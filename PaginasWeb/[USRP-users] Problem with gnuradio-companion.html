@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- saved from url=(0081)http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/001782.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+   <title> [USRP-users] Problem with gnuradio-companion
+   </title>
+   <link rel="Index" href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/index.html">
+   <link rel="made" href="mailto:usrp-users%40lists.ettus.com?Subject=Re%3A%20%5BUSRP-users%5D%20Problem%20with%20gnuradio-companion&amp;In-Reply-To=%3CCAKP4uiTWETUALCSXv1g0dFaCUG4LuSOM70n_%2BFSbEk7ca9QXUg%40mail.gmail.com%3E">
+   <meta name="robots" content="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   
+   <link rel="Previous" href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/001781.html">
+   <link rel="Next" href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/001784.html">
+ </head>
+ <body bgcolor="#ffffff">
+   <h1>[USRP-users] Problem with gnuradio-companion</h1>
+    <b>Kiran Chandrashekhar</b> 
+    <a href="mailto:usrp-users%40lists.ettus.com?Subject=Re%3A%20%5BUSRP-users%5D%20Problem%20with%20gnuradio-companion&amp;In-Reply-To=%3CCAKP4uiTWETUALCSXv1g0dFaCUG4LuSOM70n_%2BFSbEk7ca9QXUg%40mail.gmail.com%3E" title="[USRP-users] Problem with gnuradio-companion">kiran.chandrashekhar at googlemail.com
+       </a><br>
+    <i>Tue Jul 12 15:40:37 EDT 2011</i>
+    <p></p><ul>
+        <li>Previous message: <a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/001781.html">[USRP-users] Bypassing the small halfband filter
+</a></li>
+        <li>Next message: <a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/001784.html">[USRP-users] Problem with gnuradio-companion
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/date.html#1782">[ date ]</a>
+              <a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/thread.html#1782">[ thread ]</a>
+              <a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/subject.html#1782">[ subject ]</a>
+              <a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/author.html#1782">[ author ]</a>
+         </li>
+       </ul>
+    <hr>  
+<!--beginarticle-->
+<pre>Hello everyone,
+
+I am using USRP2 and have connected it through gigabit ethernet switch.
+
+I have installed the latest UHD driver and the gnuradio.
+
+uhd_find_devices command works and gives the following output:
+
+
+inux; GNU C++ version 4.4.3; Boost_104000; UHD_003.001.002-ba0e3c8
+
+--------------------------------------------------
+-- UHD Device 0
+--------------------------------------------------
+Device Address:
+    type: usrp2
+    addr: 192.168.10.2
+    name:
+    serial:
+
+
+But, when I try to start the gnuradio-companion, I get the following message
+:<i>
+</i>
+*"Cannot import gnuradio. Are your PYTHONPATH and LD_LIBRARY_PATH set
+correctly?"*
+
+I tried running sudo ldconfig, but with no success.
+
+Here is the entry of my .bashrc file:
+
+
+# GNU Radio installation
+export PATH=$PATH:/opt/gnuradio/bin
+export LD_LIBRARY_PATH=/opt/gnuradio/lib
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/gnuradio/lib/pkgconfig
+export PYTHONPATH=/opt/gnuradio/lib/python2.6/dist-packages
+
+I just performed a clean install of *gnuradio* (3.4.0 from the current
+master branch).
+
+Here is additional information : (As suggested in a forum )
+
+python -c "from gnuradio import gr" throws the error :
+
+ImportError: /usr/local/lib/libgnuradio-core-3.4.1git.so.0: undefined
+symbol: _ZTIN5gruel12msg_accepterE
+
+Here is the configuration details :
+
+System :
+
+Description:    Ubuntu 10.04.2 LTS
+Release:    10.04
+Codename:    lucid
+
+
+Kindly let me know if I am missing something.
+
+
+Regards
+Kiran Chandrashekhar
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/attachments/20110712/b1466b6e/attachment.html">http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/attachments/20110712/b1466b6e/attachment.html</a>&gt;
+</pre>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <hr>
+    <p></p><ul>
+        <!--threads-->
+	<li>Previous message: <a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/001781.html">[USRP-users] Bypassing the small halfband filter
+</a></li>
+	<li>Next message: <a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/001784.html">[USRP-users] Problem with gnuradio-companion
+</a></li>
+         <li> <b>Messages sorted by:</b> 
+              <a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/date.html#1782">[ date ]</a>
+              <a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/thread.html#1782">[ thread ]</a>
+              <a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/subject.html#1782">[ subject ]</a>
+              <a href="http://lists.ettus.com/pipermail/usrp-users_lists.ettus.com/2011-July/author.html#1782">[ author ]</a>
+         </li>
+       </ul>
+
+<hr>
+<a href="http://lists.ettus.com/mailman/listinfo/usrp-users_lists.ettus.com">More information about the USRP-users
+mailing list</a><br>
+
+</body></html>

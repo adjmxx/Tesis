@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html class="dyn detail-blog-post contents" lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+    <meta charset="utf-8">
+    <title>Andrej Mohar - Frequency Xlating FIR filter and channeling basics in GnuRadio</title> 
+    <link href="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/css.css" rel="stylesheet" type="text/css">
+<link href="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/bootstrap.css" rel="stylesheet" type="text/css">
+<link href="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/font-awesome.css" rel="stylesheet" type="text/css">
+<link href="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/jquery.css" rel="stylesheet" type="text/css">
+<link href="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/Site.css" rel="stylesheet" type="text/css">
+<link href="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/ascetic.css" rel="stylesheet" type="text/css">
+<link href="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/orchard-search-search.css" rel="stylesheet" type="text/css">
+<!--[if lt IE 9]>
+<script src="/Core/Shapes/Scripts/html5.js" type="text/javascript"></script>
+<![endif]-->
+<meta content="Orchard" name="generator">
+<meta content="Frequency Xlating FIR filter and channeling basics in GnuRadio" name="og:title">
+<meta content="http://localhost:22821/frequency-xlating-fir-filter-and-channeling-basics-in-gnuradio" name="og:url">
+<meta content="article" name="og:type">
+<meta content="summary_large_image" name="twitter:card">
+<meta content="@andrej_mohar" name="twitter:site">
+<meta content="Frequency Xlating FIR filter and channeling basics in GnuRadio" name="twitter:title">
+<meta content="In this post I'm hoping to describe the filtering process as simply as possible. The reason for this is&nbsp;it took me quite a lot of reading to actually understand what is happening during the filtering, mostly because most of the articles I've read were either listing what needs to be done without actually explaining&nbsp;how it works, or listing detailed calculations, equations and hardware implementations without explaining it in plain words. Most of these articles have also assumed the reader is an expert in the topic, effectively excluding interested enthusiasts who are still beginning to grasp the basics of DSP. So this will hopefully be helpful for the mentioned folks to tie up loose ends. Here is the list of the things I will try to cover:" name="twitter:description">
+<meta content="http://www.andrej-mohar.com/Media/Default/BlogPosts/Post_20150904_Freqency_Xlating_FIR_Filter_and_Low_Pass_filter_basics/FIRFilter.jpg" name="twitter:image">
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<link href="http://www.andrej-mohar.com/modules/orchard.themes/Content/orchard.ico" rel="shortcut icon" type="image/x-icon">
+        <!-- Google Tag Manager -->
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-MSMNDF"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <script type="text/javascript" async="" src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/ga.js"></script><script type="text/javascript" async="" src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/recaptcha__en.js"></script><script async="" src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/gtm.js"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-MSMNDF');</script>
+        <!-- End Google Tag Manager -->
+        <meta name="google-site-verification" content="JS63-x9bh8te0LqcqTPzPrwvRbogQqp_E-aH0MNe_2g">
+        <link rel="author" href="https://plus.google.com/112101854151219543173/posts">
+        <script type="text/x-mathjax-config;executed=true">
+            MathJax.Hub.Config({
+                tex2jax: {
+                    inlineMath: [ ['$','$'] ],
+                    displayMath: [ ['$$','$$'] ],
+                    processEscapes: false
+                },
+            });
+        </script>
+        <script src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/api.js"></script>
+
+
+<link rel="alternate" type="application/rss+xml" title="Blog" href="http://www.andrej-mohar.com/rss?containerid=12">
+
+    <script>        (function (d) { d.className = "dyn" + d.className.substring(6, d.className.length); })(document.documentElement);</script> 
+<script src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/embed.js" data-timestamp="1560525490377"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><link rel="prefetch" as="style" href="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/a_data/lounge.css"><link rel="prefetch" as="script" href="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/a_data/common.js"><link rel="prefetch" as="script" href="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/a_data/lounge.js"><link rel="prefetch" as="script" href="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/a_data/config.js"><style type="text/css">.hljs-ln{border-collapse:collapse}.hljs-ln td{padding:0}.hljs-ln-n:before{content:attr(data-line-number)}</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_SVG_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax_SVG .MJX-monospace {font-family: monospace}
+.MathJax_SVG .MJX-sans-serif {font-family: sans-serif}
+#MathJax_SVG_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax_SVG {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax_SVG * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.mjx-svg-href {fill: blue; stroke: blue}
+.MathJax_SVG_Processing {visibility: hidden; position: absolute; top: 0; left: 0; width: 0; height: 0; overflow: hidden; display: block!important}
+.MathJax_SVG_Processed {display: none!important}
+.MathJax_SVG_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none; padding: 0; border: 0; margin: 0}
+.MathJax_SVG_LineBox {display: table!important}
+.MathJax_SVG_LineBox span {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MathJax_SVG .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head> 
+<body><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px none; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_SVG_Hidden"></div><svg><defs id="MathJax_SVG_glyphs"><path stroke-width="1" id="MJMATHI-66" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path><path stroke-width="1" id="MJMAIN-28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path><path stroke-width="1" id="MJMATHI-6E" d="M21 287Q22 293 24 303T36 341T56 388T89 425T135 442Q171 442 195 424T225 390T231 369Q231 367 232 367L243 378Q304 442 382 442Q436 442 469 415T503 336T465 179T427 52Q427 26 444 26Q450 26 453 27Q482 32 505 65T540 145Q542 153 560 153Q580 153 580 145Q580 144 576 130Q568 101 554 73T508 17T439 -10Q392 -10 371 17T350 73Q350 92 386 193T423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 180T152 343Q153 348 153 366Q153 405 129 405Q91 405 66 305Q60 285 60 284Q58 278 41 278H27Q21 284 21 287Z"></path><path stroke-width="1" id="MJMAIN-29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path><path stroke-width="1" id="MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path><path stroke-width="1" id="MJMATHI-74" d="M26 385Q19 392 19 395Q19 399 22 411T27 425Q29 430 36 430T87 431H140L159 511Q162 522 166 540T173 566T179 586T187 603T197 615T211 624T229 626Q247 625 254 615T261 596Q261 589 252 549T232 470L222 433Q222 431 272 431H323Q330 424 330 420Q330 398 317 385H210L174 240Q135 80 135 68Q135 26 162 26Q197 26 230 60T283 144Q285 150 288 151T303 153H307Q322 153 322 145Q322 142 319 133Q314 117 301 95T267 48T216 6T155 -11Q125 -11 98 4T59 56Q57 64 57 83V101L92 241Q127 382 128 383Q128 385 77 385H26Z"></path><path stroke-width="1" id="MJMAIN-30" d="M96 585Q152 666 249 666Q297 666 345 640T423 548Q460 465 460 320Q460 165 417 83Q397 41 362 16T301 -15T250 -22Q224 -22 198 -16T137 16T82 83Q39 165 39 320Q39 494 96 585ZM321 597Q291 629 250 629Q208 629 178 597Q153 571 145 525T137 333Q137 175 145 125T181 46Q209 16 250 16Q290 16 318 46Q347 76 354 130T362 333Q362 478 354 524T321 597Z"></path><path stroke-width="1" id="MJMATHI-73" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path><path stroke-width="1" id="MJMAIN-2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path><path stroke-width="1" id="MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path><path stroke-width="1" id="MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path><path stroke-width="1" id="MJMAIN-32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path><path stroke-width="1" id="MJMAIN-2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"></path><path stroke-width="1" id="MJMATHI-4E" d="M234 637Q231 637 226 637Q201 637 196 638T191 649Q191 676 202 682Q204 683 299 683Q376 683 387 683T401 677Q612 181 616 168L670 381Q723 592 723 606Q723 633 659 637Q635 637 635 648Q635 650 637 660Q641 676 643 679T653 683Q656 683 684 682T767 680Q817 680 843 681T873 682Q888 682 888 672Q888 650 880 642Q878 637 858 637Q787 633 769 597L620 7Q618 0 599 0Q585 0 582 2Q579 5 453 305L326 604L261 344Q196 88 196 79Q201 46 268 46H278Q284 41 284 38T282 19Q278 6 272 0H259Q228 2 151 2Q123 2 100 2T63 2T46 1Q31 1 31 10Q31 14 34 26T39 40Q41 46 62 46Q130 49 150 85Q154 91 221 362L289 634Q287 635 234 637Z"></path><path stroke-width="1" id="MJSZ2-2211" d="M60 948Q63 950 665 950H1267L1325 815Q1384 677 1388 669H1348L1341 683Q1320 724 1285 761Q1235 809 1174 838T1033 881T882 898T699 902H574H543H251L259 891Q722 258 724 252Q725 250 724 246Q721 243 460 -56L196 -356Q196 -357 407 -357Q459 -357 548 -357T676 -358Q812 -358 896 -353T1063 -332T1204 -283T1307 -196Q1328 -170 1348 -124H1388Q1388 -125 1381 -145T1356 -210T1325 -294L1267 -449L666 -450Q64 -450 61 -448Q55 -446 55 -439Q55 -437 57 -433L590 177Q590 178 557 222T452 366T322 544L56 909L55 924Q55 945 60 948Z"></path><path stroke-width="1" id="MJMATHI-6D" d="M21 287Q22 293 24 303T36 341T56 388T88 425T132 442T175 435T205 417T221 395T229 376L231 369Q231 367 232 367L243 378Q303 442 384 442Q401 442 415 440T441 433T460 423T475 411T485 398T493 385T497 373T500 364T502 357L510 367Q573 442 659 442Q713 442 746 415T780 336Q780 285 742 178T704 50Q705 36 709 31T724 26Q752 26 776 56T815 138Q818 149 821 151T837 153Q857 153 857 145Q857 144 853 130Q845 101 831 73T785 17T716 -10Q669 -10 648 17T627 73Q627 92 663 193T700 345Q700 404 656 404H651Q565 404 506 303L499 291L466 157Q433 26 428 16Q415 -11 385 -11Q372 -11 364 -4T353 8T350 18Q350 29 384 161L420 307Q423 322 423 345Q423 404 379 404H374Q288 404 229 303L222 291L189 157Q156 26 151 16Q138 -11 108 -11Q95 -11 87 -5T76 7T74 17Q74 30 112 181Q151 335 151 342Q154 357 154 369Q154 405 129 405Q107 405 92 377T69 316T57 280Q55 278 41 278H27Q21 284 21 287Z"></path><path stroke-width="1" id="MJMAIN-221E" d="M55 217Q55 305 111 373T254 442Q342 442 419 381Q457 350 493 303L507 284L514 294Q618 442 747 442Q833 442 888 374T944 214Q944 128 889 59T743 -11Q657 -11 580 50Q542 81 506 128L492 147L485 137Q381 -11 252 -11Q166 -11 111 57T55 217ZM907 217Q907 285 869 341T761 397Q740 397 720 392T682 378T648 359T619 335T594 310T574 285T559 263T548 246L543 238L574 198Q605 158 622 138T664 94T714 61T765 51Q827 51 867 100T907 217ZM92 214Q92 145 131 89T239 33Q357 33 456 193L425 233Q364 312 334 337Q285 380 233 380Q171 380 132 331T92 214Z"></path><path stroke-width="1" id="MJMATHI-68" d="M137 683Q138 683 209 688T282 694Q294 694 294 685Q294 674 258 534Q220 386 220 383Q220 381 227 388Q288 442 357 442Q411 442 444 415T478 336Q478 285 440 178T402 50Q403 36 407 31T422 26Q450 26 474 56T513 138Q516 149 519 151T535 153Q555 153 555 145Q555 144 551 130Q535 71 500 33Q466 -10 419 -10H414Q367 -10 346 17T325 74Q325 90 361 192T398 345Q398 404 354 404H349Q266 404 205 306L198 293L164 158Q132 28 127 16Q114 -11 83 -11Q69 -11 59 -2T48 16Q48 30 121 320L195 616Q195 629 188 632T149 637H128Q122 643 122 645T124 664Q129 683 137 683Z"></path><path stroke-width="1" id="MJMATHI-69" d="M184 600Q184 624 203 642T247 661Q265 661 277 649T290 619Q290 596 270 577T226 557Q211 557 198 567T184 600ZM21 287Q21 295 30 318T54 369T98 420T158 442Q197 442 223 419T250 357Q250 340 236 301T196 196T154 83Q149 61 149 51Q149 26 166 26Q175 26 185 29T208 43T235 78T260 137Q263 149 265 151T282 153Q302 153 302 143Q302 135 293 112T268 61T223 11T161 -11Q129 -11 102 10T74 74Q74 91 79 106T122 220Q160 321 166 341T173 380Q173 404 156 404H154Q124 404 99 371T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Z"></path></defs></svg></div><div id="MathJax_Message" style="display: none;"></div>
+
+
+<div id="layout-wrapper">
+<header id="layout-header" class="container-fluid">
+    <div id="header" class="row">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <div class="zone zone-header"><a href="http://www.andrej-mohar.com/"><span id="branding" class="col-md-4">Andrej Mohar</span></a>
+
+<div class="user-display col-md-4 pull-right">
+        <span class="user-actions">
+            <a href="http://www.andrej-mohar.com/Users/Account/LogOn?ReturnUrl=%2Ffrequency-xlating-fir-filter-and-channeling-basics-in-gnuradio" rel="nofollow"><i class="fa fa-power-off"></i></a>
+            <a href="#" class="toggle-menu" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><i class="fa fa-bars"></i></a>
+        </span>
+</div></div>
+        </div>
+    </div>
+</header>
+<div id="layout-navigation" class="container-fluid">
+    <div class="zone zone-navigation">
+<article class="widget-navigation widget-menu-widget widget">
+    
+<nav class="navbar navbar-default row" role="navigation">
+    <div class="container col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav menu menu-main-menu">
+            
+<li class="current first"><a href="http://www.andrej-mohar.com/">Blog</a>
+</li>
+
+<li><a href="http://www.andrej-mohar.com/about">About me</a>
+</li>
+<li>
+
+    <a href="http://www.andrej-mohar.com/contact">Contact</a> 
+</li>
+<li class="last">
+
+
+
+
+<form action="/Search" class="search-form" method="get">    <fieldset>
+        <span class="search-textbox">
+            <input id="q" name="q" type="text">
+        </span>
+        <button type="submit"><i class="fa fa-search"></i></button>
+    </fieldset>
+</form></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</article></div>
+</div>
+<div id="layout-before-main" class="container-fluid">
+    <div class="zone zone-before-main">
+<article class="widget-breadcrumbs widget-before-main widget-menu-widget widget">
+    
+<nav class="row">
+    <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+        <ul class="breadcrumb">
+            
+            
+<li class="first"><a href="http://www.andrej-mohar.com/">Home</a>
+</li>
+<li class="current"><a href="http://www.andrej-mohar.com/">Blog</a>
+</li>
+<li class="current last"><a href="http://www.andrej-mohar.com/frequency-xlating-fir-filter-and-channeling-basics-in-gnuradio">Frequency Xlating FIR filter and channeling basics in GnuRadio</a>
+</li>
+        </ul>
+    </div>
+</nav>
+</article></div>
+</div>
+<div id="layout-main-container" class="container-fluid">
+    <div id="layout-main" class="row">
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+
+        <div id="layout-content" class="group col-xs-12">
+                                    <div id="content" class="group">
+                <div class="zone zone-content">
+<article class="blog-post content-item" itemscope="" itemtype="http://schema.org/BlogPosting">
+    <div class="row">
+        <div class="col-xs-1">
+            <!-- Go to www.addthis.com/dashboard to customize your tools -->
+            <div class="addthis_inline_share_toolbox" style=""></div>
+        </div>
+        <div class="col-xs-11">
+            <header>
+                
+
+
+
+
+<h1>Frequency Xlating FIR filter and channeling basics in GnuRadio</h1>
+                    <div class="metadata">
+                        <div class="published">Written by
+<span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+    <span itemprop="name">
+        <a href="https://twitter.com/andrej_mohar" itemprop="url" rel="author">Andrej Mohar</a>
+    </span>
+</span>
+on 4.9.2015. 10:41:00</div>
+                    </div>
+            </header>
+            
+
+<div itemprop="articleBody">
+    <p>In this post I'm hoping to describe the filtering process as 
+simply as possible. The reason for this is&nbsp;it took me quite a lot 
+of reading to actually understand what is happening during the 
+filtering, mostly because most of the articles I've read were either 
+listing what needs to be done without actually explaining&nbsp;how it 
+works, or listing detailed calculations, equations and hardware 
+implementations without explaining it in plain words. Most of these 
+articles have also assumed the reader is an expert in the topic, 
+effectively excluding interested enthusiasts who are still beginning to 
+grasp the basics of DSP. So this will hopefully be helpful for the 
+mentioned folks to tie up loose ends. Here is the list of the things I 
+will try to cover:</p>
+<br><ul>
+<br><li>Why does the sampling matter in the filtering process</li>
+<br><li>Why does the sampling frequency matter when defining the cutoff frequency</li>
+<br><li>What is the connection between the sampling frequency and the cutoff frequency</li>
+<br><li>What is the frequency translation and the center frequency</li>
+<br><li>How FIR filters work</li>
+<br><li>How calculating taps for low-pass filter works</li>
+<br></ul>
+<br><p>I will also present an example in GnuRadio describing how to use Frequency Xlating FIR filter with the low-pass filter taps.</p>
+<br><h2>What is aliasing and why sampling matters</h2>
+<br><p>Interestingly enough, most of us have seen the effect of aliasing
+ one time or the other. On some video recordings or old movies you can 
+sometimes observe the car wheels going very slowly forwards or even 
+backwards when you know the car is speeding forwards. You can observe 
+the trains for which you can't be sure if they are moving forwards or 
+backwards (<a href="http://www.buzzfeed.com/lukelewis/the-amazing-gif-you-can-control-with-your-mind#.spe88Jjyog">example</a>). You can also observe airplane propeller camera shots looking very strangely warped (<a href="https://www.youtube.com/watch?v=gxYjzhMEuh4">example</a>).
+ All of this is the aliasing effect. It happens when there is not enough
+ captured information to correctly recreate the original movement. The 
+same happens with the frequencies. If you capture too few samples, they 
+will produce aliasing errors when recreating the original analog signal.</p>
+<br><p>You might be wondering now, how to know or calculate the correct sampling frequency? Here is where <strong>Nyquist theorem</strong> comes to play. According to <a href="http://www.dataq.com/data-acquisition/general-education-tutorials/what-you-really-need-to-know-about-sample-rate.html">Dataq Instruments' article</a>, Nyquist theorem says two things about the minimum sampling rate needed to avoid aliasing:</p>
+<br><ol>
+<br><li><a href="https://en.wikipedia.org/wiki/Nyquist_rate">Nyquist sampling rate</a>&nbsp;needs to be twice as the highest sampled frequency rate</li>
+<br><li>The signal being digitized must be&nbsp;<a href="https://en.wikipedia.org/wiki/Bandlimiting">bandwidth-limited</a> at a value equal to half the Nyquist rate</li>
+<br></ol>
+<br><p>For example, if you want to filter the signal with the bandwidth of 200kHz, you have to sample <span style="text-decoration: underline;">at least</span> at 400kHz.</p>
+<br><h2>Finite Impulse Response Filters - the theory</h2>
+<br><p>I have already explained how the sampling affects the density and the amount of the collected samples in one of <a href="http://andrej-mohar.com/resampling-and-throttling-in-gnuradio">my previous articles</a>.&nbsp;Now
+ we will take a look what happens to these samples inside the filter. 
+The incoming signals can be represented as a function (rearranged 
+from&nbsp;<a href="https://ccrma.stanford.edu/~jos/filters/Convolution_Representation_FIR_Filters.html">this</a> article):</p>
+<br><p></p><div class="blog-math"><span class="MathJax_Preview" style="color: inherit; display: none;"></span><div class="MathJax_SVG_Display" style="text-align: center;"><span style="font-size: 100%; display: inline-block; position: relative;" class="MathJax_SVG" id="MathJax-Element-1-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;&gt;&lt;mtable columnalign=&quot;right left right left right left right left right left right left&quot; rowspacing=&quot;3pt&quot; columnspacing=&quot;0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em&quot; displaystyle=&quot;true&quot;&gt;&lt;mtr&gt;&lt;mtd&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/mtd&gt;&lt;mtd&gt;&lt;mi&gt;&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;msub&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;msub&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;msub&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;2&lt;/mn&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;mo&gt;.&lt;/mo&gt;&lt;mo&gt;.&lt;/mo&gt;&lt;mo&gt;.&lt;/mo&gt;&lt;mo&gt;+&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;msub&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/mtd&gt;&lt;/mtr&gt;&lt;mtr&gt;&lt;mtd /&gt;&lt;mtd&gt;&lt;mi&gt;&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;munderover&gt;&lt;mo&gt;&amp;#x2211;&lt;/mo&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mn&gt;0&lt;/mn&gt;&lt;/mrow&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;/mrow&gt;&lt;/munderover&gt;&lt;msub&gt;&lt;mi&gt;t&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;msub&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/mtd&gt;&lt;/mtr&gt;&lt;mtr&gt;&lt;mtd /&gt;&lt;mtd&gt;&lt;mi&gt;&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;munderover&gt;&lt;mo&gt;&amp;#x2211;&lt;/mo&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;mo&gt;=&lt;/mo&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;&amp;#x221E;&lt;/mi&gt;&lt;/mrow&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi mathvariant=&quot;normal&quot;&gt;&amp;#x221E;&lt;/mi&gt;&lt;/mrow&gt;&lt;/munderover&gt;&lt;mi&gt;h&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;msub&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mi&gt;m&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/mtd&gt;&lt;/mtr&gt;&lt;/mtable&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="45.115ex" height="17.438ex" style="vertical-align: -8.148ex;" viewBox="0 -4000 19424.2 7507.9" role="img" focusable="false" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><g transform="translate(167,0)"><g transform="translate(-13,0)"><g transform="translate(0,3132)"><use xlink:href="#MJMATHI-66" x="0" y="0"></use><use xlink:href="#MJMAIN-28" x="550" y="0"></use><use xlink:href="#MJMATHI-6E" x="940" y="0"></use><use xlink:href="#MJMAIN-29" x="1540" y="0"></use></g></g><g transform="translate(1917,0)"><g transform="translate(0,3132)"><use xlink:href="#MJMAIN-3D" x="277" y="0"></use><g transform="translate(1334,0)"><use xlink:href="#MJMATHI-74" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-30" x="511" y="-213"></use></g><g transform="translate(2149,0)"><use xlink:href="#MJMATHI-73" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMATHI-6E" x="663" y="-213"></use></g><use xlink:href="#MJMAIN-2B" x="3365" y="0"></use><g transform="translate(4366,0)"><use xlink:href="#MJMATHI-74" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-31" x="511" y="-213"></use></g><g transform="translate(5181,0)"><use xlink:href="#MJMATHI-73" x="0" y="0"></use><g transform="translate(469,-150)"><use transform="scale(0.707)" xlink:href="#MJMATHI-6E" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-2212" x="600" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-31" x="1379" y="0"></use></g></g><use xlink:href="#MJMAIN-2B" x="7302" y="0"></use><g transform="translate(8303,0)"><use xlink:href="#MJMATHI-74" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-32" x="511" y="-213"></use></g><g transform="translate(9118,0)"><use xlink:href="#MJMATHI-73" x="0" y="0"></use><g transform="translate(469,-150)"><use transform="scale(0.707)" xlink:href="#MJMATHI-6E" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-2212" x="600" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-32" x="1379" y="0"></use></g></g><use xlink:href="#MJMAIN-2B" x="11017" y="0"></use><use xlink:href="#MJMAIN-2E" x="11795" y="0"></use><use xlink:href="#MJMAIN-2E" x="12240" y="0"></use><use xlink:href="#MJMAIN-2E" x="12686" y="0"></use><use xlink:href="#MJMAIN-2B" x="13131" y="0"></use><g transform="translate(13909,0)"><use xlink:href="#MJMATHI-74" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMATHI-4E" x="511" y="-213"></use></g><g transform="translate(14999,0)"><use xlink:href="#MJMATHI-73" x="0" y="0"></use><g transform="translate(469,-150)"><use transform="scale(0.707)" xlink:href="#MJMATHI-6E" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-2212" x="600" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMATHI-4E" x="1379" y="0"></use></g></g></g><g transform="translate(0,846)"><use xlink:href="#MJMAIN-3D" x="277" y="0"></use><g transform="translate(1334,0)"><use xlink:href="#MJSZ2-2211" x="40" y="0"></use><g transform="translate(0,-1090)"><use transform="scale(0.707)" xlink:href="#MJMATHI-6D" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-3D" x="878" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-30" x="1657" y="0"></use></g><use transform="scale(0.707)" xlink:href="#MJMATHI-4E" x="634" y="1627"></use></g><g transform="translate(3026,0)"><use xlink:href="#MJMATHI-74" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMATHI-6D" x="511" y="-213"></use></g><g transform="translate(4108,0)"><use xlink:href="#MJMATHI-73" x="0" y="0"></use><g transform="translate(469,-150)"><use transform="scale(0.707)" xlink:href="#MJMATHI-6E" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-2212" x="600" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMATHI-6D" x="1379" y="0"></use></g></g></g><g transform="translate(0,-2223)"><use xlink:href="#MJMAIN-3D" x="277" y="0"></use><g transform="translate(1334,0)"><use xlink:href="#MJSZ2-2211" x="492" y="0"></use><g transform="translate(0,-1051)"><use transform="scale(0.707)" xlink:href="#MJMATHI-6D" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-3D" x="878" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-2212" x="1657" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-221E" x="2435" y="0"></use></g><use transform="scale(0.707)" xlink:href="#MJMAIN-221E" x="1217" y="1627"></use></g><use xlink:href="#MJMATHI-68" x="3930" y="0"></use><use xlink:href="#MJMAIN-28" x="4506" y="0"></use><use xlink:href="#MJMATHI-6D" x="4896" y="0"></use><use xlink:href="#MJMAIN-29" x="5774" y="0"></use><g transform="translate(6164,0)"><use xlink:href="#MJMATHI-73" x="0" y="0"></use><g transform="translate(469,-150)"><use transform="scale(0.707)" xlink:href="#MJMATHI-6E" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMAIN-2212" x="600" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMATHI-6D" x="1379" y="0"></use></g></g></g></g></g></g></svg><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtable columnalign="right left right left right left right left right left right left" rowspacing="3pt" columnspacing="0em 2em 0em 2em 0em 2em 0em 2em 0em 2em 0em" displaystyle="true"><mtr><mtd><mi>f</mi><mo stretchy="false">(</mo><mi>n</mi><mo stretchy="false">)</mo></mtd><mtd><mi></mi><mo>=</mo><msub><mi>t</mi><mrow class="MJX-TeXAtom-ORD"><mn>0</mn></mrow></msub><msub><mi>s</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi></mrow></msub><mo>+</mo><msub><mi>t</mi><mrow class="MJX-TeXAtom-ORD"><mn>1</mn></mrow></msub><msub><mi>s</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><msub><mi>t</mi><mrow class="MJX-TeXAtom-ORD"><mn>2</mn></mrow></msub><msub><mi>s</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mn>2</mn></mrow></msub><mo>+</mo><mo>.</mo><mo>.</mo><mo>.</mo><mo>+</mo><msub><mi>t</mi><mrow class="MJX-TeXAtom-ORD"><mi>N</mi></mrow></msub><msub><mi>s</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mi>N</mi></mrow></msub></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>=</mo><munderover><mo>∑</mo><mrow class="MJX-TeXAtom-ORD"><mi>m</mi><mo>=</mo><mn>0</mn></mrow><mrow class="MJX-TeXAtom-ORD"><mi>N</mi></mrow></munderover><msub><mi>t</mi><mrow class="MJX-TeXAtom-ORD"><mi>m</mi></mrow></msub><msub><mi>s</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mi>m</mi></mrow></msub></mtd></mtr><mtr><mtd></mtd><mtd><mi></mi><mo>=</mo><munderover><mo>∑</mo><mrow class="MJX-TeXAtom-ORD"><mi>m</mi><mo>=</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mrow class="MJX-TeXAtom-ORD"><mi mathvariant="normal">∞</mi></mrow></munderover><mi>h</mi><mo stretchy="false">(</mo><mi>m</mi><mo stretchy="false">)</mo><msub><mi>s</mi><mrow class="MJX-TeXAtom-ORD"><mi>n</mi><mo>−</mo><mi>m</mi></mrow></msub></mtd></mtr></mtable></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-1">\begin{align} f(n) &= t_{0}s_{n} + t_{1}s_{n-1} + t_{2}s_{n-2} + ... + t_{N}s_{n-N}\\&= \sum_{m=0}^{N} t_{m}s_{n-m}\\&= \sum_{m=-\infty}^{\infty} h(m)s_{n-m}\end{align}</script></div><p></p>
+<br><p>On the first look this might look scary, but don't let yourself be intimidated. The stated formula calculates the <a href="https://en.wikipedia.org/wiki/Convolution">convolution</a>&nbsp;between the signal samples and the filter taps. <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span style="font-size: 100%; display: inline-block;" class="MathJax_SVG" id="MathJax-Element-1-Frame" tabindex="0"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.639ex" height="2.134ex" style="vertical-align: -0.505ex;" viewBox="0 -701.7 705.8 918.9" role="img" focusable="false"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-74" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMATHI-69" x="511" y="-213"></use></g></svg></span><script type="math/tex" id="MathJax-Element-1">t_{i}</script> represents i-th tap, <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span style="font-size: 100%; display: inline-block; position: relative;" class="MathJax_SVG" id="MathJax-Element-2-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;msub&gt;&lt;mi&gt;s&lt;/mi&gt;&lt;mrow class=&quot;MJX-TeXAtom-ORD&quot;&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;/mrow&gt;&lt;/msub&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="1.89ex" height="1.759ex" style="vertical-align: -0.505ex;" viewBox="0 -540.2 813.8 757.5" role="img" focusable="false" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-73" x="0" y="0"></use><use transform="scale(0.707)" xlink:href="#MJMATHI-69" x="663" y="-213"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>s</mi><mrow class="MJX-TeXAtom-ORD"><mi>i</mi></mrow></msub></math></span></span><script type="math/tex" id="MathJax-Element-2">s_{i}</script> represents i-th sample, <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span style="font-size: 100%; display: inline-block; position: relative;" class="MathJax_SVG" id="MathJax-Element-3-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;f&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.89ex" height="2.634ex" style="vertical-align: -0.755ex;" viewBox="0 -809.3 1675 1134.2" role="img" focusable="false" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-66" x="0" y="0"></use><use xlink:href="#MJMAIN-28" x="550" y="0"></use><use xlink:href="#MJMATHI-69" x="940" y="0"></use><use xlink:href="#MJMAIN-29" x="1285" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>f</mi><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></math></span></span><script type="math/tex" id="MathJax-Element-3">f(i)</script> is filtered i-th sample, <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span style="font-size: 100%; display: inline-block; position: relative;" class="MathJax_SVG" id="MathJax-Element-4-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;h&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;(&lt;/mo&gt;&lt;mi&gt;i&lt;/mi&gt;&lt;mo stretchy=&quot;false&quot;&gt;)&lt;/mo&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="3.951ex" height="2.634ex" style="vertical-align: -0.755ex;" viewBox="0 -809.3 1701 1134.2" role="img" focusable="false" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-68" x="0" y="0"></use><use xlink:href="#MJMAIN-28" x="576" y="0"></use><use xlink:href="#MJMATHI-69" x="966" y="0"></use><use xlink:href="#MJMAIN-29" x="1311" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>h</mi><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></math></span></span><script type="math/tex" id="MathJax-Element-4">h(i)</script> is filter's response (we'll take a look into this one shortly) and <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span style="font-size: 100%; display: inline-block; position: relative;" class="MathJax_SVG" id="MathJax-Element-5-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.064ex" height="2.009ex" style="vertical-align: -0.255ex;" viewBox="0 -755.5 888.5 865.1" role="img" focusable="false" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-4E" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi></math></span></span><script type="math/tex" id="MathJax-Element-5">N</script> is number of taps (or filter length). If you want to know the filter order, it is <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span style="font-size: 100%; display: inline-block; position: relative;" class="MathJax_SVG" id="MathJax-Element-6-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="6.066ex" height="2.134ex" style="vertical-align: -0.38ex;" viewBox="0 -755.5 2611.9 918.9" role="img" focusable="false" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-4E" x="0" y="0"></use><use xlink:href="#MJMAIN-2212" x="1110" y="0"></use><use xlink:href="#MJMAIN-31" x="2111" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi><mo>−</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-6">N-1</script>.</p>
+<br><p>The first sum describes one iteration for one resulting point. 
+Each time you calculate this sum of multiplications, you get one 
+resulting point. This means the calculation takes into account some of 
+the samples from the past. If we have <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span style="font-size: 100%; display: inline-block; position: relative;" class="MathJax_SVG" id="MathJax-Element-7-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="2.064ex" height="2.009ex" style="vertical-align: -0.255ex;" viewBox="0 -755.5 888.5 865.1" role="img" focusable="false" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-4E" x="0" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi></math></span></span><script type="math/tex" id="MathJax-Element-7">N</script> taps, one element of the sum is the sample from the current time and <span class="MathJax_Preview" style="color: inherit; display: none;"></span><span style="font-size: 100%; display: inline-block; position: relative;" class="MathJax_SVG" id="MathJax-Element-8-Frame" tabindex="0" data-mathml="&lt;math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;&gt;&lt;mi&gt;N&lt;/mi&gt;&lt;mo&gt;&amp;#x2212;&lt;/mo&gt;&lt;mn&gt;1&lt;/mn&gt;&lt;/math&gt;" role="presentation"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="6.066ex" height="2.134ex" style="vertical-align: -0.38ex;" viewBox="0 -755.5 2611.9 918.9" role="img" focusable="false" aria-hidden="true"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"><use xlink:href="#MJMATHI-4E" x="0" y="0"></use><use xlink:href="#MJMAIN-2212" x="1110" y="0"></use><use xlink:href="#MJMAIN-31" x="2111" y="0"></use></g></svg><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>N</mi><mo>−</mo><mn>1</mn></math></span></span><script type="math/tex" id="MathJax-Element-8">N-1</script> samples are from the past.</p>
+<br><p>The second sum defines the convolution for theoretically 
+calculating the filter to the infinity. With the correct values this 
+would produce the <a href="http://www.dsprelated.com/freebooks/sasp/FIR_Digital_Filter_Design.html">ideal low-pass filter</a>.
+ It is obvious (or it will soon become) that this calculation going to 
+infinity cannot be implemented on a today's computer. We will show later
+ in practice why this is so.</p>
+<br><h2>Finite Impulse Response Filters - the practice</h2>
+<br><p><a href="http://www.andrej-mohar.com/Media/Default/BlogPosts/Post_20150904_Freqency_Xlating_FIR_Filter_and_Low_Pass_filter_basics/FIRFilter.jpg" class="blog-image-link" data-fancybox="article" data-caption=""><span class="blog-image blog-image-position-left"><img itemprop="image" src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/FIRFilter.jpg">Figure 1: FIR filter implementation diagram</span></a>The
+ figure 1&nbsp;displays the implementation blocks of a FIR filter. The 
+samples flow on the upper stream (denoted by the blue arrow) one by one.
+ When one sequence is completed, the rightmost sample is dropped out and
+ everything moves one sample to the right. The leftmost slot&nbsp;is 
+then filled with the next newest sample. The number of used samples is 
+determined by the filter length.</p>
+<br><p>In one iteration, each sample in the pipeline is then multiplied 
+with the corresponding tap weight. To get the current filtered sample 
+result, we sum up all the multiplication results. In the next time hop, 
+we move the samples in the pipeline to the right again and the same 
+calculation is performed again for&nbsp;this next point&nbsp;in time.</p>
+<br><p>The second part of <a href="https://youtu.be/NvRKtdrssFA?t=3m7s">Aaron Parsons'&nbsp;video</a>&nbsp;excellently describes the convolution procedure between the two functions in practice.</p>
+<br><h3>Xlating FIR filter</h3>
+<br><p>GnuRadio has several different FIR filter types implemented as 
+blocks. Each type has some additional functionality implemented besides 
+the FIR filtering functionality. Xlating FIR filter has three steps that
+ get executed consecutively.</p>
+<br><ol>
+<br><li>Frequency translation. User selects one desired frequency, which
+ gets shifted down to near zero hertz. This can be used to shift lowest 
+passband frequency to zero hertz.</li>
+<br><li>FIR filtering is applied. If the low-pass filter is used, all 
+the frequencies above the upper passband frequency can be attenuated.</li>
+<br><li>The signal is decimated. According to <a href="http://www.mathworks.com/help/signal/ug/filtering-before-downsampling.html">this Mathworks article</a>,
+ the decimation happens last because the filtering is better 
+done&nbsp;with full sample rate. This way there is&nbsp;less chance for 
+noise and aliasing.</li>
+<br></ol>
+<br><p>The GnuRadio's fir filters receive the list of real numbers as 
+tap weights parameter. This list then is used in filtering and defines 
+what kind of filter is used (low-pass, high-pass, band-pass...). The 
+user can enter the hard-coded list directly, or some of the helper 
+methods can be used to generate the list programmatically. We will 
+explore the low-pass helper method in the following section.</p>
+<br><p>In my experience with this block, it is not enough to center at 
+the desired center frequency, because you will loose the lower part of 
+the bandwidth. I had to subtract half the bandwidth from the center 
+frequency to set the lowest frequency in the bandwidth to zero and only 
+then do the full bandwidth low-pass filtering.</p>
+<br><h2>Low-pass filter</h2>
+<br><p>We already stated the taps are in GnuRadio's FIR filters entered 
+as an array of numbers (weights). As some filters can be very lengthy, 
+there are a couple of available tools to calculate filter taps easily. 
+The particular one that we are going to examine is the firdes low-pass 
+filter. GnuRadio accepts valid Python code for the blocks' parameters. 
+This allows for building the utility methods which can ease the block's 
+usage. Here is an example Python code.</p>
+<br><p><a href="http://www.andrej-mohar.com/Media/Default/BlogPosts/Post_20150904_Freqency_Xlating_FIR_Filter_and_Low_Pass_filter_basics/LowPassFilter.png" class="blog-image-link" data-fancybox="article" data-caption=""><span class="blog-image blog-image-position-left"><img itemprop="image" src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/LowPassFilter.png">Figure 2: The resulting graph of the low-pass filter</span></a></p><pre><code class="python hljs"><table class="hljs-ln"><tbody><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="1"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-comment">#!/usr/bin/python</span></div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="2"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line"> </div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="3"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">from</span> gnuradio.filter <span class="hljs-keyword">import</span> firdes</div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="4"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt</div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="5"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line"> </div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="6"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line">taps = firdes.low_pass_2(</div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="7"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line">    <span class="hljs-number">1</span>,     <span class="hljs-comment"># Gain - usually 1</span></div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="8"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line">    <span class="hljs-number">1</span>,     <span class="hljs-comment"># Sampling frequency, 1 for normalized frequency</span></div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="9"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line">    <span class="hljs-number">0.2</span>,   <span class="hljs-comment"># Cut-off frequency, from zero excluded to half the sampling frequency</span></div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="10"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line">    <span class="hljs-number">0.01</span>,  <span class="hljs-comment"># Transition frequency</span></div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="11"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line">    <span class="hljs-number">60</span>)    <span class="hljs-comment"># Attenuation dB</span></div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="12"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line"> </div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="13"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line"><span class="hljs-keyword">print</span> taps</div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="14"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line"> </div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="15"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line">plt.plot(taps)</div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="16"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line">plt.ylim(<span class="hljs-number">-0.2</span>, <span class="hljs-number">0.5</span>)</div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="17"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line">plt.xlabel(<span class="hljs-string">"Taps"</span>)</div></td></tr><tr><td class="hljs-ln-numbers"><div class="hljs-ln-line hljs-ln-n" data-line-number="18"></div></td><td class="hljs-ln-code"><div class="hljs-ln-line">plt.show()</div></td></tr></tbody></table></code></pre><p></p>
+<br><p>The result of this python script is the tuple holding all the tap
+ weights and a graph presenting those weights in the coordinate system. 
+If you have searched the Web for the low pass filter taps, the graph 
+presented on figure 2 will surely be familiar to you.</p>
+<br><p>The filter gain is usually set to one, as per the block manual entry.</p>
+<br><p><a href="http://www.andrej-mohar.com/Media/Default/BlogPosts/Post_20150904_Freqency_Xlating_FIR_Filter_and_Low_Pass_filter_basics/LowPassFilterAttenuation.jpg" class="blog-image-link" data-fancybox="article" data-caption=""><span class="blog-image blog-image-position-left"><img itemprop="image" src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/LowPassFilterAttenuation.jpg">Figure 3: Low-pass filter cut-off behavior</span></a>The
+ sampling frequency is usually the one coming into the block from some 
+source. I had some strange outputs on FFT sinks when the input sampling 
+frequency and filter sampling frequency didn't match. My practice is to 
+set the value of Xlating FIR Filter's sampling frequency equal to input 
+sampling frequency and then use the normalized frequencies in the 
+low-pass filter. This means this value will be 1 for the 100% of 
+filter's sampling frequency.</p>
+<br><p>Cut-off frequency determines after which part the filter will 
+start cutting. If the Xlating FIR Filter sampling frequency is set to 
+1000kHz, the cut-off frequency of 0.2 will be from -200kHz to 200 kHz 
+from the center of the signal (the real center, not the one after 
+subtracting the half bandwidth).</p>
+<br><p>The transition frequency, although at first not appearing 
+important, defines the number of taps that will be used. The shorter the
+ transition frequency, the more precision you need, the more taps you 
+need. As we discussed earlier, the ideal low-pass filter looks like a 
+quadratic function, which means it cuts immediately. But following this 
+rule you would need an infinite amount of taps to produce such cut. This
+ is also why it is worth to consider the requirement of shorter 
+transition frequency against more required computational power and 
+memory.</p>
+<br><p>The attenuation defines how much the signal will be attenuated after the cut-off frequency. I keep this one at 60dB.</p>
+<br><p>There are also the optional parameters for windowing. The 
+windowing gives the more detailed control over the convolution, but is 
+out of the scope of this document (read more <a href="http://www.dsprelated.com/freebooks/sasp/FIR_Digital_Filter_Design.html">here</a>).</p>
+<br><h2>GnuRadio&nbsp;experiment findings</h2>
+<br><p>I have been playing with a simple GnuRadio application to learn 
+about filtering, which I will present here. I have set up an Xlating FIR
+ filter with the low-pass taps. The taps can be changed while the 
+program is running. This allowed me to use the WX sliders to control the
+ firdes values. This way you can observe the parameter changes live and 
+learn what changing each one actually does to your filter. Also, I'd 
+suggest changing the sampling frequency to see how the ratio is being 
+changed on different sampling frequencies.</p>
+<br><p>I haven't observed the expected visual output when changing the attenuation, I'll need to follow up on this one.</p>
+<br><p><span class="blog-github-link"><span class="fa fa-github-square"></span>Project on GitHub: <a href="https://github.com/amohar/GnuRadioFiltering">GnuRadioFiltering</a></span></p>
+<br><h2>Conclusion</h2>
+<br><p>I started this experiment being sure that filtering has to happen
+ solely in the frequency domain and that I'll need to deal with the 
+Fourier transformation sooner or later. As you probably know, in the 
+frequency domain you can easily extract each separate frequency and 
+easily cut it out, calculating the inverse Fourier transformation 
+afterwards to get the filtered signal. During my research I found out 
+that the actual FFT implementations exist alongside the FIR 
+implementations. This kept me exploring in the wrong direction for quite
+ some time. When I realized that the filtering is done using the 
+convolution in the time domain, the pieces of the puzzle 
+started&nbsp;fitting one another.&nbsp;</p>
+</div>
+<div style="clear:  both"></div>
+
+    <span class="tags">
+        <i class="fa fa-tags"></i>
+        <span itemprop="keywords">
+<a href="http://www.andrej-mohar.com/Tags/GnuRadio">GnuRadio</a>, <a href="http://www.andrej-mohar.com/Tags/low-pass%20filter">low-pass filter</a>, <a href="http://www.andrej-mohar.com/Tags/filtering">filtering</a>        </span>
+    </span>
+
+<div id="disqus_thread"><iframe id="dsq-app5359" name="dsq-app5359" allowtransparency="true" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border: medium none !important; overflow: hidden !important; height: 430px !important;" src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/a.html" horizontalscrolling="no" verticalscrolling="no" width="100%" frameborder="0"></iframe></div>
+<script>
+
+/**
+ *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+ *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+ */
+
+var disqus_config = function () {
+this.page.url = "http://andrej-mohar.com/frequency-xlating-fir-filter-and-channeling-basics-in-gnuradio";  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = "frequency-xlating-fir-filter-and-channeling-basics-in-gnuradio"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://andrej-mohar.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                <footer>
+                    <!-- Stays empty - Disqus will handle the comment input -->
+                </footer>
+        </div>
+    </div>
+</article></div>
+            </div>
+                    </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="layout-footer" class="container-fluid">
+    <footer id="footer" class="row">
+        <div id="footer-sig" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <div class="zone zone-footer"><div class="credits col-xs-12">
+    <span class="copyright">
+        © Andrej Mohar 2015. 
+    </span>
+    <span class="poweredby">
+        Powered by <a href="http://www.orchardproject.net/" target="_blank">Orchard</a>
+    </span>
+    <span class="social-footer">
+        Find me on:
+        <a href="http://www.linkedin.com/profile/view?id=320454854&amp;trk=nav_responsive_tab_profile" title="LinkedIn"><span class="fa fa-linkedin-square"></span></a>
+        <a href="https://plus.google.com/+AndrejMoharWeb/posts/" title="Google+"><span class="fa fa-google-plus-square"></span></a>
+        <a href="http://stackoverflow.com/users/2413587/andrej-mohar" title="Stack Overflow"><span class="fa fa-stack-overflow"></span></a>
+        <a href="https://www.youtube.com/channel/UCqUG-UUda14BOXEHEK6bTQw" title="YouTube"><span class="fa fa-youtube"></span></a>
+        <a href="https://github.com/amohar" title="GitHub"><span class="fa fa-github-square"></span></a>
+        <a href="https://twitter.com/andrej_mohar" title="Twitter"><span class="fa fa-twitter"></span></a>
+    </span>
+</div></div>
+        </div>
+    </footer>
+</div>
+
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/addthis_widget.html"></script> 
+<script id="dsq-count-scr" src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/count.js" async=""></script>
+</div>
+<script src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/jquery-1.js" type="text/javascript"></script>
+<script src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/bootstrap.js" type="text/javascript"></script>
+<script src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/MathJax.js" id=""></script>
+<script src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/highlight.js" type="text/javascript"></script><iframe style="display: none;"></iframe>
+<script src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/highlightjs-line-numbers.js" type="text/javascript"></script>
+<script src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/jquery.js" type="text/javascript"></script>
+<script src="Andrej%20Mohar%20-%20Frequency%20Xlating%20FIR%20filter%20and%20channeling%20basics%20in%20GnuRadio_files/js.js" type="text/javascript"></script>
+        <script language="javascript" type="text/javascript">
+            hljs.initHighlightingOnLoad();
+            hljs.initLineNumbersOnLoad();
+        </script>
+        <script>
+            $('.disqus-comment-count').each(function (idx, elt) {
+                if ($(elt).html() === '') {
+                    $(elt).html('0');
+                }
+            });
+        </script>
+        <script>
+            function closeMessage(id) {
+                $('.widget-site-message-' + String(id)).fadeOut(700);
+
+                ids = Cookies.get('widget-site-closed-ids');
+                
+                if (!ids || $.inArray(id, ids.split(',')) === false) {
+                    if (!ids) {
+                        Cookies.set('widget-site-closed-ids', String(id), { expires: 1 });
+                    } else {
+                        Cookies.set('widget-site-closed-ids', ids + ',' + String(id), { expires: 1 });
+                    }
+                }
+            }
+        </script>
+
+
+
+</body></html>

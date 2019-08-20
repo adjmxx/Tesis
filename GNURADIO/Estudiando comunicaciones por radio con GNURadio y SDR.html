@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+	<!-- Security-related tags -->
+	<meta http-equiv="Content-Security-Policy" content="default-src 'none';
+				style-src 'self' 'unsafe-inline';
+				media-src 'self';
+				object-src 'self';
+				img-src 'self' https://latex.codecogs.com data: ;
+				form-action 'none';
+				base-uri 'none';
+				">
+	<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+	<!-- End of security-related tags -->
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>
+		Estudiando comunicaciones por radio con GNURadio y SDR
+	</title>
+	<meta name="description" content="Este es mi último año en la universidad, y para mi trabajo de fin de grado estoyinvestigando el uso de SDR(Software Defined Radio) parainterceptar y atacar c...">
+
+	<link rel="stylesheet" href="Estudiando%20comunicaciones%20por%20radio%20con%20GNURadio%20y%20SDR_files/main.css">
+	<link rel="canonical" href="https://foo-manroot.github.io/post/es/gnuradio/sdr/2017/11/18/gnuradio-ook.html">
+	<link rel="alternate" type="application/rss+xml" title="Foo-ManBlog" href="https://foo-manroot.github.io/feed.xml">
+
+	<!--
+		Favicon, as stated on the instructions from https://realfavicongenerator.net/
+		The icon was extracted from https://www.freefavicon.com/
+	-->
+	<link rel="apple-touch-icon" sizes="180x180" href="https://foo-manroot.github.io/icons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://foo-manroot.github.io/icons/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="194x194" href="https://foo-manroot.github.io/icons/favicon-194x194.png">
+	<link rel="icon" type="image/png" sizes="192x192" href="https://foo-manroot.github.io/icons/android-chrome-192x192.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://foo-manroot.github.io/icons/favicon-16x16.png">
+	<link rel="manifest" href="https://foo-manroot.github.io/icons/manifest.json">
+	<link rel="mask-icon" href="https://foo-manroot.github.io/icons/safari-pinned-tab.svg" color="#17191f">
+	<link rel="shortcut icon" href="https://foo-manroot.github.io/icons/favicon.ico">
+
+	<meta name="msapplication-TileColor" content="#b91d47">
+	<meta name="msapplication-TileImage" content="/icons/mstile-144x144.png">
+	<meta name="msapplication-config" content="/icons/browserconfig.xml">
+	<meta name="theme-color" content="#17191f">
+
+	<!--
+		OpenGraph tags, to tell another websites what to show on the thumbnail
+	-->
+	<meta property="og:site_name" content="Foo-ManBlog">
+	<meta property="og:image" content="https://foo-manroot.github.io/icons/favicon-194x194.png">
+	<meta property="og:url" content="https://foo-manroot.github.io/post/es/gnuradio/sdr/2017/11/18/gnuradio-ook.html">
+	
+		<meta property="og:title" content="Estudiando comunicaciones por radio con GNURadio y SDR">
+		<meta property="og:type" content="article">
+		
+		<meta property="article:author" content="Foo-Manroot">
+		<meta property="article:published_time" content="2017-11-18 15:51:19 +0000">
+	
+	<meta property="og:locale" content="es_ES">
+	
+		
+			
+			
+				<!-- Searches on the collections -->
+				
+
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+							<meta property="og:locale:alternate" content="https://foo-manroot.github.io/post/gnuradio/sdr/2017/11/18/gnuradio-ook.html">
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+						
+					
+				
+
+					
+						
+					
+				
+			
+		
+	
+		
+	
+</head>
+
+
+<body>
+	<!--
+		Little hack to simulate onClick effect to show the sidebar.
+		Extracted from: https://stackoverflow.com/a/32721572
+	-->
+	<input type="checkbox" id="sidebar-toggle-checkbox">
+	<label for="sidebar-toggle-checkbox" id="sidebar-toggle">
+		<svg viewBox="0 0 653.516 522.87801" xmlns="http://www.w3.org/2000/svg" style="width: 36px; height: 26px">
+			<path style="fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.42516828;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" d="m 22.813824,316.30058 c 15.576437,15.94572 38.072984,25.92677 63.168685,25.92677 l 369.224531,10e-4 -95.35449,95.35441 c -20.75974,20.75972 -21.92899,53.01604 -2.62126,72.32373 19.3077,19.30769 51.56404,18.13849 72.32379,-2.6213 L 636.44605,300.39483 c 0.46849,-0.46848 0.9146,-0.94949 1.36311,-1.42941 0.42207,-0.39207 0.84619,-0.77988 1.25678,-1.19047 9.47485,-9.47485 14.00769,-22.06878 13.72505,-34.89128 0.26223,-12.79516 -4.26833,-25.35723 -13.72367,-34.81256 -0.40456,-0.40456 -0.82312,-0.78594 -1.23882,-1.17253 -0.45414,-0.48636 -0.90782,-0.97411 -1.38245,-1.44874 L 429.55646,18.56045 c -20.75975,-20.7597339 -53.01747,-21.9275839 -72.32517,-2.61989 -19.30773,19.30771 -18.13848,51.564 2.62126,72.32373 l 95.35449,95.3544 -369.224531,-10e-4 c -47.238968,1e-5 -85.26992486,35.37156 -85.26992486,79.30641 0,20.59446 8.35732396,39.30712 22.10123986,53.37686 z"></path>
+		</svg>
+	</label>
+
+	<!-- Wrapper to get the slide effect when the sidebar is shown -->
+	<div id="page-wrap">
+		<header id="header">
+		
+		<a id="site-title" href="https://foo-manroot.github.io/es/index.html">
+			Foo-ManBlog
+		</a>
+
+		<nav id="header-nav">
+
+			<!--
+				Little hack to simulate onClick effect to show the menu when on mobile.
+				Extracted from: https://stackoverflow.com/a/32721572
+			-->
+			<input type="checkbox" id="menu-checkbox">
+
+			<label for="menu-checkbox" id="menu-label">
+				<a id="menu-icon">
+					<svg viewBox="0 0 18 15" style="width: 18px; height: 15px">
+						<path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"></path>
+						<path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"></path>
+						<path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"></path>
+					</svg>
+				</a>
+
+				<div id="trigger">
+					<!--
+						Includes only the desired pages on the header
+						(the rest will be on the sidebar)
+					-->
+					
+
+					
+
+					
+						
+							<a class="page-link" href="https://foo-manroot.github.io/es/about/">
+								Información
+							</a>
+						
+					
+						
+					
+						
+					
+						
+							<a class="page-link" href="https://foo-manroot.github.io/es/categories/">
+								Categorías
+							</a>
+						
+					
+						
+							<a class="page-link" href="https://foo-manroot.github.io/es/links/">
+								Useful links
+							</a>
+						
+					
+						
+					
+				</div>
+			</label>
+		</nav>
+
+</header>
+
+
+		<!-- Internationalization -->
+		<ul id="languages">
+			
+				<li>
+					
+						
+
+						
+							<!-- Searches on the collections -->
+							
+
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+										<a href="https://foo-manroot.github.io/post/gnuradio/sdr/2017/11/18/gnuradio-ook.html">
+											English
+										</a>
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+
+							
+
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+									
+								
+
+							
+
+								
+									
+								
+
+							
+
+						
+
+					
+				</li>
+			
+				<li>
+					
+						<a href="https://foo-manroot.github.io/post/es/gnuradio/sdr/2017/11/18/gnuradio-ook.html" id="current-lang">
+							Español
+						</a>
+					
+				</li>
+			
+		</ul>
+
+
+		
+<aside id="sidebar">
+
+	<ul>
+		<li class="sidebar-item">
+			<!--
+				Little hack to simulate onClick effect.
+				Extracted from: https://stackoverflow.com/a/32721572
+			-->
+			<input type="checkbox" id="sidebar-categ-checkbox" class="sidebar-checkbox">
+
+			
+			<label for="sidebar-categ-checkbox" class="sidebar-label">
+				<!-- Div to allow clicking anywhere on the box and show the sublist -->
+				<div class="sidebar-item sidebar-deployable">
+					Categorías
+				</div>
+
+				<ul class="sidebar-content">
+					
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#activemq">
+								Activemq
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#anonimity">
+								Anonimity
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#challenge">
+								Challenge
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#ciberseg">
+								Ciberseg
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#conference">
+								Conference
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#crawler">
+								Crawler
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#crypto">
+								Crypto
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#ctf">
+								Ctf
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#cybercamp">
+								Cybercamp
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#elttam">
+								Elttam
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#es">
+								Es
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#exploiting">
+								Exploiting
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#forensics">
+								Forensics
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#gnuradio">
+								Gnuradio
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#keybase">
+								Keybase
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#meepwn">
+								Meepwn
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#ocsp">
+								Ocsp
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#pgp">
+								Pgp
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#post">
+								Post
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#privacy">
+								Privacy
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#programming">
+								Programming
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#reversing">
+								Reversing
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#scraping">
+								Scraping
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#sdr">
+								Sdr
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#security">
+								Security
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#side-channel">
+								Side-channel
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#side-project">
+								Side-project
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#site-info">
+								Site-info
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#tor">
+								Tor
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#twitter">
+								Twitter
+							</a>
+						</li>
+					
+						<li class="sidebar-final-item">
+							<a href="https://foo-manroot.github.io/es/categories/#write-up">
+								Write-up
+							</a>
+						</li>
+					
+				</ul>
+			</label>
+		</li>
+
+		<li class="sidebar-item sidebar-final-item">
+			
+			<a href="https://foo-manroot.github.io/es/about/">
+					Información
+			</a>
+		</li>
+		
+		<!-- Collections -->
+		
+
+			
+
+			
+				
+				<li class="sidebar-tiem sidebar-final-item">
+					<a href="https://foo-manroot.github.io/es/">
+						Posts
+					</a>
+				</li>
+			
+		
+
+			
+
+			
+				<li class="sidebar-tiem sidebar-final-item">
+					<a href="https://foo-manroot.github.io/es/projects">
+						Proyectos
+					</a>
+				</li>
+			
+		
+
+			
+
+			
+				<li class="sidebar-tiem sidebar-final-item">
+					<a href="https://foo-manroot.github.io/es/tools">
+						Herramientas
+					</a>
+				</li>
+			
+		
+	</ul>
+
+</aside>
+
+
+
+		<div class="page-content">
+			<div class="wrapper">
+				<article class="post" itemscope="" itemtype="http://schema.org/BlogPosting">
+
+	
+	<header class="post-header">
+		<!-- Title -->
+		<h1 class="post-title" itemprop="name headline">Estudiando comunicaciones por radio con GNURadio y SDR</h1>
+		<!-- Post info -->
+		<p class="post-meta">
+			<time datetime="2017-11-18T15:51:19+00:00" itemprop="datePublished">Nov 18, 2017</time>
+			
+					• <span itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+						<span itemprop="name">
+							Escrito por:
+							<a rel="author" href="https://github.com/foo-manroot" title="Foo-Manroot">
+								Foo-Manroot
+							</a>
+						</span>
+					</span>
+			
+		</p>
+
+
+		
+		
+		<!-- Categories -->
+		<ul class="category-list">
+			
+				<li>
+					<a href="https://foo-manroot.github.io/es/categories/#post">
+						post
+					</a>
+				</li>
+			
+				<li>
+					<a href="https://foo-manroot.github.io/es/categories/#es">
+						es
+					</a>
+				</li>
+			
+				<li>
+					<a href="https://foo-manroot.github.io/es/categories/#gnuradio">
+						gnuradio
+					</a>
+				</li>
+			
+				<li>
+					<a href="https://foo-manroot.github.io/es/categories/#sdr">
+						sdr
+					</a>
+				</li>
+			
+		</ul>
+
+	</header>
+
+	<div class="post-content" itemprop="articleBody">
+		<p>Este es mi último año en la universidad, y para mi trabajo de fin de grado estoy
+investigando el uso de SDR
+<a href="https://en.wikipedia.org/wiki/Software-defined_radio">(<em>Software Defined Radio</em>)</a> para
+interceptar y atacar comunicaciones por radio inseguras.</p>
+
+<p>Las aplicaciones iniciales que tenía en mente eran sólo para interceptar teclados y
+ratones inalámbricos; pero resulta que eso <a href="https://www.mousejack.com/">ya se ha hecho</a>,
+así que decidí darle un enfoque más amplio y estudiar todas las comunicaciones por radio,
+incluyendo mandos de garajes, llaves de algunos coches…</p>
+
+<p>Por ahora, estoy sólo jugando y aprendiendo a usar <a href="http://gnuradio.org/">GNURadio</a> e
+intentando decodificar las señales simples de los mandos de domótica que se usan para
+cosas como encender o apagar luces en una casa.</p>
+
+<h2 id="hardware">Hardware</h2>
+
+<p>Antes que nada, necesitamos los dispositivos necesarios para interceptar y transmitir
+señales a las frecuencias deseadas.</p>
+
+<h3 id="receptores">Receptores</h3>
+
+<p>Hay múltiples opciones baratas para recibir señales. Sólo hay que buscar “RTL2832U”
+(yo compré el mío por unos 5$, pero la antena no es muy buena).</p>
+
+<p>Hay que tener en cuenta que estos aparatos <strong><em>no pueden transmitir</em></strong>. Sin embargo, son
+buenos receptores y deberían bastar para empezar a jugar con SDR.</p>
+
+<p>Se puede encontrar más información sobre el RTL-SDR en
+<a href="https://www.rtl-sdr.com/">rtl-sdr.com</a>, incluyendo una tienda donde comprar el <em>hardware</em>
+y múltiples tutoriales, como instrucciones para construir una antena adecuada, o
+decodificar las señales de la NOAA para obtener
+<a href="https://www.reddit.com/r/RTLSDR/search?q=noaa&amp;restrict_sr=on">imágenes meteorológicas muy buenas</a>…</p>
+
+<h3 id="transceptores">Transceptores</h3>
+
+<p>Si te resulta cómodo trabajar con señales de radio, o crees que puedes usarlo para otros
+proyectos, puedes comprar un transceptor por unos cientos de dólares, como el
+<a href="https://greatscottgadgets.com/hackrf/">HackRF One</a>.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Voy a aportar algunas muestras para poder trabajar sin necesidad de un dispositivo
+hardware; pero, si quieres jugar con tus propios mandos, deberías conseguir uno de los
+dispositivos mencionados arriba.
+</code></pre></div></div>
+
+<h2 id="software">Software</h2>
+
+<p>El único <em>software</em> que se necesita es GNURadio, pero se puede usar cualquier otro
+programa para localizar y echar un vistazo a las señales recibidas. Dos opciones
+populares son <a href="http://gqrx.dk/">GQRX</a> y <a href="https://airspy.com/download/">SDR#</a>, pero hay
+cientos de otros programas muy útiles.</p>
+
+<h2 id="el-mando">El mando</h2>
+
+<p>Yo voy a trabajar con el mando que tengo en casa: <a href="http://dinuy.com/es/rss/86-productos/domotica/229-em-man-001">EM_MAN-001,
+hecho por Dinuy</a><sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>. En
+la página enlazada hay un par de características de este mando; pero las más interesantes
+son:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Comunicación:	Por Radio-Frecuencia (433,92MHz)
+- Modulación:	ASK
+</code></pre></div></div>
+
+<p><a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/EM_MAN-001.jpg">
+	<img src="Estudiando%20comunicaciones%20por%20radio%20con%20GNURadio%20y%20SDR_files/EM_MAN-001.jpg" alt="El mando Dinuy EM_MAN-001 que va a ser estudiado" title="Mando a estudiar" style="max-height: 300px">
+</a></p>
+
+<p>Así que, simplemente mirando a la tabla proporcionada por el fabricante, sabemos dos
+cosas esenciales: la <strong>frecuencia</strong> y la <strong>modulación</strong>. Podríamos deducirlas buscando en
+el espectro (normalmente, estos mandos usan la
+<a href="https://en.wikipedia.org/wiki/ISM_band">banda ISM</a> de 433 MHz) y examinando la onda (de
+nuevo, estos mandos suelen modular usando
+<a href="https://en.wikipedia.org/wiki/On-off_keying">On-Off Keying - OOK</a>).</p>
+
+<hr>
+
+<h2 id="interceptando-y-analizando-la-señal">Interceptando y analizando la señal</h2>
+
+<p>Una vez hemos sintonizado el receptor a 433’92 MHz, podemos ver algo similar a esto en
+GQRX:</p>
+
+<video src="Estudiando%20comunicaciones%20por%20radio%20con%20GNURadio%20y%20SDR_files/Screencast-GQRX.webm" controls="controls" style="">
+	You can download the video <a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/Screencast-GQRX.webm">here</a>
+</video>
+
+<p>Y viendo en Audacity el archivo WAV grabado, podemos ver esta señal tan bonita:</p>
+
+<p><a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/gqrx_capture-audacity.jpg">
+	<img src="Estudiando%20comunicaciones%20por%20radio%20con%20GNURadio%20y%20SDR_files/gqrx_capture-audacity.jpg" alt="Señal vista en Audacity, mostrando la señal digital cuadrada" title="Captura de la señal" style="">
+</a></p>
+
+<p>El archivo WAV con la señal grabada puede ser descargado
+<a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/gqrx_capture.wav">aquí</a>.</p>
+
+<h2 id="obteniendo-los-datos-a-mano">Obteniendo los datos a mano</h2>
+
+<p>La codificación mostrada en la imagen de arriba es bastante sencilla, y puede ser
+decodificada a mano. Básicamente, las ráfagas largas se interpretan como un bit (por
+ejemplo, un <em>1</em>), y las cortas se interpretan como el otro bit (por ejemplo, un <em>0</em>).
+Para diferenciar las ráfagas largas de las cortas podemos mirar en el medio de un periodo
+(si está en alto, significa que es un 1 y si está en bajo un 0, por ejemplo).</p>
+
+<p><a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/signal-hand-decode.jpg">
+	<img src="Estudiando%20comunicaciones%20por%20radio%20con%20GNURadio%20y%20SDR_files/signal-hand-decode.jpg" alt="Señal vista en Audacity, mostrando la señal digital cuadrada y los bits decodificados" title="Datos decodificados de la señal" style="">
+</a></p>
+
+<p>Así, los datos que corresponden con el primer botón pulsado en la captura son:
+<code class="highlighter-rouge">0100 0001 0101 0100 0001 0101 0</code></p>
+
+<p>En la captura hay tres pulsaciones diferentes de botones:</p>
+<ul>
+  <li>Canal II, botón 4 (ON):	<code class="highlighter-rouge">0100000101010100000101010</code></li>
+  <li>Canal II, botón 4 (OFF):	<code class="highlighter-rouge">0100000101010100000000000</code></li>
+  <li>Canal II, botón 4 (ON):	<code class="highlighter-rouge">0100000101010100000101010</code></li>
+</ul>
+
+<p>Este tipo de dispositivos usan esta codificación tan simple para evitar perder
+información (puesto que esas bandas tienen muchas interferencias), y es bastante común
+que la información se repita varias veces; como en este mando, donde los paquetes se
+repiten tras una espera de uno o dos periodos.</p>
+
+<p>Yo usé Python para automatizar este proceso de decodificar las señales grabadas (aunque
+luego descubrí que GNURadio era mejor para esta tarea), extrayendo los siguientes datos
+para estudiar el protocolo:</p>
+
+<p><a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/protocol-study.jpg">
+	<img src="Estudiando%20comunicaciones%20por%20radio%20con%20GNURadio%20y%20SDR_files/protocol-study.jpg" alt="Bits recibidos, dependiendo del botón pulsado" title="Estudio del protocolo" style="">
+</a></p>
+
+<p>Como nota aparte, hice un pequeño archivo de sintaxis para vim (como se puede ver en la
+imagen anterior), que puede ser descargado
+<a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/signal.vim">de aquí</a>. Para usarlo, hay que crear
+un archivo <code class="highlighter-rouge">.vim.custom</code> en el directorio del proyecto con el siguiente contenido (o
+añadirlo directamente al <code class="highlighter-rouge">.vimrc</code>, o como se prefiera hacer…):</p>
+<div class="language-vim highlighter-rouge"><div class="highlight"><pre class="highlight"><code>autocmd <span class="nb">BufRead</span><span class="p">,</span><span class="nb">BufNewFile</span> *<span class="p">.</span>signal <span class="k">set</span> <span class="k">filetype</span><span class="p">=</span>signal
+autocmd <span class="nb">Syntax</span> signal <span class="k">so</span> **<span class="sr">/syntax/</span>signal<span class="p">.</span><span class="k">vim</span>
+</code></pre></div></div>
+
+<p>Por otro lado, aunque el propósito principal es usar GNURadio, dejo
+<a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/wav_data_extract.tar.gz">por aquí</a> el código
+(Python2) usado para extraer los bits de las grabaciones en WAV, que usé antes de
+conocer GNURadio. Para saber más sobre su uso, hay que ejecutar <code class="highlighter-rouge">./decode.py --help</code>.</p>
+
+<hr>
+
+<h2 id="usando-gnuradio">Usando GNURadio</h2>
+
+<p>Ahora que sabemos todo lo que hay que saber sobre la señal, podemos empezar a usar
+GNURadio para analizarla o decodificarla en tiempo real. Daré por hecho que se tienen
+algunos conocimientos básicos de GNURadio o de tratamiento digital de señales (yo tampoco
+soy un experto… sólo hacen falta algunos conceptos básicos para seguir esta parte).</p>
+
+<p>Para aprender más sobre cualquiera de estas materias, hay muchos tutoriales y recursos en
+internet, como <a href="https://greatscottgadgets.com/sdr/">esta serie</a> sobre tratamiento digital
+de señales, hecha por el creador del HackRF, o
+<a href="https://wiki.gnuradio.org/index.php/Guided_Tutorial_Introduction">esta otra serie</a>,
+sacada de la wiki de GNURadio.</p>
+
+<p>A partir de ahora trabajaré con
+<a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/cap.iq.tar.bz2">este archivo IQ</a>, capturado
+usando GNURadio, porque es más simple trabajar con él que enchufar el receptor.</p>
+
+<h3 id="obteniendo-la-señal-digital">Obteniendo la señal digital</h3>
+
+<p>La señal capturada está
+<a href="https://es.wikipedia.org/wiki/Modulaci%C3%B3n_(telecomunicaci%C3%B3n)">modulada</a> en AM.
+Eso significa que tenemos la señal portadora (a 433 MHz), pero tenemos que recuperar la
+señal original para empezar a decodificarla. Como el método usado es muy sencillo,
+podemos simplemente usar el bloque <code class="highlighter-rouge">Complex to Mag^2</code>. Además, un <code class="highlighter-rouge">Threshold</code> puede
+usarse para reducir la señal a una onda perfectamente cuadrada.</p>
+
+<p>Este primer diagrama (con un pequeño control para ajustar la frecuencia) puede ser
+descargado desde <a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/flowgraphs/analyze.grc">aquí</a>:</p>
+
+<p><a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/flowgraph_receiver.jpg">
+	<img src="Estudiando%20comunicaciones%20por%20radio%20con%20GNURadio%20y%20SDR_files/flowgraph_receiver.jpg" alt="Diagrama con los bloques mencionados para demodular la señal" title="Diagrama para extraer la señal digital" style="">
+</a></p>
+
+<p>De momento, sólo podemos ver la señal digital (junto con los diferentes estadios
+mientras se procesa la señal capturada). También podemos añadir un filtro de paso de
+banda (<em>band-pass filter</em>) para reducir el ruido.</p>
+
+<h3 id="analizando-la-señal">Analizando la señal</h3>
+
+<p>Para recuperar los datos de manera precisa mientras está siendo capturada la señal,
+debemos obtener algunas estadísticas, como la frecuencia base (para saber el número de
+muestras por periodo, para poder distinguir entre ráfagas cortas y largas). Para ello,
+podemos usar el diagrama anterior junto a un bloque propio cuyo código se puede descargar
+<a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/flowgraphs/stats_collector.py">aquí</a>, y añadirlo
+a la salida del bloque <code class="highlighter-rouge">Threshold</code>, como se muestra en la imagen:</p>
+
+<p><a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/flowgraph_get_stats.jpg">
+	<img src="Estudiando%20comunicaciones%20por%20radio%20con%20GNURadio%20y%20SDR_files/flowgraph_get_stats.jpg" alt="Diagrama con el nuevo bloque propio para obtener estadísticas de la señal" title="Diagrama para analizar la señal digital" style="">
+</a></p>
+
+<p>Este nuevo diagrama puede ser descargado
+<a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/flowgraphs/get_stats.grc">aquí</a>.</p>
+
+<p>Un ejemplo de la salida puede ser como el siguiente:</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(...)
+******************************
+=&gt; General stats:
+	 -&gt; Min burst: 688
+	 -&gt; Max burst: 2319
+	 -&gt; Mean: 1206.8630303
+=&gt; Short bursts:
+	 -&gt; Median: 716
+	 -&gt; Longer burst: 748
+=&gt; Long bursts:
+	 -&gt; Median: 2243
+	 -&gt; Shorter burst: 2223
+=&gt; Signal period (median): 2959 samples (675.904021629 Hz)
+(...)
+</code></pre></div></div>
+
+<p>Ahora ya sabemos la frecuencia base, 675’9 Hz, y podemos empezar a decodificar los datos
+en vivo, a medida que capturamos la señal.</p>
+
+<h3 id="decodificando-en-tiempo-real">Decodificando en tiempo real</h3>
+
+<p>Para decodificar los datos, voy a sustituir el bloque <code class="highlighter-rouge">statistics sink</code> por
+<a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/flowgraphs/ook2bin.py">otro bloque propio</a> para
+mostrar los bits por STDOUT. Supongo que habrá otros métodos más simples para mostrar los
+datos, pero elegí este porque Python es un lenguaje en el que el desarrollo es muy
+rápido, y no sabía cómo hacerlo con los bloques disponibles.</p>
+
+<p>Este diagrama puede descargarse
+<a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/flowgraphs/decode.grc">aquí</a>. Este es un ejemplo
+de decodificación de paquetes en tiempo real:</p>
+
+<video src="Estudiando%20comunicaciones%20por%20radio%20con%20GNURadio%20y%20SDR_files/Screencast-flowgraph_decoding.webm" controls="controls" style="">
+	You can download the video <a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/Screencast-flowgraph_decoding.webm">here</a>
+</video>
+
+<h3 id="transmitiendo-la-señal">Transmitiendo la señal</h3>
+
+<p>¡Al fin hemos llegado a la parte más chula!, donde podemos jugar con las luces / el
+timbre / <em>para-lo-que-sirva-tu-mando</em> …</p>
+
+<p>Si tienes uno de los dispositivos RTL-SDR, no podrás transmitir; pero hay muchas
+alternativas baratas al HackRF (el que voy a usar para transmitir) por ahí. El HackRF y
+transceptores similares son caros debido al amplio rango de frecuencias en el que pueden
+operar; pero <em>chips</em> pequeños que transmitan en 433 MHz deberían costar unos 5-10$. No
+lo he probado; pero supongo que será fácil usar un Arduino o una Raspberry y, junto a
+uno de esos <em>chips</em>, sintetizar la señal deseada.</p>
+
+<p>De cualquier manera, hay dos métodos para suplantar al mando: repetir las señales
+capturadas, o crear nuestra propia señal y emitirla para que el dispositivo final (la
+luz, el timbre, etc.) lo reciba.</p>
+
+<p>Repetir la señal es un método muy sencillo. Sólo tenemos que guardar la señal en un
+fichero y luego usar este mismo fichero como fuente para transmitir.</p>
+
+<p>No es el mejor método, puesto que hay que capturar todos los valores posibles, por cada
+uno de los diferentes botones, y este método no escala. En cuanto se tienen más de tres
+o cuatro botones, empieza a resultar bastante aburrido. Además, debemos tener cuidado
+con los parámetros (frecuencia y velocidad de muestreo), para repetir exactamente la
+misma señal que se recibió.</p>
+
+<p>Los diagramas son bastante simples.</p>
+
+<p>Recibir:
+<a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/flowgraph_capture.jpg">
+	<img src="Estudiando%20comunicaciones%20por%20radio%20con%20GNURadio%20y%20SDR_files/flowgraph_capture.jpg" alt="Diagrama con los bloques necesarios para guardar la señal en un archivo" title="Diagrama para capturar la señal que va a ser repetida" style="">
+</a></p>
+
+<p>Repetir:
+<a href="https://foo-manroot.github.io/assets/posts/2017-11-18-gnuradio-ook/flowgraph_replay.jpg">
+	<img src="Estudiando%20comunicaciones%20por%20radio%20con%20GNURadio%20y%20SDR_files/flowgraph_replay.jpg" alt="Diagrama con los bloques necesarios para repetir la señal" title="Diagrama para repetir la señal" style="">
+</a></p>
+
+<p>Para el otro método, sintetizar la señal, crearé otro post nuevo; puesto que requiere
+más explicación y este post es ya demasiado largo.</p>
+
+<hr>
+
+<h1 id="actualización-2018-06-10-la-siguiente-parte-está-disponible-aquí">Actualización 2018-06-10: la siguiente parte está <a href="https://foo-manroot.github.io/post/es/gnuradio/sdr/2018/01/15/gnuradio-ook-transmit.html">disponible aquí</a>.</h1>
+
+<hr>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>La página ya no está disponible. Tendréis que creerme cuando digo que esa es la
+información que venía ahí…&nbsp;<a href="#fnref:1" class="reversefootnote">↩</a></p>
+    </li>
+  </ol>
+</div>
+
+	</div>
+
+</article>
+
+			</div>
+		</div>
+
+		<a id="navigation-arrow" href="#">
+			<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 100 100">
+	<path style="fill:#dcdcdc;fill-opacity:0.69811318;fill-rule:nonzero;stroke:#000000;stroke-width:1.57218838;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.77033488" d="m 10,1002.3622 40,-44.99999 40,44.99999 -20,0 0,40 -40,0 0,-40 z"></path>
+	<path style="fill:#b3b3b3;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:2;stroke-linecap:square;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" d="M 30.849586,69.342828 C 30.817455,49.9368 30.812322,49.56822 30.571745,49.392315 30.365373,49.241418 28.872148,49.213098 21.12261,49.213098 c -5.062217,0 -9.18509,-0.0467 -9.161941,-0.103783 0.02315,-0.05708 8.590157,-9.71814 19.037795,-21.469022 C 46.106861,10.647265 50.025331,6.3080251 50.146451,6.4361706 c 0.08376,0.088614 8.659401,9.7354684 19.056992,21.4374544 l 18.904708,21.276338 -9.263349,0.03036 -9.263349,0.03036 -0.22097,0.267739 c -0.208358,0.252456 -0.220971,1.391245 -0.220971,19.951723 l 0,19.683987 -19.128595,0 -19.128594,0 -0.03274,-19.771295 z"></path>
+</svg>
+
+		</a>
+
+		
+<div id="footer-rule"></div>
+
+<footer id="footer">
+
+	<h2 id="footer-heading">Foo-ManBlog</h2>
+
+	<!-- Column 1: contact -->
+	<ul id="footer-contact">
+		<li>Foo-ManBlog</li>
+		<li><a href="mailto:foomanroot@disroot.org">foomanroot@disroot.org</a></li>
+	</ul>
+
+	<!-- Column 2: social media -->
+	<ul id="footer-social-media">
+		
+		<li>
+			<a href="https://github.com/Foo-Manroot">
+	<span class="icon icon--github"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"></path></svg>
+</span>
+	<span class="username">Foo-Manroot</span>
+</a>
+
+		</li>
+		
+
+		
+
+		
+		<li>
+			<a href="https://keybase.io/Foo_Manroot">
+	<!-- Icon extracted from
+	https://github.com/barryclark/jekyll-now/pull/997/commits/d96882283e3c117d22ec6d6b1eafd1977e41a9ff
+	-->
+	<span class="icon icon--keybase"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?--><svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" width="40" height="40" viewBox="0 0 10.583333 10.583333" version="1.1" id="svg3850" inkscape:version="0.92.2 (5c3e80d, 2017-08-06)" sodipodi:docname="keybase.svg">  <defs id="defs3844">    <clipPath clipPathUnits="userSpaceOnUse" id="clipPath3752">      <path d="M 0,600 H 600 V 0 H 0 Z" id="path3750" inkscape:connector-curvature="0"></path>    </clipPath>  </defs>  <sodipodi:namedview id="base" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageopacity="0.0" inkscape:pageshadow="2" inkscape:zoom="5.6" inkscape:cx="42.472402" inkscape:cy="6.0201547" inkscape:document-units="mm" inkscape:current-layer="layer1" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" units="px" inkscape:window-width="1920" inkscape:window-height="1018" inkscape:window-x="-8" inkscape:window-y="-8" inkscape:window-maximized="1"></sodipodi:namedview>  <metadata id="metadata3847">    <rdf:rdf>      <cc:work rdf:about="">        <dc:format>image/svg+xml</dc:format>        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"></dc:type>        <dc:title></dc:title>      </cc:work>    </rdf:rdf>  </metadata>  <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(-18.092464,-126.73724)">    <g transform="matrix(0.029348,0,0,-0.029348,14.417843,140.81319)" id="g3746">      <g id="g3748" clip-path="url(#clipPath3752)">        <g id="g3754" transform="translate(309.6481,443.0691)">          <path d="m 0,0 c -98.307,0 -178,-79.693 -178,-178 0,-33.94 9.502,-65.658 25.986,-92.647 l 19.44,20.641 c -1.307,7.529 -1.994,15.271 -1.994,23.175 0,74.32 60.248,134.568 134.568,134.568 74.32,0 134.568,-65.784 134.568,-134.568 0,-26.549 -5.149,-52.647 -17.217,-74.692 h 10.801 C 159.013,-269.513 178,-225.976 178,-178 178,-79.693 98.307,0 0,0" style="fill:#33a0ff;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3756" inkscape:connector-curvature="0"></path>        </g>        <g id="g3758" transform="translate(309.6481,350.8062)">          <path d="m 0,0 c -74.32,0 -134.568,-60.248 -134.568,-134.568 0,-27.636 8.335,-53.322 22.622,-74.692 h 229.297 c 12.068,22.045 17.217,48.143 17.217,74.692 C 134.568,-65.785 74.32,0 0,0" style="fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3760" inkscape:connector-curvature="0"></path>        </g>        <g id="g3762" transform="translate(309.648,359.4888)">          <path d="m 0,0 c -78.989,0 -143.251,-64.262 -143.251,-143.251 0,-27.349 7.708,-52.93 21.06,-74.692 h 20.924 c -15.462,20.909 -24.618,46.75 -24.618,74.692 0,69.413 56.472,125.885 125.885,125.885 32.98,0 64.562,-13.801 88.929,-38.86 23.486,-24.154 36.956,-55.874 36.956,-87.025 0,-21.165 -3.474,-49.887 -18.547,-74.692 h 19.811 c 10.59,21.139 16.102,46.468 16.102,74.692 0,35.633 -15.261,71.764 -41.871,99.131 C 73.714,-15.669 37.711,0 0,0" style="fill:#282828;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3764" inkscape:connector-curvature="0"></path>        </g>        <g id="g3766" transform="translate(282.4788,177.1741)">          <path d="m 0,0 c 0,-7.135 -5.784,-12.918 -12.918,-12.918 -7.135,0 -12.919,5.783 -12.919,12.918 0,7.135 5.784,12.918 12.919,12.918 C -5.784,12.918 0,7.135 0,0" style="fill:#282827;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3768" inkscape:connector-curvature="0"></path>        </g>        <g id="g3770" transform="translate(362.6539,177.1741)">          <path d="m 0,0 c 0,-7.135 -5.784,-12.918 -12.918,-12.918 -7.135,0 -12.919,5.783 -12.919,12.918 0,7.135 5.784,12.918 12.919,12.918 C -5.784,12.918 0,7.135 0,0" style="fill:#282827;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3772" inkscape:connector-curvature="0"></path>        </g>        <g id="g3774" transform="translate(162.8241,182.2988)">          <path d="M 0,0 71.708,76.051 54.447,21.94 c 55.984,40.741 114.755,34.298 156.138,22.147 43.924,-12.898 74.675,25.895 44.572,67.279 -14.305,19.667 -33.927,35.996 -56.216,45.898 C 140.484,183.234 81.711,168.093 42.064,128.042 0.065,85.617 0,38.558 0,0" style="fill:#ff6f21;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3776" inkscape:connector-curvature="0"></path>        </g>        <g id="g3778" transform="translate(302.9106,343.7231)">          <path d="m 0,0 c -8.383,0 -16.707,-0.835 -24.888,-2.518 -24.944,-5.131 -48.1,-17.917 -66.964,-36.972 -32.121,-32.449 -38.155,-67.268 -39.289,-99.79 l 82.637,87.643 -21.637,-67.83 c 41.87,22.549 89.888,26.082 143.086,10.461 17.117,-5.025 32.664,-1.171 40.576,10.059 8.125,11.533 6.08,27.9 -5.472,43.781 -13.617,18.721 -32.34,34.017 -52.72,43.071 C 37.267,-4.071 18.496,0 0,0 m -148.769,-183.29 v 21.866 c 0,39.706 0,89.122 44.575,134.151 21.283,21.498 47.496,35.941 75.807,41.764 29.801,6.13 61.188,2.425 90.767,-10.716 23.124,-10.273 44.33,-27.578 59.712,-48.726 15.891,-21.845 18.046,-46.368 5.625,-63.998 -12.141,-17.234 -35.56,-23.795 -59.665,-16.719 -56.709,16.651 -106.7,9.642 -148.582,-20.838 l -21.44,-15.601 13.716,42.997 z" style="fill:#282827;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3780" inkscape:connector-curvature="0"></path>        </g>        <g id="g3782" transform="translate(229.2376,393.203)">          <path d="m 0,0 c -8.199,0.503 -14.484,7.588 -14.005,15.794 l 1.177,19.013 c 0.488,7.865 7.043,14.024 14.924,14.024 0.294,0 0.59,-0.008 0.888,-0.026 l 19.001,-1.177 c 3.978,-0.241 7.63,-2.024 10.275,-5.018 2.648,-2.992 3.97,-6.846 3.714,-10.842 L 34.808,12.823 C 34.744,11.794 34.531,10.975 34.406,10.538 L 33.788,7.524 21.805,-1.349 Z" style="fill:#3dcc8e;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3784" inkscape:connector-curvature="0"></path>        </g>        <g id="g3786" transform="translate(231.3336,450.7176)">          <path d="m 0,0 c -12.457,0 -22.819,-9.738 -23.59,-22.17 l -1.176,-18.982 -0.002,-0.032 -0.002,-0.033 c -0.755,-12.971 9.181,-24.171 22.148,-24.965 l 18.635,-1.153 6.318,-0.39 5.087,3.766 6.768,5.01 5.345,3.957 1.229,5.999 c 0.25,0.937 0.521,2.205 0.618,3.754 l 1.168,18.98 c 0.402,6.278 -1.688,12.372 -5.887,17.116 -4.171,4.723 -9.948,7.542 -16.255,7.925 L 1.451,-0.044 1.424,-0.043 1.396,-0.041 C 0.933,-0.014 0.463,0 0,0 m 14.191,-39.695 0.699,11.291 -11.294,0.7 -0.701,-11.295 11.296,-0.696 M 0,-17.366 c 0.125,0 0.251,-0.004 0.377,-0.011 l 18.976,-1.175 c 1.662,-0.101 3.195,-0.847 4.302,-2.1 1.111,-1.256 1.665,-2.869 1.558,-4.541 l -1.167,-18.965 c -0.019,-0.294 -0.135,-0.552 -0.193,-0.834 l -6.767,-5.01 -18.646,1.153 c -3.441,0.211 -6.073,3.183 -5.873,6.623 l 1.176,18.982 c 0.205,3.313 2.954,5.878 6.257,5.878" style="fill:#282828;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3788" inkscape:connector-curvature="0"></path>        </g>        <g id="g3790" transform="translate(344.001,357.9734)">          <path d="m 0,0 c -8.501,-22.153 -33.156,-34.521 -55.996,-28.09 -25.734,7.246 -39.324,27.927 -36.061,54.161 3.245,26.088 20.875,48.96 41.196,77.155 -16.692,-35.53 -2.512,-38.859 1.974,-38.681 4.432,0.175 10.902,-0.58 20.111,-3.636 C -3.686,52.582 9.578,24.96 0,0" style="fill:#ff6f21;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3792" inkscape:connector-curvature="0"></path>        </g>        <g id="g3794" transform="translate(278.2453,424.9296)">          <path d="m 0,0 c -9.334,-14.428 -15.919,-27.765 -17.685,-41.958 -2.734,-21.985 8.406,-38.708 29.798,-44.731 18.609,-5.239 38.61,4.795 45.536,22.844 3.755,9.785 3.364,20.372 -1.102,29.809 -4.469,9.445 -12.39,16.458 -22.302,19.747 -8.622,2.862 -14.023,3.322 -17.032,3.201 C 10.926,-11.347 5.142,-8.413 1.729,-3.266 1.052,-2.246 0.476,-1.158 0,0 m 22.077,-105.429 c -4.876,0 -9.803,0.654 -14.67,2.024 -14.629,4.119 -26.313,12.251 -33.787,23.518 -7.449,11.229 -10.402,25.086 -8.537,40.073 3.309,26.607 19.783,49.38 38.857,75.749 1.291,1.783 2.595,3.586 3.91,5.412 L 22.753,32.578 C 12.894,11.591 16.184,6.346 16.222,6.303 16.241,6.304 16.432,6.265 16.542,6.265 23,6.529 30.804,5.151 39.715,2.194 c 14.459,-4.799 26.011,-15.028 32.529,-28.802 6.515,-13.767 7.089,-29.201 1.619,-43.459 -8.297,-21.62 -29.455,-35.362 -51.786,-35.362" style="fill:#282827;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3796" inkscape:connector-curvature="0"></path>        </g>        <g id="g3798" transform="translate(319.8644,272.5052)">          <path d="m 0,0 c -3.608,0 -6.985,1.603 -9.265,4.397 l -6.424,7.869 c -2.014,2.465 -2.947,5.569 -2.626,8.737 0.258,2.55 1.303,4.897 2.988,6.765 -1.082,0.676 -2.059,1.533 -2.89,2.549 l -1.468,1.798 c -4.16,5.092 -3.401,12.618 1.69,16.778 l 0.254,0.208 -8.865,10.881 c -4.486,5.496 -3.665,13.629 1.835,18.123 2.309,1.88 5.2,2.909 8.155,2.909 3.879,0 7.515,-1.723 9.977,-4.728 L 33.508,26.871 C 37.987,21.384 37.165,13.251 31.665,8.757 30.143,7.514 28.329,6.624 26.419,6.182 25.463,5.962 24.488,5.851 23.513,5.851 c -3.093,0 -6.031,1.094 -8.342,3.058 L 7.559,2.695 C 5.43,0.957 2.746,0 0,0" style="fill:#3dcc8e;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3800" inkscape:connector-curvature="0"></path>        </g>        <g id="g3802" transform="translate(303.2478,362.2024)">          <path d="m 0,0 c -4.946,0 -9.785,-1.722 -13.625,-4.85 -9.229,-7.539 -10.604,-21.152 -3.086,-30.362 l 4.494,-5.516 c -3.558,-7.05 -2.886,-15.844 2.422,-22.344 l 0.369,-0.453 c -2.083,-6.44 -0.962,-13.777 3.627,-19.398 l 6.426,-7.87 c 3.934,-4.82 9.762,-7.587 15.989,-7.587 4.741,0 9.375,1.652 13.049,4.651 l 3.064,2.5 c 2.339,-0.852 4.837,-1.3 7.4,-1.3 1.631,0 3.264,0.186 4.853,0.553 3.205,0.739 6.246,2.231 8.794,4.312 9.206,7.521 10.581,21.134 3.063,30.344 L 16.737,-7.962 16.716,-7.936 16.695,-7.91 C 12.578,-2.883 6.493,0 0,0 m 0,-17.366 c 1.219,0 2.426,-0.529 3.259,-1.547 l 40.127,-49.388 c 1.469,-1.799 1.199,-4.447 -0.598,-5.915 -0.518,-0.423 -1.103,-0.699 -1.711,-0.839 -0.312,-0.073 -0.631,-0.108 -0.948,-0.108 -1.219,0 -2.427,0.526 -3.26,1.544 l -3.996,4.926 -14.189,-11.583 c -0.608,-0.496 -1.34,-0.738 -2.068,-0.738 -0.949,0 -1.89,0.411 -2.537,1.204 l -6.426,7.87 c -1.13,1.384 -0.924,3.422 0.46,4.552 l 14.259,11.64 -5.826,7.182 -7.054,-5.762 c -0.577,-0.471 -1.271,-0.7 -1.962,-0.7 -0.899,0 -1.792,0.389 -2.405,1.14 l -1.469,1.799 c -1.132,1.387 -0.927,3.429 0.46,4.561 l 6.969,5.693 -14.343,17.604 c -1.468,1.8 -1.199,4.447 0.598,5.915 0.785,0.64 1.726,0.95 2.66,0.95" style="fill:#282828;fill-opacity:1;fill-rule:nonzero;stroke:none" id="path3804" inkscape:connector-curvature="0"></path>        </g>      </g>    </g>  </g></svg></span>
+	<span class="username">Foo_Manroot</span>
+</a>
+
+		</li>
+		
+
+	</ul>
+
+	<!-- Column 3: page description -->
+	<p id="footer-description">
+		<!-- Current language's description -->
+		Página web personal de Foo-Manroot, con artículos, write-ups, 
+herramientas útiles , proyectos y más información interesante; 
+principalmente sobre ciberseguridad.
+
+	</p>
+</footer>
+
+	</div>
+
+
+
+</body></html>

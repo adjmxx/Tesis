@@ -1,0 +1,378 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1252">
+<title>GNU Radio Simple FM Band Spectrum Analyzer</title>
+<link rel="STYLESHEET" type="text/css" href="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/css1.css" title="CSS1">
+</head>
+<body vlink="white" text="white" link="aqua" bgcolor="black" alink="yellow">
+<center>
+<p class="header"><a href="http://www.stargazing.net/david/GNUradio/LiveDVD.html">&lt;&lt;PREVIOUS</a> -
+<a href="http://www.stargazing.net/david/index.html">HOME</a> -
+<a href="http://www.stargazing.net/david/misc/contents.html">CONTENTS</a> -
+<a href="http://www.stargazing.net/david/GNUradio/index.html">NEXT&gt;&gt;</a><br>
+<a href="http://www.stargazing.net/david/GNUradio/index.html">GNU Radio INDEX</a> -
+<a href="http://www.stargazing.net/david/misc/whatsnew.html"><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/newcola.gif" alt="New" width="28" height="18" border="0" align="ABSMIDDLE"></a>
+</p>
+<h2>GNU Radio Companion<br>
+Simple FM Band Spectrum Analyzer<br>
+SDR: Realtek RTL2832U and Raphael Micro R820T</h2>
+<a target="_top" href="http://gnuradio.org/"><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_12_02_38c.png" alt="Ubuntu ISO DVD" width="335" height="94" border="0" align="MIDDLE"></a>
+<br>&nbsp;<br>
+</center>
+
+<center>
+<table width="1400" cellpadding="2" bgcolor="BLACK">
+<tbody><tr>
+<td>
+<p>
+This <a target="_top" href="http://gnuradio.org/">GNU Radio</a> project was to learn how to use<br> 
+<a target="_top" href="http://gnuradio.org/redmine/projects/gnuradio/wiki/GNURadioCompanion">GNU Radio Companion</a>
+to create signal flow graph (gr file)<br>
+and then create source code (py file) to control the the 
+<a href="http://www.stargazing.net/david/radio/receivers.html">Realtek RTL2832U SDR</a>.
+
+</p><p><b>YouTube Video</b></p>
+<ul>
+<li><a target="_top" href="http://youtu.be/gHhS90dQ-ZI">GNU Radio &amp; RTL SDR FM Spectrum Analyzer</a>
+</li></ul>
+
+<p><b>SDR Design Goals</b></p>
+<ul>
+<li>Learn how to use GNU Radio Companion.
+<ul>
+<li><a href="http://www.stargazing.net/david/GNUradio/LiveDVD.html">Using the GNU Radio Live SDR Environment DVD</a> is a quick way to use GNU Radio because<br>everything is installed and you do not install anything on your PC hard drive.
+</li></ul>
+</li><li>Simple SDR to control the Realtek RTL2832U SDR.
+</li><li>Use the WX GUI Spectrum Plot.
+</li><li>Use the WX GUI Spectrum Waterfall Plot.
+</li><li>Use the WX GUI Constellation Plot.
+</li><li>Use the WX GUI Scope Plot.
+</li><li>WX GUI notebook that supports multiple tabs.
+</li><li>WX GUI slider to set the center frequency.
+<ul>
+<li>The center frequency slider moves in increments of 200 kHz on across the 
+<a target="_top" href="http://en.wikipedia.org/wiki/FM_broadcast_band">FM broadcast band</a>
+</li><li>USA start frequency is 87.9 MHz.
+</li><li>USA end frequency is 107.9 MHz.
+</li></ul>
+</li><li>WX GUI slider to set the RF gain.
+<ul>
+<li>The RF gain slider moves in increments of 1 from 0 to 45.
+</li><li>This is based on the results of rtl_test
+</li></ul>
+</li><li>WX GUI text to set the sample rate.
+</li><li>WX GUI static text to provide a label.
+</li></ul>
+<p></p>
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+<p><b>Understanding DSP Techniques</b></p>
+<ul>
+<li>There are four different ways to measure a signal.
+<br>&nbsp;
+
+<ul>
+<li><a target="_top" href="http://en.wikipedia.org/wiki/Frequency_spectrum">Frequency Spectrum</a> Plot (Also, called a 
+<a target="_top" href="http://en.wikipedia.org/wiki/Spectrum_analyzer">spectrum analyzer</a> instrument)
+<ul>
+<li>Measure signal amplitude versus frequency.
+</li><li>This called frequency domain analysis.
+</li><li>The signal line is called a spectrum trace.
+</li><li>Vertical axis is amplitude.
+<ul>
+<li>Amplitude is in dB which is logarithmic.
+<ul>
+<li>A logarithmic scale shows more dynamic range than using a linear scale. 
+</li></ul>
+</li></ul>
+</li><li>The horizontal axis is frequency.
+<ul>
+<li>Usually the center frequency is the signal of interest.
+</li><li>The start frequency (lowest frequency) is the left edge.
+</li><li>The end frequency (highest frequency) is the right edge.
+</li><li>The span is the end frequency minus the start frequency.
+<ul>
+<li>The span is dependent upon the sample rate setting.
+</li></ul>
+</li></ul>
+</li></ul>
+<br>
+
+</li><li>Spectrum <a target="_top" href="http://en.wikipedia.org/wiki/Waterfall_plot">Waterfall Plot</a> (Also called the 
+<a target="_top" href="http://en.wikipedia.org/wiki/Spectrogram">spectrogram</a>)
+<ul>
+<li>Measure signal amplitude versus frequency and versus time.
+</li><li>This called frequency domain analysis.
+</li><li>The horizontal axis is frequency, the same as the spectrum plot horizontal axis.
+</li><li>The vertical axis is time.
+<ul>
+<li>The current time trace is on the bottom.
+</li><li>The oldest time trace is on the bottom.
+</li></ul>
+</li><li>The color of the trace is the amplitude of the signal.
+<ul>
+<li>Bright colors represent strong signal amplitude.
+</li><li>Dark colors represent weak signal amplitude.
+</li><li>GNU radio has several different color mappings: RGB1, RGB2, RGB3 and gray.
+</li></ul>
+</li></ul>
+<br>
+
+</li><li><a target="_top" href="http://en.wikipedia.org/wiki/Constellation_diagram">Constellation</a> Plot (IQ: 
+<a target="_top" href="http://en.wikipedia.org/wiki/In-phase_and_quadrature_components">Inphase and Quadrature</a> signals)
+<ul>
+<li>the inphase versus quadrature signal is plotted.
+</li><li>The horizontal axis is the inphase signal.
+<ul>
+<li>Zero amplitude is in the center.
+</li><li>Negative amplitude is to the left of center.
+</li><li>Positive amplitude is to the left of center.
+</li></ul>
+</li><li>The vertical axis is the quadrature signal.
+<ul>
+<li>Zero amplitude is in the center.
+</li><li>Negative amplitude is to the left of center.
+</li><li>Positive amplitude is to the left of center.
+</li></ul>
+</li><li>One sample is one dot on the constellation plot.
+</li><li>Two samples are two dots on the constellation plot. 
+</li><li>Three samples are three dots on the constellation plot.
+</li><li>Hundred samples are hundred dots on the constellation plot.
+</li></ul>
+<br>
+
+</li><li>Scope Plot (Also called an 
+<a target="_top" href="http://en.wikipedia.org/wiki/Oscilloscope">oscilloscope</a> instrument)
+<ul>
+<li>Measure signal amplitude versus time.
+</li><li>This called time domain analysis.
+</li><li>The signal line is called a waveform.
+</li><li>The horizontal axis is time measured from the start of the waveform.
+<ul>
+<li>GNU Radio time axis is longer than the display.
+<ul>
+<li>You use T Offset (time offset) to select the different parts of the waveform.
+</li></ul>
+</li></ul>
+</li><li>The vertical axis is signal amplitude usually measured in a linear scale.
+<ul>
+<li>In the center of the vertical axis is 0 amplitude.
+</li><li>Above center is positive amplitude.
+</li><li>Below center is negative amplitude.
+</li></ul>
+</li></ul>
+</li></ul>
+</li></ul>
+<p></p>
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+
+<p><b>Download: <a href="http://www.stargazing.net/david/GNUradio/code/FMstationsRTL.zip">FMstationsRTL.zip</a> (4 KB)</b></p>
+<ul>
+<li>GNU Radio Companion file: FMstationsRTL.grc 18 KB
+</li><li>Python file: FMstationsRTL.py 9 KB
+</li></ul>
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+<p><b>GNU Radio Companion Signal Flow Graph</b></p>
+<img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_18_00_46.png" alt="GNU Radio Companion Signal Flow Graph" width="1322" height="1044" border="0">
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+<h2>106.7 MHz Center Frequency</h2>
+
+<p><b>GNU Radio FMstationsRTL.py Program Spectrum (Frequency Domain) Plot</b><br>
+</p><ul>
+<li>The center frequency is tuned to 106.7 MHz.
+</li><li>The RF gain is set to 13 for best signal to noise ratio across the FM band.
+</li><li>The sample rate is set to 1.024 MS/s which provides 2.024 MHz span.
+</li><li>The peak hold is turned on and it is the green spectrum trace.
+</li></ul>
+<p></p>
+<img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_18_01_31.png" alt="GNU Radio Companion Signal Flow Graph" width="801" height="863" border="0">
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+
+<p><b>GNU Radio FMstationsRTL.py Program Spectrum Waterfall (Spectrogram) Plot</b><br>
+</p><ul>
+<li>The Color is RGB1 with Autoscale.
+</li></ul>
+<p></p>
+<img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_18_02_05.png" alt="GNU Radio Companion Signal Flow Graph" width="801" height="863" border="0">
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+
+<p><b>GNU Radio FMstationsRTL.py Program Spectrum Waterfall (Spectrogram) Plot</b><br>
+</p><ul>
+<li>The Color is RGB2 with Autoscale.
+</li></ul>
+<p></p>
+<img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_18_02_36.png" alt="GNU Radio Companion Signal Flow Graph" width="801" height="863" border="0">
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+
+<p><b>GNU Radio FMstationsRTL.py Program Spectrum Waterfall (Spectrogram) Plot</b><br>
+</p><ul>
+<li>The Color is RGB3 with Autoscale.
+</li></ul>
+<p></p>
+<img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_18_03_11.png" alt="GNU Radio Companion Signal Flow Graph" width="801" height="863" border="0">
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+
+<p><b>GNU Radio FMstationsRTL.py Program Spectrum Waterfall (Spectrogram) Plot</b><br>
+</p><ul>
+<li>The Color is Gray with Autoscale.
+</li></ul>
+<p></p>
+<img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_18_03_44.png" alt="GNU Radio Companion Signal Flow Graph" width="801" height="863" border="0">
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+<p><b>GNU Radio FMstationsRTL.py Program Constellation (IQ: Inphase versus Quadrature) Plot</b><br>
+</p><ul>
+<li>The default settings are used.
+</li></ul>
+<p></p>
+<img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_18_04_05.png" alt="GNU Radio Companion Signal Flow Graph" width="801" height="863" border="0">
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+<p><b>GNU Radio FMstationsRTL.py Program Scope (Time Domain) Plot</b><br>
+</p><ul>
+<li>The Counts/Div was increased to 0.1/Divison and the T (Time) Offset was sent to zero.
+</li></ul>
+<p></p>
+<img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_18_05_09.png" alt="GNU Radio Companion Signal Flow Graph" width="801" height="863" border="0">
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+<h2>95.5 MHz Center Frequency</h2>
+
+<p><b>GNU Radio FMstationsRTL.py Program Spectrum (Frequency Domain) Plot</b><br>
+</p><ul>
+<li>The center frequency is tuned to 95.5 MHz where is all most no other FM stations in the spectrum analyzer span.
+</li><li>The RF gain is set to 13 for best signal to noise ratio across the FM band.
+</li><li>The sample rate is set to 1.024 MS/s which provides 2.024 MHz span.
+</li><li>The peak hold is turned on and it is the green spectrum trace.
+</li></ul>
+<p></p>
+<img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_18_07_00.png" alt="GNU Radio Companion Signal Flow Graph" width="801" height="863" border="0">
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+
+<p><b>GNU Radio FMstationsRTL.py Program Spectrum Waterfall (Spectrogram) Plot</b><br>
+</p><ul>
+<li>The Color is RGB2 with Autoscale.
+</li></ul>
+<p></p>
+<img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_18_07_47.png" alt="GNU Radio Companion Signal Flow Graph" width="801" height="863" border="0">
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+<p><b>GNU Radio FMstationsRTL.py Program Constellation (IQ: Inphase versus Quadrature) Plot</b><br>
+</p><ul>
+<li>The default settings are used.
+</li></ul>
+<p></p>
+<img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_18_08_11.png" alt="GNU Radio Companion Signal Flow Graph" width="801" height="863" border="0">
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+<p><b>GNU Radio FMstationsRTL.py Program Scope (Time Domain) Plot</b><br>
+</p><ul>
+<li>The Counts/Div was increased to 0.1/Divison and the T (Time) Offset was sent to zero.
+</li></ul>
+<p></p>
+<img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/2014-05-26_18_08_54.png" alt="GNU Radio Companion Signal Flow Graph" width="801" height="863" border="0">
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+<p><b>Software and PC</b>
+</p><ul>
+<li><a target="_top" href="http://www.stargazing.net/david/GNUradio/LiveDVD.html">GNU Radio Live SDR Environment</a> DVD 2014-0419 snapshot
+</li><li>Dell Inspiron 17R (i17RM-83901sLV) Window 8.1 notebook running Ubuntu Live DVD.
+<ul>
+<li>64-bit, Intel Core i7-4500U CPU @ 1.80 GHz x 4  with 8 GB RAM.
+</li></ul>
+</li></ul>
+
+
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+
+<p><b>Software-Defined Radio (<a target="_top" href="http://en.wikipedia.org/wiki/Software-defined_radio">SDR</a>) Hardware</b>
+</p><ul>
+<li>SDRs based on Realtek RTL2832U and Raphael Micro R820T <a target="_top" href="http://en.wikipedia.org/wiki/DVB-T">Digital Video Broadcasting Terrestrial (DVB-T)</a>
+ Receivers using USB
+<ul>
+<li>Features
+<ul>
+<li>2+ MHz capture bandwidth
+</li><li>The RTL2832U streams 8-bit I+Q data into the PC using USB.
+</li><li>Frequency Range (approximate) 25MHz - 1750MHz
+</li><li>Female MCX Antenna Connector
+</li><li>Very low cost ~$20
+</li><li>Low cost SDR to learn about using a SDR with software 
+</li></ul>
+
+&nbsp; 
+</li><li>In the USA <a target="_top" href="http://www.nooelec.com/store/">NooElec</a> is a good source for the SDR receivers &amp; up converter.
+<ul>
+<li><a target="_top" href="http://www.nooelec.com/store/sdr/tv28tv2-sdr-dvb-t-usb-stick-set.html#.U0Grh1zHOuc">NooElec NESDR Mini SDR &amp; DVB-T USB Stick (R820T) with Antenna and Remote Control</a>
+<ul>
+<li><a target="_top" href="http://www.nooelec.com/store/sdr/sdr-accessories/ham-it-up-v1-0-rf-upconverter-for-software-defined-radio.html#.U0GsYVzHOuc">Ham It Up v1.2 - RF Upconverter For Software Defined Radio</a>
+<ul>
+<li>NooElec cable between the and the up converter 
+<a target="_top" href="http://www.nooelec.com/store/sdr/sdr-adapters-and-cables/male-mcx-to-male-sma-pigtail-rg174-0-5-length.html#.U0GqKVzHOuc">Male MCX to Male SMA pigtail cable, RG174, 0.5' length</a>
+</li></ul>
+</li></ul>
+</li><li>NooElec SDRs and up converters are available on 
+<a target="_top" href="http://www.amazon.com/s/ref=nb_sb_ss_c_0_7?url=search-alias%3Delectronics&amp;field-keywords=nooelec&amp;sprefix=NooElec%2Caps%2C281">Amazon.com</a>
+</li></ul>
+
+&nbsp;
+</li><li>Antenna <a target="_top" href="http://www.amazon.com/gp/product/B001JT1KEG/ref=oh_details_o05_s00_i00?ie=UTF8&amp;psc=1">Scanner Ant-Base 30-1300 Mhz</a> by Antennacraft, includes 50 feet of RG-6
+<ul>
+<li>MCX male to F female cable <a target="_top" href="http://www.amazon.com/gp/product/B00CTJN480/ref=oh_details_o04_s00_i01?ie=UTF8&amp;psc=1">RF coaxial coax cable assembly MCX male to F female 6"</a>
+</li></ul>
+</li></ul>
+</li></ul>
+</td>
+</tr>
+</tbody></table>
+</center>
+
+
+<center><p></p><img src="GNU%20Radio%20Simple%20FM%20Band%20Spectrum%20Analyzer_files/starsbar.gif" width="500" height="8"><br><p></p></center>
+<center><p class="navfooter">
+<a href="http://www.stargazing.net/david/index.html">Home</a> -
+<a href="http://www.stargazing.net/david/misc/whatsnew.html">What's&nbsp;New</a> -
+<a href="http://www.stargazing.net/david/misc/contents.html">Site&nbsp;Map</a> -
+<a href="http://www.stargazing.net/david/misc/obstypes.html">Observing</a> -
+<a href="http://www.stargazing.net/david/eyes/index.html">Unaided&nbsp;Eye</a> -
+<a href="http://www.stargazing.net/david/binoculars/index.html">Binoculars</a> -
+<a href="http://www.stargazing.net/david/telescopes/index.html">Telescopes</a> -
+<a href="http://www.stargazing.net/david/astrophoto/index.html">Astroimaging</a> -
+<a href="http://www.stargazing.net/david/messier/ccdimages.html">Images</a> -
+<a href="http://www.stargazing.net/david/skyevents/index.html">Sky&nbsp;Events</a> -
+<a href="http://www.stargazing.net/david/darksky/index.html">Dark&nbsp;Sky</a> -
+<a href="http://www.stargazing.net/david/solarsystem/index.html">Solar&nbsp;System</a> -
+<a href="http://www.stargazing.net/david/sun/index.html">Sun</a> -
+<a href="http://www.stargazing.net/david/moon/index.html">Moon</a> -
+<a href="http://www.stargazing.net/david/planets/index.html">Planets</a> -
+<a href="http://www.stargazing.net/david/mars/index.html">Mars</a> -
+<a href="http://www.stargazing.net/david/jupiter/index.html">Jupiter</a> -
+<a href="http://www.stargazing.net/david/saturn/index.html">Saturn</a> -
+<a href="http://www.stargazing.net/david/comets/index.html">Comets</a> -
+<a href="http://www.stargazing.net/david/meteors/index.html">Meteors</a> -
+<a href="http://www.stargazing.net/david/constel/starsindex.html">Stars</a> -
+<a href="http://www.stargazing.net/david/constel/constellations.html">Constellations</a> -
+<a href="http://www.stargazing.net/david/constel/allskymaps.html">Sky&nbsp;Maps</a> -
+<a href="http://www.stargazing.net/david/deepsky/deepsky.html">Deep&nbsp;Sky</a> -
+<a href="http://www.stargazing.net/david/equip/index.html">Equipment</a> -
+<a href="http://www.stargazing.net/david/ip/index.html">Image&nbsp;Processing</a> -
+<a href="http://www.stargazing.net/david/software/index.html">Software</a> -
+<a href="http://www.stargazing.net/david/starparty/index.html">Star&nbsp;Parties</a> -
+<a href="http://www.stargazing.net/david/its/index.html">Imaging&nbsp;the&nbsp;Sky</a> -
+<a href="http://www.stargazing.net/david/portland/index.html">Portland&nbsp;Astronomy</a> -
+<a href="http://www.stargazing.net/david/travels/index.html">Travels</a> -
+<a href="http://www.stargazing.net/david/websites/index.html">Web&nbsp;Sites</a> -
+<a href="http://www.stargazing.net/david/misc/glossary.html">Glossary</a>
+</p></center>
+<p class="copyright" align="CENTER"><a href="http://www.stargazing.net/david/misc/copyright.html">© 1998-2014 David Haworth</a></p>
+
+</body></html>

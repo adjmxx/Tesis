@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!-->
+<html class="js video maskImage placeholder" lang="en"><!--<![endif]--><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <title>Construcción de Módulos y Bloques en GNU Radio Companion - Radiolab ↯</title>
+  <meta name="author" content="Daniel Domínguez">
+
+  
+  <meta name="description" content="Los módulos en GNU Radio nos permiten extender la funcionalidad de la plataforma, es decir, podemos construir bloques con nuestro propio código para …">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
+
+  
+  <link rel="canonical" href="http://eontool.github.io/blog/2013/08/20/construccion-de-modulos-y-bloques-en-gnu-radio-companion">
+  <link href="http://eontool.github.io/favicon.png" rel="icon">
+  <link href="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="http://eontool.github.io/atom.xml" rel="alternate" title="Radiolab ↯" type="application/atom+xml">
+  <script type="text/javascript" src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/jXHR.js"></script><script type="text/javascript" async="" src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/ga.js"></script><script async="" src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/analytics.js"></script><script src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/modernizr-2.js"></script>
+  <script src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/jquery.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/css_003.css" rel="stylesheet" type="text/css">
+<link href="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/css_002.css" rel="stylesheet" type="text/css">
+<link href="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/css.css" rel="stylesheet" type="text/css">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-43340015-1', 'eontool.github.io');
+  ga('send', 'pageview');
+
+</script>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-43340015-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+<script type="text/javascript" async="" src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/embed.js"></script><script type="text/javascript" async="" src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/widgets.js"></script><script charset="utf-8" src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/button.js"></script><link rel="prefetch" as="style" href="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/a_data/lounge.css"><link rel="prefetch" as="script" href="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/a_data/common.js"><link rel="prefetch" as="script" href="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/a_data/lounge.js"><link rel="prefetch" as="script" href="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/a_data/config.js"></head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://eontool.github.io/">Radiolab ↯</a></h1>
+  
+    <h2>Tecnologia y Telecomunicaciones.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://eontool.github.io/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:eontool.github.io">
+    <input class="search" type="text" name="q" results="0" placeholder="Buscar">
+  </fieldset>
+</form>
+  
+<fieldset class="mobile-nav"><select><option value="" selected="selected">Navigate…</option><option value="http://eontool.github.io/">» Blog</option><option value="http://eontool.github.io/blog/archives">» Archivos</option><option value="http://eontool.github.io/acerca-de">» Acerca De</option><option value="http://eontool.github.io/atom.xml">» RSS</option></select></fieldset><ul class="main-navigation">
+  <li><a href="http://eontool.github.io/">Blog</a></li>
+  <li><a href="http://eontool.github.io/blog/archives">Archivos</a></li>
+  <li><a href="http://eontool.github.io/acerca-de">Acerca De</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Construcción de Módulos y Bloques en GNU Radio Companion</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-08-20T16:08:00-07:00" pubdate="" data-updated="true">08/20/2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Los módulos en GNU Radio nos permiten 
+extender la funcionalidad de la plataforma, es decir, podemos construir 
+bloques con nuestro propio código para el procesamiento de datos y así 
+tener mayor poder y flexibilidad.</p>
+
+<!-- more -->
+
+
+<p>Para este tutorial asumimos que completamos satistactoriamente la <a href="http://eontool.github.io/blog/2013/04/30/instalacion-gnuradio-companion-en-ubuntu/">instalación de GNU Radio Companion</a>.</p>
+
+<p>Dentro de nuestra carpeta “grc” ejecutamos el siguiente comando:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ git clone https://github.com/mbant/gr-modtool.git
+</span><span class="line">$ cd gr-modtool</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>Utilizando gr_modtool, crearemos un nuevo módulo llamado “pruebas”:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ gr_modtool newmod
+</span><span class="line">Name of the new module: pruebas
+</span><span class="line">Creating out-of-tree module in ./gr-pruebas... Done.
+</span><span class="line">Use 'gr_modtool add' to add a new block to this currently empty module.</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>Al revisar el contenido de la carpeta “gr-modtool”, vemos que se ha 
+creado una nueva carpeta llamada “gr-pruebas”, ahora tenemos que hacer 
+una copia el archivo “gr_moodtool.py” dentro de nuestra nueva carpeta.</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ cp gr_modtool.py gr-pruebas
+</span><span class="line">$ cd gr-pruebas</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>Contenido en la carpeta del modulo “gr-pruebas”:
+<img class="center" src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/contenido_grc_modtool.png" title="Carpeta" alt="images"></p>
+
+<p>Ahora vamos a crear un nuevo bloque de procesamiento:</p>
+
+<figure class="code"> <div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+</pre></td><td class="code"><pre><code class="bash"><span class="line"><span class="nv">$ </span>gr_modtool add
+</span><span class="line">GNU Radio module name identified: pruebas
+</span><span class="line">Enter code <span class="nb">type</span>: general
+</span><span class="line">Language: C++
+</span><span class="line">Enter name of block/code <span class="o">(</span>without module name prefix<span class="o">)</span>: demo
+</span><span class="line">Block/code identifier: demo
+</span><span class="line">Enter valid argument list, including default arguments:
+</span><span class="line">Add Python QA code? <span class="o">[</span>Y/n<span class="o">]</span>
+</span><span class="line">Add C++ QA code? <span class="o">[</span>y/N<span class="o">]</span>
+</span><span class="line">Adding file <span class="s1">'demo_impl.h'</span>...
+</span><span class="line">Adding file <span class="s1">'demo_impl.cc'</span>...
+</span><span class="line">Adding file <span class="s1">'demo.h'</span>...
+</span><span class="line">Editing swig/pruebas_swig.i...
+</span><span class="line">Adding file <span class="s1">'qa_demo.py'</span>...
+</span><span class="line">Editing python/CMakeLists.txt...
+</span><span class="line">Adding file <span class="s1">'pruebas_demo.xml'</span>...
+</span><span class="line">Editing grc/CMakeLists.txt...
+</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>Para poder utilizar nuestro bloque es necesario editar algunas lineas. Iniciemos:</p>
+
+<p>Editamos nuestro archivo “pruebas_demo.xml” en /gr-pruebas/grc/</p>
+
+<figure class="code"><figcaption><span> (pruebas_demo.xml)</span> <a href="http://eontool.github.io/downloads/code/pruebas_demo.xml">download</a></figcaption>
+ <div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+</pre></td><td class="code"><pre><code class="xml"><span class="line"><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+</span><span class="line"><span class="nt">&lt;block&gt;</span>
+</span><span class="line">  <span class="nt">&lt;name&gt;</span>demo<span class="nt">&lt;/name&gt;</span>
+</span><span class="line">  <span class="nt">&lt;key&gt;</span>pruebas_demo<span class="nt">&lt;/key&gt;</span>
+</span><span class="line">  <span class="nt">&lt;category&gt;</span>pruebas<span class="nt">&lt;/category&gt;</span>
+</span><span class="line">  <span class="nt">&lt;import&gt;</span>import pruebas<span class="nt">&lt;/import&gt;</span>
+</span><span class="line">  <span class="nt">&lt;make&gt;</span>pruebas.demo($)<span class="nt">&lt;/make&gt;</span>
+</span><span class="line">
+</span><span class="line">  <span class="nt">&lt;param&gt;</span>
+</span><span class="line">    <span class="nt">&lt;name&gt;</span>Demo<span class="nt">&lt;/name&gt;</span>
+</span><span class="line">    <span class="nt">&lt;key&gt;&lt;/key&gt;</span>
+</span><span class="line">    <span class="nt">&lt;type&gt;</span>int<span class="nt">&lt;/type&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/param&gt;</span>
+</span><span class="line">
+</span><span class="line">  <span class="nt">&lt;sink&gt;</span>
+</span><span class="line">    <span class="nt">&lt;name&gt;</span>in<span class="nt">&lt;/name&gt;</span>
+</span><span class="line">    <span class="nt">&lt;type&gt;</span>int<span class="nt">&lt;/type&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/sink&gt;</span>
+</span><span class="line">
+</span><span class="line">  <span class="nt">&lt;source&gt;</span>
+</span><span class="line">    <span class="nt">&lt;name&gt;</span>out<span class="nt">&lt;/name&gt;</span>
+</span><span class="line">    <span class="nt">&lt;type&gt;</span>int<span class="nt">&lt;/type&gt;</span>
+</span><span class="line">  <span class="nt">&lt;/source&gt;</span>
+</span><span class="line"><span class="nt">&lt;/block&gt;</span>
+</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>Editamos el archivo “demo_impl.cc” en /gr-pruebas/lib/</p>
+
+<p>Estas son las partes del código que modificaremos:</p>
+
+<p>&lt;+MIN_IN+&gt;, &lt;+MAX_IN+&gt;, &lt;+MIN_OUT+&gt;, &lt;+MAX_OUT+&gt;, &lt;+ITYPE+&gt;, &lt;+OTYPE+&gt;.</p>
+
+<figure class="code"><figcaption><span> (demo_impl.cc)</span> <a href="http://eontool.github.io/downloads/code/demo_impl.cc">download</a></figcaption>
+ <div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+<span class="line-number">16</span>
+<span class="line-number">17</span>
+<span class="line-number">18</span>
+<span class="line-number">19</span>
+<span class="line-number">20</span>
+<span class="line-number">21</span>
+<span class="line-number">22</span>
+<span class="line-number">23</span>
+<span class="line-number">24</span>
+<span class="line-number">25</span>
+<span class="line-number">26</span>
+<span class="line-number">27</span>
+<span class="line-number">28</span>
+<span class="line-number">29</span>
+<span class="line-number">30</span>
+<span class="line-number">31</span>
+<span class="line-number">32</span>
+<span class="line-number">33</span>
+<span class="line-number">34</span>
+<span class="line-number">35</span>
+<span class="line-number">36</span>
+<span class="line-number">37</span>
+<span class="line-number">38</span>
+<span class="line-number">39</span>
+<span class="line-number">40</span>
+<span class="line-number">41</span>
+<span class="line-number">42</span>
+<span class="line-number">43</span>
+<span class="line-number">44</span>
+<span class="line-number">45</span>
+<span class="line-number">46</span>
+<span class="line-number">47</span>
+<span class="line-number">48</span>
+<span class="line-number">49</span>
+<span class="line-number">50</span>
+<span class="line-number">51</span>
+<span class="line-number">52</span>
+<span class="line-number">53</span>
+<span class="line-number">54</span>
+<span class="line-number">55</span>
+<span class="line-number">56</span>
+<span class="line-number">57</span>
+<span class="line-number">58</span>
+<span class="line-number">59</span>
+<span class="line-number">60</span>
+<span class="line-number">61</span>
+<span class="line-number">62</span>
+<span class="line-number">63</span>
+<span class="line-number">64</span>
+<span class="line-number">65</span>
+<span class="line-number">66</span>
+<span class="line-number">67</span>
+<span class="line-number">68</span>
+<span class="line-number">69</span>
+<span class="line-number">70</span>
+<span class="line-number">71</span>
+<span class="line-number">72</span>
+<span class="line-number">73</span>
+<span class="line-number">74</span>
+<span class="line-number">75</span>
+<span class="line-number">76</span>
+<span class="line-number">77</span>
+<span class="line-number">78</span>
+<span class="line-number">79</span>
+</pre></td><td class="code"><pre><code class="c++"><span class="line"><span class="cm">/* -*- c++ -*- */</span>
+</span><span class="line"><span class="cm">/* </span>
+</span><span class="line"><span class="cm"> * Copyright 2013 &lt;+YOU OR YOUR COMPANY+&gt;.</span>
+</span><span class="line"><span class="cm"> * </span>
+</span><span class="line"><span class="cm"> * This is free software; you can redistribute it and/or modify</span>
+</span><span class="line"><span class="cm"> * it under the terms of the GNU General Public License as published by</span>
+</span><span class="line"><span class="cm"> * the Free Software Foundation; either version 3, or (at your option)</span>
+</span><span class="line"><span class="cm"> * any later version.</span>
+</span><span class="line"><span class="cm"> * </span>
+</span><span class="line"><span class="cm"> * This software is distributed in the hope that it will be useful,</span>
+</span><span class="line"><span class="cm"> * but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+</span><span class="line"><span class="cm"> * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+</span><span class="line"><span class="cm"> * GNU General Public License for more details.</span>
+</span><span class="line"><span class="cm"> * </span>
+</span><span class="line"><span class="cm"> * You should have received a copy of the GNU General Public License</span>
+</span><span class="line"><span class="cm"> * along with this software; see the file COPYING.  If not, write to</span>
+</span><span class="line"><span class="cm"> * the Free Software Foundation, Inc., 51 Franklin Street,</span>
+</span><span class="line"><span class="cm"> * Boston, MA 02110-1301, USA.</span>
+</span><span class="line"><span class="cm"> */</span>
+</span><span class="line">
+</span><span class="line"><span class="cp">#ifdef HAVE_CONFIG_H</span>
+</span><span class="line"><span class="cp">#include "config.h"</span>
+</span><span class="line"><span class="cp">#endif</span>
+</span><span class="line">
+</span><span class="line"><span class="cp">#include &lt;gnuradio/io_signature.h&gt;</span>
+</span><span class="line"><span class="cp">#include "demo_impl.h"</span>
+</span><span class="line">
+</span><span class="line"><span class="k">namespace</span> <span class="n">gr</span> <span class="p">{</span>
+</span><span class="line">  <span class="k">namespace</span> <span class="n">pruebas</span> <span class="p">{</span>
+</span><span class="line">
+</span><span class="line">    <span class="n">demo</span><span class="o">::</span><span class="n">sptr</span>
+</span><span class="line">    <span class="n">demo</span><span class="o">::</span><span class="n">make</span><span class="p">()</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">      <span class="k">return</span> <span class="n">gnuradio</span><span class="o">::</span><span class="n">get_initial_sptr</span>
+</span><span class="line">        <span class="p">(</span><span class="k">new</span> <span class="n">demo_impl</span><span class="p">());</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="cm">/*</span>
+</span><span class="line"><span class="cm">     * The private constructor</span>
+</span><span class="line"><span class="cm">     */</span>
+</span><span class="line">    <span class="n">demo_impl</span><span class="o">::</span><span class="n">demo_impl</span><span class="p">()</span>
+</span><span class="line">      <span class="o">:</span> <span class="n">gr</span><span class="o">::</span><span class="n">block</span><span class="p">(</span><span class="s">"demo"</span><span class="p">,</span>
+</span><span class="line">              <span class="n">gr</span><span class="o">::</span><span class="n">io_signature</span><span class="o">::</span><span class="n">make</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)),</span>
+</span><span class="line">              <span class="n">gr</span><span class="o">::</span><span class="n">io_signature</span><span class="o">::</span><span class="n">make</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)))</span>
+</span><span class="line">    <span class="p">{}</span>
+</span><span class="line">
+</span><span class="line">    <span class="cm">/*</span>
+</span><span class="line"><span class="cm">     * Our virtual destructor.</span>
+</span><span class="line"><span class="cm">     */</span>
+</span><span class="line">    <span class="n">demo_impl</span><span class="o">::~</span><span class="n">demo_impl</span><span class="p">()</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="kt">void</span>
+</span><span class="line">    <span class="n">demo_impl</span><span class="o">::</span><span class="n">forecast</span> <span class="p">(</span><span class="kt">int</span> <span class="n">noutput_items</span><span class="p">,</span> <span class="n">gr_vector_int</span> <span class="o">&amp;</span><span class="n">ninput_items_required</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="cm">/* &lt;+forecast+&gt; e.g. ninput_items_required[0] = noutput_items */</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">    <span class="kt">int</span>
+</span><span class="line">    <span class="n">demo_impl</span><span class="o">::</span><span class="n">general_work</span> <span class="p">(</span><span class="kt">int</span> <span class="n">noutput_items</span><span class="p">,</span>
+</span><span class="line">                       <span class="n">gr_vector_int</span> <span class="o">&amp;</span><span class="n">ninput_items</span><span class="p">,</span>
+</span><span class="line">                       <span class="n">gr_vector_const_void_star</span> <span class="o">&amp;</span><span class="n">input_items</span><span class="p">,</span>
+</span><span class="line">                       <span class="n">gr_vector_void_star</span> <span class="o">&amp;</span><span class="n">output_items</span><span class="p">)</span>
+</span><span class="line">    <span class="p">{</span>
+</span><span class="line">        <span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="n">in</span> <span class="o">=</span> <span class="p">(</span><span class="k">const</span> <span class="kt">int</span> <span class="o">*</span><span class="p">)</span> <span class="n">input_items</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span class="line">        <span class="kt">int</span> <span class="o">*</span><span class="n">out</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)</span> <span class="n">output_items</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span><span class="line">
+</span><span class="line">        <span class="c1">// Do &lt;+signal processing+&gt;</span>
+</span><span class="line">        <span class="c1">// Tell runtime system how many input items we consumed on</span>
+</span><span class="line">        <span class="c1">// each input stream.</span>
+</span><span class="line">        <span class="n">consume_each</span> <span class="p">(</span><span class="n">noutput_items</span><span class="p">);</span>
+</span><span class="line">
+</span><span class="line">        <span class="c1">// Tell runtime system how many output items we produced.</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">noutput_items</span><span class="p">;</span>
+</span><span class="line">    <span class="p">}</span>
+</span><span class="line">
+</span><span class="line">  <span class="p">}</span> <span class="cm">/* namespace pruebas */</span>
+</span><span class="line"><span class="p">}</span> <span class="cm">/* namespace gr */</span>
+</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>Para compilar nuestro módulo y bloque creamos un directorio “build” 
+en la carpeta gr-pruebas y dentro de el ejecutamos los siguientes 
+comandos:</p>
+
+<figure class="code"><div class="highlight"><table><tbody><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class=""><span class="line">$ mkdir build &amp;&amp; cd build
+</span><span class="line">$ cmake ../
+</span><span class="line">$ sudo make
+</span><span class="line">$ sudo make install
+</span><span class="line">$ sudo ldconfig</span></code></pre></td></tr></tbody></table></div></figure>
+
+
+<p>Para utilizar nuestro bloque, ejecutamos gnuradio-companion y de lado
+ derecho habrá un nuevo módulo llamado “pruebas” y dentro de este 
+nuestro bloque “demo”.</p>
+
+<p><img class="center" src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/gnuradio-pruebas-demo.png" title="GNU Radio" alt="images"></p>
+
+<p>Hasta este punto hemos creado un módulo y un bloque de procesamiento,
+ en el siguiente tutorial veremos la creación de un bloque con entradas y
+ salidas funcionales para probarlo en GNU Radio Companion.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Publicado por <span class="fn">Daniel Domínguez</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+<time datetime="2013-08-20T16:08:00-07:00" pubdate="" data-updated="true">08/20/2013</time>
+      
+
+<span class="categories">
+  
+    <a class="category" href="http://eontool.github.io/blog/categories/gnu-radio-companion/">GNU Radio Companion</a>, <a class="category" href="http://eontool.github.io/blog/categories/ubuntu/">Ubuntu</a>, <a class="category" href="http://eontool.github.io/blog/categories/gr-modtool/">gr-modtool</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <iframe id="twitter-widget-0" scrolling="no" allowtransparency="true" class="twitter-share-button twitter-share-button-rendered twitter-tweet-button" style="position: static; visibility: visible; width: 60px; height: 20px;" title="Twitter Tweet Button" src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/tweet_button.html" data-url="http://eontool.github.io/blog/2013/08/20/construccion-de-modulos-y-bloques-en-gnu-radio-companion/" frameborder="0"></iframe>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="http://eontool.github.io/blog/2013/04/30/instalacion-gnuradio-companion-en-ubuntu/" title="Previous Post: Instalación de GNU Radio Companion 3.7.x en Ubuntu 13.04 x64">« Instalación de GNU Radio Companion 3.7.x en Ubuntu 13.04 x64</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comentarios</h1>
+    <div id="disqus_thread" aria-live="polite"><iframe id="dsq-app2803" name="dsq-app2803" allowtransparency="true" scrolling="no" tabindex="0" title="Disqus" style="width: 1px !important; min-width: 100% !important; border: medium none !important; overflow: hidden !important; height: 1100px !important;" src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/a.html" horizontalscrolling="no" verticalscrolling="no" width="100%" frameborder="0"></iframe></div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section class="odd">
+  <h1>Entradas Recientes</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="http://eontool.github.io/blog/2013/08/20/construccion-de-modulos-y-bloques-en-gnu-radio-companion/">Construcción de Módulos y Bloques en GNU Radio Companion</a>
+      </li>
+    
+      <li class="post">
+        <a href="http://eontool.github.io/blog/2013/04/30/instalacion-gnuradio-companion-en-ubuntu/">Instalación de GNU Radio Companion 3.7.x en Ubuntu 13.04 x64</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section class="even">
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos"><li><a href="https://github.com/eontool/nodejs-typescript-boilerplate">nodejs-typescript-boilerplate</a><p></p></li><li><a href="https://github.com/eontool/e2e-puppeteer">e2e-puppeteer</a><p>e2e setup using puppeteer and cucumber for BDD.</p></li><li><a href="https://github.com/eontool/sat-calculo-anual">sat-calculo-anual</a><p>Calculo de retenciones sobre archivos xml.</p></li><li><a href="https://github.com/eontool/angularjs-starter-project">angularjs-starter-project</a><p>Using ES6 and Typescript.</p></li><li><a href="https://github.com/eontool/angularjs-typescript-starter">angularjs-typescript-starter</a><p></p></li><li><a href="https://github.com/eontool/electron-starter-app">electron-starter-app</a><p></p></li><li><a href="https://github.com/eontool/angularjs-starter">angularjs-starter</a><p>AngularJS / TypeScript - Boilerplate Project</p></li><li><a href="https://github.com/eontool/aws-s3-demo">aws-s3-demo</a><p>AWS S3 Demo Application</p></li><li><a href="https://github.com/eontool/dynamodb-boilerplate">dynamodb-boilerplate</a><p>AWS DynamoDB example project</p></li><li><a href="https://github.com/eontool/lzw-js">lzw-js</a><p></p></li><li><a href="https://github.com/eontool/angularjs-typescript-boilerplate">angularjs-typescript-boilerplate</a><p></p></li><li><a href="https://github.com/eontool/chatify">chatify</a><p></p></li><li><a href="https://github.com/eontool/sorting-ts">sorting-ts</a><p>Sorting algorithms written in typescript.</p></li><li><a href="https://github.com/eontool/webworkers-ts">webworkers-ts</a><p>Web workers implementation in typescript.</p></li><li><a href="https://github.com/eontool/primes-js">primes-js</a><p></p></li><li><a href="https://github.com/eontool/ts-todoapp">ts-todoapp</a><p></p></li><li><a href="https://github.com/eontool/webrtc-app">webrtc-app</a><p></p></li><li><a href="https://github.com/eontool/lcg-visualizer">lcg-visualizer</a><p></p></li><li><a href="https://github.com/eontool/wd-tree">wd-tree</a><p></p></li><li><a href="https://github.com/eontool/usgs-geojson-data">usgs-geojson-data</a><p></p></li><li><a href="https://github.com/eontool/angularjs-firebase-spa">angularjs-firebase-spa</a><p>A demo SPA using AngularJS and Firebase BaaS</p></li><li><a href="https://github.com/eontool/foobar">foobar</a><p></p></li><li><a href="https://github.com/eontool/js-search-filter">js-search-filter</a><p>Vanilla JS search filter</p></li></ul>
+  
+  <a href="https://github.com/eontool">@eontool</a> en GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'eontool',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    <span class="toggle-sidebar"></span></div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright © 2013 - Daniel Domínguez -
+  <span class="credit">Powered by <a href="http://octopress.org/">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'eontool';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://eontool.github.io/blog/2013/08/20/construccion-de-modulos-y-bloques-en-gnu-radio-companion/';
+        var disqus_url = 'http://eontool.github.io/blog/2013/08/20/construccion-de-modulos-y-bloques-en-gnu-radio-companion/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+
+
+<iframe scrolling="no" allowtransparency="true" src="Construcci%C3%B3n%20de%20M%C3%B3dulos%20y%20Bloques%20en%20GNU%20Radio%20Companion%20-%20Radiolab%20%E2%86%AF_files/widget_iframe.html" title="Twitter settings iframe" style="display: none;" frameborder="0"></iframe><iframe style="display: none;"></iframe></body></html>

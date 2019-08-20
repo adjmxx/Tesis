@@ -1,0 +1,2876 @@
+<!DOCTYPE html>
+<!-- saved from url=(0116)https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706 -->
+<html lang="en" class="direction-ltr" style="direction:ltr;" prefix="og: http://ogp.me/ns#"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><link rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/platform.less" type="text/css" media="screen"><script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/jquery.min.js.descarga"></script><script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/telligent.glow.min.js.descarga"></script><script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/jquery.validate.min.js.descarga"></script><script type="text/javascript">
+// <![CDATA[
+try { jQuery.extend(jQuery.validator.messages,{required:'This field is required.',remote:'Please fix this field.',date:'Please enter a valid date.',dateISO:'Please enter a valid date (ISO).',number:'Please enter a valid number.',digits:'Please enter only digits.',creditcard:'Please enter a valid credit card number.',equalTo:'Please enter the same value again.',accept:'Please enter a value with a valid extension.',maxlength:jQuery.validator.format('Please enter no more than {0} characters.'),minlength:jQuery.validator.format('Please enter at least {0} characters.'),rangelength:jQuery.validator.format('Please enter a value between {0} and {1} characters long.'),range:jQuery.validator.format('Please enter a value between {0} and {1}.'),max:jQuery.validator.format('Please enter a value less than or equal to {0}.'),min:jQuery.validator.format('Please enter a value greater than or equal to {0}.')}); } catch(e) { };
+// ]]>
+</script><script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/telligent.evolution.min.js.descarga"></script><script type="text/javascript">
+// <![CDATA[
+try { jQuery.telligent.evolution.site.configure({baseUrl:'/',isRemote:false,enableGlobalForm:true,remoteUrlEncodePattern:'',datePattern:{
+	pattern: '<1-31> <ene.,feb.,mar.,abr.,may.,jun.,jul.,ago.,sep.,oct.,nov.,dic.> <0001-9999>',
+    yearIndex: 2,
+    monthIndex: 1,
+    dayIndex: 0,
+    hourIndex: -1,
+    minuteIndex: -1,
+    amPmIndex: -1,
+    parseDateOnLoad: true
+},dateTimePattern:{
+	pattern: '<1-31> <ene.,feb.,mar.,abr.,may.,jun.,jul.,ago.,sep.,oct.,nov.,dic.> <0001-9999> <0-23>:<00-59> ',
+    yearIndex: 2,
+    monthIndex: 1,
+    dayIndex: 0,
+    hourIndex: 3,
+    minuteIndex: 4,
+    amPmIndex: -1,
+    parseDateOnLoad: true
+},timePattern:{
+	pattern: '<0-23>:<00-59> ',
+    yearIndex: -1,
+    monthIndex: -1,
+    dayIndex: -1,
+    hourIndex: 0,
+    minuteIndex: 1,
+    amPmIndex: -1,
+    parseDateOnLoad: true
+},monthNames:['ene.','feb.','mar.','abr.','may.','jun.','jul.','ago.','sep.','oct.','nov.','dic.'],dayNames:['do.','lu.','ma.','mi.','ju.','vi.','sá.'],authorizationCookieName:'AuthorizationCookie',silverlightFileUploadEnabled:true,accessingUserId:2101,accessingUserIsSystemAccount:true,accessingUserTemporary:false,defaultErrorMessage:'An error occurred.  Please try again or contact your administrator.',defaultMultiErrorMessagePrefix:'The following errors occurred:  ',quoteText:'Quote',dateMinuteInFutureFormat:'in a few seconds',dateMinutesInFutureFormat:'in {0} minutes',dateHourInFutureFormat:'in over an hour',dateHoursInFutureFormat:'in {0} hours',dateDayInFutureFormat:'in {0} day',dateDaysInFutureFormat:'in {0} days',dateMonthInFutureFormat:'in {0} month',dateMonthsInFutureFormat:'in {0} months',dateYearInFutureFormat:'in over {0} year',dateYearsInFutureFormat:'in over {0} years',dateNowAgoFormat:'now',dateMinuteAgoFormat:'a few seconds ago',dateMinutesAgoFormat:'{0} minutes ago',dateHourAgoFormat:'{0} hour ago',dateHoursAgoFormat:'{0} hours ago',dateDayAgoFormat:'{0} day ago',dateDaysAgoFormat:'{0} days ago',dateMonthAgoFormat:'{0} month ago',dateMonthsAgoFormat:'{0} months ago',dateYearAgoFormat:'over {0} year ago',dateYearsAgoFormat:'over {0} years ago',previewZoomIn:'Zoom in',previewZoomOut:'Zoom out',previewClose:'Close'});
+jQuery.extend($.fn.evolutionUserFileTextBox.defaults,{removeText:'Remove',selectText:'Select/Upload...',noFileText:'No File Selected'});
+jQuery.telligent.evolution.navigationConfirmation.configure({message:'Unless you save before leaving this page, you will lose any changes you have made.'});
+jQuery.telligent.evolution.validation.registerExtensions({passwordInvalidMessage:'Password contains invalid chars ...',passwordRegex:'^.*$',emailInvalidMessage:'Your email address is invalid.',emailRegex:'^[!$\u0026*\\-=^`|~#%\u0027\\.\"+/?_{}\\\\a-zA-Z0-9 ]+@[\\-\\.a-zA-Z0-9]+(?:\\.[a-zA-Z0-9]+)+$',usernameInvalidMessage:'Your sign in name does not meet the requirements for this site.',usernameRegex:'^.*$',emailsInvalidMessage:'One or more emails is invalid',urlInvalidMessage:'URL not in correct format',urlRegex:'^(?:(?:http|https|mailto|ftp|mms):|/|#|~/|data:image/(?:png|gif|jpe?g);base64,)'});
+jQuery.extend(jQuery.fn.evolutionLike.defaults,{likeText:'Like',unlikeText:'Unlike',modalTitleText:'People who like this',modalShowMoreText:'Show More',whoLikesOtherText:'\u003ca href=\"{user_profile_url}\" class=\"internal-link view-user-profile\"\u003e{user_display_name}\u003c/a\u003e likes this',whoLikesOtherTwoText:'\u003ca href=\"{user_profile_url}\" class=\"internal-link view-user-profile\"\u003e{user_display_name}\u003c/a\u003e and \u003cspan class=\"who-likes\"\u003e1 other\u003c/span\u003e like this',whoLikesOtherMultipleText:'\u003ca href=\"{user_profile_url}\" class=\"internal-link view-user-profile\"\u003e{user_display_name}\u003c/a\u003e and \u003cspan class=\"who-likes\"\u003e{count} others\u003c/span\u003e like this',whoLikesAccessingText:'You like this',whoLikesAccessingTwoText:'You and \u003cspan class=\"who-likes\"\u003e1 other\u003c/span\u003e like this',whoLikesAccessingMultipleText:'You and \u003cspan class=\"who-likes\"\u003e{count} others\u003c/span\u003e like this'});
+jQuery.extend(jQuery.fn.evolutionInlineTagEditor.defaults,{editButtonText:'Edit tags',selectTagsText:'Select tags',saveTagsText:'Save',cancelText:'Cancel'});
+jQuery.extend(jQuery.fn.evolutionStarRating.defaults,{titles:['Terrible','Poor','Fair','Average','Good','Excellent'],ratingMessageFormat:'Average rating: {rating} out of {count} ratings.'});
+jQuery.extend(jQuery.fn.evolutionModerate.defaults,{moderateLinkText:'moderate',reportLinkText:'Report as abusive',reportedLinkText:'Reported as abusive',reportedNotificationMessageText:'{NAME}\u0027s post has been reported. \u003cstrong\u003eThank you for your feedback.\u003c/strong\u003e'});
+jQuery.extend(jQuery.fn.evolutionBookmark.defaults,{deleteBookmarkText:'Unbookmark {content_type_name}',addBookmarkText:'Bookmark this {content_type_name}',processingText:'...'});
+jQuery.extend($.fn.evolutionCodeEditor.defaults,{editorUrl:'/cfs-file/__key/system/ace/ace.js'});
+jQuery.extend(jQuery.telligent.evolution.ui.components.forumvotes.defaults,{modalTitleTextThread:'People who had this question',modalTitleTextReply:'People helped by this answer',noVotesText:'No Votes',modalShowMoreText:'More'});
+jQuery.extend(jQuery.telligent.evolution.ui.components.forumqualityvotes.defaults,{modalTitleText:'People who voted on this thread',tipTextThread:'View Voters',noVotesText:'No Votes',upVoteText:'Vote Up',downVoteText:'Vote Down',logintext:'Login to vote on this thread',modalShowMoreText:'More'});
+jQuery.extend(jQuery.fn.evolutionFeature.defaults,{editFeatureText:'Edit Feature',addFeatureText:'Feature ',processingText:'...'});
+jQuery.telligent.evolution.systemNotifications.configure({explicitPanelUrl:'#_cptype=panel\u0026_cpcontexttype=Explicit\u0026_cppanelid=994a7020-02f3-4fc2-ba7d-be3f0febf9f9\u0026viewnotification=1',notificationText:'System Notification',reviewText:'Click to review and resolve.',andMoreText:' (plus {0} more)'});
+} catch(e) { };
+// ]]>
+</script><script type="text/javascript">jQuery(function($) {
+	$.telligent.evolution.messaging.subscribe('userActionFollowToggle', function(data) {
+		var e = $(data.target);
+		var userId = e.data('userid'), accessingUserId = e.data('accessinguserid'), v = e.data('follow');
+		e.html('...');
+		if (v) {
+			$.telligent.evolution.post({
+				url: $.telligent.evolution.site.getBaseUrl() + 'api.ashx/v2/users/{FollowerId}/following.json',
+				data: { FollowerId: accessingUserId, FollowingId: userId },
+				dataType: 'json',
+				success: function(response) { e.html('Unfollow').data('follow', false); },
+				error: function(response) {  e.html('Follow').data('follow', true); }
+			});
+		} else {
+			$.telligent.evolution.del({
+				url: $.telligent.evolution.site.getBaseUrl() + 'api.ashx/v2/users/{FollowerId}/following/{FollowingId}.json',
+				data: { FollowerId: accessingUserId, FollowingId: userId },
+				dataType: 'json',
+				success: function(response) { e.html('Follow').data('follow', true); },
+				error: function(response) {  e.html('Unfollow').data('follow', false); }
+			});
+		}
+	});
+});</script><script type="text/javascript">jQuery(function($) {
+	$.telligent.evolution.messaging.subscribe('userActionFriendshipToggle', function(data) {
+		var e = $(data.target);
+		var userId = e.data('userid'), accessingUserId = e.data('accessinguserid'), v = parseInt(e.data('friendship'));
+		var t = e.html();
+		e.html('...');
+		if (v == 0) {
+				e.html(t);
+				$.glowModal('/user/requestfriend?UserId=' + userId + '', {width:670,height:390});
+		} else if (v == 3) {
+				$.telligent.evolution.post({
+					url: $.telligent.evolution.site.getBaseUrl() + 'api.ashx/v2/users/{RequestorId}/friends.json',
+					data: { RequestorId: accessingUserId, RequesteeId: userId, RequestMessage: '<p>Hello,<\/p>\n<p>I would like to connect with you in EngineerZone. Please accept my friend request.<\/p> '},
+					dataType: 'json',
+					success: function(response) { window.location = window.location; },
+					error: function(response) {  e.html(t); }
+				});
+		} else if (v == 1 || v == 2 || v == 4) {
+			if (v == 4 || (v == 1 && window.confirm('Are you sure you want to cancel this friendship request?')) || (v == 2 && window.confirm('Are you sure you want to unfriend this person?'))) {
+				$.telligent.evolution.del({
+					url: $.telligent.evolution.site.getBaseUrl() + 'api.ashx/v2/users/{RequestorId}/friends/{RequesteeId}.json',
+					data: { RequestorId: accessingUserId, RequesteeId: userId },
+					dataType: 'json',
+					success: function(response) { window.location = window.location; },
+					error: function(response) {  e.html(t); }
+				});
+			} else { e.html(t); }
+		}
+	});
+});</script><script type="text/javascript">
+(function($){
+$.extend($.fn.evolutionUpDownVoting.defaults,{voteDownMessage:'Vote against this idea',voteUpMessage:'Vote for this idea',loginMessage:'Sign in to vote on ideas',noPermissionMessage:'You do not have permission to vote for this idea',notGroupMemberMessage:'Join this group to vote on this idea',deleteMessage:'Remove your vote for this idea',readOnlyMessage: 'Voting on this idea has been disabled',switchToDownVoteMessage: 'Vote against this idea instead of for it',switchToUpVoteMessage: 'Vote for this idea instead of against it',voteDownAgainMessage:'Vote against this idea again',voteUpAgainMessage:'Vote for this idea again',removeDownVoteMesage:'Remove a vote against this idea',removeUpVoteMessage:'Remove a vote for this idea' });}(jQuery));
+</script>
+<script type="text/javascript">(function($){ $.telligent.evolution.media.defaults.endpoint = 'https://ez.analog.com/callback.ashx?__type=Telligent.Evolution.Api.Plugins.Endpoints.FileViewerEndpoint%2C%20Telligent.Evolution.Platform'; }(jQuery));</script><script type="text/javascript">(function($){ $.telligent.evolution.preview.defaults.endpoint = 'https://ez.analog.com/callback.ashx?__type=Telligent.Evolution.Api.Plugins.Endpoints.WebPreviewEndpoint%2C%20Telligent.Evolution.Platform'; }(jQuery));</script><script type="text/javascript">(function($){ $.fn.evolutionComposer.plugins.mentions.defaults.mentionablesEndpoint = 'https://ez.analog.com/callback.ashx?__type=Telligent.Evolution.Api.Plugins.Endpoints.MentionablesEndpoint%2C%20Telligent.Evolution.Platform'; }(jQuery));</script><script type="text/javascript">(function($){ $.telligent.evolution.language.defaults.dateEndpoint = 'https://ez.analog.com/callback.ashx?__type=Telligent.Evolution.Api.Plugins.Endpoints.DateFormattingEndpoint%2C%20Telligent.Evolution.Platform'; }(jQuery));</script><script type="text/javascript">(function($){ $.fn.evolutionUserFileTextBox.defaults.endpoint = 'https://ez.analog.com/callback.ashx?__type=Telligent.Evolution.Api.Plugins.Endpoints.UserFileTextBoxEndpoint%2C%20Telligent.Evolution.Platform'; }(jQuery));</script><script type="text/javascript">
+window.setCommunityType = function(type) {
+	jQuery.telligent.evolution.post({
+		url: 'https://ez.analog.com/callback.ashx?__type=Telligent.Evolution.Api.Plugins.UsageReporter%2C%20Telligent.Evolution.Platform',
+		data: { communitytype: type }
+	});
+};
+</script><style>
+.contextual-administration-handle::after {
+	width: 80%;
+	height: 80%;
+	top: 10%;
+	left: 10%;
+	background-image: url('/cfs-filesystemfile/__key/defaultwidgets/fd266454714b4b3c9b7194d8b1bf9741-63df45f4dd4647c7821531bc63994672/edit.svg?_=636909236661371739');
+}
+#_tc_ap.contextual-administration-panel-container .contextual-administration-panel-wrapper .contextual-panel .contextual-panel-heading .navigation-list .search a {
+	background-image: url('/cfs-filesystemfile/__key/defaultwidgets/fd266454714b4b3c9b7194d8b1bf9741-63df45f4dd4647c7821531bc63994672/glass.svg?_=636909236661528342');
+	background-repeat: no-repeat;
+}
+#_tc_ap.contextual-administration-panel-container .contextual-administration-panel-wrapper .contextual-panel .contextual-panel-heading .navigation-list .close a {
+	background-image: url('/cfs-filesystemfile/__key/defaultwidgets/fd266454714b4b3c9b7194d8b1bf9741-63df45f4dd4647c7821531bc63994672/cross.svg?_=636909236661371739');
+	background-repeat: no-repeat;
+}
+}
+#_tc_ap.contextual-administration-panel-container .contextual-administration-panel-wrapper .contextual-panel .contextual-panel-heading-search a.exit-search {
+	background-image: url('/cfs-filesystemfile/__key/defaultwidgets/fd266454714b4b3c9b7194d8b1bf9741-63df45f4dd4647c7821531bc63994672/cross.svg?_=636909236661371739');
+	background-repeat: no-repeat;
+}
+#_tc_ap.contextual-administration-panel-container .contextual-administration-panel-wrapper .contextual-panel .contextual-panel-heading .navigation-list .back a .icon {
+	background-image: url('/cfs-filesystemfile/__key/defaultwidgets/fd266454714b4b3c9b7194d8b1bf9741-63df45f4dd4647c7821531bc63994672/back.svg?_=636909236661059294');
+	background-repeat: no-repeat;
+}
+</style>
+
+
+
+<script type="text/html" id="fragment-63df45f4dd4647c7821531bc639946721687005179_categoriesTemplate">
+			</script>
+
+<script type="text/html" id="fragment-63df45f4dd4647c7821531bc639946721687005179_panelContainerTemplate">
+	<div id="_tc_ap" class="contextual-administration-panel-container">
+	</div>
+</script>
+
+<script type="text/html" id="fragment-63df45f4dd4647c7821531bc639946721687005179_panelLoadingIndicatorTemplate">
+	<div class="contextual-administration-panel-loading">
+		<div class="spinner">
+			<div class="bounce1"></div>
+			<div class="bounce2"></div>
+			<div class="bounce3"></div>
+		</div>
+	</div>
+</script>
+
+<script type="text/html" id="fragment-63df45f4dd4647c7821531bc639946721687005179_panelTemplate">
+	<div class="contextual-administration-panel-wrapper" data-panelid="<%= panelId %>" data-namespace="<%: namespace %>">
+		<div class="contextual-panel <%= type %> <%= cssClass %>">
+			<div class="contextual-panel-heading">
+				<ul class="navigation-list">
+					<% if(backUrl && backLabel) { %>
+						<li class="navigation-list-item <%= (backUrl == '#_cptype=root' ? type : type) %> back">
+							<a href="<%: backUrl %>" class="ui-tip" data-tip="Back">
+								<span class="icon">&lt;</span> <span class="label ui-squeezetext" data-minsize="11"><%= backLabel %></span>
+							</a>
+						</li>
+					<% } else if (backLabel) { %>
+						<li class="navigation-list-item <%= (backUrl == '#_cptype=root' ? type : type) %> back">
+							<a href="#" class="ui-tip" data-tip="Back" onclick="window.history.back(); return false;">
+								<span class="icon">&lt;</span> <span class="label ui-squeezetext" data-minsize="11"><%= backLabel %></span>
+							</a>
+						</li>
+					<% } %>
+					<li class="navigation-list-item search"><a href="#" class="ui-tip" data-tip="Search">Search</a></li>
+					<li class="navigation-list-item close"><a href="#" data-messagename="contextual.shell.close" class="ui-tip" data-tip="Close">&times;</a></li>
+				</ul>
+				<h3 class="name ui-squeezetext ui-tip" data-minsize="11"><%= (name || '') %></h3>
+				<div class="custom-panel-heading-content"></div>
+				<div class="contextual-panel-heading-search">
+					<form>
+					<input type="text" placeholder="Search" />
+					<a href="#" class="exit-search ui-tip" data-tip="Close Search">&times;</a>
+					</form>
+				</div>
+			</div>
+			<div class="contextual-panel-content glow-scrollable <%= contentClass %>">
+				<%= (typeof content === "string" ? content : "") %>
+			</div>
+			<div class="contextual-panel-content-search-results glow-scrollable">
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/html" id="fragment-63df45f4dd4647c7821531bc639946721687005179_customPanelTemplate">
+	<div class="contextual-administration-panel-wrapper" data-panelid="<%= panelId %>" data-namespace="<%: namespace %>" data-rootpanelid="<%= (rootPanelId || '') %>">
+		<div class="contextual-panel <%= cssClass %>">
+			<div class="contextual-panel-heading">
+				<ul class="navigation-list">
+					<% if(backUrl && backLabel) { %>
+						<li class="navigation-list-item back">
+							<a href="<%: backUrl %>" class="ui-tip" data-tip="Back">
+								<span class="icon">&lt;</span> <span class="label ui-squeezetext" data-minsize="11"><%= backLabel %></span>
+							</a>
+						</li>
+					<% } %>
+					<li class="navigation-list-item close"><a href="#" data-messagename="contextual.shell.close" class="ui-tip" data-tip="Close">&times;</a></li>
+				</ul>
+				<h3 class="name ui-squeezetext ui-tip" data-minsize="11"><%= (name || '') %></h3>
+				<div class="custom-panel-heading-content"></div>
+			</div>
+			<div class="contextual-panel-content <%= contentClass %>">
+				<%= (typeof content === "string" ? content : "") %>
+			</div>
+		</div>
+	</div>
+</script>
+
+<script type="text/html" id="fragment-63df45f4dd4647c7821531bc639946721687005179_loadingIndicatorTemplate">
+	<div class="scrollable-loading-indicator"><span class="ui-loading"></span></div>
+</script>
+
+
+<script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/ui.js.descarga"></script>
+<script type="text/javascript">
+// only show contextual shell in top-most window
+if (window === window.top) {
+	jQuery(document).ready(function(j){
+		jQuery.telligent.evolution.widgets.contextualPanelShell.register({
+			rootCategoriesTemplateId: 'fragment-63df45f4dd4647c7821531bc639946721687005179_categoriesTemplate',
+			panelContainerTemplateId: 'fragment-63df45f4dd4647c7821531bc639946721687005179_panelContainerTemplate',
+			panelTemplateId: 'fragment-63df45f4dd4647c7821531bc639946721687005179_panelTemplate',
+			loadingIndicatorTemplateId: 'fragment-63df45f4dd4647c7821531bc639946721687005179_loadingIndicatorTemplate',
+			panelLoadingIndicatorTemplateId: 'fragment-63df45f4dd4647c7821531bc639946721687005179_panelLoadingIndicatorTemplate',
+			loadUrl: '/utility/scripted-file.ashx?_cf=load.vm\u0026_fid=63df45f4dd4647c7821531bc63994672\u0026_wid=fragment-63df45f4dd4647c7821531bc639946721687005179\u0026_ct=plugin\u0026_cp=\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pt=Telligent.Evolution.CoreServices.Administration.Plugins.ContextualPanelServicePlugin%2C%20Telligent.Evolution.Platform\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+			searchUrl: '/utility/scripted-file.ashx?_cf=search.vm\u0026_fid=63df45f4dd4647c7821531bc63994672\u0026_wid=fragment-63df45f4dd4647c7821531bc639946721687005179\u0026_ct=plugin\u0026_cp=\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pt=Telligent.Evolution.CoreServices.Administration.Plugins.ContextualPanelServicePlugin%2C%20Telligent.Evolution.Platform\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+			rootPanelUrl: '#_cptype=root',
+			previewPanelUrl: '#_cptype=panel\u0026_cpcontexttype=Theme\u0026_cppanelid=a81369a5-aa60-4034-8a25-07df22cd9c42',
+			customPanelTemplateId: 'fragment-63df45f4dd4647c7821531bc639946721687005179_customPanelTemplate',
+			hasCategories:  false ,
+			supportsExplicitOnly:  false 		});
+	});
+}
+</script>
+	<title>Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone</title>
+<meta key="og:site_name" content="EngineerZone">
+<meta name="GENERATOR" content="Telligent Community 10">
+<link rel="canonical" href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706"><meta key="og:site_name" content="EngineerZone">
+<meta name="GENERATOR" content="Telligent Community 10"><link type="text/css" rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/screen.less"><link type="text/css" rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/print.css" media="print"><link type="text/css" rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/handheld.less" media="only screen and (max-width: 670px)"><link type="text/css" rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/tablet.less" media="only screen and (min-device-width: 671px) and (max-device-width: 1024px) and (orientation: landscape), only screen and (min-device-width: 671px) and (max-device-width: 1024px) and (orientation: portrait)"><meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
+
+	<link rel="icon" type="image/png" href="https://ez.analog.com/cfs-file/__key/themefiles/tc-s-3fc3f82483d14ec485ef92e206116d49-00000000000000000000000000000000-favicon/favicon.ico">
+	<link rel="apple-touch-icon" href="https://ez.analog.com/cfs-file/__key/themefiles/tc-s-3fc3f82483d14ec485ef92e206116d49-00000000000000000000000000000000-favicon/favicon.ico">
+<link type="text/css" rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/analyticswidget.css"><link type="text/css" rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/cssoverrides.css"><link type="text/css" rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/custom.less">
+<script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/theme.js.descarga"></script>
+<script type="text/javascript">
+jQuery(function(j){
+	j.telligent.evolution.theme.social.register({
+		dockedSidebars:  true ,
+		adaptiveHeaders:  true ,
+		adaptiveHeadersMinWidth: 670
+	})
+});
+</script><script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/analytics.js.descarga"></script><script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/helper_place_grid_new.js.descarga"></script>
+
+<script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satelliteLib-6918599d4993e6e0537845174bbba34655d0ec94.js.descarga"></script><script type="text/javascript" async="" defer="" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/saved_resource">
+</script>
+
+<script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/dnb_coretag_v4.min.js.descarga">
+</script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/s-code-contents-1e1faf4ca7b5be533164e434ee1d0be2b1427d97.js.descarga"></script>
+
+
+
+<script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satelliteLib-6918599d4993e6e0537845174bbba34655d0ec94.js.descarga"></script><script type="text/javascript" async="" defer="" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/saved_resource">
+</script>
+
+<script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/dnb_coretag_v4.min.js.descarga">
+</script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/s-code-contents-1e1faf4ca7b5be533164e434ee1d0be2b1427d97.js.descarga"></script><link rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/style.less">
+<link rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/style(1).less">
+<link rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/scripted-file.ashx">
+<link rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/style(2).less">
+<link rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/style(3).less">
+<link rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/style(4).less">
+<link rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/style(5).less">
+<link rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/style(6).less">
+<link rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/style(7).less">
+<link rel="stylesheet" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/style(8).less"><link rel="alternate" type="application/rss+xml" title="Linux Software Drivers (RSS 2.0)" href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/rss"><link rel="alternate" type="application/rss+xml" title="Q&amp;A - Recent Threads (RSS 2.0)" href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/rss?Mode=0"><link rel="alternate" type="application/rss+xml" title="Q&amp;A - Recent Posts (RSS 2.0)" href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/rss?Threadless=1"><link rel="alternate" type="application/rss+xml" title="Cross-compiling new GNU Radio on ZC706 (RSS 2.0)" href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706/rss?ContentTypeId=0"><title>
+
+</title><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/ip.json"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/ip.json"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5cd080a864746d3d740023ef.js.descarga"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5cfea31564746d3f630016db.js.descarga"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5cc08b9d64746d5d3b00061a.js.descarga"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5cd080a864746d3d740023ef.js.descarga"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5cfea31564746d3f630016db.js.descarga"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5cc08b9d64746d5d3b00061a.js.descarga"></script><link rel="stylesheet" type="text/css" id="u0" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/skin.min.css"><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5c9a5e2964746d2d0900707b.js.descarga"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5cfaba3264746d2009001f6b.js.descarga"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5c9e7a0764746d2fd6001208.js.descarga"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5c48963c64746d1924000029.js.descarga"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5c9a5e2964746d2d0900707b.js.descarga"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5cfaba3264746d2009001f6b.js.descarga"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5c9e7a0764746d2fd6001208.js.descarga"></script><script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/satellite-5c48963c64746d1924000029.js.descarga"></script></head><body spellcheck="true" style="padding-top: 154px;"><form name="ctl04" method="post" action="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706" id="ctl04">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="kIWWb6/XtxcMnKpgeF/+2uQ9j7l4qDaMwfa5VdsaiHSC7tr8rTFWJi9kpsSOoRJi1kcP9OmqcittlMfzqXpG/w==">
+</div>
+
+
+<script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/WebResource.axd" type="text/javascript"></script>
+<script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/WebResource(1).axd" type="text/javascript"></script>
+<div>
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="C21772F6">
+</div>
+    
+
+
+<div class="single-column header-fragments evolution-reflow-container" data-related="_h_page" id="_h_singlecolumn" style="display:none"></div><div class="header-fragments evolution-reflow-container" data-related="_h_singlecolumn" id="_h_page" data-reflow-width="670"><div class="layout">
+<div class="layout-header"></div>
+<div class="layout-content header-top-content" id="_h_layout" style="visibility: visible;"><div class="layout-region header" id="_h_header" style="position: fixed; top: 0px; z-index: 10;">
+<div class="layout-region-inner header"><div class="content-fragment scripted-content-fragment no-wrapper responsive-1 o" id="header-4517" data-reflow="_h_header,_h_singlecolumn,1,0,0">
+<div class="content-fragment-content">
+<style>
+    #ez-custom-header {
+        display: block;
+        text-align: center;
+        background-color: #e3e3e3;
+        margin-bottom: 5px;
+    }
+    
+   
+    
+    #top-stripe {
+        margin: 0 auto;
+        max-width: 1860px;
+        text-align: right;
+        overflow: hidden;
+    }
+    
+    
+    #jump{
+        float: right;
+        display: inline-block;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        color: #009fc1;
+        text-decoration: none;
+        padding: 12px 15px;
+        font-size: 14px;
+        font-weight: bold;
+        background-color: #f0f0f0;
+        border-left: 1px solid #B6B6B6;
+        border-right: 1px solid #B6B6B6;
+        margin: 0;
+
+    }
+    #jump:last-child{border-right: none}       
+    #jump:hover{color: #027b95;}     
+    
+    #ext-link{
+        float: left;
+        display: inline-block;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        color: #656565;
+        text-decoration: none;
+        font-weight: bold;
+        padding: 12px 25px;
+        font-size: 14px;
+        border-left: 1px solid #B6B6B6;
+        margin: 0;
+
+    }   
+    
+        #ext-link:last-child{
+        border-right: 1px solid #B6B6B6;
+
+    }  
+    
+    #ext-link:hover{
+        background-color: #f0f0f0;
+
+    }       
+</style>
+<div id="ez-custom-header">
+    <div id="top-stripe">
+        <a href="https://www.analog.com/" target="_blank" id="ext-link">Analog.com</a>
+        <a href="https://www.analog.com/library/analogDialogue/index.html" target="_blank" id="ext-link">Analog<span style="font-weight:normal"> Dialogue</span></a>
+        <a href="https://wiki.analog.com/doku.php" target="_blank" id="ext-link" style="border-right: 1px solid #B6B6B6">Wiki</a>
+<!-- <a href="http://www.linear.com/" id="ext-link" target="_blank">Linear.com</a>-->
+        
+        
+        <a href="https://ez.analog.com/cn" target="_blank" id="jump">简体中文</a>                     
+   
+    </div> 
+</div></div>
+<div class="content-fragment-footer"></div>
+</div>
+<div class="content-fragment site-banner no-wrapper responsive-1 	all
+" id="header-5548" data-reflow="_h_header,_h_singlecolumn,1,0,1">
+<div class="content-fragment-content">
+
+
+
+
+
+
+
+								
+
+
+	
+<style>
+.header-fragments .layout .header-top-content .layout-region.header {
+	background-color: #FFFFFF;
+}
+
+.banner.site fieldset ul.field-list li.field-item .field-item-input input {
+	background-color: #FFFFFF;
+}
+
+
+.header-fragments .header-top-content .layout-region.header .banner.site .navigation-list ul a,
+.header-fragments .header-top-content .layout-region.header .banner.site .navigation-list ul a.active,
+.header-fragments .header-top-content .layout-region.header .banner.site fieldset ul li .field-item-input input,
+.header-fragments .header-top-content .layout-region.header .banner.site fieldset ul li .field-item-input input.active,
+.header-fragments .header-top-content .layout-region.header .banner.site fieldset ul.field-list li.field-item .field-item-input:after,
+.header-fragments .header-top-content .layout-region.header .banner.site fieldset ul.field-list li.field-item .field-item-input input.active,
+.header-fragments .header-top-content .layout-region.header .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a {
+	color: #009FBD;
+}
+.header-fragments .header-top-content .layout-region.header .banner.site fieldset ul.field-list li.field-item .field-item-input input::placeholder {
+	color: #009FBD;
+}
+.header-fragments .header-top-content .layout-region.header .banner.site fieldset ul.field-list li.field-item .field-item-input input:-ms-input-placeholder {
+	color: #009FBD;
+}
+.header-fragments .header-top-content .layout-region.header .banner.site fieldset ul.field-list li.field-item .field-item-input input::-ms-input-placeholder {
+	color: #009FBD;
+}
+
+.header-fragments:hover .header-top-content .layout-region.header .banner.site .navigation-list ul a,
+.header-fragments:hover .header-top-content .layout-region.header .banner.site .navigation-list ul a.active,
+.header-fragments .header-top-content .layout-region.header .banner.site .navigation-list ul a.active,
+.header-fragments:hover .header-top-content .layout-region.header .banner.site fieldset ul li .field-item-input input,
+.header-fragments:hover .header-top-content .layout-region.header .banner.site fieldset ul li .field-item-input input.active,
+.header-fragments:hover .header-top-content .layout-region.header .banner.site fieldset ul.field-list li.field-item .field-item-input:after,
+.header-fragments:hover .header-top-content .layout-region.header .banner.site fieldset ul.field-list li.field-item .field-item-input input.active,
+.header-fragments .header-top-content .layout-region.header .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a.subnav-open,
+.header-fragments .header-top-content .layout-region.header .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a.links-expanded,
+.header-fragments:hover .header-top-content .layout-region.header .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a {
+	color: #FFFFFF;
+}
+.header-fragments:hover .header-top-content .layout-region.header .banner.site fieldset ul.field-list li.field-item .field-item-input input::placeholder {
+	color: #FFFFFF;
+}
+.header-fragments:hover .header-top-content .layout-region.header .banner.site fieldset ul.field-list li.field-item .field-item-input input:-ms-input-placeholder {
+	color: #FFFFFF;
+}
+.header-fragments:hover .header-top-content .layout-region.header .banner.site fieldset ul.field-list li.field-item .field-item-input input::-ms-input-placeholder {
+	color: #FFFFFF;
+}
+.header-fragments .header-top-content .layout-region.header .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a.selected:after {
+	background-color: #FFFFFF;
+}
+
+
+
+
+.single-column .banner.site {
+	background-color: #FFFFFF;
+}
+.single-column .banner.site > .navigation-list.handheld ul a,
+.single-column .banner.site .container.handheld .user-links ul a {
+	color: #009FBD;
+}
+.single-column .banner.site > .navigation-list.handheld ul a.active,
+.single-column .banner.site .container.handheld .user-links ul a.active {
+	color: #FFFFFF;
+}
+</style>
+
+<div class="banner site  all  " id="header-5548_banner">
+			<div class="avatar">
+																		<a href="https://ez.analog.com/" title="Home" class="ui-tip">
+					<img src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/EngineerZone_logo.png-250x88.png" border="0px" alt="EngineerZone" style="max-width:125px;max-height:44px;">
+				</a>
+					</div>
+
+					<div class="name hidden">EngineerZone</div>
+		
+						<fieldset class="search" id="header-5548_searchFields">
+			<ul class="field-list">
+				<li class="field-item">
+					<span class="field-item-description hidden">
+						<label>Search</label>
+					</span>
+					<span class="field-item-input">
+						<input autocomplete="off" type="search" placeholder="Search" id="header-5548_Search" value="">
+					</span>
+				</li>
+			</ul>
+		</fieldset>
+								<div class="navigation-list user-links" id="header-5548_bannerLinks">
+					<ul>
+																																																							                        
+													<li class="navigation-list-item item-login">
+																	<a href="https://ez.analog.com/login?ReturnUrl=%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706" title="Join or sign in"><span class="login_text">Log in</span></a>
+							
+							</li>
+																																																												</ul>
+				</div>
+						<div class="navigation-list handheld">
+			<ul>
+				<li class="navigation-list-item">
+					<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706#" class="site" id="header-5548_handheldSiteLinksLink" style="visibility: hidden;">Site</a>
+				</li>
+									<li class="navigation-list-item item-search">
+					<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706#" class="search" id="header-5548_handheldSearchFieldsLink">Search</a>
+				</li>
+																						<li class="navigation-list-item item-login">
+							<a href="https://ez.analog.com/login?ReturnUrl=%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706"><span class="login_text">Log in</span></a>
+								</li>
+															
+			</ul>
+		</div>
+		<div class="container handheld">
+			<fieldset class="search" style="display:none" id="header-5548_handheldSearchFields"></fieldset>
+			<div class="user-links" style="display:none" id="header-5548_handheldBannerLinks"></div>
+		</div>
+	</div>
+
+</div>
+<div class="content-fragment-footer"></div>
+</div>
+<div class="content-fragment navigation-custom no-wrapper responsive-hidden" id="header-4519" data-reflow="_h_header,_h_singlecolumn,10000,0,2">
+<div class="content-fragment-content">
+
+
+
+
+	
+
+
+			<div class="navigation-list links" id="header-4519_container" data-minlinks="0" data-direction="horizontal" data-maxlinks="4" data-reflow-wait-check-count="0" data-reflow-wait-timeout="null" data-finalized="true" style="display: block; overflow: hidden; height: 38px;"><div class="container" style="overflow: auto hidden; height: 58px; visibility: visible;"><ul style="list-style: none; padding: 0px; margin: 0px; overflow: hidden; display: flex; width: 1100px;"><li class="navigation-list-item"><a href="https://ez.analog.com/" style="white-space: normal;">Home</a></li><li class="navigation-list-item"><a href="https://ez.analog.com/" style="white-space: normal;">Blogs ⌵</a><ul class="children" style="display: none; white-space: normal;">
+																			<li>
+								<a href="https://ez.analog.com/b/engineerzone-spotlight">EngineerZone Spotlight</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/b/engineering-mind">The Engineering Mind</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/b/analog-garage">Analog Garage</a>
+							</li>
+													</ul></li><li class="navigation-list-item"><a href="https://ez.analog.com/" style="white-space: normal;">Browse ⌵</a><ul class="children" style="display: none; white-space: normal;">
+																			<li>
+								<a href="https://ez.analog.com/subgrouplist">All Groups</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/members">All Members</a>
+							</li>
+													</ul></li><li class="navigation-list-item"><a href="https://ez.analog.com/" style="white-space: normal;">Support ⌵</a><ul class="children" style="display: none; white-space: normal;">
+																			<li>
+								<a href="https://ez.analog.com/depth-perception-ranging-technologies/lidar-solutions/3d-tof-depth-sensing/">3D ToF Depth Sensing</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/amplifiers/">Amplifiers</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/analog-microcontrollers/">Analog Microcontrollers</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/audio/">Audio</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/clock_and_timing/">Clock and Timing</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/data_converters/">Data Converters</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/design-tools-and-calculators/">Design Tools and Calculators</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/dds/">Direct Digital Synthesis (DDS)</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/embedded-vision-sensing/">Embedded Vision Sensing</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/energy-metering/">Energy Monitoring and Metering</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/fpga/">FPGA Reference Designs</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/interface-isolation/">Interface and Isolation</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/low-power-rf-transceivers/">Low Power RF Transceivers</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/mems/">MEMS Inertial Sensors</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/motor-control-hardware-platforms2/">Motor Control Hardware Platforms</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/optical_sensing/">Optical Sensing</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/power/">Power By Linear</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/dsp/">Processors and DSP</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/circuits_from_the_lab/">Reference Circuits</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/rf/">RF and Microwave</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/switches_multiplexers/">Switches/Multiplexers</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/temperature_sensors/">Temperature Sensors</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/video/">Video</a>
+							</li>
+																			<li>
+								<a href="https://ez.analog.com/wireless-sensor-networks-reference-library/">Wireless Sensor Networks Reference Library</a>
+							</li>
+													</ul></li><li style="display: none;"></li></ul></div></div>
+		</div>
+<div class="content-fragment-footer"></div>
+</div>
+</div>
+</div>
+<div class="layout-region content" id="_h_content">
+<div class="layout-region-inner content"><div id="header-4520"></div>
+<div class="content-fragment group-banner no-wrapper with-spacing responsive-1" id="header-4521" data-reflow="_h_content,_h_singlecolumn,1,1,4">
+<div class="content-fragment-content">
+
+
+
+
+	
+	
+			
+			
+		
+<style>
+				.banner.context > .avatar {
+			display: none;
+		}
+	
+		
+		.single-column.header-fragments,
+		.header-fragments .layout .header-top-content .layout-region.content,
+		.header-fragments .layout .header-top-content.with-adaptable-elements .layout-region.content {
+			background: #FF7200;
+		}
+
+	
+				.single-column.header-fragments {}
+
+		.header-fragments .layout .header-top-content:not(.scrolled) .layout-region.content,
+		.header-fragments .layout .header-top-content.with-adaptable-elements:not(.scrolled) .layout-region.content {
+			 border-bottom: 1px solid #CFD8DC;
+		}
+
+		.header-fragments .layout .header-top-content:not(scrolled) {
+			box-shadow: none;
+		}
+		.header-fragments .layout .header-top-content.scrolled {
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+		}
+		
+	/* parent navigation */
+	.banner.context.slim .hierarchy > .parent-navigation a.more:before,
+	.banner.context > .hierarchy > .parent-navigation ul li a,
+	.banner.context > .hierarchy > .parent-navigation ul li a:hover,
+	.banner.context > .hierarchy > .parent-navigation ul li a:before,
+	.scrolled .banner.context > .hierarchy > .parent-navigation a.more:before,
+	.scrolled .banner.context > .hierarchy > .parent-navigation ul li a:before,
+	.banner.context > .hierarchy > .parent-navigation ul li a.more.links-expanded,
+	.banner.context > .hierarchy > .parent-navigation ul li a.more.links-expanded:before,
+	.banner.context > .hierarchy > .parent-navigation ul li a.more:before {
+		color: #FFFFFF;
+	}
+
+	/* hierarchy components */
+	.banner.context > .hierarchy > .current-hierarchy > .hierarchy-component,
+	.banner.context > .hierarchy > .current-hierarchy > .hierarchy-component a,
+	.banner.context > .hierarchy > .current-hierarchy > .hierarchy-component:before,
+	.banner.context > .hierarchy > .current-hierarchy > .hierarchy-component a:hover {
+		color: #FFFFFF;
+	}
+
+	/* applications */
+	.banner.context > .hierarchy > .current-hierarchy > .applications ul a,
+	.banner.context > .hierarchy > .current-hierarchy > .applications ul a:hover,
+	.banner.context > .hierarchy > .current-hierarchy > .applications ul a.more,
+	.banner.context:not(.home) > .hierarchy > .current-hierarchy > .applications ul a.more,
+	.banner.context:not(.home) > .hierarchy > .current-hierarchy > .applications ul a.more:before,
+	.banner.context.home > .hierarchy > .current-hierarchy > .applications ul a.more:before,
+	.scrolled .banner.context .hierarchy .current-hierarchy > .applications ul a.more,
+	.scrolled .banner.context .hierarchy .current-hierarchy > .applications ul a.more:before,
+	.banner.context.slim:not(.home) > .hierarchy > .current-hierarchy > .applications ul a.more,
+	.banner.context.slim:not(.home) > .hierarchy > .current-hierarchy > .applications ul a.more:before,
+	.scrolled .banner.context:not(.home) > .hierarchy > .current-hierarchy > .applications ul a.more,
+	.scrolled .banner.context:not(.home) > .hierarchy > .current-hierarchy > .applications ul a.more:before {
+		border-color: #FFFFFF;
+		color: #FFFFFF;
+	}
+	.banner.context.home > .hierarchy > .current-hierarchy > .applications ul a.links-expanded,
+	.banner.context.home > .hierarchy > .current-hierarchy > .applications ul a.links-expanded:before,
+	.banner.context.home > .hierarchy > .current-hierarchy > .applications ul a.more.links-expanded:before,
+	.scrolled .banner.context .hierarchy .current-hierarchy > .applications ul a.more.links-expanded,
+	.scrolled .banner.context .hierarchy .current-hierarchy > .applications ul a.more.links-expanded:before,
+	.banner.context:not(.home) > .hierarchy > .current-hierarchy > .applications ul a.more.links-expanded,
+	.banner.context:not(.home) > .hierarchy > .current-hierarchy > .applications ul a.more.links-expanded:before,
+	.banner.context.slim:not(.home) > .hierarchy > .current-hierarchy > .applications ul a.more.links-expanded,
+	.banner.context.slim:not(.home) > .hierarchy > .current-hierarchy > .applications ul a.more.links-expanded:before,
+	.scrolled .banner.context:not(.home) > .hierarchy > .current-hierarchy > .applications ul a.more.links-expanded,
+	.scrolled .banner.context:not(.home) > .hierarchy > .current-hierarchy > .applications ul a.more.links-expanded:before {
+		background-color: #FFFFFF;
+		color: #FF7200;
+		border-color: #FFFFFF;
+	}
+
+	/* new */
+	.banner.context > .new ul a,
+	.banner.context .navigation-list.new ul a.links-expanded,
+	.banner.context .navigation-list.new ul a.links-expanded:hover,
+	.banner.context .navigation-list.new ul a.links-expanded:active,
+	.banner.context .navigation-list.new ul a:hover {
+		background-color: #FFFFFF;
+		color: #FF7200;
+	}
+	.single-column .banner.context > .new a,
+	.single-column .banner.context:not(.home) > .new a,
+	.single-column .banner.context.home > .new a {
+		color: #FFFFFF;
+		border-color: #FFFFFF;
+	}
+
+	/* inheriting application banner */
+	.banner.application,
+	.banner.application .navigation-list a,
+	.banner.application .name .title a {
+		color: #FFFFFF;
+	}
+	.banner.application::after {
+		background-color: #FFFFFF;
+	}
+
+
+	/* custom navigation widget */
+	.header-fragments .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a,
+	.header-fragments .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a:hover {
+		color: #FFFFFF;
+	}
+	.header-fragments .content-fragment.navigation-custom:after,
+	.header-fragments .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a.selected:after {
+		background-color: #FFFFFF;
+	}
+	.header-fragments:hover .header-top-content .layout-region.content .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a {
+		color: #FFFFFF;
+	}
+	.header-fragments .header-top-content .layout-region.content .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a.links-expanded,
+	.header-fragments .header-top-content .layout-region.content .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a.subnav-open,
+	.header-fragments:hover .header-top-content .layout-region.content .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a.links-expanded,
+	.header-fragments:hover .header-top-content .layout-region.content .content-fragment.navigation-custom .navigation-list[data-direction='horizontal'] a.subnav-open {
+		background-color: #FFFFFF;
+		color: #FF7200;
+	}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+<div class="banner context   with-application    with-alert   with-ancestors ">
+	<div class="avatar">
+		<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/">
+			<img src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/4U591ZP5BPI3.png-68x68x2.png" alt="Linux Software Drivers">
+		</a>
+	</div>
+
+	<div class="hierarchy">
+
+																																				<div class="parent-navigation">
+					<div class="" data-direction="horizontal" id="header-4521_parentNavigation" data-reflow-wait-check-count="0" data-reflow-wait-timeout="null" data-finalized="true" style="overflow: hidden; height: 16px;"><div class="container" style="overflow: auto hidden; height: 36px; visibility: visible;"><ul style="list-style: none; padding: 0px; margin: 0px; overflow: hidden; display: flex; width: 975px;"><li class="navigation-list-item "><a class="crumb depth-0 " href="https://ez.analog.com/linux-device-drivers/" style="white-space: normal;">Linux and Microcontroller Device Drivers</a></li><li style="display: none;"></li></ul></div></div>
+				</div>
+			
+		
+		<div class="current-hierarchy">
+
+							<div class="container hierarchy-component">
+					<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/"><span>Linux Software Drivers</span></a>
+				</div>
+			
+												<span class="application hierarchy-component">
+						<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a"><span>Q&amp;A</span></a>
+					</span>
+													<span class="content hierarchy-component">
+						<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706"><span>Cross-compiling new GNU Radio on ZC706</span></a>
+					</span>
+							
+							<div class="navigation-list applications">
+					<div class="" data-minlinks="0" data-maxlinks="0" data-direction="vertical" id="header-4521_applicationNavigation" data-reflow-wait-check-count="0" data-reflow-wait-timeout="null" data-finalized="true"><div class="container"><ul style="list-style: none; padding: 0px; margin: 0px; overflow: hidden; visibility: visible;"><li style="display: none;"><a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a" class="internal-link view-application forum single  selected">Q&amp;A</a></li><li style="display: none;"><a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/discussions" class="internal-link view-application forum single ">Discussions</a></li><li style="display: none;"><a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/w/documents" class="internal-link view-application wiki single ">Documents</a></li><li style="display: none;"><a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/m/file-uploads" class="internal-link view-application media-gallery single ">File Uploads</a></li><li style="display: none;"><a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/m/video-images" class="internal-link view-application media-gallery single ">Video/Images</a></li><li style="display: none;"><a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/tags" class="internal-link view-tags ">Tags</a></li><li style="display: none;"><a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/p/reports" class="internal-link view-post ">Reports</a></li><li><a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706#" class="more" data-more="">More</a></li></ul></div></div>
+				</div>
+			
+		</div>
+
+	</div>
+
+	
+	
+			<div class="navigation-list new">
+			<div class="" data-direction="vertical" data-reflow-wait-check-count="0" data-reflow-wait-timeout="null" data-finalized="true"><div class="container"><ul style="list-style: none; padding: 0px; margin: 0px; overflow: hidden; visibility: visible;"><li class="navigation-list-item"><a href="https://ez.analog.com/login?ReturnUrl=%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706">New</a></li></ul></div></div>
+		</div>
+				<div class="join-alert"><a href="https://ez.analog.com/login?ReturnUrl=%2Flinux-device-drivers%2Flinux-software-drivers%2F%3Frequestmembership%3Dtrue" class="internal-link join-group">Linux Software Drivers requires membership for participation - click to join</a></div>
+					</div>
+
+	
+			</div>
+<div class="content-fragment-footer"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="layout-footer"></div>
+</div></div>
+<div class="single-column content-fragment-page forums-thread evolution-reflow-container" data-related="_p_page" id="_p_singlecolumn" style="display:none"></div><div class="content-fragment-page forums-thread evolution-reflow-container" data-related="_p_singlecolumn" id="_p_page" data-reflow-width="670"><div class="layout">
+<div class="layout-header"></div>
+<div class="layout-content content-left-sidebar-right" id="_p_layout"><div class="layout-region right-sidebar" id="_p_right-sidebar" style="position: relative;">
+<div class="layout-region-inner right-sidebar"><div class="content-fragment thread-details no-wrapper with-spacing responsive-hidden" id="fragment-42696" data-reflow="_p_right-sidebar,_p_singlecolumn,10000,5,0">
+<div class="content-fragment-content">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="content-details minimal" id="fragment-42696_wrapper">
+
+	<ul class="attribute-list">
+
+					<li class="attribute-item state  verified ">
+				<span class="attribute-name">State</span>
+				<span class="attribute-value">
+											<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706?ReplyFilter=Answers&amp;ReplySortBy=Answers&amp;ReplySortOrder=Descending" class="append-icon check">
+							Verified Answer
+						</a>
+									</span>
+			</li>
+		
+		
+		
+					
+		
+		
+		<li class="attribute-item replies">
+			<span class="attribute-name">Replies</span>
+			<span class="attribute-value">
+																3 replies
+			</span>
+		</li>
+		
+							<li class="attribute-item subscribers">
+			<span class="attribute-name">Subscribers</span>
+			<span class="attribute-value">
+												60 subscribers
+			</span>
+		</li>
+		<li class="attribute-item views">
+			<span class="attribute-name">Views</span>
+			<span class="attribute-value">
+												79 views
+			</span>
+		</li>
+		<li class="attribute-item users">
+			<span class="attribute-name">Users</span>
+			<span class="attribute-value" id="fragment-42696_statisticsContainer">
+												0 members are here
+			</span>
+		</li>
+	</ul>
+
+			<div class="content-tags">
+			<ul class="tag-list">
+							<li class="tag-item">
+				<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/tags/cross_2D00_compile" rel="tag">cross-compile</a>
+			</li>
+									<li class="tag-item">
+				<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/tags/cannot%2bimport%2bgnuradio" rel="tag">cannot import gnuradio</a>
+			</li>
+									<li class="tag-item">
+				<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/tags/gnuradio" rel="tag">gnuradio</a>
+			</li>
+						</ul>
+		</div>
+	
+</div>
+
+</div>
+<div class="content-fragment-footer"></div>
+</div>
+<div id="fragment-42697"></div>
+<div class="content-fragment forum-links no-wrapper responsive-1" id="fragment-42698" data-reflow="_p_right-sidebar,_p_singlecolumn,1,5,2">
+<div class="content-fragment-header">
+Options
+			</div>
+<div class="content-fragment-content">
+
+
+
+	<div class="navigation-list links" data-minlinks="2" data-direction="vertical" data-maxlinks="0" data-reflow-wait-check-count="0" data-reflow-wait-timeout="null" data-finalized="true" style="display: block;"><div class="container"><ul style="list-style: none; padding: 0px; margin: 0px; overflow: hidden; visibility: visible;"><li style="display: none;"><a href="mailto:?subject=Cross-compiling%20new%20GNU%20Radio%20on%20ZC706&amp;body=https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706" class="internal-link email-post">Share</a></li><li><a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706#" data-more="">More</a></li></ul></div></div>
+
+
+			</div>
+<div class="content-fragment-footer"></div>
+</div>
+<div class="content-fragment more-content top-border with-header with-spacing responsive-1 
+			as-list
+		" id="fragment-42699" data-reflow="_p_right-sidebar,_p_singlecolumn,1,5,3" style="display: block;">
+<div class="content-fragment-header">
+Related
+			</div>
+<div class="content-fragment-content">
+
+
+<div id="fragment-42699_delayedPagedContentWrapper"><div id="pifragment-42699-paged-content">
+		
+
+		    	                                            
+			
+														
+				
+	
+	
+		
+			<div class="avatar-list">
+		<ul class="content-list">
+		
+	
+		<li class="content-item" data-href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/97777/cross-compiler-unable-to-find-matio-library">
+			<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/97777/cross-compiler-unable-to-find-matio-library" class="internal-link view-full-post navigable">
+				<div class="content">cross compiler unable to find matio library</div>
+			</a>
+			<div class="author">
+				<div class="avatar">
+									</div>
+				<div class="meta">
+					<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/97777/cross-compiler-unable-to-find-matio-library" class="internal-link view-post navigable">
+						 I am attempting to cross compiling the ad9361 library for linux my zc706 board but the cross compiler cant find the matIO library. I just installed the library and it is located at /usr/local/lib. I am...
+					</a>
+				</div>
+			</div>
+		</li>
+			
+	
+		<li class="content-item" data-href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/97489/cross-compiling-libiio-for-windows">
+			<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/97489/cross-compiling-libiio-for-windows" class="internal-link view-full-post navigable">
+				<div class="content">cross compiling libiio for windows</div>
+			</a>
+			<div class="author">
+				<div class="avatar">
+									</div>
+				<div class="meta">
+					<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/97489/cross-compiling-libiio-for-windows" class="internal-link view-post navigable">
+						 Hi, 
+ I had a need for a libiio dll today, and the windows binaries provided here looked to be a bit out of date: http://wiki.analog.com/resources/tools-software/linux-software/libiio 
+ I didn't see any...
+					</a>
+				</div>
+			</div>
+		</li>
+			
+	
+		<li class="content-item" data-href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87245/cross-compiling-from-ubuntu-to-zynq">
+			<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87245/cross-compiling-from-ubuntu-to-zynq" class="internal-link view-full-post navigable">
+				<div class="content">Cross compiling from ubuntu to zynq</div>
+			</a>
+			<div class="author">
+				<div class="avatar">
+									</div>
+				<div class="meta">
+					<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87245/cross-compiling-from-ubuntu-to-zynq" class="internal-link view-post navigable">
+						 Hi 
+ I'm trying to learn from the oscilloscope reference design for the ad-fmcdaq2-ebz on the xilinx zc706 so I could modify it or write my own application. 
+ I've succeeded in compiling the oscilloscope...
+					</a>
+				</div>
+			</div>
+		</li>
+			
+	
+		<li class="content-item" data-href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/97744/basic-gnu-radio-problems">
+			<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/97744/basic-gnu-radio-problems" class="internal-link view-full-post navigable">
+				<div class="content">Basic GNU Radio Problems</div>
+			</a>
+			<div class="author">
+				<div class="avatar">
+									</div>
+				<div class="meta">
+					<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/97744/basic-gnu-radio-problems" class="internal-link view-post navigable">
+						 Hello I am using the newest SD card build for the FMCOMMS3 on ZedBoard. I am trying to transmit an audio file with no gain using the rx and tx on the same fmcomms3 board. This is not working well at all...
+					</a>
+				</div>
+			</div>
+		</li>
+			
+	
+		<li class="content-item" data-href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87628/gnu-radio-fmcomms2-receiver">
+			<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87628/gnu-radio-fmcomms2-receiver" class="internal-link view-full-post navigable">
+				<div class="content">GNU Radio FMCOMMS2 Receiver</div>
+			</a>
+			<div class="author">
+				<div class="avatar">
+									</div>
+				<div class="meta">
+					<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87628/gnu-radio-fmcomms2-receiver" class="internal-link view-post navigable">
+						 I'm trying to test a couple of QPSK receiver implementations on ZC706 and FMCOMMS2 boards for research, I'd like to test QPSK receive in GNU Radio (I know GNU Radio isn't fast enough to provide proper...
+					</a>
+				</div>
+			</div>
+		</li>
+				</ul>
+	</div>
+	</div>
+</div>
+
+
+
+
+
+			</div>
+<div class="content-fragment-footer"></div>
+</div>
+</div>
+<div class="layout-region-inner right-sidebar" visibility="hidden" style="display: none;"></div></div>
+<div class="layout-region content" id="_p_content">
+<div class="layout-region-inner content"><div id="fragment-42700"></div>
+<div id="fragment-42701"></div>
+<div class="content-fragment threaded-thread no-wrapper with-spacing responsive-1" id="fragment-42702" data-reflow="_p_content,_p_singlecolumn,1,1,6">
+<div class="content-fragment-content">
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="thread-start">
+
+	
+	
+			
+	
+			
+		
+	
+	
+		<div class="content full" id="87262" data-threadid="87262" data-userid="38669" data-permalink="~/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706">
+		<h1 class="name">Cross-compiling new GNU Radio on ZC706</h1>
+
+		<div class="author header thread-starter">
+			<div class="avatar">
+									<a href="https://ez.analog.com/members/zacharyr">
+						<img src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/default.png-32x32x2.png" border="0" alt="zacharyr">
+					</a>
+							</div>
+			<span class="user-name">
+				<span class="ui-userpresence ui-tip " style="display: none;" data-userid="38669" data-contentid="c86a5713-033b-476f-9308-852343e0bf1b" data-contenttypeid="e9ed4118-60ed-4f2b-a026-5705b8793d05" data-present="" data-presentlabel="Online" data-notpresentlabel="Offline" data-tip=""></span>
+									<a href="https://ez.analog.com/members/zacharyr" class="internal-link view-user-profile">
+						zacharyr
+					</a>
+											</span>
+			
+				 		
+		        	            							
+			<span class="post-date">
+			    	
+			    	
+
+				                <a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706">on Jul 7, 2016 </a> 				
+			
+			</span>
+		</div>
+
+				
+		<div class="content">
+			<p>Hello,</p>
+ <p>I am trying to install a newer version of GNU Radio on my ZC706 device than what came with the compiled SD image 2015_R2. The GNU Radio version that came with 2015_R2 is 3.7.8, but I need 3.7.9 installed on my ZC706.</p>
+ <p>I have performed the following steps to try to update the built-in GNU Radio:</p>
+ <p>1. I first uninstalled the built-in GNU Radio by running a shell script (PREFIX=/usr instead of /usr/local): <a class="jive-link-external-small" href="http://svn.tapr.org/repos_sdr_hpsdr/trunk/N5EG/GRC3.6/Gnuradio_remove" rel="nofollow" target="_blank">http://svn.tapr.org/repos_sdr_hpsdr/trunk/N5EG/GRC3.6/Gnuradio_remove</a></p>
+ <p>2. I then followed the steps on the GNU Radio website to cross-compile GNU Radio: <a class="jive-link-external-small" href="http://gnuradio.org/redmine/projects/gnuradio/wiki/Embedded" rel="nofollow" target="_blank">http://gnuradio.org/redmine/projects/gnuradio/wiki/Embedded</a></p>
+ <p>3. The cross-compiled GNU Radio installed successfully using the make install DESTDIR=~/mydevice command.</p>
+ <p>The problem is when I run gnuradio-companion on the ZC706, I receive the error:</p>
+ <p>&nbsp;&nbsp;&nbsp;&nbsp; Cannot import gnuradio.</p>
+ <p>&nbsp;&nbsp;&nbsp; </p>
+ <p>&nbsp;&nbsp;&nbsp;&nbsp; Is the python path environment variable set correctly?</p>
+ <p>&nbsp;&nbsp;&nbsp;&nbsp; All OS: PYTHONPATH</p>
+ <p>&nbsp;&nbsp;&nbsp;&nbsp; Is the library path environment variable set correctly?</p>
+ <p>&nbsp;&nbsp;&nbsp;&nbsp; Linux: LD_LIBRARY_PATH</p>
+ <p>&nbsp;&nbsp;&nbsp;&nbsp; Windows: PATH</p>
+ <p>&nbsp;&nbsp;&nbsp;&nbsp; MacOSX: DYLD_LIBRARY_PATH</p>
+ <p>I set my environment variables in .bashrc as the following:</p>
+ <p>export PYTHONPATH=$PYTHONPATH:/usr/lib/python2.7/site-packages/:/usr/lib/python2.7/dist-packages/:/usr/bin/X11/:/usr/local/lib/python2.7/dist-packages/</p>
+ <p>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/</p>
+ <p>export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/lib/pkgconfig</p>
+ <p>export PATH=$PATH:/usr/bin</p>
+ <p>I am thinking the built-in GNU Radio was configured differently in a way that my uninstall script did not properly remove GNU Radio before I installed the new one, is there any way to fix this?</p><div style="clear:both;"></div>
+								</div>
+
+				
+				
+		<div class="actions footer">
+			
+						
+									
+									
+						
+						
+			
+			
+			
+			<div class="navigation-list" data-minlinks="1" data-direction="horizontal" data-maxlinks="1" id="fragment-42702_postActions-612de988-3629-4c64-be99-8757fef87397" data-reflow-wait-check-count="0" data-reflow-wait-timeout="null"></div>
+		</div>
+
+					<fieldset class="hidden" id="fragment-42702_replyFormId612de988-3629-4c64-be99-8757fef87397">
+				<ul class="field-list">
+					<li class="field-item post-body">
+						<span class="field-item-input">
+														
+							
+							
+							
+							
+							
+															
+								
+							
+																													
+							
+							<div id="mceu_7" class="mce-tinymce mce-container mce-panel mce-editor-submittable mce-editor-desktop mce-editor-blur mce-submitpanel-narrow" hidefocus="1" tabindex="-1" role="application" style="visibility: hidden; border-width: 1px; height: auto; overflow: visible;"><div id="mceu_7-body" class="mce-container-body mce-stack-layout"><div id="mceu_8" class="mce-container mce-menubar mce-toolbar mce-stack-layout-item mce-first" role="menubar" style="border-width: 0px 0px 1px; display: none;"><div id="mceu_8-body" class="mce-container-body mce-flow-layout"><div id="mceu_9" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-first mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_9" role="menuitem" aria-haspopup="true"><button id="mceu_9-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Edit</span> <i class="mce-caret"></i></button></div><div id="mceu_10" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_10" role="menuitem" aria-haspopup="true"><button id="mceu_10-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Insert</span> <i class="mce-caret"></i></button></div><div id="mceu_11" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_11" role="menuitem" aria-haspopup="true"><button id="mceu_11-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Format</span> <i class="mce-caret"></i></button></div><div id="mceu_12" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-last mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_12" role="menuitem" aria-haspopup="true"><button id="mceu_12-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Tools</span> <i class="mce-caret"></i></button></div></div></div><div id="mceu_16" class="mce-edit-area mce-container mce-panel mce-stack-layout-item mce-last" hidefocus="1" tabindex="-1" role="group" style="border-width: 0px 0px 1px; position: relative;"><iframe id="fragment-42702_fragment-42702_createEditor_ifr" frameborder="0" allowtransparency="true" title="Rich Text Area. Press ALT-F9 for menu. Press ALT-F10 for toolbar. Press ALT-0 for help" src="javascript:&quot;&quot;" style="width: 100%; height: 60px; display: block;" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/saved_resource.html"></iframe><div class="mce-placeholder" style="display: block;">Add a reply...</div><div style="position: absolute; top: 0px; left: 0px;"><div class="mceDragDropShade" style="position: absolute; display: none; left: 0px; top: 0px;"></div><div class="mceDragDropMessage" style="position: absolute; display: none; left: 0px; top: 0px;"></div></div></div><div id="mceu_13" class="mce-toolbar-grp mce-container mce-panel mce-stack-layout-item" hidefocus="1" tabindex="-1" role="group"><div id="mceu_13-body" class="mce-container-body mce-stack-layout"><div id="mceu_14" class="mce-container mce-toolbar mce-stack-layout-item mce-first mce-last" role="toolbar"><div id="mceu_14-body" class="mce-container-body mce-flow-layout"><div id="mceu_15" class="mce-container mce-flow-layout-item mce-first mce-last mce-btn-group" role="group" style="width: 100%;"><div id="mceu_15-body" style="white-space: normal;"><div id="mceu_0" class="mce-widget mce-btn mce-menubtn mce-first mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_0" role="button" aria-haspopup="true"><button id="mceu_0-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Edit</span> <i class="mce-caret"></i></button></div><div id="mceu_1" class="mce-widget mce-btn mce-menubtn mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_1" role="button" aria-haspopup="true"><button id="mceu_1-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Insert</span> <i class="mce-caret"></i></button></div><div id="mceu_2" class="mce-widget mce-btn mce-menubtn mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_2" role="button" aria-haspopup="true"><button id="mceu_2-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Format</span> <i class="mce-caret"></i></button></div><div id="mceu_3" class="mce-widget mce-btn mce-menubtn mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_3" role="button" aria-haspopup="true"><button id="mceu_3-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Tools</span> <i class="mce-caret"></i></button></div><div id="mceu_4" class="mce-widget mce-btn" tabindex="-1" aria-labelledby="mceu_4" role="button" aria-label="Bullet list"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-bullist"></i></button></div><div id="mceu_5" class="mce-widget mce-btn" tabindex="-1" aria-labelledby="mceu_5" role="button" aria-label="Numbered list"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-numlist"></i></button></div><div id="mceu_6" class="mce-widget mce-submitpanel mce-last" tabindex="0" role="presentation" aria-haspopup="false"><span class="suggest-field"><input type="checkbox" id="fragment-42702_createSuggest" class="suggest"><label for="fragment-42702_createSuggest">Suggest as Answer</label></span><div class="mce-widget mce-btn mce-primary mce-btn-has-text mce-submitpanel-button" tabindex="-1" id="mceu_6_send" role="button"><button tabindex="-1" style="width:100%; height:100%;" type="button"><span class="mce-txt">Login</span></button></div></div></div></div></div></div></div></div></div></div><textarea id="fragment-42702_fragment-42702_createEditor" name="fragment-42702_fragment-42702_createEditor" style="width: 100%; height: 85px; display: none;" placeholder="Add a reply..." aria-hidden="true"></textarea><script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/tinymce.min.js.descarga"></script><script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/telligent.tinymce.min.js.descarga"></script><link rel="stylesheet" type="text/css" href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/telligent.tinymce.ui.css"><script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/en-US.js.descarga"></script><style>
+@font-face {
+	font-family:'tinymce';
+	src:url('https://ez.analog.com/tinymce/skins/telligent/fonts//tinymce.eot?_=636827532080000000');
+	src:url('https://ez.analog.com/tinymce/skins/telligent/fonts//tinymce.eot?_=636827532080000000#iefix') format('embedded-opentype'),url('https://ez.analog.com/tinymce/skins/telligent/fonts//tinymce.woff?_=636827532080000000') format('woff'),url('https://ez.analog.com/tinymce/skins/telligent/fonts//tinymce.ttf?_=636827532080000000') format('truetype'),url('https://ez.analog.com/tinymce/skins/telligent/fonts//tinymce.svg?_=636827532080000000#tinymce') format('svg');
+	font-weight:normal;
+	font-style:normal
+}
+@font-face {
+	font-family:'tinymce-small';
+	src:url('https://ez.analog.com/tinymce/skins/telligent/fonts//tinymce-small.eot?_=636827532080000000');
+	src:url('https://ez.analog.com/tinymce/skins/telligent/fonts//tinymce-small.eot?_=636827532080000000#iefix') format('embedded-opentype'),url('https://ez.analog.com/tinymce/skins/telligent/fonts//tinymce-small.woff?_=636827532080000000') format('woff'),url('https://ez.analog.com/tinymce/skins/telligent/fonts//tinymce-small.ttf?_=636827532080000000') format('truetype'),url('https://ez.analog.com/tinymce/skins/telligent/fonts//tinymce-small.svg?_=636827532080000000#tinymce') format('svg');
+	font-weight:normal;
+	font-style:normal
+}
+</style>
+<script language="javascript" type="text/javascript">
+// <![CDATA[
+if (!window.tinyMCE_TelligentEvolutionOptions) {
+    tinyMCE_TelligentEvolutionOptions = new Object();
+    tinyMCE_TelligentEvolutionOptions._currentEditor = null;
+    tinyMCE_TelligentEvolutionOptions._contentChangedHandle = null;
+    tinyMCE_TelligentEvolutionOptions.UpdateBookmark = function(editor) {
+	    if (!editor)
+		    editor = tinyMCE.activeEditor;
+
+	    if (!editor)
+		    return;
+
+	    window.clearTimeout(editor._updateBookmarkHandle);
+        editor._updateBookmarkHandle = window.setTimeout(function() { 
+		    if (editor.selection) {
+			    editor._currentBookmark = editor.selection.getBookmark(2);
+		    }
+        }, 99);
+    };
+    tinyMCE_TelligentEvolutionOptions.MoveToBookmark = function(editor) {
+	    if (!editor)
+		    editor = tinyMCE.activeEditor;
+
+	    if (!editor)
+		    return;
+
+	    if (editor._currentBookmark) {
+            try {
+		        editor.selection.moveToBookmark(editor._currentBookmark);
+            } catch (e) { }
+	    } 
+    };
+    tinyMCE_TelligentEvolutionOptions.InitializeContentWindow = function() {
+	    tinyMCE_TelligentEvolutionOptions._currentEditor = tinyMCE.activeEditor;
+	    tinyMCE_TelligentEvolutionOptions.UpdateBookmark();
+    };
+    tinyMCE_TelligentEvolutionOptions.InsertContent = function(content, editor) {
+	    if (!editor)
+		    editor = tinyMCE.activeEditor;
+
+	    if (!editor)
+		    return;
+
+        try {
+	        tinyMCE_TelligentEvolutionOptions.MoveToBookmark(editor);
+            editor.execCommand('mceInsertContent', false, content)
+        } catch(e) {}
+    };
+    tinyMCE_TelligentEvolutionOptions.SetContent = function(content, editor) {
+	    if (!editor)
+		    editor = tinyMCE.activeEditor;
+
+	    if (!editor)
+		    return;
+
+        try {
+            editor.execCommand('mceSetContent', false, content)
+        } catch (e) {}
+    };
+    tinyMCE_TelligentEvolutionOptions.Setup = function(ed) {
+        if (window.$) { try { $(document).bind('beforecustomizepage', function() { if (ed) { ed.remove(); } }); } catch (e) { } }
+        ed.on('NodeChange', function() {
+		    tinyMCE_TelligentEvolutionOptions.UpdateBookmark();
+            window.clearTimeout(ed._contentChangedHandle);
+            ed._contentChangedHandle = window.setTimeout(function() { 
+                if(tinyMCE.activeEditor === ed) {
+                    tinyMCE_TelligentEvolutionOptions.ContentChanged(ed); 
+                }
+            }, 999);
+        });
+        ed.on('change SetContent', function() {
+		    tinyMCE_TelligentEvolutionOptions.UpdateBookmark();
+            window.clearTimeout(ed._contentChangedHandle);
+            ed._contentChangedHandle = window.setTimeout(function() { 
+			    try {
+				    tinyMCE_TelligentEvolutionOptions.ContentChanged(ed); 
+			    } catch(e) { }
+		    }, 999);
+        });
+	    ed.on('keydown', function (e) {
+		    if (ed._tinyMCE_TelligentEvolutionOptions_onKeyDownHandlers) {
+			    for (var i = 0; i < ed._tinyMCE_TelligentEvolutionOptions_onKeyDownHandlers.length; i++) {
+				    var response = ed._tinyMCE_TelligentEvolutionOptions_onKeyDownHandlers[i](e);
+				    if (response === false) {
+					    return false;
+				    }
+			    }
+		    }
+        }, true);
+        ed.on('LoadContent', function() { 
+		    ed._oldContentValue = ed.getContent(); 
+		    if (ed._oldContentValue == '<p>&nbsp;</p>') { 
+			    ed._oldContentValue = ''; 
+		    } 
+		    try {
+			    ed.getWin().document.addEventListener('keydown', function() { ed.getWin().focus(); });
+		    } catch (e) {}
+	    });
+	
+    }
+    tinyMCE_TelligentEvolutionOptions.ContentChanged = function(ed) {
+        ed.save();
+
+        var oldContent = ed._oldContentValue;
+        ed._oldContentValue = ed.getContent();
+    
+        if (ed._oldContentValue == '<p>&nbsp;</p>')
+            ed._oldContentValue = '';
+
+        if (oldContent == ed._oldContentValue)
+            return;
+
+        if (ed._tinyMCE_TelligentEvolutionOptions_onChangeHandlers) {
+            for (var i = 0; i < ed._tinyMCE_TelligentEvolutionOptions_onChangeHandlers.length; i++) {
+                ed._tinyMCE_TelligentEvolutionOptions_onChangeHandlers[i]();
+            }
+        }
+    }
+    tinyMCE_TelligentEvolutionOptions.GetBaseUrl = function() {
+        try { 
+            if (window.parent && window.parent.Telligent_Modal)
+                return window.parent.location + ""; 
+        } 
+        catch (e) {} 
+
+        return window.location + "";
+    };
+    tinyMCE_TelligentEvolutionOptions.AttachOnChangeHandler = function(id, f) {
+        var ed = tinyMCE.get(id);
+        if (ed) {
+            if (!ed._tinyMCE_TelligentEvolutionOptions_onChangeHandlers)
+                ed._tinyMCE_TelligentEvolutionOptions_onChangeHandlers = new Array();
+
+            ed._tinyMCE_TelligentEvolutionOptions_onChangeHandlers[ed._tinyMCE_TelligentEvolutionOptions_onChangeHandlers.length] = f;
+            return;
+        }
+
+        window.setTimeout(function() { tinyMCE_TelligentEvolutionOptions.AttachOnChangeHandler(id, f) }, 499);
+    }
+    tinyMCE_TelligentEvolutionOptions.AttachOnKeyDownHandler = function(id, f) {
+	    var ed = tinyMCE.get(id);
+        if (ed) {
+            if (!ed._tinyMCE_TelligentEvolutionOptions_onKeyDownHandlers)
+                ed._tinyMCE_TelligentEvolutionOptions_onKeyDownHandlers = new Array();
+
+            ed._tinyMCE_TelligentEvolutionOptions_onKeyDownHandlers[ed._tinyMCE_TelligentEvolutionOptions_onKeyDownHandlers.length] = f;
+            return;
+        }
+
+        window.setTimeout(function() { tinyMCE_TelligentEvolutionOptions.AttachOnKeyDownHandler(id, f) }, 499);
+    }
+    tinyMCE_TelligentEvolutionOptions.ContextQueryString = '_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706';
+    tinyMCE_TelligentEvolutionOptions.DirectUploadContext = '5bb76a67-af02-4d60-b423-ccf15ceeb02f';
+    tinyMCE_TelligentEvolutionOptions.DirectUploadUrl = 'https:\/\/ez.analog.com\/multipleupload?UploadContext=5bb76a67-af02-4d60-b423-ccf15ceeb02f';
+    tinyMCE_TelligentEvolutionOptions.MediaMaxWidth = 0;
+    tinyMCE_TelligentEvolutionOptions.MediaMaxHeight = 0;
+}
+// ]]>
+</script>
+<script language="javascript" type="text/javascript">
+// <![CDATA[
+tinymce.EditorManager.baseURL = "https://ez.analog.com/tinymce";
+(function() {
+    var editor = tinymce.EditorManager.get('fragment-42702_fragment-42702_createEditor');
+    if (editor) {
+        editor.remove();
+    }
+})();
+tinymce.EditorManager.init({
+    selector:"#fragment-42702_fragment-42702_createEditor",
+    relative_urls:false,
+    setup:new Function('ed', 'tinyMCE_TelligentEvolutionOptions.Setup(ed);'),
+    tinyautosave_key:'617622609-',
+    evolution_contenttypeid:'f586769b-0822-468a-b7f3-a94d480ed9b0',
+    theme: 'modern',
+    skin: 'telligent',
+    resize: 'true',
+	object_resizing: 'table,img,.mceInsertMediaItem',
+    language: 'en-US',
+    plugins: 'charmap,source,contextmenu,noneditable,fullscreen,hr,paste,searchreplace,visualblocks,visualchars,enhancements,modalpopups,tips,emoticons,embeddables,quotes,anchor,autolink,link,autoresize,colorpicker,textcolor,lists,table,hashtags,mentions,media,preview,tinyautosave,submit,bottomtoolbar',submittable_prehtml: '<span class=\"suggest-field\"><input type=\"checkbox\" id=\"fragment-42702_createSuggest\" class=\"suggest\" \/><label for=\"fragment-42702_createSuggest\">Suggest as Answer<\/label><\/span>',submit_enabletoggle: false,menu: { 
+    edit   : {title : 'Edit'  , items : 'removehashtag removemention editmedia editimage removemedia editembeddable edittoken removetoken editlink previewmedia removelink undo redo | pastetext searchreplace | selectall'},
+    insert : {title : 'Insert', items : 'link media token embedb99cc4af-f990-4d68-b98f-dd11f41cb350 embeddc8ab71f-3b98-42d9-b0f6-e21e02a0f8e2 embed33ecb077-39b7-4078-9b1e-dc3f977a690b emoticon | anchor hr | charmap'},
+    format : {title : 'Format', items : 'bold italic underline | indent outdent |formats | removeformat'},
+    tools  : {title : 'Tools' , items : 'tinyautosave preview source'}
+},statusbar: false,
+    fontsize_formats: 'Small=75% Normal=inherit Large=150% Larger=200%',
+    font_formats: 'Arial=arial,helvetica,sans-serif;Comic Sans=comic sans ms,comic sans,sans-serif;Courier New=courier new,courier;Default Font=inherit;Georgia=georgia,palatino;Helvetica=helvetica;Impact=impact,chicago;Tahoma=tahoma,arial,helvetica,sans-serif;Times New Roman=times new roman,times;Verdana=verdana,geneva',
+	evolution_emoticons: true,
+	evolution_upload:false,
+	evolution_localfiles:true,
+enhancements_placeholder: 'Add a reply...',autoresize_bottom_margin: 1,autoresize_overflow_padding: 0,autoresize_min_height: 60,height: 85,min_height: 60,enhancements_wrappercss:'mce-editor-submittable mce-editor-desktop',toolbar: 'bullist numlist submit',contextmenu: 'cell row column deletetable',evolution_embeddables: [{"name":"Embed Code","typeid":"b99cc4af-f990-4d68-b98f-dd11f41cb350","previewUrl":"/cfs-file/__key/system/images/embedcode.png","configurable":true},{"name":"Code","typeid":"dc8ab71f-3b98-42d9-b0f6-e21e02a0f8e2","previewUrl":"/cfs-file/__key/system/images/embedcode.png","configurable":true},{"name":"Poll","typeid":"33ecb077-39b7-4078-9b1e-dc3f977a690b","previewUrl":"/cfs-file/__key/system/images/poll.png","configurable":true}],browser_spellcheck : true,autolink_pattern: /((?:http|ftp|https):\/\/)([\w\-]{1,63}(?:\.[\w\-]{1,63}){0,127}(?:\([\w\-\.,@?!^=%&:/~\+#]{0,2046}\)|[\w\-\.,@?!^=%&:/~\+#]{0,2047}[\w\-@?^=%&:/~\+#]){0,2048})/i,paste_data_images: true,submit_entermessage:'Enter to Login',submit_buttontext:'Login',submit_onsubmit:function() { jQuery.telligent.evolution.messaging.publish('telligent.evolution.widgets.thread.submit', { from: 'fragment-42702-root',  login: true , forumId: 422 , threadId: 87262 }); },submit_entertosubmit: true,
+    document_base_url: tinyMCE_TelligentEvolutionOptions.GetBaseUrl(),
+	images_dataimg_filter: function() { return false; },
+    anchor_bottom: false,
+    anchor_top: false,
+    content_css: 'https:\/\/ez.analog.com\/tinymce\/telligent\/telligent.tinymce.content.css?_=636827532080000000',valid_elements:'@[class|style|align|id|itemscope|itemtype|itemprop|dir|lang|title],a[charset|href|hreflang|name|rel|rev|target|type],abbr,acronym,address,aside,b,bdo,big,blockquote[cite],br[clear],caption,cite,code,col[char|charoff|span|width],colgroup[char|charoff|span|width],dd,del[cite|datetime],dfn,div,dl,dt,em,figcaption,figure,font[face|size|color],h1,h2,h3,h4,h5,h6,hr,i,img[alt|border|height|hspace|longdesc|name|src|vspace|width],ins[cite|datetime],kbd,li,mark,meta[charset|content|name|scheme],meter[max|min|value|high|low|optimum],ol[start|reversed],p,pre,progress[value|max],q[cite],rp,rt,ruby,s,samp,small,span,strike,strong,sub,sup,table[border|cellpadding|cellspacing|frame|height|rules|summary|width|bgcolor],tbody[char|charoff|valign],td[abbr|axis|char|charoff|colspan|headers|height|nowrap|rowspan|scope|valign|width|bgcolor],tfoot[char|charoff|valign],th[abbr|axis|char|charoff|colspan|headers|height|nowrap|rowspan|scope|valign|width|bgcolor],thead[char|charoff|valign],time[datetime],tr[char|charoff|valign],tt,u,ul,var',valid_styles: {'*':'background,background-attachment,background-color,background-image,background-position,background-repeat,background-size,border,border-bottom,border-bottom-color,border-bottom-style,border-bottom-width,border-collapse,border-color,border-left,border-left-color,border-left-style,border-left-width,border-radius,border-right,border-right-color,border-right-style,border-right-width,border-spacing,border-style,border-top,border-top-color,border-top-style,border-top-width,border-width,bottom,box-shadow,color,clear,cursor,direction,display,float,font,font-family,font-size,font-style,font-weight,height,left,letter-spacing,line-height,list-style,list-style-image,list-style-position,list-style-type,margin,margin-bottom,margin-left,margin-right,margin-top,overflow,padding,padding-bottom,padding-left,padding-right,padding-top,position,right,table-layout,text-align,text-decoration,text-indent,text-overflow,text-shadow,text-transform,top,vertical-align,white-space,width'},protect:[/\<\!\-\-.*?\-\-\>/g,/\<\!\[CDATA\[.*?\]\]\>/g],
+    directionality: 'ltr'
+});
+// ]]>
+</script>
+						</span>
+						<span class="field-item-validation" style="display: none;"></span>
+						<span class="processing hidden"><span class="ui-loading" data-width="45" data-height="15" style="display: block; width: 45px; height: 15px; margin: 0px auto; padding: 0px; text-align: center; box-sizing: border-box;"><div class="spinner"><div class="bounce1" style="width:15px;height:15px;background-color:rgb(61, 61, 61);"></div><div class="bounce2" style="width:15px;height:15px;background-color:rgb(61, 61, 61);"></div><div class="bounce3" style="width:15px;height:15px;background-color:rgb(61, 61, 61);"></div></div></span></span>
+					</li>
+				</ul>
+			</fieldset>
+			</div>
+
+</div>
+
+	<div class="best-replies-wrapper" id="fragment-42702_bestRepliesWrapper">
+		
+	</div>
+
+
+
+
+
+
+
+
+<div class="threaded-wrapper-outer">
+	<div class="typing-status-wrapper root"></div>
+	<div class="threaded-wrapper " id="fragment-42702_preRenderedWrapperId" style="display: block;"><div class="reply-header">	
+<div class="threaded-filter" id="fragment-42702_filter">
+
+			<ul class="filter type margin-bottom margin-top">
+			<li class="filter-option selected" data-sortby="CreatedDate" data-sortorder="Ascending">
+				<a class="navigable" href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706?ReplySortBy=CreatedDate&amp;ReplySortOrder=Ascending">All Replies</a>
+			</li>
+			<li class="filter-option" data-filter="answers" data-sortby="Answers" data-sortorder="Descending">
+				<a class="navigable" href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706?ReplyFilter=Answers&amp;ReplySortBy=Answers&amp;ReplySortOrder=Descending">Answers</a>
+			</li>
+		</ul>
+	
+	<ul class="filter order margin-bottom margin-top">
+		<li class="filter-option selected" data-sortby="CreatedDate" data-sortorder="Ascending">
+			<a class="navigable" href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706?ReplySortBy=CreatedDate&amp;ReplySortOrder=Ascending">Oldest</a>
+		</li>
+					<li class="filter-option" data-sortby="Votes" data-sortorder="Descending">
+				<a class="navigable" href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706?ReplySortBy=Votes&amp;ReplySortOrder=Descending">Votes</a>
+			</li>
+				<li class="filter-option" data-sortby="CreatedDate" data-sortorder="Descending">
+			<a class="navigable" href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706?ReplySortBy=CreatedDate&amp;ReplySortOrder=Descending">Newest</a>
+		</li>
+	</ul>
+
+</div>
+
+</div><ul class="content-list threaded" data-sortby="CreatedDate" data-sortorder="Ascending" data-filter=""><li class="threaded content-item  " data-id="144463" data-parentid="null" data-createddate="2016-07-07T05:39:07.0000000Z" data-yesvotes="0" data-novotes="0">
+
+	<div class="rendered-content ">
+		
+
+
+	
+		
+	
+	
+
+
+<div data-status="">
+	<div class="author" data-authorprofileurl="/members/pcercuei">
+		<div class="avatar">
+							<a href="https://ez.analog.com/members/pcercuei" class="internal-link view-user-profile">
+					<img src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/default.png-44x44x2.png" border="0px" alt="pcercuei">
+				</a>
+					</div>
+		<div class="meta">
+			<span class="qa-votes">
+													<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706#" class="ui-presentcontent ui-forumvotes reply ui-tip" data-presentcontents="a59e8b3b336941e8b90ad14f61af04ba|f586769b0822468ab7f3a94d480ed9b0|" data-id="144463" data-type="reply" data-count="0" data-voted="false" data-tip="People helped by this answer">0</a>
+							</span>
+			<span class="user-name">
+				<span class="ui-userpresence ui-tip " style="display: none;" data-userid="22858" data-contentid="f4e8790e-b27f-49a7-92d6-e2cbbc4cadb0" data-contenttypeid="e9ed4118-60ed-4f2b-a026-5705b8793d05" data-present="" data-presentlabel="Online" data-notpresentlabel="Offline" data-tip=""></span>
+									<a href="https://ez.analog.com/members/pcercuei" class="internal-link view-user-profile">
+						pcercuei
+					</a>
+							</span>
+			
+			
+						 		
+		        	            							
+			
+							
+
+
+	
+
+
+
+
+			<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706/144463#144463" class="internal-link view-post navigable">
+				on Jul 7, 2016 5:39 AM
+			</a>
+		
+					</div>
+	</div>
+
+		
+		<div class="content full threaded-reply-content user-defined-markup" data-replyid="144463" data-userid="22858" data-permalink="~/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706/144463">
+					<div class="content"><p>Hi,</p>
+ <p>That "cannot import gnuradio" error sounds like an error from Python.</p>
+ <p>If you run "python", then type "import gnuradio", it should not throw any error.</p>
+ <p>Do you have things installed inside /usr/lib/python2.7/site-packages? On Debian (and therefore Ubuntu and Linaro) Python will not look inside this directory, but in /usr/lib/python2.7/dist-packages instead.</p>
+ <p>Regards,</p>
+ <p>-Paul</p><div style="clear:both;"></div></div>
+			</div>
+
+		
+		
+		
+		
+	<div class="edit-form"></div>
+	<div class="actions meta edit">
+		<div class="navigation-list" data-maxlinks="1" data-direction="horizontal" data-reflow-wait-check-count="0" data-reflow-wait-timeout="null"></div>
+	</div>
+	<div class="actions meta default">
+		
+						
+						
+				
+						
+				
+				
+		
+		<div class="navigation-list" data-maxlinks="3" data-direction="horizontal" data-reflow-wait-check-count="0" data-reflow-wait-timeout="null"></div>
+	</div>
+</div>
+		<div class="typing-status-wrapper"></div>
+		<div class="new-replies-wrapper"></div>
+	</div>
+
+	<div class="newreply"></div>
+
+	<ul class="content-list threaded" data-sortby="CreatedDate" data-sortorder="Ascending" data-filter=""></ul>
+
+</li><li class="threaded content-item  " data-id="144464" data-parentid="null" data-createddate="2016-07-07T23:22:28.0000000Z" data-yesvotes="0" data-novotes="0">
+
+	<div class="rendered-content ">
+		
+
+
+	
+		
+	
+	
+
+
+<div data-status="">
+	<div class="author" data-authorprofileurl="/members/zacharyr">
+		<div class="avatar">
+							<a href="https://ez.analog.com/members/zacharyr" class="internal-link view-user-profile">
+					<img src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/default.png-44x44x2.png" border="0px" alt="zacharyr">
+				</a>
+					</div>
+		<div class="meta">
+			<span class="qa-votes">
+													<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706#" class="ui-presentcontent ui-forumvotes reply ui-tip" data-presentcontents="4159b3e854264d6c9b2313bbdb518351|f586769b0822468ab7f3a94d480ed9b0|" data-id="144464" data-type="reply" data-count="0" data-voted="false" data-tip="People helped by this answer">0</a>
+							</span>
+			<span class="user-name">
+				<span class="ui-userpresence ui-tip " style="display: none;" data-userid="38669" data-contentid="c86a5713-033b-476f-9308-852343e0bf1b" data-contenttypeid="e9ed4118-60ed-4f2b-a026-5705b8793d05" data-present="" data-presentlabel="Online" data-notpresentlabel="Offline" data-tip=""></span>
+									<a href="https://ez.analog.com/members/zacharyr" class="internal-link view-user-profile">
+						zacharyr
+					</a>
+							</span>
+			
+			
+						 		
+		        	            							
+			
+							
+
+
+	
+
+
+
+
+			<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706/144464#144464" class="internal-link view-post navigable">
+				on Jul 7, 2016 11:22 PM
+			</a>
+		
+					</div>
+	</div>
+
+		
+		<div class="content full threaded-reply-content user-defined-markup" data-replyid="144464" data-userid="38669" data-permalink="~/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706/144464">
+					<div class="content"><p>Hello,</p>
+ <p><br>You are correct, when I import gnuradio in a python -v session, it returns no error:</p>
+ <p>&nbsp;&nbsp;&nbsp;&nbsp; &gt;&gt;&gt; import gnuradio</p>
+ <p>&nbsp;&nbsp;&nbsp;&nbsp; import gnuradio # directory /usr/lib/python2.7/site-packages/gnuradio</p>
+ <p>&nbsp;&nbsp;&nbsp;&nbsp; # /usr/lib/python2.7/site-packages/gnuradio/__init__.pyc matches /usr/lib/python2.7/site-packages/gnuradio/__init__.py</p>
+ <p>&nbsp;&nbsp;&nbsp;&nbsp; import gnuradio # precompiled from /usr/lib/python2.7/site-packages/gnuradio/__init__pyc</p>
+ <p>So it appears that gnuradio is in fact installed in site-packages, but this should not be an issue as I added site-packages in my PYTHONPATH export in .bashrc</p><div style="clear:both;"></div></div>
+			</div>
+
+		
+		
+		
+		
+	<div class="edit-form"></div>
+	<div class="actions meta edit">
+		<div class="navigation-list" data-maxlinks="1" data-direction="horizontal" data-reflow-wait-check-count="0" data-reflow-wait-timeout="null"></div>
+	</div>
+	<div class="actions meta default">
+		
+						
+						
+				
+						
+				
+				
+		
+		<div class="navigation-list" data-maxlinks="3" data-direction="horizontal" data-reflow-wait-check-count="0" data-reflow-wait-timeout="null"></div>
+	</div>
+</div>
+		<div class="typing-status-wrapper"></div>
+		<div class="new-replies-wrapper"></div>
+	</div>
+
+	<div class="newreply"></div>
+
+	<ul class="content-list threaded" data-sortby="CreatedDate" data-sortorder="Ascending" data-filter=""></ul>
+
+</li><li class="threaded content-item  " data-id="144465" data-parentid="null" data-createddate="2016-07-08T05:50:28.0000000Z" data-yesvotes="0" data-novotes="0">
+
+	<div class="rendered-content verified">
+		
+
+
+	
+			
+		
+	
+
+
+<div data-status="verified">
+	<div class="author" data-authorprofileurl="/members/pcercuei">
+		<div class="avatar">
+							<a href="https://ez.analog.com/members/pcercuei" class="internal-link view-user-profile">
+					<img src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/default.png-44x44x2.png" border="0px" alt="pcercuei">
+				</a>
+					</div>
+		<div class="meta">
+			<span class="qa-votes">
+													<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706#" class="ui-presentcontent ui-forumvotes reply ui-tip" data-presentcontents="e02ebb8cad5149c7a5c7e8fd47898b74|f586769b0822468ab7f3a94d480ed9b0|" data-id="144465" data-type="reply" data-count="0" data-voted="false" data-tip="People helped by this answer">0</a>
+							</span>
+			<span class="user-name">
+				<span class="ui-userpresence ui-tip " style="display: none;" data-userid="22858" data-contentid="f4e8790e-b27f-49a7-92d6-e2cbbc4cadb0" data-contenttypeid="e9ed4118-60ed-4f2b-a026-5705b8793d05" data-present="" data-presentlabel="Online" data-notpresentlabel="Offline" data-tip=""></span>
+									<a href="https://ez.analog.com/members/pcercuei" class="internal-link view-user-profile">
+						pcercuei
+					</a>
+							</span>
+			
+			
+						 		
+		        	            							
+			
+							
+
+
+	
+
+
+
+
+			<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706/144465#144465" class="internal-link view-post navigable">
+				on Jul 8, 2016 5:50 AM
+			</a>
+		
+					</div>
+	</div>
+
+		
+		<div class="content full threaded-reply-content user-defined-markup" data-replyid="144465" data-userid="22858" data-permalink="~/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706/144465">
+					<div class="content"><p>Hi,</p>
+ <p>Well then, two options:</p>
+ <ul>
+  <li>always run GNU Radio from a bash shell, by executing "gnuradio-companion". Then the generated Python scripts should work, as PYTHONPATH will be defined;</li>
+  <li>Or move all the files in site-packages to dist-packages.</li>
+ </ul>
+ <p>Regards,</p>
+ <p>-Paul</p><div style="clear:both;"></div></div>
+			</div>
+
+		
+		
+		
+		
+	<div class="edit-form"></div>
+	<div class="actions meta edit">
+		<div class="navigation-list" data-maxlinks="1" data-direction="horizontal" data-reflow-wait-check-count="0" data-reflow-wait-timeout="null"></div>
+	</div>
+	<div class="actions meta default">
+		
+						
+				
+						
+						
+				
+				
+		
+		<div class="navigation-list" data-maxlinks="3" data-direction="horizontal" data-reflow-wait-check-count="0" data-reflow-wait-timeout="null"></div>
+	</div>
+</div>
+		<div class="typing-status-wrapper"></div>
+		<div class="new-replies-wrapper"></div>
+	</div>
+
+	<div class="newreply"></div>
+
+	<ul class="content-list threaded" data-sortby="CreatedDate" data-sortorder="Ascending" data-filter=""></ul>
+
+</li></ul></div>
+</div>
+
+<div id="fragment-42702_editorWrapperWrapper" style="display:none">
+	
+		
+	
+	
+	
+	
+	
+					
+		
+	
+<script language="javascript" type="text/javascript">
+// <![CDATA[
+tinymce.EditorManager.baseURL = "https://ez.analog.com/tinymce";
+(function() {
+    var editor = tinymce.EditorManager.get('fragment-42702_fragment-42702_editor');
+    if (editor) {
+        editor.remove();
+    }
+})();
+tinymce.EditorManager.init({
+    selector:"#fragment-42702_fragment-42702_editor",
+    relative_urls:false,
+    setup:new Function('ed', 'tinyMCE_TelligentEvolutionOptions.Setup(ed);'),
+    tinyautosave_key:'1442438173-',
+    evolution_contenttypeid:'f586769b-0822-468a-b7f3-a94d480ed9b0',
+    theme: 'modern',
+    skin: 'telligent',
+    resize: 'true',
+	object_resizing: 'table,img,.mceInsertMediaItem',
+    language: 'en-US',
+    plugins: 'charmap,source,contextmenu,noneditable,fullscreen,hr,paste,searchreplace,visualblocks,visualchars,enhancements,modalpopups,tips,emoticons,embeddables,quotes,anchor,autolink,link,autoresize,colorpicker,textcolor,lists,table,hashtags,mentions,media,preview,tinyautosave,submit,bottomtoolbar',submittable_prehtml: '<span class=\"suggest-field\"><input type=\"checkbox\" id=\"fragment-42702_suggest\" class=\"suggest\" \/><label for=\"fragment-42702_suggest\">Suggest as Answer<\/label><\/span>',submit_enabletoggle: false,menu: { 
+    edit   : {title : 'Edit'  , items : 'removehashtag removemention editmedia editimage removemedia editembeddable edittoken removetoken editlink previewmedia removelink undo redo | pastetext searchreplace | selectall'},
+    insert : {title : 'Insert', items : 'link media token embedb99cc4af-f990-4d68-b98f-dd11f41cb350 embeddc8ab71f-3b98-42d9-b0f6-e21e02a0f8e2 embed33ecb077-39b7-4078-9b1e-dc3f977a690b emoticon | anchor hr | charmap'},
+    format : {title : 'Format', items : 'bold italic underline | indent outdent |formats | removeformat'},
+    tools  : {title : 'Tools' , items : 'tinyautosave preview source'}
+},statusbar: false,
+    fontsize_formats: 'Small=75% Normal=inherit Large=150% Larger=200%',
+    font_formats: 'Arial=arial,helvetica,sans-serif;Comic Sans=comic sans ms,comic sans,sans-serif;Courier New=courier new,courier;Default Font=inherit;Georgia=georgia,palatino;Helvetica=helvetica;Impact=impact,chicago;Tahoma=tahoma,arial,helvetica,sans-serif;Times New Roman=times new roman,times;Verdana=verdana,geneva',
+	evolution_emoticons: true,
+	evolution_upload:false,
+	evolution_localfiles:true,
+autoresize_bottom_margin: 1,autoresize_overflow_padding: 0,autoresize_min_height: 60,height: 85,min_height: 60,enhancements_wrappercss:'mce-editor-submittable mce-editor-desktop',toolbar: 'bullist numlist submit',contextmenu: 'cell row column deletetable',evolution_embeddables: [{"name":"Embed Code","typeid":"b99cc4af-f990-4d68-b98f-dd11f41cb350","previewUrl":"/cfs-file/__key/system/images/embedcode.png","configurable":true},{"name":"Code","typeid":"dc8ab71f-3b98-42d9-b0f6-e21e02a0f8e2","previewUrl":"/cfs-file/__key/system/images/embedcode.png","configurable":true},{"name":"Poll","typeid":"33ecb077-39b7-4078-9b1e-dc3f977a690b","previewUrl":"/cfs-file/__key/system/images/poll.png","configurable":true}],browser_spellcheck : true,autolink_pattern: /((?:http|ftp|https):\/\/)([\w\-]{1,63}(?:\.[\w\-]{1,63}){0,127}(?:\([\w\-\.,@?!^=%&:/~\+#]{0,2046}\)|[\w\-\.,@?!^=%&:/~\+#]{0,2047}[\w\-@?^=%&:/~\+#]){0,2048})/i,paste_data_images: true,submit_entermessage:'Enter to Reply',submit_buttontext:'Reply',submit_onsubmit:function() { jQuery.telligent.evolution.messaging.publish('telligent.evolution.widgets.thread.submit', { from: 'fragment-42702-nested' }); },submit_entertosubmit: true,
+    document_base_url: tinyMCE_TelligentEvolutionOptions.GetBaseUrl(),
+	images_dataimg_filter: function() { return false; },
+    anchor_bottom: false,
+    anchor_top: false,
+    content_css: 'https:\/\/ez.analog.com\/tinymce\/telligent\/telligent.tinymce.content.css?_=636827532080000000',valid_elements:'@[class|style|align|id|itemscope|itemtype|itemprop|dir|lang|title],a[charset|href|hreflang|name|rel|rev|target|type],abbr,acronym,address,aside,b,bdo,big,blockquote[cite],br[clear],caption,cite,code,col[char|charoff|span|width],colgroup[char|charoff|span|width],dd,del[cite|datetime],dfn,div,dl,dt,em,figcaption,figure,font[face|size|color],h1,h2,h3,h4,h5,h6,hr,i,img[alt|border|height|hspace|longdesc|name|src|vspace|width],ins[cite|datetime],kbd,li,mark,meta[charset|content|name|scheme],meter[max|min|value|high|low|optimum],ol[start|reversed],p,pre,progress[value|max],q[cite],rp,rt,ruby,s,samp,small,span,strike,strong,sub,sup,table[border|cellpadding|cellspacing|frame|height|rules|summary|width|bgcolor],tbody[char|charoff|valign],td[abbr|axis|char|charoff|colspan|headers|height|nowrap|rowspan|scope|valign|width|bgcolor],tfoot[char|charoff|valign],th[abbr|axis|char|charoff|colspan|headers|height|nowrap|rowspan|scope|valign|width|bgcolor],thead[char|charoff|valign],time[datetime],tr[char|charoff|valign],tt,u,ul,var',valid_styles: {'*':'background,background-attachment,background-color,background-image,background-position,background-repeat,background-size,border,border-bottom,border-bottom-color,border-bottom-style,border-bottom-width,border-collapse,border-color,border-left,border-left-color,border-left-style,border-left-width,border-radius,border-right,border-right-color,border-right-style,border-right-width,border-spacing,border-style,border-top,border-top-color,border-top-style,border-top-width,border-width,bottom,box-shadow,color,clear,cursor,direction,display,float,font,font-family,font-size,font-style,font-weight,height,left,letter-spacing,line-height,list-style,list-style-image,list-style-position,list-style-type,margin,margin-bottom,margin-left,margin-right,margin-top,overflow,padding,padding-bottom,padding-left,padding-right,padding-top,position,right,table-layout,text-align,text-decoration,text-indent,text-overflow,text-shadow,text-transform,top,vertical-align,white-space,width'},protect:[/\<\!\-\-.*?\-\-\>/g,/\<\!\[CDATA\[.*?\]\]\>/g],
+    directionality: 'ltr'
+});
+// ]]>
+</script>
+	
+<div id="mceu_24" class="mce-tinymce mce-container mce-panel mce-editor-submittable mce-editor-desktop mce-editor-blur mce-submitpanel-narrow" hidefocus="1" tabindex="-1" role="application" style="visibility: hidden; border-width: 1px; height: auto; overflow: visible;"><div id="mceu_24-body" class="mce-container-body mce-stack-layout"><div id="mceu_25" class="mce-container mce-menubar mce-toolbar mce-stack-layout-item mce-first" role="menubar" style="border-width: 0px 0px 1px; display: none;"><div id="mceu_25-body" class="mce-container-body mce-flow-layout"><div id="mceu_26" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-first mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_26" role="menuitem" aria-haspopup="true"><button id="mceu_26-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Edit</span> <i class="mce-caret"></i></button></div><div id="mceu_27" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_27" role="menuitem" aria-haspopup="true"><button id="mceu_27-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Insert</span> <i class="mce-caret"></i></button></div><div id="mceu_28" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_28" role="menuitem" aria-haspopup="true"><button id="mceu_28-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Format</span> <i class="mce-caret"></i></button></div><div id="mceu_29" class="mce-widget mce-btn mce-menubtn mce-flow-layout-item mce-last mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_29" role="menuitem" aria-haspopup="true"><button id="mceu_29-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Tools</span> <i class="mce-caret"></i></button></div></div></div><div id="mceu_33" class="mce-edit-area mce-container mce-panel mce-stack-layout-item mce-last" hidefocus="1" tabindex="-1" role="group" style="border-width: 0px 0px 1px; position: relative;"><iframe id="fragment-42702_fragment-42702_editor_ifr" frameborder="0" allowtransparency="true" title="Rich Text Area. Press ALT-F9 for menu. Press ALT-F10 for toolbar. Press ALT-0 for help" src="javascript:&quot;&quot;" style="width: 100%; height: 60px; display: block;" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/saved_resource(1).html"></iframe><div style="position: absolute; top: 0px; left: 0px;"><div class="mceDragDropShade" style="position: absolute; display: none; left: 0px; top: 0px;"></div><div class="mceDragDropMessage" style="position: absolute; display: none; left: 0px; top: 0px;"></div></div></div><div id="mceu_30" class="mce-toolbar-grp mce-container mce-panel mce-stack-layout-item" hidefocus="1" tabindex="-1" role="group"><div id="mceu_30-body" class="mce-container-body mce-stack-layout"><div id="mceu_31" class="mce-container mce-toolbar mce-stack-layout-item mce-first mce-last" role="toolbar"><div id="mceu_31-body" class="mce-container-body mce-flow-layout"><div id="mceu_32" class="mce-container mce-flow-layout-item mce-first mce-last mce-btn-group" role="group" style="width: 100%;"><div id="mceu_32-body" style="white-space: normal;"><div id="mceu_17" class="mce-widget mce-btn mce-menubtn mce-first mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_17" role="button" aria-haspopup="true"><button id="mceu_17-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Edit</span> <i class="mce-caret"></i></button></div><div id="mceu_18" class="mce-widget mce-btn mce-menubtn mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_18" role="button" aria-haspopup="true"><button id="mceu_18-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Insert</span> <i class="mce-caret"></i></button></div><div id="mceu_19" class="mce-widget mce-btn mce-menubtn mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_19" role="button" aria-haspopup="true"><button id="mceu_19-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Format</span> <i class="mce-caret"></i></button></div><div id="mceu_20" class="mce-widget mce-btn mce-menubtn mce-btn-has-text" tabindex="-1" aria-labelledby="mceu_20" role="button" aria-haspopup="true"><button id="mceu_20-open" role="presentation" type="button" tabindex="-1"><span class="mce-txt">Tools</span> <i class="mce-caret"></i></button></div><div id="mceu_21" class="mce-widget mce-btn" tabindex="-1" aria-labelledby="mceu_21" role="button" aria-label="Bullet list"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-bullist"></i></button></div><div id="mceu_22" class="mce-widget mce-btn" tabindex="-1" aria-labelledby="mceu_22" role="button" aria-label="Numbered list"><button role="presentation" type="button" tabindex="-1"><i class="mce-ico mce-i-numlist"></i></button></div><div id="mceu_23" class="mce-widget mce-submitpanel mce-last" tabindex="0" role="presentation" aria-haspopup="false"><span class="suggest-field"><input type="checkbox" id="fragment-42702_suggest" class="suggest"><label for="fragment-42702_suggest">Suggest as Answer</label></span><div class="mce-widget mce-btn mce-primary mce-btn-has-text mce-submitpanel-button" tabindex="-1" id="mceu_23_send" role="button"><button tabindex="-1" style="width:100%; height:100%;" type="button"><span class="mce-txt">Reply</span></button></div></div></div></div></div></div></div></div></div></div><textarea id="fragment-42702_fragment-42702_editor" name="fragment-42702_fragment-42702_editor" style="width: 100%; height: 85px; display: none;" aria-hidden="true"></textarea></div>
+
+
+
+
+			</div>
+<div class="content-fragment-footer"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="layout-footer"></div>
+</div></div>
+
+    
+
+<div class="single-column footer-fragments evolution-reflow-container" data-related="_f_page" id="_f_singlecolumn" style="display:none"></div><div class="footer-fragments evolution-reflow-container" data-related="_f_singlecolumn" id="_f_page" data-reflow-width="670"><div class="layout">
+<div class="layout-header"></div>
+<div class="layout-content content" id="_f_layout"><div class="layout-region content" id="_f_content">
+<div class="layout-region-inner content"><div class="content-fragment scripted-content-fragment no-wrapper responsive-3" id="footer-4622" data-reflow="_f_content,_f_singlecolumn,3,1,0">
+<div class="content-fragment-content">
+<style>
+
+        .wrapp-footer-i123 *,
+        .wrapp-footer-i123 *:hover {
+            color: #fff;
+        }
+        
+         .wrapp-footer-i123 .footer{
+            min-width: 1024px;
+        }
+
+        .wrapp-footer-i123 {
+            height: auto;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+
+        .wrapp-footer-i123 span.header4 a {
+            cursor: default;
+        }
+
+        /*Utilities*//* 300 Normal - Azbuka Regular*/
+        @font-face {
+            font-family: "Azbuka";
+            /*font-stretch: normal;*/
+            font-style: normal;
+            font-weight: 300;
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka300.eot?_=636939586099320098");
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka300.woff?_=636939586099644788") format("woff"),
+            url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka300.ttf?_=636939586099488466") format("truetype");
+        }
+
+        /* 400 Normal - Azbuka Medium */
+        @font-face {
+            font-family: "Azbuka";
+            font-stretch: normal;
+            font-style: normal;
+            font-weight: 400;
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka400.eot?_=636939586100582206");
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka400.woff?_=636939586100894778") format("woff"),
+            url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka400.ttf?_=636939586100738575") format("truetype");
+        }
+
+        /* 700 Normal - Azbuka Bold */
+        @font-face {
+            font-family: "Azbuka";
+            font-stretch: normal;
+            font-style: normal;
+            font-weight: 700;
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka700.eot?_=636939586101676157");
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka700.woff?_=636939586102000707") format("woff"),
+            url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka700.ttf?_=636939586101901958") format("truetype");
+        }
+
+        /**************/
+        /* 300 Italic - Azbuka Italic*/
+        @font-face {
+            font-family: "Azbuka";
+            font-stretch: normal;
+            font-style: italic;
+            font-weight: 300;
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka300i.eot?_=636939586099957241");
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka300i.woff?_=636939586100269780") format("woff"),
+            url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka300i.ttf?_=636939586100269780") format("truetype");
+        }
+
+        /* 400 Italic - Azbuka Medium Italic */
+        @font-face {
+            font-family: "Azbuka";
+            font-stretch: normal;
+            font-style: italic;
+            font-weight: 400;
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka400i.eot?_=636939586101363482");
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka400i.woff?_=636939586101519831") format("woff"),
+            url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka400i.ttf?_=636939586101519831") format("truetype");
+        }
+
+        /* 700 Italic - Azbuka Bold Italic */
+        @font-face {
+            font-family: "Azbuka";
+            font-stretch: normal;
+            font-style: italic;
+            font-weight: 700;
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka700i.eot?_=636939586102313235");
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka700i.woff?_=636939586102625715") format("woff"),
+            url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka700i.ttf?_=636939586102469417") format("truetype");
+        }
+
+        /**************/
+        /* 300 Condensed - Azbuka Condensed*/
+        @font-face {
+            font-family: "Azbuka";
+            font-stretch: condensed;
+            font-style: normal;
+            font-weight: 300;
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka300c.eot?_=636939586099644788");
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka300c.woff?_=636939586099957241") format("woff"),
+            url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka300c.ttf?_=636939586099801011") format("truetype");
+        }
+
+        /* 400 Condensed - Azbuka Medium Condensed */
+        @font-face {
+            font-family: "Azbuka";
+            font-stretch: condensed;
+            font-style: normal;
+            font-weight: 400;
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka400c.eot?_=636939586100894778");
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka400c.woff?_=636939586101207317") format("woff"),
+            url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka400c.ttf?_=636939586101051042") format("truetype");
+        }
+
+        /* 700 Condensed - Azbuka Bold Condensed */
+        @font-face {
+            font-family: "Azbuka";
+            font-stretch: condensed;
+            font-style: normal;
+            font-weight: 700;
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka700c.eot?_=636939586102156940");
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka700c.woff?_=636939586102313235") format("woff"),
+            url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/azbuka700c.ttf?_=636939586102156940") format("truetype");
+        }
+
+        @font-face {
+            font-family: 'icomoon';
+            src: url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/icomoon.eot?_=636939586104031966");
+        url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/icomoon.woff?_=636939586104188202") format('woff'),
+        url("https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/icomoon.ttf?_=636939586104188202") format('truetype'), font-weight: normal;
+            font-style: normal;
+        }
+
+        /*call out*/
+        .wrapp-footer-i123 .callout .bg-head {
+            background: url(https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/bgheader.png?_=636939586102625715) no-repeat;
+        }
+
+        .wrapp-footer-i123 .sociallinks .list-social li {
+            
+            background: url(https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/sprite1.png?_=636939586104344497) no-repeat #656565;
+        }
+        @media screen and (max-width: 640px){
+        .wrapp-footer-i123 .sociallinks .list-social li a {
+            background: url(https://ez.analog.com/cfs-filesystemfile/__key/widgetfiles/63c630f75c0e4710ab017a4d29664a18-d/sprite1.png?_=636939586104344497) no-repeat;
+        }
+        }
+        
+    </style>
+<link href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/bootstrap2.less" rel="stylesheet">
+<link href="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/orgStyles.less" rel="stylesheet">
+
+
+<div class="wrapp-footer-i123">
+
+   
+    <a class="backtotop" href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706#header">&nbsp;</a>
+
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="row footer-bottom" name="adi_footer_bottom">
+                <div class="col-md-12 clearfix">
+                    <div class="col-md-2" name="Footer_Social_Media_Links_eee39a50-a6b0-4426-9c6a-78dd1523c507">
+                        <div class="row">
+                            <div class="sociallinks"><span class="header4"><a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706#" class="footer-collapse dropdown-toggle" data-toggle="dropdown">Social<span class="glyphicon pull-right glyphicon-chevron-down visible-phone"></span></a></span>
+                                <ul class="pull-right list-social footer-dropdown-menu">
+                                    <li class="ez-color"><a href="https://ez.analog.com/" target="" title="Join Analog Devices on EngineerZone"></a></li>
+                                    <li class="instagram-color"><a href="https://www.instagram.com/analogdevices/?hl=en" target="_blank" title="Follow us on Instagram"></a></li>
+                                    <li class="facebook-color"><a href="http://www.facebook.com/AnalogDevicesInc" target="_blank" title="Visit Analog Devices on Facebook"></a></li>
+                                    <li class="twitter-color"><a href="https://twitter.com/ADI_News" target="_blank" title="Follow Analog Devices on Twitter"></a></li>
+                                    <li class="linkedin-color"><a href="http://www.linkedin.com/company/3450" target="_blank" title="Join Analog Devices on LinkedIn"></a></li>
+                                    <li class="youtube-color"><a href="http://www.youtube.com/user/AnalogDevicesInc" target="_blank" title="View Analog Devices on YouTube"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 quick" name="adi_footer_quicklinks">
+                        <div class="quicklinks"><span class="header4"><a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706#" class="footer-collapse dropdown-toggle" data-toggle="dropdown">Quick Links<span class="glyphicon pull-right glyphicon-chevron-down visible-phone"></span></a></span>
+                            <ul class="list-unstyled footer-dropdown-menu">
+                                <li class=""><a href="https://www.analog.com/en/about-adi.html" target="" title="About ADI" name="About_ADI_a18d047b-e6c9-43eb-ac39-f2433cb55f1f">About ADI</a></li>
+                                <li class=""><a href="https://www.analog.com/en/about-adi/partners.html" target="_blank" title="" name="Partners_5e47a5a2-8dd5-4b8d-b949-bb78e7c8b52d">Partners</a>
+                                </li>
+                                <li class=""><a href="https://www.analog.com/en/analog-dialogue.html" target="" title="Analog Dialogue" name="Analog_Dialogue_41ade380-bf31-4791-8015-2a7cc8211984">Analog
+                                    Dialogue</a></li>
+                                <li class=""><a href="https://careers.analog.com/" target="" title="Careers" name="Careers_d3bc9a5a-eaac-4f74-a4eb-9588b983bae8">Careers</a></li>
+                                <li class=""><a href="https://www.analog.com/en/about-adi/contact-us.html" target="" title="Contact us" name="Contact_us_95dc0fe9-dc2d-4f85-81fa-1a49595a3d0d">Contact
+                                    us</a></li>
+                                <li class=""><a href="http://investor.analog.com/" target="" title="Investor Relations" name="Investor_Relations_2ffc3744-f828-4aa2-8db4-3e3bb8854bb7">Investor
+                                    Relations</a></li>
+                                <li class=""><a href="https://www.analog.com/en/about-adi/news-room.html" target="" title="News Room" name="News_Room_0b77676a-6e78-428a-b729-3b12f20cb0d0">News
+                                    Room</a></li>
+                                <li class=""><a href="https://www.analog.com/en/about-adi/quality-reliability.html" target="" title="Quality &amp; Reliability" name="Quality_N_Reliability_9f2071ca-97a4-4e6c-85f8-a28480bc998c">Quality
+                                    &amp; Reliability</a></li>
+                                <li class=""><a href="https://www.analog.com/en/about-adi/corporate-information/sales-distribution.html" target="" title="Sales &amp; Distributors" name="Sales_N_Distributors_c71f89eb-3bca-4ca9-a79d-73a1172cfa1a">Sales &amp;
+                                    Distribution</a></li>
+                            </ul>
+                        </div>
+                    </div><!--[if gt IE 8]><!-->
+                    <div id="footer-region-language" class="col-md-2 visible-phone">
+                        <div class="accordion-group">
+                            <div class="accordion-heading"><span class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapseTwo"> Global<span class="glyphicon pull-right glyphicon-chevron-down visible-phone"></span></span></div>
+                            <div id="collapseTwo" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <div class="global-message"> Please Select a Region</div>
+                                    <div class="accordion" id="accordion2">
+                                        <div class="accordion-group">
+                                            <div class="accordion-heading"><span class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#India"> India<span class="glyphicon pull-right glyphicon-chevron-down visible-phone"></span></span>
+                                            </div>
+                                            <div id="India" class="accordion-body collapse">
+                                                <div class="accordion-inner"><a href="https://www.analog.com/en/landing-pages/001/india-welcome.html"><img data-image-source="//assets.analog.com/images/map_india.jpg" class="mobile-images" width="100%" alt="India"></a></div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-group">
+                                            <div class="accordion-heading"><span class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#Korea"> Korea<span class="glyphicon pull-right glyphicon-chevron-down visible-phone"></span></span>
+                                            </div>
+                                            <div id="Korea" class="accordion-body collapse">
+                                                <div class="accordion-inner"><a href="https://www.analog.com/en/landing-pages/001/korea-welcome.html"><img data-image-source="//assets.analog.com/images/map_korea.jpg" class="mobile-images" width="100%" alt="Korea"></a></div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-group">
+                                            <div class="accordion-heading"><span class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#Singapore"> Singapore<span class="glyphicon pull-right glyphicon-chevron-down visible-phone"></span></span>
+                                            </div>
+                                            <div id="Singapore" class="accordion-body collapse">
+                                                <div class="accordion-inner"><a href="https://www.analog.com/en/landing-pages/001/singapore-welcome.html"><img data-image-source="//assets.analog.com/images/map_singapore.jpg" class="mobile-images" width="100%" alt="Singapore"></a></div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-group">
+                                            <div class="accordion-heading"><span class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#Taiwan"> Taiwan<span class="glyphicon pull-right glyphicon-chevron-down visible-phone"></span></span>
+                                            </div>
+                                            <div id="Taiwan" class="accordion-body collapse">
+                                                <div class="accordion-inner"><a href="https://www.analog.com/en/landing-pages/001/taiwan-welcome.html"><img data-image-source="//assets.analog.com/images/map_taiwan.jpg" class="mobile-images" width="100%" alt="Taiwan"></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-group">
+                            <div class="accordion-heading"><span class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapseLanguage"> Language<span class="glyphicon pull-right glyphicon-chevron-down visible-phone"></span></span></div>
+                            <div id="collapseLanguage" class="accordion-body collapse">
+                                <div class="accordion-inner">
+                                    <div class="global-message">Please Select a Language</div>
+                                    <div class="accordion language-footer-container" id="accordion4">
+                                        <div class="accordion-group language-footer-block">
+                                            <div class="accordion-heading">
+                            <span class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#English">
+                                English<span class="glyphicon  pull-right glyphicon-chevron-down visible-phone"></span>
+                            </span>
+                                            </div>
+                                            <div id="English" class="accordion-body collapse">
+                                                <div class="accordion-inner language-footer">
+                                                    <a href="https://www.analog.com/en/products/ada4961.html">
+                                                        <img data-image-source="//assets.analog.com/images/language_en.jpg" class="mobile-images" width="100%" alt="English">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-group language-footer-block">
+                                            <div class="accordion-heading">
+                            <span class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#简体中文">
+                                简体中文<span class="glyphicon  pull-right glyphicon-chevron-down visible-phone"></span>
+                            </span>
+                                            </div>
+                                            <div id="简体中文" class="accordion-body collapse">
+                                                <div class="accordion-inner language-footer">
+                                                    <a href="https://www.analog.com/cn/products/ada4961.html">
+                                                        <img data-image-source="//assets.analog.com/images/language_cn.jpg" class="mobile-images" width="100%" alt="简体中文">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-group language-footer-block">
+                                            <div class="accordion-heading">
+                            <span class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#日本語">
+                                日本語<span class="glyphicon  pull-right glyphicon-chevron-down visible-phone"></span>
+                            </span>
+                                            </div>
+                                            <div id="日本語" class="accordion-body collapse">
+                                                <div class="accordion-inner language-footer">
+                                                    <a href="https://www.analog.com/jp/products/ada4961.html">
+                                                        <img data-image-source="//assets.analog.com/images/language_jp.jpg" class="mobile-images" width="100%" alt="日本語">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="accordion-group language-footer-block">
+                                            <div class="accordion-heading">
+                            <span class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#Руccкий">
+                                Руccкий<span class="glyphicon  pull-right glyphicon-chevron-down visible-phone"></span>
+                            </span>
+                                            </div>
+                                            <div id="Руccкий" class="accordion-body collapse">
+                                                <div class="accordion-inner language-footer">
+                                                    <a href="https://www.analog.com/ru/products/ada4961.html">
+                                                        <img data-image-source="//assets.analog.com/images/language_ru.jpg" class="mobile-images" width="100%" alt="Руccкий">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--<![endif]-->
+                    <div class="col-md-2 visible-desktop"><span class="header4">Languages</span>
+                        <div class="quicklinks" name="adi_footer_languages_quicklinks">
+                            <ul class="list-unstyled">
+                                <li><a href="https://www.analog.com/en/" target="" title="English" name="English_2c0dae2c-e343-42a4-8ce2-cd8350c8ec55">English</a></li>
+                                <li><a href="https://www.analog.com/cn/" target="" title="简体中文" name="Chinese_8f00bfa0-df96-41b4-b43b-9937d78c4452">简体中文</a></li>
+                                <li><a href="https://www.analog.com/jp/" target="" title="日本語" name="Japanese_28d4203f-f1f1-4a94-acf1-e5023759cda3">日本語</a></li>
+                                <li><a href="https://www.analog.com/ru/" target="" title="Руccкий" name="Russian_08ad222c-9e19-46af-997d-9e7a12a99c0b">Руccкий</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 visible-desktop">
+                        <div class="newsletter" name="Callouts_Newsletter_b24a4bad-d9d0-4b9a-bb7d-149bf3a624cf"><span class="header4">Newsletters</span>
+                            <p>Interested in the latest news and articles about ADI products, design tools, training and
+                                events? Choose from one of our 12 newsletters that match your product area of interest,
+                                delivered monthly or quarterly to your inbox.</p>
+                            <div class="control-form"><a class="btn btn-primary" name="Newsletter_Sign Up_b24a4bad-d9d0-4b9a-bb7d-149bf3a624cf" href="https://my.analog.com/en/app/subscriptions">Sign Up</a></div>
+                        </div>
+                        <div class="switch-mobile-view"><a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706" id="btn-force-mobile-view" class="btn btn-primary">Switch
+                            to mobile view</a></div>
+                    </div>
+                </div>
+                <div class="col-md-12 clearfix visible-phone">
+                    <div class="container text-center">
+                        <button type="button" id="btn-force-desktop-view" class="btn btn-primary"> Desktop View</button>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row copyright" name="adi_footer_copyright">
+                        <div class="col-md-5 visible-phone">
+                            <div data-src="//assets.analog.com/images/footer_logo.gif" class="visible-phone"><img src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/footer_logo.gif" alt="Analog Logo" width="100"></div>
+                            <span class="copy">©</span> 1995 - 2019 Analog Devices, Inc. All Rights Reserved <span id="CN-ICP-number" style="display:none;">沪ICP备09046653号</span></div>
+                        <ul class="list-inline pull-left visible-desktop links">
+                            <li> ©</li>
+                            <li> 1995 - 2019 Analog Devices, Inc. All Rights Reserved</li>
+                            <li id="CN-ICP-number"> 沪ICP备09046653号</li>
+                        </ul>
+                        <ul class="list-inline pull-right visible-desktop" name="adi_footer_horizontal_links">
+                            <li class=""><a href="https://www.analog.com/en/sitemap.html" target="" title="Sitemap" name="Sitemap_b8effdcc-bc20-42ab-af7b-e2a546667326">Sitemap</a></li>
+                            <li class=""><a href="https://www.analog.com/en/about-adi/landing-pages/001/privacy_security_statement.html" target="" title="Privacy &amp; Security" name="Privacy_N_Security_7bd22b0b-d67b-4530-ae22-266045bc4d73">Privacy &amp;
+                                Security</a></li>
+                            <li class=""><a href="https://www.analog.com/en/landing-pages/001/privacy-settings.html" target="" title="Privacy Settings" name="Privacy_Settings_c3370251-faa8-4c65-b2b4-1bfeab8d75ea">Privacy
+                                Settings</a></li>
+                            <li class=""><a href="https://www.analog.com/en/about-adi/landing-pages/001/terms_of_use.html" target="" title="Terms of use" name="Terms_of_Use_fd8a5f4a-6e7a-4d1d-9605-56488afcf6c6">Terms of use</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div></div>
+<div class="content-fragment-footer"></div>
+</div>
+<div class="content-fragment raw-content no-wrapper responsive-1" id="footer-4623" data-reflow="_f_content,_f_singlecolumn,1,1,1">
+<div class="content-fragment-content">
+
+
+
+	<div id="footer-4623_content" class=" user-defined-markup" style="">
+		<style>
+    .j-alert-banner {
+        font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-weight: inherit;
+        font-style: inherit;
+        font-size: 100%;
+        font-family: inherit;
+        font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        vertical-align: baseline;
+        display: none;
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        width: 100%;
+        z-index: 9998;
+    }
+
+    .j-alert.j-bannerContainer {
+        color: #fff;
+        position: relative;
+        background: #f0f0f0;
+        padding: 15px 12px;
+        border-radius: 5px 5px 0 0;
+        border: solid 1px black;
+        box-shadow: none;
+        margin: 0 auto;
+        width: 96%;
+        z-index: 9999;
+        text-align: center;
+    }
+
+    span.j-bannerText {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-weight: inherit;
+        font-style: inherit;
+        font-size: 100%;
+        font-family: inherit;
+        vertical-align: baseline;
+        font-size: 16px;
+        color: black;
+        margin-right: 10%;
+        display: inline-block;
+        margin-bottom:10px;
+            margin-top: 10px;
+    }
+
+
+    .j-alert .link:link, .j-alert .link:visited, .j-alert .link:hover, .j-alert .link:active, .j-alert .link:focus {
+        /*color: #fff;*/
+        text-decoration: underline;
+    }
+
+    a:visited.j-bannerText {
+        text-decoration: underline;
+        color: navy;
+    }
+
+
+    a:link.j-bannerText {
+        color: #3778c7;
+    }
+
+    .j-btn-global.j-bannerButton:focus {
+        background: #2178d1;
+        color: white;
+        text-decoration: none;
+        border: 1px solid #0d2747;
+        /* box-shadow: 0 3px 5px rgba(34,34,34,.8); */
+    }
+
+    .j-btn-global.j-bannerButton {
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, .15);
+        border-radius: 3px;
+        color: #606060;
+        cursor: pointer;
+        display: inline-block;
+        line-height: normal;
+        font-family: inherit;
+        font-size: .8571rem;
+        font-weight: 600;
+        margin: 0 10px 0 0;
+        padding: 8px 15px;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        -webkit-appearance: none;
+        box-sizing: border-box;
+        background: #f0f0f0;
+        text-shadow: none;
+        color: #2178d1;
+        box-shadow: none;
+
+    }
+
+    a.j-btn-global.j-bannerButton {
+        text-decoration: none;
+    }
+
+
+    .j-cookie-consent-overlay {
+        display: none;
+        background: #000;
+        opacity: .55;
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+    }
+
+
+    .j-alert-banner.hidden{
+        display: none;
+        visibility: hidden;
+    }
+    
+   @media only screen and (max-width: 1520px){
+span.j-bannerText {
+    display: block;
+    margin-right: auto;
+}}
+    
+@media screen and (max-width: 850px) {
+  .j-btn-global.j-bannerButton {
+    margin-top: 10px;
+  }
+}
+
+</style>
+
+<div class="j-alert-banner" id="cookie-consent-alert" role="alert" aria-live="polite" aria-atomic="true" style="display: block;">
+    <div class="j-alert j-bannerContainer">
+        <span class="j-bannerText" id="cookieConsentMessage">EngineerZone Uses cookies to ensure you get the best experience in our community. For more information on cookies, please read our
+            <a href="https://www.analog.com/en/about-adi/landing-pages/001/privacy_security_statement.html" target="_blank" class="j-bannerText link">Privacy &amp; Security Statement</a>.
+        </span>
+        <button type="button" class="j-btn-global j-bannerButton" id="cookie-consent-agree" autofocus="true" aria-describedby="cookieConsentMessage" aria-label="Accept &amp; Continue">
+            Accept &amp; Continue
+        </button>
+
+        <!--<a href="about:blank" class="j-btn-global j-bannerButton" id="cookie-consent-disagree"-->
+        <!--   aria-label="Decline &amp; Close">Decline &amp; Close-->
+        <!--</a>-->
+    </div>
+    <div class="j-cookie-consent-overlay" id="cookie-consent-overlay" style="display: block;"></div>
+</div>
+<script>
+  
+    function getCookie(key) {
+        const regexp = new RegExp(".*"+key+"=([^;]*)");
+        const result = regexp.exec(document.cookie);
+        if(result) {
+            return result [1];
+        }
+    }
+    function setCookie(key, value){
+        var date = new Date().setTime(new Date().getTime()+365*24*60*60*1000);
+        var expiresDate = new Date(date).toUTCString();
+        document.cookie = key+"="+value+";expires="+expiresDate+";path=/";
+        console.log(document.cookie);
+        var isAgreeCookieConsent = getCookie("GDPR.cookie.consent.accepted");
+        if (isAgreeCookieConsent) {
+            $(".j-alert-banner").attr("class", "j-alert-banner hidden");
+        }
+    }
+
+
+
+   function setHandler(){
+        $("#cookie-consent-agree").on("click", function(e){  setCookie("GDPR.cookie.consent.accepted" ,"true");        });
+    }
+
+
+
+    function initCookieMessage(){
+        var isAgreeCookieConsent = getCookie("GDPR.cookie.consent.accepted");
+        if (!isAgreeCookieConsent) {
+            $(".j-alert-banner.hidden").attr("class", "j-alert-banner");
+            setHandler(); }
+    }
+
+
+    initCookieMessage();
+
+</script><div style="clear:both;"></div>
+	</div>
+</div>
+<div class="content-fragment-footer"></div>
+</div>
+<div id="footer-2612"></div>
+<div id="footer-2613"></div>
+<div id="footer-2614"></div>
+<div id="footer-2615"></div>
+<div id="footer-2616"></div>
+</div>
+</div>
+</div>
+<div class="layout-footer"></div>
+</div></div>	<script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/ui.js(1).descarga"></script>
+
+	<script type="text/html" id="header-5548_site-banner-list-template">
+		<div>
+			<div class="multiple-column-list columns-1">
+				<div class="multiple-column-item column-1">
+					<ul class="content-list content">
+					</ul>
+					<div class="loading"><span class="ui-loading"></span></div>
+					<% if(footerContent) { %>
+						<div class="content-list-footer">
+							<%= footerContent %>
+						</div>
+					<% } %>
+				</div>
+			</div>
+		</div>
+	</script>
+
+			<script type="text/html" id="header-5548_site-banner-notification-preferences-template">
+			<div class="notification-preference">
+				<span class="description">Do not notify me when someone <strong><%: notificationTypeName %></strong>?</span>
+				<a href="#" class="confirm internal-link button submit-button" data-notificationtypeid="<%: notificationTypeId %>">Confirm</a>
+				<a href="#" class="cancel internal-link button submit-button">Cancel</a>
+			</div>
+		</script>
+
+		<script type="text/html" id="header-5548_site-banner-bookmark-filter-template">
+
+			<ul class="navigation-list filter">
+				<% if(contentTypeIds && contentTypeIds.length > 0) { %>
+					<li class="navigation-item conversations">
+						<a class="internal-link" href="#" data-contenttypeids="<%: contentTypeIds %>">Content</a>
+					</li>
+				<% } %>
+				<% if(applicationContentTypeIds && applicationContentTypeIds.length > 0) { %>
+					<li class="navigation-item conversations">
+						<a class="internal-link" href="#" data-contenttypeids="<%: applicationContentTypeIds %>">Application</a>
+					</li>
+				<% } %>
+				<% if(containerTypes && containerTypes.length > 0) { %>
+					<% foreach(containerTypes, function(containerType) {  %>
+						<li class="navigation-item conversations">
+							<a class="internal-link" href="#" data-contenttypeids="<%: containerType.id %>"><%: containerType.name %></a>
+						</li>
+					<% }); %>
+				<% } %>
+			</ul>
+		</script>
+
+		<script type="text/html" id="header-5548_site-banner-user-template">
+									<div class="user "
+								<div>
+					<div class="avatar">
+													<img src="/cfs-filesystemfile/__key/communityserver-components-imagefileviewer/communityserver-components-avatars_2E00_/default.png_2D00_40x40x2.png?_=636592280367019669" />
+											</div>
+					<span class="user-name">
+													Anonymous
+											</span>
+
+														</div>
+			</div>
+
+										<ul class="navigation-list user">
+																																																																																																																											</ul>
+					</script>
+				<script type="text/html" id="header-5548_site-banner-search-filter-template">
+			<% if(places && places.length > 0) { %>
+				<ul class="navigation-list filter">
+					<% foreach(places, function(place) { %>
+						<li class="navigation-item">
+							<a class="place internal-link" href="#" data-key="<%: place.key %>" data-value="<%: place.value %>" data-searchparam="<%: place.searchParameter %>" data-searchvalue="<%: place.searchValue %>"><%= place.name %></a>
+					<% }); %>
+				</ul>
+			<% } %>
+
+			<% if(filters && filters.length > 0) { %>
+				<ul class="navigation-list filter">
+				<% foreach(filters, function(filter) {  %>
+					<li class="navigation-item">
+						<a class="type internal-link" href="#" data-key="<%: filter.key %>"><%= filter.name %></a>
+					</li>
+				<% }); %>
+				</ul>
+			<% } %>
+		</script>
+	
+	<script type="text/javascript">
+		
+		
+
+			
+															
+		jQuery(function(){
+			jQuery.telligent.evolution.widgets.siteBanner.register({
+				wrapper: '#header-5548',
+				messagePrefix: 'widget.header-5548.',
+				userPopupTemplate: 'header-5548_site-banner-list-template',
+				banner: jQuery('#header-5548_banner'),
+									handheldSearchFieldsLink: jQuery('#header-5548_handheldSearchFieldsLink'),
+					handheldSearchFields: jQuery('#header-5548_handheldSearchFields'),
+					handheldBannerLinksLink: jQuery('#header-5548_handheldBannerLinksLink'),
+					handheldBannerLinks: jQuery('#header-5548_handheldBannerLinks'),
+					handheldBannerLinksCount: jQuery('#header-5548_handheldBannerLinksCount'),
+					bannerSiteLinks: jQuery('#header-5548_bannerSiteLinks'),
+					handheldSiteLinksLink: jQuery('#header-5548_handheldSiteLinksLink'),
+					handheldSiteLinks: jQuery('#header-5548_handheldSiteLinks'),
+
+																		searchFields: jQuery('#header-5548_searchFields'),
+					searchTemplate: 'header-5548_site-banner-list-template',
+					searchUrl: '/utility/scripted-file.ashx?_cf=search.vm\u0026_fid=5548\u0026_wid=header-5548\u0026_ct=header\u0026_cp=\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=10\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+					searchInput: jQuery('#header-5548_Search'),
+					searchFooterContent: '\u003ca data-messagename=\"widget.header-5548.advancedsearch\" class=\"right\" id=\"header-5548_advancedsearch\" href=\"#\"\u003eAdvanced search\u003c/a\u003e',
+					searchFilterTemplate: 'header-5548_site-banner-search-filter-template',
+					searchAdvancedUrl: '/search?{0}',
+					searchAdvancedUserUrl: '/members?{0}',
+					searchFilterContentName: 'Content',
+					searchFilterGroupsName: 'Groups',
+					searchFilterPeopleName: 'People',
+					searchPlaceApplicationId:  'db37d403-8f4b-40a8-b995-a7863a52238c' ,
+					searchPlaceApplicationName:  'In Q\u0026amp;A' ,
+					searchPlaceGroupId:  '07a52e10-6881-4ffb-9f59-7fa31b6ef00c' ,
+					searchPlaceGroupLocalId:  '205' ,
+					searchPlaceGroupName:  'In Linux Software Drivers' ,
+					searchPlaceAnywhereName: 'Anywhere',
+					advancedSearchId: 'header-5548_advancedsearch',
+					searchShowPeople:  false,
+													bannerLinks: jQuery('#header-5548_bannerLinks'),
+
+					notificationsTemplate: 'header-5548_site-banner-list-template',
+					notificationsUrl: '/utility/scripted-file.ashx?_cf=notifications.vm\u0026_fid=5548\u0026_wid=header-5548\u0026_ct=header\u0026_cp=\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=10\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+					notificationsLink: jQuery('#header-5548_notifications'),
+					notificationsUnread: 0,
+					notificationListFooterContent: '\u003ca href=\"$core_v2_urls.Notifications()\" class=\"view-all left\"\u003eView all\u003c/a\u003e\u003ca class=\"right\" href=\"${notificationSettingsUrl}\"\u003eSettings\u003c/a\u003e',
+					notificationPreferenceTemplate: 'header-5548_site-banner-notification-preferences-template',
+					notificationssUnreadCountMessageSingular: 'You have {0} unread notification',
+					notificationssUnreadCountMessagePlural: 'You have {0} unread notifications',
+
+					conversationsTemplate: 'header-5548_site-banner-list-template',
+					conversationsUrl: '/utility/scripted-file.ashx?_cf=conversations.vm\u0026_fid=5548\u0026_wid=header-5548\u0026_ct=header\u0026_cp=\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=10\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+					conversationsLink: jQuery('#header-5548_conversations'),
+					conversationsUnread: 0,
+					conversationNotificationTypeId: '84e4c0a7-3a17-4dfe-b8a0-d7038aa04a84',
+					conversationListFooterContent: '\u003ca href=\"${core_v2_urls.Conversations()}\" class=\"left\"\u003eView all\u003c/a\u003e\u003ca href=\"#\" data-messagename=\"widget.header-5548.startconversation\" class=\"right\"\u003eNew message\u003c/a\u003e',
+					conversationsUnreadCountMessageSingular: 'You have {0} unread message',
+					conversationsUnreadCountMessagePlural: 'You have {0} unread messages',
+					conversationNewConversationUrl:'/user/conversations?New=True',
+
+					bookmarksTemplate: 'header-5548_site-banner-list-template',
+					bookmarksUrl: '/utility/scripted-file.ashx?_cf=bookmarks.vm\u0026_fid=5548\u0026_wid=header-5548\u0026_ct=header\u0026_cp=\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=10\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+					bookmarksLink: jQuery('#header-5548_bookmarks'),
+					bookmarksListFooterContent: '\u003ca class=\"left\" href=\"${bookmarksUrl}\"\u003eView all\u003c/a\u003e',
+					bookmarksContentTypes: '$core_v2_encoding.JavascriptEncode($contentTypes)',
+					bookmarksApplicationContentTypes: '$core_v2_encoding.JavascriptEncode($applicationContentTypes)',
+					bookmarksContainerContentTypes: '$core_v2_encoding.JavascriptEncode($containerContentTypes)',
+					bookmarksFilterTemplate: 'header-5548_site-banner-bookmark-filter-template',
+					bookmarksIsBookmarked:  false ,
+					bookmarksCurrentContentId: '',
+					bookmarksBookmarks: 'Bookmarks',
+					bookmarkAdded: 'Bookmark added',
+					bookmarkRemoved: 'Bookmark removed',
+
+					userContentTemplate: 'header-5548_site-banner-user-template',
+					userLink: jQuery('#header-5548_user'),
+				
+				viewType: 'all'
+			});
+		});
+	</script>
+
+		<script>
+		jQuery(function(j){
+			// no sub-nav on touch
+			if(j('body').hasClass('touch'))
+				return;
+
+			var container = j('#header-4519_container');
+			var popup;
+			var currentParent;
+			var hideTimeoutHandle;
+
+			function hideLinksPopup() {
+				if(popup) {
+					popup.glowPopUpPanel('hide', true);
+					$(currentParent).removeClass('subnav-open');
+					currentParent = null;
+				}
+			}
+
+			function mouseOut() {
+				window.clearTimeout(hideTimeoutHandle);
+				hideTimeoutHandle = window.setTimeout(function() {
+					hideLinksPopup();
+				}, 300);
+			}
+
+			function mouseOver() {
+				window.clearTimeout(hideTimeoutHandle);
+			}
+
+			function showLinksPopUp(parent, children) {
+				parent.addClass('subnav-open');
+				if(currentParent == parent.get(0)) {
+					return;
+				}
+
+				var links = j('<ul></ul>').append(children);
+
+				if(popup) {
+					hideLinksPopup();
+					popup.glowPopUpPanel('empty', '')
+						.glowPopUpPanel('append', links)
+						.glowPopUpPanel('show', parent);
+				} else {
+					popup = j('<div></div>')
+						.glowPopUpPanel({
+							cssClass: 'links-popup-panel',
+							zIndex: 1500,
+							hideOnDocumentClick: true
+						})
+						.on('glowPopUpPanelMouseOut', function() {
+							mouseOut();
+						})
+						.on('glowPopUpPanelMouseOver', function() {
+							mouseOver();
+						})
+						.glowPopUpPanel('append', links)
+						.glowPopUpPanel('show', parent)
+				}
+				currentParent = parent.get(0);
+			}
+
+			container.on('mouseenter', '.navigation-list-item a', function(e){
+				var elm = j(e.target);
+				var children = elm.data('_link_children');
+				if(!children) {
+					children = elm.closest('li').find('ul.children > li');
+					elm.data('_link_children', children);
+				}
+				if(children && children.length > 0) {
+					mouseOver();
+					showLinksPopUp(elm, children);
+				}
+			});
+
+			container.on('mouseleave', '.navigation-list-item a', function(e){
+				mouseOut();
+			});
+		});
+		</script>
+	
+			<div style="height:100px"></div>
+		
+		<script>
+		jQuery(function(j){
+			var isHome =  false ;
+			var parents = j('#header-4521_parentNavigation');
+			var applications = j('#header-4521_applicationNavigation');
+			function expand(links) {
+				links.uilinks('reconfigure', { maxLinks: 100 });
+			}
+			function collapse(links) {
+				links.uilinks('reconfigure', { maxLinks: 0 });
+			}
+			j.telligent.evolution.messaging.subscribe('theme.social.scrolled', function(){
+				collapse(parents);
+				collapse(applications);
+			});
+			j.telligent.evolution.messaging.subscribe('theme.social.unscrolled', function(){
+				if(isHome) {
+					expand(parents);
+					expand(applications);
+				} else {
+					expand(parents);
+					collapse(applications);
+				}
+			});
+		});
+		</script>
+	
+<script>jQuery.telligent.evolution.template.register('fragment-42696_repliesTemplate',function(h,d){var s=[];with(d){with(h){s.push('	<li class=\"attribute-item replies\">\n		<span class=\"attribute-name\">Replies<\/span>\n		<span class=\"attribute-value\">\n			'); if(replyCount == 1) { s.push('\n				');s.push(String( replyCount ));s.push(' reply\n			'); } else { s.push('\n				');s.push(String( replyCount ));s.push(' replies\n			'); } s.push('\n		<\/span>\n	<\/li>\n');}}return s.join('');});</script>
+<script>jQuery.telligent.evolution.template.register('fragment-42696_answersTemplate',function(h,d){var s=[];with(d){with(h){s.push('	<li class=\"attribute-item answers\">\n		<span class=\"attribute-name\">Answers<\/span>\n		<span class=\"attribute-value\">\n			'); if(answerCount == 1) { s.push('\n				');s.push(String( answerCount ));s.push(' answer\n			'); } else { s.push('\n				');s.push(String( answerCount ));s.push(' answers\n			'); } s.push('\n		<\/span>\n	<\/li>\n');}}return s.join('');});</script>
+<script>jQuery.telligent.evolution.template.register('fragment-42696_usersTemplate',function(h,d){var s=[];with(d){with(h){s.push('	<li class=\"attribute-item users\">\n		<span class=\"attribute-name\">Users<\/span>\n		<span class=\"attribute-value\">\n			'); if(presentUsers == 1) { s.push('\n				');s.push(String( presentUsers ));s.push(' member is here\n			'); } else { s.push('\n				');s.push(String( presentUsers ));s.push(' members are here\n			'); } s.push('\n		<\/span>\n	<\/li>\n');}}return s.join('');});</script>
+<script>jQuery.telligent.evolution.template.register('fragment-42696_statusTemplate',function(h,d){var s=[];with(d){with(h){s.push('	<li class=\"attribute-item state '); if (status == 'Answered') { s.push(' verified '); } else if (status == 'AnsweredNotVerified') { s.push(' suggested '); } s.push('\">\n		<span class=\"attribute-name\">State<\/span>\n		<span class=\"attribute-value\">\n			'); if (status == 'Answered') { s.push('\n				<a href=\"https:\/\/ez.analog.com\/linux-device-drivers\/linux-software-drivers\/f\/q-a\/87262\/cross-compiling-new-gnu-radio-on-zc706?ReplyFilter=Answers&amp;ReplySortBy=Answers&amp;ReplySortOrder=Descending\" class=\"append-icon check\">\n					Verified Answer\n				<\/a>\n			'); } else if (status == 'NotAnswered') { s.push('\n				Not Answered\n			'); } else if (status == 'AnsweredNotVerified') { s.push('\n				<a href=\"https:\/\/ez.analog.com\/linux-device-drivers\/linux-software-drivers\/f\/q-a\/87262\/cross-compiling-new-gnu-radio-on-zc706?ReplyFilter=Answers&amp;ReplySortBy=Answers&amp;ReplySortOrder=Descending\" class=\"append-icon check\">\n					Suggested Answer\n				<\/a>\n			'); } s.push('\n		<\/span>\n	<\/li>\n');}}return s.join('');});</script>
+<script>jQuery.telligent.evolution.template.register('fragment-42696_statisticsTemplate',function(h,d){var s=[];with(d){with(h){s.push('	'); if(userCount == 1) { s.push('\n		');s.push(String( userCount ));s.push(' member is here\n	'); } else { s.push('\n		');s.push(String( userCount ));s.push(' members are here\n	'); } s.push('\n');}}return s.join('');});</script>
+	<script src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/ui.js(2).descarga"></script>
+
+	<script>
+	jQuery(document).ready(function() {
+		jQuery.telligent.evolution.widgets.threadDetails.register({
+			contentTypeId: '46448885-d0e6-4133-bbfb-f0cd7b0fd6f7',
+			contentId: '612de988-3629-4c64-be99-8757fef87397',
+			status: 'Answered',
+			replyCount:  3 ,
+			answerCount:  1 ,
+			presentUsers: 0,
+			wrapper: '#fragment-42696_wrapper',
+			voteId:  '#fragment-42696_vote612de988-3629-4c64-be99-8757fef87397' ,
+			unvoteId:  '#fragment-42696_unvote612de988-3629-4c64-be99-8757fef87397' ,
+			statisticsContainer: 'fragment-42696_statisticsContainer',
+			threadId: 87262,
+			templates: {
+				status: 'fragment-42696_statusTemplate',
+				users: 'fragment-42696_usersTemplate',
+				answers: 'fragment-42696_answersTemplate',
+				replies: 'fragment-42696_repliesTemplate',
+				statistics: 'fragment-42696_statisticsTemplate'
+			}
+		});
+	});
+	</script>
+
+	<script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/ui.js(3).descarga"></script>
+	
+	<script type="text/javascript">
+	jQuery(document).ready(function() {
+		jQuery.telligent.evolution.widgets.moreContent.register({
+			wrapper: '#fragment-42699',
+			useSlider:  false ,
+			title: 'Related',
+			content: '#pifragment-42699-paged-content',
+			sliderTemplate: 'telligent.evolution.widgets.moreContent.sliderTemplate',
+			slideAt: 0.3,
+			delayedPagedContentWrapper: 'fragment-42699_delayedPagedContentWrapper',
+			delayedPagedContentUrl: "/utility/scripted-file.ashx?_cf=content.vm\u0026_fid=42699\u0026_wid=fragment-42699\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706",
+			isPreview:  false		});
+	});
+	</script>
+
+	<script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/ui.js(4).descarga"></script>
+
+<script>jQuery.telligent.evolution.template.register('fragment-42702_loadMoreTemplate',function(h,d){var s=[];with(d){with(h){s.push('	<li class=\"load-more '); if(previous) { s.push(' previous '); } else { s.push(' next '); } s.push('\" '); if (loadInline) { s.push(' data-inline=\"inline\" '); } s.push('>\r\n	'); if(previous) { s.push('\r\n		<a class=\"previous\" href=\"#\" '); if (loadInline) { s.push(' data-inline=\"inline\" '); } s.push('>View More <\/a>\r\n	'); } else { s.push('\r\n		<a class=\"next\" href=\"#\" '); if (loadInline) { s.push(' data-inline=\"inline\" '); } s.push('>View More <\/a>\r\n	'); } s.push('\r\n	<span class=\"ui-loading\" data-width=\"24\" data-height=\"24\"><\/span>\r\n<\/li>\r\n\r\n');}}return s.join('');});</script>
+<script>jQuery.telligent.evolution.template.register('fragment-42702_newRepliesTemplate',function(h,d){var s=[];with(d){with(h){s.push('	<div class=\"threaded new-replies '); if(offscreen) { s.push(' offscreen '); } s.push('\" '); if(offscreen) { s.push(' style=\"width: ');s.push(String( width ));s.push('px\" '); } s.push('>\r\n	<a href=\"#\" data-messagename=\"ui.replies.new\" data-replyid=\"');s.push(String( replyId ));s.push('\">\r\n		'); if(newReplies == 1) { s.push('\r\n			');s.push(String( newReplies ));s.push(' new reply\r\n		'); } else { s.push('\r\n			');s.push(String( newReplies ));s.push(' new replies\r\n		'); } s.push('\r\n	<\/a>\r\n<\/div>\r\n\r\n');}}return s.join('');});</script>
+<script>jQuery.telligent.evolution.template.register('fragment-42702_replyTemplate',function(h,d){var s=[];with(d){with(h){s.push('	<li class=\"threaded content-item '); if(isDeleted) { s.push(' deleted '); } s.push(' '); if(isNew) { s.push(' new '); } s.push('\"\r\n	data-id=\"');s.push(escape(String( id )));s.push('\"\r\n	data-parentid=\"');s.push(escape(String( parentId )));s.push('\"\r\n	data-createddate=\"');s.push(escape(String( createdDate )));s.push('\"\r\n	data-yesvotes=\"');s.push(escape(String( yesVotes )));s.push('\"\r\n	data-novotes=\"');s.push(escape(String( noVotes )));s.push('\">\r\n\r\n	<div class=\"rendered-content ');s.push(String( status ));s.push('\">\r\n		');s.push(String( body ));s.push('\r\n		<div class=\"typing-status-wrapper\"><\/div>\r\n		<div class=\"new-replies-wrapper\"><\/div>\r\n	<\/div>\r\n\r\n	<div class=\"newreply\"><\/div>\r\n\r\n	<ul class=\"content-list threaded\"\r\n	data-sortby=\"');s.push(String( (sortBy || '') ));s.push('\"\r\n	data-sortorder=\"');s.push(String( (sortOrder || '') ));s.push('\"\r\n	data-filter=\"');s.push(String( (filter || '') ));s.push('\"><\/ul>\r\n\r\n<\/li>\r\n\r\n');}}return s.join('');});</script>
+<script>jQuery.telligent.evolution.template.register('fragment-42702_replyFormTemplate',function(h,d){var s=[];with(d){with(h){s.push('	<div class=\"reply-form '); if (editingReplyId) { s.push(' edit '); } else { s.push(' create '); } s.push('\" '); if (editingReplyId) { s.push(' data-editing=\"');s.push(String( editingReplyId ));s.push('\" '); } s.push('>\n	'); if(!editingReplyId) { s.push('\n		\n		<div class=\"author\"  data-authorprofileurl=\"\" >\n			<div class=\"avatar\">\n									<img src=\"\/cfs-filesystemfile\/__key\/communityserver-components-imagefileviewer\/communityserver-components-avatars_2E00_\/default.png_2D00_44x44x2.png?_=636591363179385156\" border=\"0px\" alt=\"Anonymous\" \/>\n							<\/div>\n			<div class=\"meta\">\n				<span class=\"user-name\">\n					<span class=\"ui-userpresence ui-tip \" style=\"display: none;\"\r\ndata-userid=\"2101\" \r\ndata-contentid=\"320a82d8-faee-49e2-9afc-cb5ffd3c0486\" \r\ndata-contenttypeid=\"e9ed4118-60ed-4f2b-a026-5705b8793d05\" \r\ndata-present=\"\" \r\ndata-presentlabel=\"Online\" \r\ndata-notpresentlabel=\"Offline\" \r\ndata-tip=\"\"><\/span>\n											Anonymous\n									<\/span>\n				\n				 		\n		        	            							<\/div>\n		<\/div>\n	'); } s.push('\n\n	<div class=\"editor\"><\/div>\n\n<\/div>\r\n');}}return s.join('');});</script>
+<script>jQuery.telligent.evolution.template.register('fragment-42702_typingIndicatorTemplate',function(h,d){var s=[];with(d){with(h){s.push('	<div class=\"threaded typing-status\">');s.push(String( displayName ));s.push(' is typing a reply...<\/div>\r\n\r\n');}}return s.join('');});</script>
+<script>jQuery.telligent.evolution.template.register('fragment-42702_replyListTemplate',function(h,d){var s=[];with(d){with(h){s.push('	<ul class=\"content-list threaded\"\r\n	data-sortby=\"');s.push(String( (sortBy || '') ));s.push('\"\r\n	data-sortorder=\"');s.push(String( (sortOrder || '') ));s.push('\"\r\n	data-filter=\"');s.push(String( (filter || '') ));s.push('\"><\/ul>\r\n\r\n');}}return s.join('');});</script>
+<script>jQuery.telligent.evolution.template.register('fragment-42702_headerTemplate',function(h,d){var s=[];with(d){with(h){s.push('	\r\n<div class=\"threaded-filter\" id=\"fragment-42702_filter\">\r\n\r\n			<ul class=\"filter type margin-bottom margin-top\">\r\n			<li class=\"filter-option\" data-sortby=\"CreatedDate\" data-sortorder=\"Ascending\">\r\n				<a class=\"navigable\" href=\"https:\/\/ez.analog.com\/linux-device-drivers\/linux-software-drivers\/f\/q-a\/87262\/cross-compiling-new-gnu-radio-on-zc706?ReplySortBy=CreatedDate&amp;ReplySortOrder=Ascending\">All Replies<\/a>\r\n			<\/li>\r\n			<li class=\"filter-option\" data-filter=\"answers\" data-sortby=\"Answers\" data-sortorder=\"Descending\">\r\n				<a class=\"navigable\" href=\"https:\/\/ez.analog.com\/linux-device-drivers\/linux-software-drivers\/f\/q-a\/87262\/cross-compiling-new-gnu-radio-on-zc706?ReplyFilter=Answers&amp;ReplySortBy=Answers&amp;ReplySortOrder=Descending\">Answers<\/a>\r\n			<\/li>\r\n		<\/ul>\r\n	\r\n	<ul class=\"filter order margin-bottom margin-top\">\r\n		<li class=\"filter-option\" data-sortby=\"CreatedDate\" data-sortorder=\"Ascending\">\r\n			<a class=\"navigable\" href=\"https:\/\/ez.analog.com\/linux-device-drivers\/linux-software-drivers\/f\/q-a\/87262\/cross-compiling-new-gnu-radio-on-zc706?ReplySortBy=CreatedDate&amp;ReplySortOrder=Ascending\">Oldest<\/a>\r\n		<\/li>\r\n					<li class=\"filter-option\" data-sortby=\"Votes\" data-sortorder=\"Descending\">\r\n				<a class=\"navigable\" href=\"https:\/\/ez.analog.com\/linux-device-drivers\/linux-software-drivers\/f\/q-a\/87262\/cross-compiling-new-gnu-radio-on-zc706?ReplySortBy=Votes&amp;ReplySortOrder=Descending\">Votes<\/a>\r\n			<\/li>\r\n				<li class=\"filter-option\" data-sortby=\"CreatedDate\" data-sortorder=\"Descending\">\r\n			<a class=\"navigable\" href=\"https:\/\/ez.analog.com\/linux-device-drivers\/linux-software-drivers\/f\/q-a\/87262\/cross-compiling-new-gnu-radio-on-zc706?ReplySortBy=CreatedDate&amp;ReplySortOrder=Descending\">Newest<\/a>\r\n		<\/li>\r\n	<\/ul>\r\n\r\n<\/div>\r\n\r\n');}}return s.join('');});</script>
+	<script type="text/javascript">
+	jQuery(document).ready(function() {
+
+		jQuery.telligent.evolution.widgets.thread.register({
+			replyId:  null ,
+			preFocus:  false ,
+			wrapper: '#fragment-42702',
+			container: '#fragment-42702_preRenderedWrapperId',
+			forumId: 422,
+			threadUrl: 'https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706',
+			threadId: 87262,
+			sortOrder: 'Ascending',
+			sortBy: 'CreatedDate',
+			filter:  null ,
+			flattenedSortBy: 'CreatedDate',
+			flattenedSortOrder: 'Ascending',
+			flattenedDepth: 2,
+			pageSize: 5,
+			endlessScroll:  true ,
+			highlightNewSeconds: 4,
+			listRepliesUrl: '/utility/scripted-file.ashx?_cf=callback-model-list-replies.vm\u0026_fid=42702\u0026_wid=fragment-42702\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+			addReplyUrl: '/utility/scripted-file.ashx?_cf=callback-model-add-reply.vm\u0026_fid=42702\u0026_wid=fragment-42702\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+			editReplyUrl: '/utility/scripted-file.ashx?_cf=callback-model-edit-reply.vm\u0026_fid=42702\u0026_wid=fragment-42702\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+			getReplyUrl: '/utility/scripted-file.ashx?_cf=callback-model-get-reply.vm\u0026_fid=42702\u0026_wid=fragment-42702\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+			advancedReplyUrl: '/utility/scripted-file.ashx?_cf=callback-advancedreply.vm\u0026_fid=42702\u0026_wid=fragment-42702\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+			loadMoreTemplate: 'fragment-42702_loadMoreTemplate',
+			newRepliesTemplate: 'fragment-42702_newRepliesTemplate',
+			replyTemplate: 'fragment-42702_replyTemplate',
+			typingIndicatorTemplate: 'fragment-42702_typingIndicatorTemplate',
+			replyListTemplate: 'fragment-42702_replyListTemplate',
+			replyFormTemplate: 'fragment-42702_replyFormTemplate',
+			deleteForumReplyPanelUrl: '#_cptype=panel\u0026_cpcontexttype=Explicit\u0026_cppanelid=c2360510-559b-4c97-9cc9-760e5b71a003\u0026replyid=0',
+			loginUrl: '/login?ReturnUrl=%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+			headerTemplate: 'fragment-42702_headerTemplate',
+			filterWrapper: '#fragment-42702_filter',
+			noRepliesMessage: 'There are no remaining replies.',
+			moreActionsUrl: "/utility/scripted-file.ashx?_cf=callback-more-reply-actions.vm\u0026_fid=42702\u0026_wid=fragment-42702\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706",
+			moreLinkMessage: 'widget.fragment-42702.more',
+			replyEditor: {
+				appendTo: function(container) {
+					try { if (tinyMCE.get('fragment-42702_fragment-42702_editor')) { tinyMCE.get('fragment-42702_fragment-42702_editor').plugins.enhancements.moveTo(container); } else { jQuery('#fragment-42702_fragment-42702_editor').appendTo(container); } } catch(e) { };
+					try { tinyMCE_TelligentEvolutionOptions.AttachOnKeyDownHandler('fragment-42702_fragment-42702_editor',function(e) { jQuery.telligent.evolution.messaging.publish('widgets.thread.typing', { container: container }) }); } catch(e) { };
+				},
+				checkedVal: function(val) {
+					if(typeof(val) !== 'undefined') {
+						if(val) {
+							jQuery('#fragment-42702_suggest').attr('checked','checked');
+						} else {
+							jQuery('#fragment-42702_suggest').removeAttr('checked');
+						}
+					}
+					return jQuery('#fragment-42702_suggest').is(':checked');
+				},
+				remove: function() {
+					// removing the editor technically just moves it back to a hidden location
+					var wrapper = '#fragment-42702_editorWrapperWrapper';
+					try { if (tinyMCE.get('fragment-42702_fragment-42702_editor')) { tinyMCE.get('fragment-42702_fragment-42702_editor').plugins.enhancements.moveTo(wrapper); } else { jQuery('#fragment-42702_fragment-42702_editor').appendTo(wrapper); } } catch(e) { };
+				},
+				val: function(val) {
+					if (typeof(val) !== 'undefined') {
+						tinyMCE_TelligentEvolutionOptions.SetContent(val, tinyMCE.get('fragment-42702_fragment-42702_editor'));
+					}
+					return (tinyMCE.get('fragment-42702_fragment-42702_editor').getContent() || '').replace(/(?:^\W*<p[^>]*>(?:&nbsp;)?<\/p>|<p[^>]*>(?:&nbsp;)?<\/p>\W*$)/gi, '')
+				},
+				focus: function() {
+					try { tinyMCE.get('fragment-42702_fragment-42702_editor').plugins.enhancements.focusAndView(); } catch (e) { }
+				},
+				insert: function(val) {
+					try { tinyMCE_TelligentEvolutionOptions.InsertContent(val, tinyMCE.get('fragment-42702_fragment-42702_editor')); } catch (e) { }
+				}
+			},
+			text: {
+				more: 'More',
+				peopleWhoVoted: 'People who voted on this reply',
+				noVotes: 'No Votes'
+			},
+			bestRepliesWrapperId: 'fragment-42702_bestRepliesWrapper',
+			listBestUrl: '/utility/scripted-file.ashx?_cf=callback-model-list-best.vm\u0026_fid=42702\u0026_wid=fragment-42702\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+			wrapperId: 'fragment-42702',
+			unlinkUrl: "/utility/scripted-file.ashx?_cf=callback-model-unlink.vm\u0026_fid=42702\u0026_wid=fragment-42702\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706",
+			pagedMessage: "ui.page.pifragment-42702.paged",
+			replyModerated: 'All replies are moderated. Your reply will appear once a moderator approves it.',
+			moreStartLinkMessage: 'widget.fragment-42702.threadstart.more',
+			moreStartActionsUrl: "/utility/scripted-file.ashx?_cf=callback-more-start-actions.vm\u0026_fid=42702\u0026_wid=fragment-42702\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706",
+			muteUrl: "/utility/scripted-file.ashx?_cf=callback-model-mute.vm\u0026_fid=42702\u0026_wid=fragment-42702\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706",
+			subscribeUrl: "/utility/scripted-file.ashx?_cf=callback-model-subscribe.vm\u0026_fid=42702\u0026_wid=fragment-42702\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706",
+			confirmDeleteThreadMessage: 'Are you sure you want to delete this post? All replies will also be deleted!',
+			confirmDeleteReplyMessage: 'Are you sure you want to delete this reply? Child replies will be preserved.',
+			successMessage: 'Your reply has been posted',
+			redirect: '/utility/scripted-file.ashx?_cf=callback-redirect.vm\u0026_fid=42702\u0026_wid=fragment-42702\u0026_ct=page\u0026_cp=forums-thread\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=0\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+			anonBodySelector : '#fragment-42702_anonymous-body',
+			loginSelector: '#fragment-42702_login',
+			forumReplyContentTypeId: 'f586769b-0822-468a-b7f3-a94d480ed9b0',
+			tempBody: '',
+			createWrapperId: 'fragment-42702_replyFormId612de988-3629-4c64-be99-8757fef87397',
+							lastReadDate: null,
+						createEditor: {
+				attachOnChange: function() {
+					try { tinyMCE_TelligentEvolutionOptions.AttachOnKeyDownHandler('fragment-42702_fragment-42702_createEditor',function(e) { jQuery.telligent.evolution.messaging.publish('telligent.evolution.widgets.thread.typing', { from: 'fragment-42702' }) }); } catch(e) { };
+				},
+				val: function(val) {
+					if (typeof(val) !== 'undefined') {
+						tinyMCE_TelligentEvolutionOptions.SetContent(val, tinyMCE.get('fragment-42702_fragment-42702_createEditor'));
+					}
+					return (tinyMCE.get('fragment-42702_fragment-42702_createEditor').getContent() || '').replace(/(?:^\W*<p[^>]*>(?:&nbsp;)?<\/p>|<p[^>]*>(?:&nbsp;)?<\/p>\W*$)/gi, '')
+				},
+				checkedVal: function(val) {
+					if(typeof(val) !== 'undefined') {
+						if(val) {
+							jQuery('#fragment-42702_createSuggest').attr('checked','checked');
+						} else {
+							jQuery('#fragment-42702_createSuggest').removeAttr('checked');
+						}
+					}
+					return jQuery('#fragment-42702_createSuggest').is(':checked');
+				},
+				focus: function() {
+					try { tinyMCE.get('fragment-42702_fragment-42702_createEditor').plugins.enhancements.focusAndView(); } catch (e) { }
+				},
+				insert: function(val) {
+					try { tinyMCE_TelligentEvolutionOptions.InsertContent(val, tinyMCE.get('fragment-42702_fragment-42702_createEditor')); } catch (e) { }
+				}
+			}
+		});
+	});
+	</script>
+
+	<script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/ui.js(5).descarga"></script>
+
+	<script type="text/javascript">
+		jQuery(function(){
+			jQuery.telligent.evolution.widgets.userHover.register({
+				getUserInformationUrl: '/utility/scripted-file.ashx?_cf=get-user-information.vm\u0026_fid=2613\u0026_wid=footer-2613\u0026_ct=footer\u0026_cp=\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=10\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706',
+				getRecentActivityUrl: '/utility/scripted-file.ashx?_cf=get-recent-activity.vm\u0026_fid=2613\u0026_wid=footer-2613\u0026_ct=footer\u0026_cp=\u0026_ctt=c6108064af6511ddb074de1a56d89593\u0026_ctc=07a52e1068814ffb9f597fa31b6ef00c\u0026_ctn=3fc3f82483d14ec485ef92e206116d49\u0026_cc=0\u0026_ipd=10\u0026_pcurl=~%2Flinux-device-drivers%2Flinux-software-drivers%2Ff%2Fq-a%2F87262%2Fcross-compiling-new-gnu-radio-on-zc706'
+			});
+		});
+	</script>
+
+	<script type="text/html" id="footer-2615_tip_template">
+		<div class="tourtip">
+			<div class="tourtip-message">
+				<%= message %>
+			</div>
+			<ul class="tourtip-actions">
+				<% if(state.index() > 0) { %>
+					<li>
+						<a href="#" class="tourtip-previous">Previous</a>
+					</li>
+				<% } %>
+				<% if(state.index() < (state.count() - 1)) { %>
+					<li>
+						<a href="#" class="tourtip-next">Next</a>
+					</li>
+				<% } %>
+				<% if(state.index() === (state.count() - 1)) { %>
+					<li>
+						<a href="#" class="tourtip-finish">Ok, got it!</a>
+					</li>
+				<% } else { %>
+					<li>
+						<a href="#" class="ui-tip tourtip-skip" title="Continue this tour in 24 hours.">Later</a>
+					</li>
+				<% } %>
+			</ul>
+		</div>
+	</script>
+	<script type="text/javascript" src="./Cross-compiling new GNU Radio on ZC706 - Q&amp;A - Linux Software Drivers - EngineerZone_files/ui.js(6).descarga"></script>
+
+	<script type="text/javascript">
+	jQuery(function(){
+		jQuery.telligent.evolution.widgets.tourTips.register({
+			tipTemplate: 'footer-2615_tip_template',
+			minWidth: 750,
+			suppressDuration: 86400
+		});
+	});
+	</script>
+
+	<script type="text/javascript">
+	//<![CDATA[
+
+        jQuery.telligent.evolution.ui.components.moderate.defaults = {
+    		reportedText: 'Thank you for your report',
+    		flagText: 'Report as abusive',
+    		flaggedText: 'Reported as abusive'
+    	};
+	//]]>
+	</script>
+
+<script type="text/javascript">
+// <![CDATA[
+window.ctl05_ctl00 = new Telligent_CallbackManager('ctl05_ctl00','ctl05$ctl00','ctl04');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl06_ctl00 = new Telligent_CallbackManager('ctl06_ctl00','ctl06$ctl00','ctl04');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl07_ctl00 = new Telligent_CallbackManager('ctl07_ctl00','ctl07$ctl00','ctl04');
+// ]]>
+</script></form><script type="text/javascript">_satellite.pageBottom();</script>
+<a href="https://ez.analog.com/linux-device-drivers/linux-software-drivers/f/q-a/87262/cross-compiling-new-gnu-radio-on-zc706#" class="evolution-quote-handle" style="display: none;">Quote</a><div style="position: absolute; display: none; z-index: 7000;"></div></body></html>

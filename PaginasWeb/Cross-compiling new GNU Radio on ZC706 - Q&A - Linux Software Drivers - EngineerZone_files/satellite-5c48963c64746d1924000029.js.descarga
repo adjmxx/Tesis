@@ -1,0 +1,48 @@
+_satellite.pushAsyncScript(function(event, target, $variables){
+  (function( w, d, $s ){
+
+    var i;
+
+    check();
+
+    function check(){
+      
+      	var cookie = $s.readCookie( 'cookieAccepted' );
+
+        if( cookie === 'pending' || !cookie ){
+            if( !i ) i = setInterval( check, 1000 ); 
+            return;
+        }
+
+        if( i ) clearInterval( i );
+
+        if( cookie === 'false' ) return $s.notify( '[GTM] User declined analytics.' );
+
+        addGTM();
+
+    }
+
+    function addGTM(){
+
+        $s.notify( '[GTM] Load tag manager.' )
+
+        var sExists = d.querySelector( 'script[src*="googletagmanager.com/gtag"]' ),
+        s = d.createElement( 'script' );
+        s.src = "https://www.googletagmanager.com/gtag/js?id=DC-9206192";
+        s.async = true;
+      
+      	
+        
+      	if( !sExists ) d.head.appendChild( s );
+      
+      	function gtag(){ dataLayer.push( arguments ) };
+      
+      	w.dataLayer = w.dataLayer || [];
+        gtag('js', new Date());
+        gtag('config', 'DC-9206192');
+      
+    }
+            
+
+})( window, document, _satellite );
+});

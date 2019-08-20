@@ -1,0 +1,46 @@
+_satellite.pushAsyncScript(function(event, target, $variables){
+  
+(function(w, d, $s) {
+
+    var i;
+
+    check();
+
+    function check() {
+
+        var cookie = $s.readCookie('cookieAccepted');
+
+        if (cookie === 'pending' || !cookie ) {
+            if (!i) i = setInterval(check, 1000);
+            return;
+        }
+
+        if (i) clearInterval(i);
+
+        if (cookie === 'false') return $s.notify('[GTM] User declined analytics.');
+
+        addGTM();
+
+    }
+
+    function addGTM() {
+        var axel = Math.random(),
+            a = axel * 10000000000000,
+            s = document.createElement("script"),
+            s2 = document.createElement("script"),
+            sessionID = _satellite.readCookie("ipe_s")
+        		text = document.createTextNode("ttd_dom_ready(function() {if (typeof TTDUniversalPixelApi === 'function') {var universalPixelApi = new TTDUniversalPixelApi();universalPixelApi.init('tsmgpd7', ['cegtmc5'], 'https://insight.adsrvr.org/track/up');}});");
+      
+        s.type = "text/javascript";
+        s.src = "https://js.adsrvr.org/up_loader.1.1.0.js";
+				
+        document.body.appendChild(s);
+      	//Trade desk Tag script
+      	s2.type = "text/javascript";
+      	
+      	s2.appendChild(text);
+      	document.body.appendChild(s2);
+    }
+
+})(window, document, _satellite);
+});

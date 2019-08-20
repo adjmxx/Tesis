@@ -1,0 +1,191 @@
+P {
+  color: white;
+  font-family:  verdana,geneva,arial,helvetica;
+  font-size: 11pt;
+}
+
+
+P.sideframe {
+  font-family:  "Arial Narrow",verdana,geneva,arial,helvetica;
+  color: white;
+  font-size: 10pt;
+}
+
+
+P.copyright {
+  font-family:  "Arial Narrow", Arial, Helvetica, Geneva, sans-serif;
+  color: white;
+  font-size: 10pt;
+}
+
+P.header {
+  font-family:  "Arial Black", Arial, Helvetica, Geneva, sans-serif;
+  color: white;
+  font-size: 8pt;
+}
+
+P.navfooter {
+  font-family:  verdana,geneva,arial,helvetica;
+  color: white;
+  font-size: 10pt;
+}
+
+P.notopspace {
+  color: white;
+  font-size: 10pt;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+P.moontable {
+  font-family:  Arial, Helvetica, Geneva, sans-serif;
+  color: white;
+  font-size: 10pt;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+P.moontablel {
+  font-family:  Arial, Helvetica, Geneva, sans-serif;
+  color: white;
+  font-size: 10pt;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+P.moontablelh {
+  font-family:  Arial, Helvetica, Geneva, sans-serif;
+  color: white;
+  font-size: 12pt;
+  text-align: left;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+P.moontablelhc {
+  font-family:  Arial, Helvetica, Geneva, sans-serif;
+  color: white;
+  font-size: 12pt;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+P.marstablelt {
+  font-family:  Arial, Helvetica, Geneva, sans-serif;
+  color: white;
+  font-size: 14pt;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+P.marstablelh {
+  font-family:  Arial, Helvetica, Geneva, sans-serif;
+  color: white;
+  font-size: 12pt;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+P.pagechange {
+  font-family:  "Arial Narrow", Arial, Helvetica, Geneva, sans-serif;
+  color: white;
+  font-size: 10pt;
+}
+
+P.textheader {
+  font-family:  Arial, Helvetica, Geneva, sans-serif;
+  color: white;
+  font-size: 10pt;
+  font-weight: bold;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+PRE.text {
+  font-size: 11pt;
+}
+
+PRE.darksky {
+  font-size: 9pt;
+}
+
+LI { 
+list-style-image: url(../jpg/smallgal13x16c.jpg);
+  color: white;
+  font-family:  verdana,geneva,arial,helvetica;
+  font-size: 11pt;
+ }
+
+
+B.blink { text-decoration: blink; }
+
+DL DT {
+  font-family:  verdana,geneva,arial,helvetica;
+  color: white;
+  text-align: left;
+  font-style: normal;
+  font-size: 11pt;
+}
+
+DL DD {
+  color: white;
+  text-align: left;
+  font-family:  verdana,geneva,arial,helvetica;
+  font-style: normal;
+  font-size: 11pt;
+}
+
+H1, H2, H3, H4 {
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  font-style: normal;
+}
+
+H1 {
+  font-size: 20pt;
+}
+
+H1.left {
+  font-size: 20pt;
+  text-align: left;
+}
+
+H2 { 
+  font-size: 15pt;
+}
+
+
+H2.left { 
+  font-size: 15pt;
+  text-align: left;
+}
+
+H3 { 
+  font-size: 12pt;
+  text-align: left;
+}
+
+H3.center { 
+  font-size: 11pt;
+  text-align: center;
+}
+
+H4 { 
+  font-size: 11pt;
+  text-align: left;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}

@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0049)https://bbs.archlinux.org/viewtopic.php?id=147452 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>[SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime) / AUR Issues, Discussion &amp; PKGBUILD Requests / Arch Linux Forums</title>
+<link rel="stylesheet" type="text/css" href="./[SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime) _ AUR Issues, Discussion &amp; PKGBUILD Requests _ Arch Linux Forums_files/ArchLinux.css">
+<link rel="canonical" href="https://bbs.archlinux.org/viewtopic.php?id=147452" title="Page 1">
+<link rel="alternate" type="application/atom+xml" href="https://bbs.archlinux.org/extern.php?action=feed&amp;tid=147452&amp;type=atom" title="Atom topic feed">
+    <link rel="stylesheet" media="screen" href="./[SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime) _ AUR Issues, Discussion &amp; PKGBUILD Requests _ Arch Linux Forums_files/arch.css">
+        <link rel="stylesheet" media="screen" href="./[SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime) _ AUR Issues, Discussion &amp; PKGBUILD Requests _ Arch Linux Forums_files/archnavbar.css">
+    
+<link rel="shortcut icon" href="https://bbs.archlinux.org/style/ArchLinux/favicon.ico">
+</head>
+
+<body>
+<div id="archnavbar" class="anb-forum">
+	<div id="archnavbarlogo"><h1><a href="http://www.archlinux.org/">Arch Linux</a></h1></div>
+	<div id="archnavbarmenu">
+		<ul id="archnavbarlist">
+			<li id="anb-home"><a href="http://www.archlinux.org/">Home</a></li><li id="anb-packages"><a href="http://www.archlinux.org/packages/">Packages</a></li><li id="anb-forums" class="anb-selected"><a href="https://bbs.archlinux.org/">Forums</a></li><li id="anb-wiki"><a href="https://wiki.archlinux.org/">Wiki</a></li><li id="anb-bugs"><a href="https://bugs.archlinux.org/">Bugs</a></li><li id="anb-security"><a href="https://security.archlinux.org/">Security</a></li><li id="anb-aur"><a href="https://aur.archlinux.org/">AUR</a></li><li id="anb-download"><a href="http://www.archlinux.org/download/">Download</a></li>		</ul>
+	</div>
+</div>
+
+
+<div id="punviewtopic" class="pun">
+<div class="top-box"></div>
+<div class="punwrap">
+
+<div id="brdheader" class="block">
+	<div class="box">
+		<div id="brdmenu" class="inbox">
+			<ul>
+				<li id="navindex" class="isactive"><a href="https://bbs.archlinux.org/index.php">Index</a></li>
+				<li id="navrules"><a href="https://bbs.archlinux.org/misc.php?action=rules">Rules</a></li>
+				<li id="navsearch"><a href="https://bbs.archlinux.org/search.php">Search</a></li>
+				<li id="navregister"><a href="https://bbs.archlinux.org/register.php">Register</a></li>
+				<li id="navlogin"><a href="https://bbs.archlinux.org/login.php">Login</a></li>
+			</ul>
+		</div>
+		<div id="brdwelcome" class="inbox">
+			<p class="conl">You are not logged in.</p>
+			<ul class="conr">
+				<li><span>Topics: <a href="https://bbs.archlinux.org/search.php?action=show_recent" title="Find topics with recent posts.">Active</a> | <a href="https://bbs.archlinux.org/search.php?action=show_unanswered" title="Find topics with no replies.">Unanswered</a></span></li>
+			</ul>
+			<div class="clearer"></div>
+		</div>
+	</div>
+</div>
+
+
+
+<div id="brdmain">
+<div class="linkst">
+	<div class="inbox crumbsplus">
+		<ul class="crumbs">
+			<li><a href="https://bbs.archlinux.org/index.php">Index</a></li>
+			<li><span>»&nbsp;</span><a href="https://bbs.archlinux.org/viewforum.php?id=38">AUR Issues, Discussion &amp; PKGBUILD Requests</a></li>
+			<li><span>»&nbsp;</span><strong><a href="https://bbs.archlinux.org/viewtopic.php?id=147452">[SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime)</a></strong></li>
+		</ul>
+		<div class="pagepost">
+			<p class="pagelink conl"><span class="pages-label">Pages: </span><strong class="item1">1</strong></p>
+		</div>
+		<div class="clearer"></div>
+	</div>
+</div>
+
+<div id="p1149706" class="blockpost rowodd firstpost blockpost1">
+	<h2><span><span class="conr">#1</span> <a href="https://bbs.archlinux.org/viewtopic.php?pid=1149706#p1149706">2012-08-21 21:41:42</a></span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div class="postbody">
+				<div class="postleft">
+					<dl>
+						<dt><strong>Techmeology</strong></dt>
+						<dd class="usertitle"><strong>Member</strong></dd>
+						<dd><span>Registered: 2012-08-21</span></dd>
+						<dd><span>Posts: 19</span></dd>
+					</dl>
+				</div>
+				<div class="postright">
+					<h3>[SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime)</h3>
+					<div class="postmsg">
+						<p>I recently reinstalled gnuradio-git from the AUR (using yaourt -S gnuradio-git), now gnuradio's Python interface does not work. It seems to me that something is incorrectly causing a symbol in /usr/lib/python2.7/site-packages/gnuradio/gr/_gnuradio_core_runtime.so to be called PyInit__gnuradio_core_runtime instead of init_gnuradio_core_runtime. Any help would be appreciated.</p><p>Many thanks,</p><p>Techmeology</p><br><p>I've tried, to no avail:</p><ul><li><p>Modifying the build file to checkout an older version of gnuradio (the version that I think was previously installed)</p></li><li><p>Downgrading swig to the previous version (2.0.7)</p></li><li><p>Googling for this error message</p></li><li><p>Setting PYTHONPATH and LD_LIBRARY_PATH</p></li></ul><p>Testing gnuradio as simply as possible:</p><div class="codebox"><pre><code>python2 -c "from gnuradio import gr"
+Traceback (most recent call last):
+  File "&lt;string&gt;", line 1, in &lt;module&gt;
+  File "/usr/lib/python2.7/site-packages/gnuradio/gr/__init__.py", line 43, in &lt;module&gt;
+    from gnuradio_core import *
+  File "/usr/lib/python2.7/site-packages/gnuradio/gr/gnuradio_core.py", line 23, in &lt;module&gt;
+    from gnuradio_core_runtime import *
+  File "/usr/lib/python2.7/site-packages/gnuradio/gr/gnuradio_core_runtime.py", line 26, in &lt;module&gt;
+    _gnuradio_core_runtime = swig_import_helper()
+  File "/usr/lib/python2.7/site-packages/gnuradio/gr/gnuradio_core_runtime.py", line 22, in swig_import_helper
+    _mod = imp.load_module('_gnuradio_core_runtime', fp, pathname, description)
+ImportError: dynamic module does not define init function (init_gnuradio_core_runtime)</code></pre></div><p>Upon inspecting the shared object that seems to be broken:</p><div class="codebox"><pre><code>nm -D /usr/lib/python2.7/site-packages/gnuradio/gr/_gnuradio_core_runtime.so | grep gnuradio
+00000000000258a0 T PyInit__gnuradio_core_runtime</code></pre></div><p>On another machine (on which gnuradio was installed a few months ago), the symbol in the shared object name is init_gnuradio_core_runtime - which is what Python seems to expect.</p><p>gnuradio-companion gives an error message titles: "dynamic module does not define init function (init...":</p><div class="codebox"><pre><code>Cannot import gnuradio.
+
+Is the python path environment variable set correctly?
+	All OS: PYTHONPATH
+
+Is the library path environment variable set correctly?
+	Linux: LD_LIBRARY_PATH
+	Windows: PATH
+	MacOSX: DYLD_LIBRARY_PATH</code></pre></div>
+						<p class="postedit"><em>Last edited by Techmeology (2012-08-25 20:29:16)</em></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="inbox">
+			<div class="postfoot clearb">
+				<div class="postfootleft"><p><span>Offline</span></p></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="p1149925" class="blockpost roweven">
+	<h2><span><span class="conr">#2</span> <a href="https://bbs.archlinux.org/viewtopic.php?pid=1149925#p1149925">2012-08-22 13:33:30</a></span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div class="postbody">
+				<div class="postleft">
+					<dl>
+						<dt><strong>Malvineous</strong></dt>
+						<dd class="usertitle"><strong>Member</strong></dd>
+						<dd class="postavatar"><img src="./[SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime) _ AUR Issues, Discussion &amp; PKGBUILD Requests _ Arch Linux Forums_files/46006.png" width="40" height="80" alt=""></dd>
+						<dd><span>From: Brisbane, Australia</span></dd>
+						<dd><span>Registered: 2011-02-03</span></dd>
+						<dd><span>Posts: 149</span></dd>
+						<dd class="usercontacts"><span class="website"><a href="http://www.shikadi.net/" rel="nofollow">Website</a></span></dd>
+					</dl>
+				</div>
+				<div class="postright">
+					<h3>Re: [SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime)</h3>
+					<div class="postmsg">
+						<p>I've been having the same problem.&nbsp; Unfortunately I can't help, but please post back if you find a solution!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="inbox">
+			<div class="postfoot clearb">
+				<div class="postfootleft"><p><span>Offline</span></p></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="p1151314" class="blockpost rowodd">
+	<h2><span><span class="conr">#3</span> <a href="https://bbs.archlinux.org/viewtopic.php?pid=1151314#p1151314">2012-08-25 18:02:35</a></span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div class="postbody">
+				<div class="postleft">
+					<dl>
+						<dt><strong>unclekyky</strong></dt>
+						<dd class="usertitle"><strong>Member</strong></dd>
+						<dd><span>Registered: 2012-08-25</span></dd>
+						<dd><span>Posts: 2</span></dd>
+					</dl>
+				</div>
+				<div class="postright">
+					<h3>Re: [SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime)</h3>
+					<div class="postmsg">
+						<p>I am having the same problem as well.&nbsp; The problem even persists when I build the source myself which leads me to believe it is one of the dependencies.&nbsp; When building from source I can run "make test" (or "make check" I can't remember which) and about 95% of the tests fail. </p><p>I just used yaourt to install gnuradio-git on another machine (which is nearly fresh).&nbsp; I can "from gnuradio import gr" without a problem, but gnuradio-companion didn't compile.&nbsp; One of the main differences with this machine is that I never installed python 3 on it.&nbsp; I'm pretty sure that on my other machine all of the binaries and python path variables are pointing to python2, but I can't be too sure since I am brand new to arch.</p><p>This is from the machine that works.</p><div class="codebox"><pre><code>nm -D /usr/lib/python2.7/site-packages/gnuradio/gr/_gnuradio_core_runtime.so | grep gnuradio
+0001f8e0 T init_gnuradio_core_runtime</code></pre></div><p>This is from the machine that doesn't</p><div class="codebox"><pre><code>nm -D /usr/lib/python2.7/site-packages/gnuradio/gr/_gnuradio_core_runtime.so | grep gnuradio
+0000000000024bf0 T PyInit_gnuradio_core_runtime</code></pre></div><p>Any help would be greatly appreciated.</p><p>EDIT: Found this. <a href="http://bugs.python.org/msg90429" rel="nofollow">http://bugs.python.org/msg90429</a> .&nbsp; It looks like PyInit_ is used in Python3 instead of init_.&nbsp; This means that our systems are building towards Python3 for some reason.</p>
+						<p class="postedit"><em>Last edited by unclekyky (2012-08-25 18:18:17)</em></p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="inbox">
+			<div class="postfoot clearb">
+				<div class="postfootleft"><p><span>Offline</span></p></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="p1151369" class="blockpost roweven">
+	<h2><span><span class="conr">#4</span> <a href="https://bbs.archlinux.org/viewtopic.php?pid=1151369#p1151369">2012-08-25 20:28:20</a></span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div class="postbody">
+				<div class="postleft">
+					<dl>
+						<dt><strong>Techmeology</strong></dt>
+						<dd class="usertitle"><strong>Member</strong></dd>
+						<dd><span>Registered: 2012-08-21</span></dd>
+						<dd><span>Posts: 19</span></dd>
+					</dl>
+				</div>
+				<div class="postright">
+					<h3>Re: [SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime)</h3>
+					<div class="postmsg">
+						<p>unclekyky: Thank you:D - that's very enlightening - and the clue I needed. I had wondered as much, so decided to test the theory by doing such things as alias python=python2, but that didn't work and so I dropped that theory in favour of something having changed with SWIG (as noted, downgrading didn't work), or some other dependency I hadn't considered - something must have changed between when I last successfully compiled it, and now. I tried a rebuild, having temporarily pacman -Rdd python. This build works correctly:D:D I'm still mystified as to why it suddenly broke, since I've had Python 3 installed up until now. It's a bit of a hack, but for now we can make this work like this:</p><div class="codebox"><pre><code>sudo pacman -Rdd python
+yaourt -S gnuradio-git
+sudo pacman -S python</code></pre></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="inbox">
+			<div class="postfoot clearb">
+				<div class="postfootleft"><p><span>Offline</span></p></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="p1151374" class="blockpost rowodd">
+	<h2><span><span class="conr">#5</span> <a href="https://bbs.archlinux.org/viewtopic.php?pid=1151374#p1151374">2012-08-25 20:39:52</a></span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div class="postbody">
+				<div class="postleft">
+					<dl>
+						<dt><strong>unclekyky</strong></dt>
+						<dd class="usertitle"><strong>Member</strong></dd>
+						<dd><span>Registered: 2012-08-25</span></dd>
+						<dd><span>Posts: 2</span></dd>
+					</dl>
+				</div>
+				<div class="postright">
+					<h3>Re: [SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime)</h3>
+					<div class="postmsg">
+						<p>I also have come up with a solution (albeit hacked together), based on the discussion <a href="http://lists.gnu.org/archive/html/discuss-gnuradio/2012-04/msg00545.html" rel="nofollow">here</a> (more specifically <a href="http://lists.gnu.org/archive/html/discuss-gnuradio/2012-04/msg00559.html" rel="nofollow">this post</a>).&nbsp; I'm not sure how cmake determines the include or library path, but it can be overridden with this (just edit the PKGBUILD file):</p><div class="codebox"><pre><code>cmake -DPYTHON_EXECUTABLE=/usr/bin/python2.7 -DPYTHON_INCLUDE_DIR=/usr/include/python2.7 -DPYTHON_LIBRARY=/usr/lib/libpython2.7.so -DCMAKE_INSTALL_PREFIX=/usr ../</code></pre></div><p>So, just to be clear: this isn't a bug with the AUR package.&nbsp; It exists in the CMakeLists.txt of the gnuradio git source.&nbsp; In that file there is a line that says "find_package(PythonLibs)" which for some reason on our systems was finding the Python3 libs.&nbsp; This can also be changed to "find_package(PythonLibs 2.7.3)" (if that is your version of Python).&nbsp; This cmake file needs to test to make sure the python version is less than 3.</p><p>Anyway, I'm glad we both got it sorted!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="inbox">
+			<div class="postfoot clearb">
+				<div class="postfootleft"><p><span>Offline</span></p></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="p1151389" class="blockpost roweven">
+	<h2><span><span class="conr">#6</span> <a href="https://bbs.archlinux.org/viewtopic.php?pid=1151389#p1151389">2012-08-25 21:24:35</a></span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div class="postbody">
+				<div class="postleft">
+					<dl>
+						<dt><strong>Techmeology</strong></dt>
+						<dd class="usertitle"><strong>Member</strong></dd>
+						<dd><span>Registered: 2012-08-21</span></dd>
+						<dd><span>Posts: 19</span></dd>
+					</dl>
+				</div>
+				<div class="postright">
+					<h3>Re: [SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime)</h3>
+					<div class="postmsg">
+						<p>unclekyky: that's an even better solution:D Thanks.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="inbox">
+			<div class="postfoot clearb">
+				<div class="postfootleft"><p><span>Offline</span></p></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="p1151499" class="blockpost rowodd">
+	<h2><span><span class="conr">#7</span> <a href="https://bbs.archlinux.org/viewtopic.php?pid=1151499#p1151499">2012-08-26 02:48:23</a></span></h2>
+	<div class="box">
+		<div class="inbox">
+			<div class="postbody">
+				<div class="postleft">
+					<dl>
+						<dt><strong>Malvineous</strong></dt>
+						<dd class="usertitle"><strong>Member</strong></dd>
+						<dd class="postavatar"><img src="./[SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime) _ AUR Issues, Discussion &amp; PKGBUILD Requests _ Arch Linux Forums_files/46006.png" width="40" height="80" alt=""></dd>
+						<dd><span>From: Brisbane, Australia</span></dd>
+						<dd><span>Registered: 2011-02-03</span></dd>
+						<dd><span>Posts: 149</span></dd>
+						<dd class="usercontacts"><span class="website"><a href="http://www.shikadi.net/" rel="nofollow">Website</a></span></dd>
+					</dl>
+				</div>
+				<div class="postright">
+					<h3>Re: [SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime)</h3>
+					<div class="postmsg">
+						<p>Excellent!&nbsp; That works perfectly.&nbsp; Hopefully GNURadio git will be fixed soon - glad you raised the issue with them.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="inbox">
+			<div class="postfoot clearb">
+				<div class="postfootleft"><p><span>Offline</span></p></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="postlinksb">
+	<div class="inbox crumbsplus">
+		<div class="pagepost">
+			<p class="pagelink conl"><span class="pages-label">Pages: </span><strong class="item1">1</strong></p>
+		</div>
+		<ul class="crumbs">
+			<li><a href="https://bbs.archlinux.org/index.php">Index</a></li>
+			<li><span>»&nbsp;</span><a href="https://bbs.archlinux.org/viewforum.php?id=38">AUR Issues, Discussion &amp; PKGBUILD Requests</a></li>
+			<li><span>»&nbsp;</span><strong><a href="https://bbs.archlinux.org/viewtopic.php?id=147452">[SOLVED] Gnuradio Python Interface Broken (init_gnuradio_core_runtime)</a></strong></li>
+		</ul>
+		<div class="clearer"></div>
+	</div>
+</div>
+</div>
+
+<div id="brdfooter" class="block">
+	<h2><span>Board footer</span></h2>
+	<div class="box">
+		<div id="brdfooternav" class="inbox">
+			<div class="conl">
+				<form id="qjump" method="get" action="https://bbs.archlinux.org/viewforum.php">
+					<div><label><span>Jump to<br></span>
+					<select name="id" onchange="window.location=(&#39;viewforum.php?id=&#39;+this.options[this.selectedIndex].value)">
+						<optgroup label="Technical Issues and Assistance">
+							<option value="23">Newbie Corner</option>
+							<option value="17">Installation</option>
+							<option value="22">Kernel &amp; Hardware</option>
+							<option value="18">Applications &amp; Desktop Environments</option>
+							<option value="31">Laptop Issues</option>
+							<option value="8">Networking, Server, and Protection</option>
+							<option value="32">Multimedia and Games</option>
+							<option value="50">System Administration</option>
+							<option value="35">Other Architectures</option>
+						</optgroup>
+						<optgroup label="Arch-centric">
+							<option value="24">Announcements, Package &amp; Security Advisories</option>
+							<option value="1">Arch Discussion</option>
+							<option value="13">Forum &amp; Wiki discussion</option>
+						</optgroup>
+						<optgroup label="Pacman Upgrades, Packaging &amp; AUR">
+							<option value="44">Pacman &amp; Package Upgrade Issues</option>
+							<option value="49">[testing] Repo Forum</option>
+							<option value="4">Creating &amp; Modifying Packages</option>
+							<option value="38" selected="selected">AUR Issues, Discussion &amp; PKGBUILD Requests</option>
+						</optgroup>
+						<optgroup label="Contributions &amp; Discussion">
+							<option value="20">GNU/Linux Discussion</option>
+							<option value="27">Community Contributions</option>
+							<option value="33">Programming &amp; Scripting</option>
+							<option value="30">Other Languages</option>
+							<option value="47">Artwork and Screenshots</option>
+						</optgroup>
+					</select></label>
+					<input type="submit" value=" Go " accesskey="g">
+					</div>
+				</form>
+			</div>
+			<div class="conr">
+				<p id="feedlinks"><span class="atom"><a href="https://bbs.archlinux.org/extern.php?action=feed&amp;tid=147452&amp;type=atom">Atom topic feed</a></span></p>
+				<p id="poweredby">Powered by <a href="http://fluxbb.org/">FluxBB</a></p>
+			</div>
+			<div class="clearer"></div>
+		</div>
+	</div>
+</div>
+
+</div>
+<div class="end-box"></div>
+</div>
+
+
+
+</body></html>

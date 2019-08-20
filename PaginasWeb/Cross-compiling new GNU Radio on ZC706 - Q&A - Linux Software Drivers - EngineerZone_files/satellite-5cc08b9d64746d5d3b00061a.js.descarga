@@ -1,0 +1,55 @@
+_satellite.pushAsyncScript(function(event, target, $variables){
+  (function(){
+
+    var container = document.querySelector( 'section.bottomnav.mega-menu' );
+    if( container ) container.addEventListener( 'expand', handleExpand );
+
+    /**
+     * @name bindListeners
+     * @function
+     * @description Applies click event handlers on all PST links
+     */
+    function bindListeners(){
+        var psts = container.querySelectorAll( 'a.pst' );
+        for( var i = 0; i < psts.length; ++i ) psts[ i ].onclick = trackClick;
+    }
+
+    /**
+     * @name handleExpand
+     * @function
+     * @description Watches the expanding of the megamenu
+     * @param {EventListenerObject} e 
+     */
+    function handleExpand( e ){
+
+        if( e.detail !== 'products' ) return;
+
+        var target = container.querySelector( 'div.main div.results' );
+
+        if( window.MutationObserver ){
+            var observer = new MutationObserver( bindListeners );
+            if( target ) observer.observe( target, { childList: true });
+        } else {
+            jQuery( target ).bind( 'DOMNodeInserted', bindListeners );
+        }
+    }
+
+    /**
+     * @name trackClick
+     * @function
+     * @description Tracks PST clicks and prevents page from continuing until its successfully completed
+     * @param {EventListenerObject} e 
+     */
+    function trackClick( e ){
+        var link = e.currentTarget || e.target;
+
+        e.preventDefault();
+        s.events = 'event93';
+        s.linkTrackEvents = 'event93';
+        s.tl( link, 'o', 'Products Masthead PST Icon Click' );
+
+        window.location = link.href;
+    }
+
+})();
+});

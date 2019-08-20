@@ -1,0 +1,3043 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0049)https://ubuntuforums.org/showthread.php?t=2369339 -->
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" id="vbulletin_html"><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+	
+<meta id="e_vb_meta_bburl" name="vb_meta_bburl" content="https://ubuntuforums.org">
+<!--<base href="https://ubuntuforums.org/">--><base href="."><!--[if IE]></base><![endif]-->
+<meta name="generator" content="vBulletin 4.2.2">
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+
+	<link rel="Shortcut Icon" href="https://ubuntuforums.org/favicon.ico" type="image/x-icon">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" async="" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/analytics.js.descarga"></script><script src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/all.js.descarga" async="" crossorigin="anonymous"></script><script async="" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/gtm.js.descarga"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MXBXNKW');</script>
+<!-- End Google Tag Manager -->
+
+<script type="text/javascript">
+<!--
+	if (typeof YAHOO === 'undefined') // Load ALL YUI Local
+	{
+		document.write('<script type="text/javascript" src="clientscript/yui/yuiloader-dom-event/yuiloader-dom-event.js?v=422"><\/script>');
+		document.write('<script type="text/javascript" src="clientscript/yui/connection/connection-min.js?v=422"><\/script>');
+		var yuipath = 'clientscript/yui';
+		var yuicombopath = '';
+		var remoteyui = false;
+	}
+	else	// Load Rest of YUI remotely (where possible)
+	{
+		var yuipath = 'clientscript/yui';
+		var yuicombopath = '';
+		var remoteyui = true;
+		if (!yuicombopath)
+		{
+			document.write('<script type="text/javascript" src="clientscript/yui/connection/connection-min.js?v=422"><\/script>');
+		}
+	}
+	var SESSIONURL = "s=a9679fcf2884adb7df7f2150eb91ebc5&";
+	var SECURITYTOKEN = "guest";
+	var IMGDIR_MISC = "images/ubuntu-VB4/misc";
+	var IMGDIR_BUTTON = "images/ubuntu-VB4/buttons";
+	var vb_disable_ajax = parseInt("0", 10);
+	var SIMPLEVERSION = "422";
+	var BBURL = "https://ubuntuforums.org";
+	var LOGGEDIN = 0 > 0 ? true : false;
+	var THIS_SCRIPT = "showthread";
+	var RELPATH = "showthread.php?t=2369339";
+	var PATHS = {
+		forum : "",
+		cms   : "",
+		blog  : ""
+	};
+	var AJAXBASEURL = "https://ubuntuforums.org/";
+// -->
+</script><script type="text/javascript" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/yuiloader-dom-event.js.descarga"></script><script type="text/javascript" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/connection-min.js.descarga"></script>
+<script type="text/javascript" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/vbulletin-core.js.descarga"></script>
+
+
+
+	<link rel="alternate" type="application/rss+xml" title="Ubuntu Forums RSS Feed" href="https://ubuntuforums.org/external.php?type=RSS2">
+	
+		<link rel="alternate" type="application/rss+xml" title="Ubuntu Forums - Multimedia Software - RSS Feed" href="https://ubuntuforums.org/external.php?type=RSS2&amp;forumids=334">
+	
+
+
+
+	<link rel="stylesheet" type="text/css" href="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/css.php">
+
+	<!--[if lt IE 8]>
+	<link rel="stylesheet" type="text/css" href="css.php?styleid=117&amp;langid=3&amp;d=1541054923&amp;td=ltr&amp;sheet=popupmenu-ie.css,vbulletin-ie.css,vbulletin-chrome-ie.css,vbulletin-formcontrols-ie.css,editor-ie.css" />
+	<![endif]-->
+
+<link href="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/css" rel="stylesheet" type="text/css">
+	<meta name="keywords" content="gnuradio, rtl, [ubuntu], _zn3pmt5pmt_fe, wrong, package, pmt, symbol, undefined, hmm, libgnuradio-pmt-3.7.6git.so, missing, install, slightly, /usr/local/lib/python2.7/dist-packages/pmt/_pmt_swig.so, message, error">
+	<meta name="description" content="I&#39;ve been having a fight with installing gnuradio. I&#39;m running ubuntu 16.04 and I&#39;m using the  myriadrf repos as suggested by gqrx install page to install gqrx and gnuradio.   apt-get successfully completes install of gnuradio version 3.7.10 and  all of the dependencies.  When I run gnuradio-companion it complains that  libgnuradio-pmt-3.7.6git.so is missing.   
+ 
+There error message has the following text:  
+ 
+   Cannot import gnuradio. Is the model path environment variable set correctly?  
+">
+
+	<title>[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so?</title>
+	<link rel="canonical" href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+		<link rel="stylesheet" type="text/css" href="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/css(1).php">
+	
+	<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="css.php?styleid=117&amp;langid=3&amp;d=1541054923&amp;td=ltr&amp;sheet=toolsmenu-ie.css,postlist-ie.css,showthread-ie.css,postbit-ie.css,poll-ie.css" /><![endif]-->
+<link rel="stylesheet" type="text/css" href="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/css(2).php">
+
+<style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}.fb_reposition{overflow:hidden;position:relative}.fb_invisible{display:none}.fb_reset{background:none;border:0;border-spacing:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}.fb_reset>div{overflow:hidden}@keyframes fb_transform{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}.fb_animate{animation:fb_transform .3s forwards}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}.fb_dialog_advanced{border-radius:8px;padding:10px}.fb_dialog_content{background:#fff;color:#373737}.fb_dialog_close_icon{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px}.fb_dialog_mobile .fb_dialog_close_icon{left:5px;right:auto;top:5px}.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}.fb_dialog_close_icon:hover{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent}.fb_dialog_close_icon:active{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent}.fb_dialog_iframe{line-height:0}.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #365899;color:#fff;font-size:14px;font-weight:bold;margin:0}.fb_dialog_content .dialog_title>span{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Cou7n-nqK52.gif) no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}body.fb_hidden{height:100%;left:0;margin:0;overflow:visible;position:absolute;top:-10000px;transform:none;width:100%}.fb_dialog.fb_dialog_mobile.loading{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/ya/r/3rhSv5V8j3o.gif) white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}.fb_dialog.fb_dialog_mobile.loading.centered{background:none;height:auto;min-height:initial;min-width:initial;width:auto}.fb_dialog.fb_dialog_mobile.loading.centered #fb_dialog_loader_spinner{width:100%}.fb_dialog.fb_dialog_mobile.loading.centered .fb_dialog_content{background:none}.loading.centered #fb_dialog_loader_close{clear:both;color:#fff;display:block;font-size:18px;padding-top:20px}#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .4);bottom:0;left:0;min-height:100%;position:absolute;right:0;top:0;width:100%;z-index:10000}#fb-root #fb_dialog_ipad_overlay.hidden{display:none}.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}.fb_dialog_mobile .fb_dialog_iframe{position:sticky;top:0}.fb_dialog_content .dialog_header{background:linear-gradient(from(#738aba), to(#2c4987));border-bottom:1px solid;border-color:#1d3c78;box-shadow:white 0 1px 1px -1px inset;color:#fff;font:bold 14px Helvetica, sans-serif;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}.fb_dialog_content .dialog_header table{height:43px;width:100%}.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px}.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px}.fb_dialog_content .touchable_button{background:linear-gradient(from(#4267B2), to(#2a4887));background-clip:padding-box;border:1px solid #29487d;border-radius:3px;display:inline-block;line-height:18px;margin-top:3px;max-width:85px;padding:4px 12px;position:relative}.fb_dialog_content .dialog_header .touchable_button input{background:none;border:none;color:#fff;font:bold 12px Helvetica, sans-serif;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}.fb_dialog_content .dialog_content{background:url(https://static.xx.fbcdn.net/rsrc.php/v3/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #4a4a4a;border-bottom:0;border-top:0;height:150px}.fb_dialog_content .dialog_footer{background:#f5f6f7;border:1px solid #4a4a4a;border-top-color:#ccc;height:40px}#fb_dialog_loader_close{float:left}.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}#fb_dialog_loader_spinner{animation:rotateSpinner 1.2s linear infinite;background-color:transparent;background-image:url(https://static.xx.fbcdn.net/rsrc.php/v3/yD/r/t-wz8gw1xG1.png);background-position:50% 50%;background-repeat:no-repeat;height:24px;width:24px}@keyframes rotateSpinner{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.fb_iframe_widget{display:inline-block;position:relative}.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify}.fb_iframe_widget iframe{position:absolute}.fb_iframe_widget_fluid_desktop,.fb_iframe_widget_fluid_desktop span,.fb_iframe_widget_fluid_desktop iframe{max-width:100%}.fb_iframe_widget_fluid_desktop iframe{min-width:220px;position:relative}.fb_iframe_widget_lift{z-index:1}.fb_iframe_widget_fluid{display:inline}.fb_iframe_widget_fluid span{width:100%}</style></head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MXBXNKW"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="above_body"> <!-- closing tag is in template navbar -->
+<div id="header" class="floatcontainer doc_header">
+	<div><a name="top" href="https://ubuntuforums.org/index.php?s=a9679fcf2884adb7df7f2150eb91ebc5" class="logo-image"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/ubuntulogo-o-small.png" alt="Ubuntu Forums" title="Ubuntu Forums"></a></div>
+	<div id="toplinks" class="toplinks">
+		
+			<ul class="nouser">
+			
+				<li><a rel="faq" href="https://ubuntuforums.org/faq.php?s=a9679fcf2884adb7df7f2150eb91ebc5">FAQ</a></li>
+                <li>
+                    <!-- OpenID Login Button -->
+<form class="logindetails" action="https://ubuntuforums.org/login.php" method="post">
+<input type="hidden" name="do" value="login">
+<input type="hidden" name="openid" value="https://login.ubuntu.com">
+<input type="submit" class="loginbutton" value="Login with SSO"><br>
+</form>
+<!-- / OpenID Login Button -->
+                </li>
+
+				
+			</ul>
+		
+	</div>
+	<div class="ad_global_header">
+		
+		
+	</div>
+	<hr>
+</div>
+<div id="navbar" class="navbar">
+	<ul id="navtabs" class="navtabs floatcontainer">
+		
+		
+	
+		<li class="selected" id="vbtab_forum">
+			<a class="navtab" href="https://ubuntuforums.org/forum.php?s=a9679fcf2884adb7df7f2150eb91ebc5">Forum</a>
+		</li>
+		
+		
+			<ul class="floatcontainer">
+				
+					
+						<li class="popupmenu" id="vbmenu_qlinks">
+							<a href="javascript://" class="popupctrl" id="yui-gen1">Quick Links</a>
+							<ul class="popupbody" id="yui-gen0">
+								
+									<li id="link_mje2_914"><a href="https://ubuntuforums.org/search.php?do=process&amp;type[]=1&amp;replyless=1&amp;replylimit=0">Unanswered Posts</a></li>
+								
+									<li id="link_mjm0_271"><a href="https://ubuntuforums.org/search.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=getnew&amp;contenttype=vBForum_Post">New Posts</a></li>
+								
+									<li id="link_odiw_103"><a href="http://ubuntuforums.org/showgroups.php">View Forum Leaders</a></li>
+								
+									<li id="link_mdy0_388"><a href="http://ubuntuforums.org/faq.php">FAQ</a></li>
+								
+									<li id="link_nzqx_135"><a href="http://ubuntuforums.org/faq.php?faq=vb3_reading_posting#faq_vb3_contact_admin">Contact an Admin</a></li>
+								
+							</ul>
+						</li>
+					
+				
+					
+						<li class="popupmenu" id="menu_mja2_174">
+							<a href="javascript://" class="popupctrl" id="yui-gen3">Forum Community</a>
+							<ul class="popupbody" id="yui-gen2">
+								
+									<li id="link_mja2_178"><a target="_blank" href="https://wiki.ubuntu.com/ForumCouncil">Forum Council</a></li>
+								
+									<li id="link_mja2_759"><a target="_blank" href="https://wiki.ubuntu.com/ForumCouncilAgenda"><span> FC Agenda</span></a></li>
+								
+									<li id="link_mja2_602"><a target="_blank" href="https://wiki.ubuntu.com/ForumsGovernance">Forum Governance</a></li>
+								
+									<li id="link_ntk3_139"><a href="http://ubuntuforums.org/showgroups.php/">Forum Staff</a></li>
+								
+									<li id="link_mja2_802"><a href="http://ubuntuforums.org/misc.php?do=showrules">Ubuntu Forums Code of Conduct</a></li>
+								
+									<li id="link_mja2_447"><a target="_blank" href="http://webchat.freenode.net/?channels=ubuntuforums">Forum IRC Channel</a></li>
+								
+							</ul>
+						</li>
+					
+				
+					
+						<li class="popupmenu" id="menu_mja2_686">
+							<a href="javascript://" class="popupctrl" id="yui-gen5">Ubuntu Community</a>
+							<ul class="popupbody" id="yui-gen4">
+								
+									<li id="link_mja2_167"><a target="_blank" href="http://community.ubuntu.com/">Ubuntu</a></li>
+								
+									<li id="link_mja2_232"><a target="_blank" href="http://www.ubuntu.com/download/desktop">Get <b style="color: #dd4814">Ubuntu</b></a></li>
+								
+									<li id="link_mja2_426"><a target="_blank" href="http://www.kubuntu.org/getkubuntu">Get <b style="color:#10147e">Kubuntu</b></a></li>
+								
+									<li id="link_mja2_138"><a target="_blank" href="http://xubuntu.org/getxubuntu/">Get <b style="color: #04a">Xubuntu</b></a></li>
+								
+									<li id="link_mja2_351"><a target="_blank" href="https://help.ubuntu.com/community/Lubuntu/GetLubuntu">Get <b style="color: #033C71">Lubuntu</b></a></li>
+								
+									<li id="link_nzmw_867"><a target="_blank" href="http://ubuntustudio.org/download/">Get <b style="color:#116286">Ubuntu Studio</b></a></li>
+								
+									<li id="link_nzmw_456"><a target="_blank" href="http://www.mythbuntu.org/download-type">Get <b style="color: #dd4814">Mythbuntu</b></a></li>
+								
+									<li id="link_nzmw_464"><a target="_blank" href="http://www.edubuntu.org/download">Get <b style="color: #a30b00">Edubuntu</b></a></li>
+								
+									<li id="link_nzmw_559"><a target="_blank" href="http://ubuntugnome.org/download/">Get <b style="color: #dd4814">Ubuntu GNOME</b></a></li>
+								
+									<li id="link_nzmw_633"><a target="_blank" href="http://www.ubuntukylin.com/downloads/show.php?lang=en&amp;id=122">Get <b style="color: #dd4814">Ubuntu Kylin</b></a></li>
+								
+									<li id="link_nzy1_643"><a target="_blank" href="https://ubuntubudgie.org/downloads">Get <b style="color: #8B008B">Ubuntu Budgie</b></a></li>
+								
+									<li id="link_nzy1_968"><a target="_blank" href="https://ubuntu-mate.org/download/">Get <b style="color: #87A556">Ubuntu Mate</b></a></li>
+								
+									<li id="link_mja2_877"><a target="_blank" href="http://www.ubuntu.com/project/about-ubuntu/conduct">Ubuntu Code of Conduct</a></li>
+								
+									<li id="link_mja2_199"><a target="_blank" href="https://wiki.ubuntu.com/">Ubuntu Wiki</a></li>
+								
+									<li id="link_mja2_891"><a target="_blank" href="https://help.ubuntu.com/community/">Community Wiki</a></li>
+								
+							</ul>
+						</li>
+					
+				
+					
+						<li class="popupmenu" id="menu_mja2_593">
+							<a href="javascript://" class="popupctrl" id="yui-gen7">Other Support</a>
+							<ul class="popupbody" id="yui-gen6">
+								
+									<li id="link_mja2_994"><a target="_blank" href="https://answers.launchpad.net/">Launchpad Answers</a></li>
+								
+									<li id="link_mja2_430"><a target="_blank" href="http://webchat.freenode.net/?channels=ubuntu">Ubuntu IRC Support</a></li>
+								
+									<li id="link_mja2_646"><a target="_blank" href="http://askubuntu.com/">AskUbuntu</a></li>
+								
+									<li id="link_mja2_817"><a target="_blank" href="https://help.ubuntu.com/">Official Documentation</a></li>
+								
+									<li id="link_mja2_745"><a target="_blank" href="https://help.ubuntu.com/community">User Documentation</a></li>
+								
+							</ul>
+						</li>
+					
+				
+					
+						<li class="popupmenu" id="menu_mtaz_185">
+							<a href="javascript://" class="popupctrl" id="yui-gen9">Social Media</a>
+							<ul class="popupbody" id="yui-gen8">
+								
+									<li id="link_mtaz_522"><a target="_blank" href="https://www.facebook.com/UbuntuForums">Facebook</a></li>
+								
+									<li id="link_mtaz_149"><a target="_blank" href="https://twitter.com/ubuntuforums">Twitter</a></li>
+								
+							</ul>
+						</li>
+					
+				
+					
+						<li class="popupmenu" id="menu_ode5_930">
+							<a href="javascript://" class="popupctrl" id="yui-gen11">Useful Links</a>
+							<ul class="popupbody" id="yui-gen10">
+								
+									<li id="link_ode5_240"><a target="_blank" href="http://distrowatch.com/table.php?distribution=ubuntu">Distrowatch</a></li>
+								
+									<li id="link_ode5_738"><a target="_blank" href="https://bugs.launchpad.net/ubuntu/">Bugs: Ubuntu</a></li>
+								
+									<li id="link_ode5_821"><a target="_blank" href="https://launchpad.net/ubuntu/+ppas">PPAs: Ubuntu</a></li>
+								
+									<li id="link_ode5_923"><a target="_blank" href="http://www.webupd8.org/">Web Upd8: Ubuntu</a></li>
+								
+									<li id="link_ode5_916"><a target="_blank" href="http://www.omgubuntu.co.uk/">OMG! Ubuntu</a></li>
+								
+									<li id="link_ode5_248"><a target="_blank" href="https://insights.ubuntu.com/">Ubuntu Insights</a></li>
+								
+									<li id="link_ode5_244"><a target="_blank" href="http://planet.ubuntu.com/">Planet Ubuntu</a></li>
+								
+							</ul>
+						</li>
+					
+				
+					
+						
+					
+				
+			</ul>
+		
+
+	
+		<li id="vbtab_whatsnew">
+			<a class="navtab" href="https://ubuntuforums.org/activity.php?s=a9679fcf2884adb7df7f2150eb91ebc5">Activity Page</a>
+		</li>
+		
+		
+
+	
+		<li id="tab_nti4_938">
+			<a target="_blank" class="navtab" href="http://ubuntuforums.org/showthread.php?t=2230004">Please read before SSO login</a>
+		</li>
+		
+		
+
+		
+	</ul>
+	
+		<div id="globalsearch" class="globalsearch">
+			<form action="https://ubuntuforums.org/search.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=process" method="post" id="navbar_search" class="navbar_search">
+				
+				<input type="hidden" name="securitytoken" value="guest">
+				<input type="hidden" name="do" value="process">
+				<span class="textboxcontainer"><span><input type="text" value="" name="query" class="textbox" tabindex="99"></span></span>
+				<span class="buttoncontainer"><span><input type="image" class="searchbutton" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/search.png" name="submit" onclick="document.getElementById(&#39;navbar_search&#39;).submit;" tabindex="100"></span></span>
+			</form>
+			<ul class="navbar_advanced_search">
+				<li><a href="https://ubuntuforums.org/search.php?s=a9679fcf2884adb7df7f2150eb91ebc5?search_type=1" accesskey="4">Advanced Search</a></li>
+				
+			</ul>
+		</div>
+	
+</div>
+</div><!-- closing div for above_body -->
+
+<div class="body_wrapper">
+<div id="breadcrumb" class="breadcrumb">
+	<ul class="floatcontainer">
+		<li class="navbithome"><a href="https://ubuntuforums.org/index.php?s=a9679fcf2884adb7df7f2150eb91ebc5" accesskey="1"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/navbit-home.png" alt="Home" title="Home"></a></li>
+		
+	<li class="navbit"><a href="https://ubuntuforums.org/index.php?s=a9679fcf2884adb7df7f2150eb91ebc5">Forum</a></li>
+
+	<li class="navbit"><a href="https://ubuntuforums.org/forumdisplay.php?f=130&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">The Ubuntu Forum Community</a></li>
+
+	<li class="navbit"><a href="https://ubuntuforums.org/forumdisplay.php?f=327&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu Official Flavours Support</a></li>
+
+	<li class="navbit"><a href="https://ubuntuforums.org/forumdisplay.php?f=334&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Multimedia Software</a></li>
+
+		
+	<li class="navbit lastnavbit"><span><span style="font-weight: bold; color: #980101;">[ubuntu]</span> GNURadio install missing libgnuradio-pmt-3.7.6git.so?</span></li>
+
+	</ul>
+	<hr>
+</div>
+
+
+
+
+
+
+
+
+
+	<div id="above_postlist" class="above_postlist">
+		
+		<div id="pagination_top" class="pagination_top">
+		
+			<div id="postpagestats_above" class="postpagestats">
+				Results 1 to 8 of 8
+			</div>
+		</div>
+	</div>
+	<div id="pagetitle" class="pagetitle">
+		<h1>
+			Thread: <span class="threadtitle"><a href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" title="Reload this Page">GNURadio install missing libgnuradio-pmt-3.7.6git.so?</a></span>
+		</h1>
+		
+			
+<span id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; width: 0px; height: 0px;"><div><iframe name="f34e95059e22104" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/ping.html" style="display: none;"></iframe></div><div><iframe name="fb_xdm_frame_https" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tabindex="-1" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/xd_arbiter.html" style="border: none;"></iframe></div></div></span>
+<script type="text/javascript" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/all.js(1).descarga"></script>
+
+<fb:like href="https://ubuntuforums.org/showthread.php?t=2369339" font="tahoma" layout="standard" show_faces="false" width="260" action="like" colorscheme="light" class=" fb_iframe_widget" fb-xfbml-state="rendered" fb-iframe-plugin-query="action=like&amp;app_id=&amp;color_scheme=light&amp;container_width=0&amp;font=tahoma&amp;href=https%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D2369339&amp;layout=standard&amp;locale=en_US&amp;sdk=joey&amp;show_faces=false&amp;width=260"><span style="vertical-align: bottom; width: 260px; height: 20px;"><iframe name="f268a418972e6ac" width="260px" height="1000px" title="fb:like Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/like.html" style="border: none; visibility: visible; width: 260px; height: 20px;" class=""></iframe></span></fb:like>
+		
+	</div>
+	<div id="thread_controls" class="thread_controls toolsmenu">
+		<div>
+		<ul id="postlist_popups" class="postlist_popups popupgroup">
+			
+			
+			<li class="popupmenu" id="threadtools">
+				<h6><a class="popupctrl" href="javascript://" id="yui-gen13">Thread Tools</a></h6>
+				<ul class="popupbody" id="yui-gen12">
+					<li><a href="https://ubuntuforums.org/printthread.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;t=2369339&amp;pp=10&amp;page=1" accesskey="3" rel="nofollow">Show Printable Version</a></li>
+					
+					<li>
+						
+							<a href="https://ubuntuforums.org/subscription.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=addsubscription&amp;t=2369339" rel="nofollow">Subscribe to this Thread…</a>
+						
+					</li>
+					
+
+						
+					
+				</ul>
+			</li>
+
+			
+
+			
+
+			
+
+			
+				<li class="popupmenu" id="displaymodes">
+					<h6><a class="popupctrl" href="javascript://" id="yui-gen15">Display</a></h6>
+					<ul class="popupbody" id="yui-gen14">
+						<li><label>Linear Mode</label></li>
+						<li><a href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5&amp;mode=hybrid"> Switch to Hybrid Mode</a></li>
+						<li><a href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13678733&amp;mode=threaded#post13678733"> Switch to Threaded Mode</a></li>
+					</ul>
+				</li>
+			
+
+			
+			</ul>
+		</div>
+	</div>
+
+<div id="postlist" class="postlist restrain">
+	
+
+	
+		<ol id="posts" class="posts" start="1">
+			
+<li class="postbit postbitim postcontainer old" id="post_13678733">
+	<div class="postdetails_noavatar">
+		<div class="posthead">
+                        
+                                <span class="postdate old">
+                                        
+                                                <span class="date">August 22nd, 2017</span>
+                                        
+                                </span>
+                                <span class="nodecontrols">
+                                        
+                                                <a name="post13678733" href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13678733#post13678733" class="postcounter">#1</a><a id="postcount13678733" name="1"></a>
+                                        
+                                        
+                                        
+                                </span>
+                        
+		</div>
+
+		<div class="userinfo_noavatar">
+			<div class="contact">
+				
+				<div class="username_container">
+					
+						<div class="popupmenu memberaction" id="yui-gen16">
+	<a class="username offline popupctrl" href="https://ubuntuforums.org/member.php?u=1411221&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" title="machs is offline" id="yui-gen18"><strong><span style="color: #000000;">machs</span></strong></a>
+	<ul class="popupbody memberaction_body" id="yui-gen17">
+		<li class="left">
+			<a href="https://ubuntuforums.org/member.php?u=1411221&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" class="siteicon_profile">
+				View Profile
+			</a>
+		</li>
+		
+		<li class="right">
+			<a href="https://ubuntuforums.org/search.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=finduser&amp;userid=1411221&amp;contenttype=vBForum_Post&amp;showposts=1" class="siteicon_forum" rel="nofollow">
+				View Forum Posts
+			</a>
+		</li>
+		
+		
+		<li class="left">
+			<a href="https://ubuntuforums.org/private.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=newpm&amp;u=1411221" class="siteicon_message" rel="nofollow">
+				Private Message
+			</a>
+		</li>
+		
+		
+		
+		
+		
+		
+		
+
+		
+
+		
+		
+	</ul>
+</div>
+						<img class="inlineimg onlinestatus" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/user-offline.png" alt="machs is offline" border="0" title="machs is offline">
+
+					
+					<span class="usertitle">
+						First Cup of Ubuntu
+					</span>
+					
+						<span class="rank"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/rank_1.png" alt="" border=""></span>
+					
+
+                                        
+					
+					
+						<div class="imlinks">
+							    
+						</div>
+					
+				</div>
+			</div>
+			
+				<div class="userinfo_extra">
+					<dl class="userstats">
+						<dt>Join Date</dt> <dd>Aug 2011</dd>
+						
+						
+						<!-- <dt>Beans</dt> <dd>9</dd>	 -->
+<dt>Beans</dt> <dd>9</dd>
+
+                                                 
+						
+					</dl>
+					
+					
+				</div>
+			
+		</div>
+	</div>
+
+	<div class="postbody">
+		
+		<div class="postrow">
+		
+		<h2 class="posttitle icon">
+			GNURadio install missing libgnuradio-pmt-3.7.6git.so?
+		</h2>
+		
+				
+					
+					
+				
+				
+		<div class="content">
+			<div id="post_message_13678733">
+				<blockquote class="postcontent restore">
+					I've been having a fight with installing gnuradio. I'm running ubuntu 16.04 and I'm using the  myriadrf repos as suggested by <a href="http://gqrx.dk/download/install-ubuntu" target="_blank">gqrx install page</a> to install gqrx and gnuradio.   apt-get successfully completes install of gnuradio version 3.7.10 and  all of the dependencies.  When I run gnuradio-companion it complains that  libgnuradio-pmt-3.7.6git.so is missing.  <br>
+<br>
+There error message has the following text: <br>
+<br>
+  <div class="bbcode_container">
+	<div class="bbcode_description">Code:</div>
+	<pre class="bbcode_code" style="height:132px;"><div style="margin-left:40px"> Cannot import gnuradio. Is the model path environment variable set correctly? 
+
+All OS: PYTHONPATH Is the library path environment variable set correctly?
+Linux: LD_LIBRARY_PATH  
+Windows: PATH 
+MacOSX: DYLD_LIBRARY_PATH
+
+  (libgnuradio-pmt-3.7.6git.so.0.0.0: cannot open shared object file: No such file or directory)
+</div></pre>
+</div> <br>
+<br>
+I have a libgnuradio-pmt file installed however it is  version 3.7.10.  I do not have a libgnuradio-pmt-3.7.6git.so.0.0.0 on my system. <br>
+<br>
+<div class="bbcode_container">
+	<div class="bbcode_description">Code:</div>
+	<pre class="bbcode_code" style="height:96px;">machs@electricSheep:~$ find /usr/ | grep radio-pmt
+/usr/share/doc/libgnuradio-pmt3.7.10
+/usr/share/doc/libgnuradio-pmt3.7.10/changelog.Debian.gz
+/usr/share/doc/libgnuradio-pmt3.7.10/copyright
+/usr/lib/x86_64-linux-gnu/libgnuradio-pmt.so
+/usr/lib/x86_64-linux-gnu/libgnuradio-pmt.so.3.7.10</pre>
+</div>I believe my paths are set-up correctly.<br>
+<br>
+<br>
+<div class="bbcode_container">
+	<div class="bbcode_description">Code:</div>
+	<pre class="bbcode_code" style="height:84px;">machs@electricSheep:~$ echo $PYTHONPATH
+/usr/local/lib/python2.7/dist-packages/
+machs@electricSheep:~$ echo $LD_LIBARY_PATH
+/usr/lib/x86_64-linux-gnu/
+machs@electricSheep:~$</pre>
+</div>Any thoughts on what I can try next?
+				</blockquote>
+			</div>
+
+			
+
+
+		</div>
+			
+				
+			
+				
+			
+			
+			
+		</div>
+	</div>
+	<div class="postfoot">
+		<div class="textcontrols floatcontainer">
+			<span class="postcontrols">
+				<img style="display:none" id="progress_13678733" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/progress.gif" alt="">
+				
+				
+<!-- added advance reply -->
+                    
+                        <a class="quickreply" href="https://ubuntuforums.org/newreply.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13678733&amp;noquote=1" rel="nofollow"><img id="replyimg_13678733" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/clear.gif" alt="Advanced reply" title="Advanced reply"> Adv Reply</a>
+                        <span class="seperator">&nbsp;</span>
+                    
+<!-- end added advance reply -->
+<!-- the next id was qrwq_13678733 -->
+				
+				
+			</span>
+			<span class="postlinking">
+				
+					
+				
+				
+
+				 
+				
+
+					
+
+					
+					 
+
+					
+					
+					
+					
+					
+			</span>
+		</div>
+	</div>
+	<hr>
+</li>
+
+<li class="postbit postbitim postcontainer old" id="post_13678852">
+	<div class="postdetails_noavatar">
+		<div class="posthead">
+                        
+                                <span class="postdate old">
+                                        
+                                                <span class="date">August 22nd, 2017</span>
+                                        
+                                </span>
+                                <span class="nodecontrols">
+                                        
+                                                <a name="post13678852" href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13678852#post13678852" class="postcounter">#2</a><a id="postcount13678852" name="2"></a>
+                                        
+                                        
+                                        
+                                </span>
+                        
+		</div>
+
+		<div class="userinfo">
+			<div class="contact">
+				
+					<a class="postuseravatarlink" href="https://ubuntuforums.org/member.php?u=19&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" title="Artificial Intelligence is offline">
+						
+							<img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/avatar19_126.gif" alt="Artificial Intelligence&#39;s Avatar" title="Artificial Intelligence&#39;s Avatar">
+						
+					</a>
+				
+				<div class="username_container">
+					
+						<div class="popupmenu memberaction" id="yui-gen19">
+	<a class="username offline popupctrl" href="https://ubuntuforums.org/member.php?u=19&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" title="Artificial Intelligence is offline" id="yui-gen21"><strong><span style="font-weight: bold; color: #C61919;">Artificial Intelligence</span></strong></a>
+	<ul class="popupbody memberaction_body" id="yui-gen20">
+		<li class="left">
+			<a href="https://ubuntuforums.org/member.php?u=19&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" class="siteicon_profile">
+				View Profile
+			</a>
+		</li>
+		
+		<li class="right">
+			<a href="https://ubuntuforums.org/search.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=finduser&amp;userid=19&amp;contenttype=vBForum_Post&amp;showposts=1" class="siteicon_forum" rel="nofollow">
+				View Forum Posts
+			</a>
+		</li>
+		
+		
+		<li class="left">
+			<a href="https://ubuntuforums.org/private.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=newpm&amp;u=19" class="siteicon_message" rel="nofollow">
+				Private Message
+			</a>
+		</li>
+		
+		
+		
+		
+		
+		
+		
+
+		
+
+		
+		
+	</ul>
+</div>
+						<img class="inlineimg onlinestatus" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/user-offline.png" alt="Artificial Intelligence is offline" border="0" title="Artificial Intelligence is offline">
+
+					
+					<span class="usertitle">
+						elementary OS user
+					</span>
+					
+						<span class="rank"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/rank_uf_moderator_2013-07.png" alt="" border=""></span>
+					
+
+                                        
+					
+					
+						<div class="imlinks">
+							    
+						</div>
+					
+				</div>
+			</div>
+			
+				<div class="userinfo_extra">
+					<dl class="userstats">
+						<dt>Join Date</dt> <dd>Oct 2004</dd>
+						<dt>Location</dt> <dd>Denmark - Scandinavia</dd>
+						
+						<!-- <dt>Beans</dt> <dd>19,313</dd>	 -->
+<dt>Beans</dt> <dd>19,313</dd>
+
+                                                 <dt>Distro</dt><dd>Ubuntu 18.04 Bionic Beaver</dd>
+						
+					</dl>
+					
+					
+				</div>
+			
+		</div>
+	</div>
+
+	<div class="postbody">
+		
+		<div class="postrow">
+		
+		<h2 class="posttitle icon">
+			Re: GNURadio install missing libgnuradio-pmt-3.7.6git.so?
+		</h2>
+		
+				
+				
+		<div class="content">
+			<div id="post_message_13678852">
+				<blockquote class="postcontent restore">
+					Have you tried symblink the two?<br>
+<br>
+<div class="bbcode_container">
+	<div class="bbcode_description">Code:</div>
+	<pre class="bbcode_code" style="height:36px;">sudo ln -s /usr/lib/x86_64-linux-gnu/libgnuradio-pmt.so.3.7.10 /usr/lib/x86_64-linux-gnu/libgnuradio-pmt-3.7.6git.so.0.0.0</pre>
+</div>
+				</blockquote>
+			</div>
+
+			
+
+
+		</div>
+			
+				
+			
+			
+				<blockquote class="signature restore"><div class="signaturecontainer"><font color="#FF0000">| AMD Ryzen 1700x 3.4 GHz | ASUS PRIME X370-A | 32 GB 2400 Mhz DDR4 |<br>
+| ASUS Nvidia 1070 8 GB | SSD 250 GB | HDD 1 TB |</font><br>
+<br>
+My Blog: <a href="https://eosvisions.wordpress.com/" target="_blank">https://eosvisions.wordpress.com</a><br>
+<br>
+Try elementary OS - <a href="https://elementary.io/" target="_blank">https://elementary.io</a></div></blockquote>
+			
+			
+		</div>
+	</div>
+	<div class="postfoot">
+		<div class="textcontrols floatcontainer">
+			<span class="postcontrols">
+				<img style="display:none" id="progress_13678852" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/progress.gif" alt="">
+				
+				
+<!-- added advance reply -->
+                    
+                        <a class="quickreply" href="https://ubuntuforums.org/newreply.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13678852&amp;noquote=1" rel="nofollow"><img id="replyimg_13678852" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/clear.gif" alt="Advanced reply" title="Advanced reply"> Adv Reply</a>
+                        <span class="seperator">&nbsp;</span>
+                    
+<!-- end added advance reply -->
+<!-- the next id was qrwq_13678852 -->
+				
+				
+			</span>
+			<span class="postlinking">
+				
+					
+				
+				
+
+				 
+				
+
+					
+
+					
+					 
+
+					
+					
+					
+					
+					
+			</span>
+		</div>
+	</div>
+	<hr>
+</li>
+
+<li class="postbit postbitim postcontainer old" id="post_13679060">
+	<div class="postdetails_noavatar">
+		<div class="posthead">
+                        
+                                <span class="postdate old">
+                                        
+                                                <span class="date">August 23rd, 2017</span>
+                                        
+                                </span>
+                                <span class="nodecontrols">
+                                        
+                                                <a name="post13679060" href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13679060#post13679060" class="postcounter">#3</a><a id="postcount13679060" name="3"></a>
+                                        
+                                        
+                                        
+                                </span>
+                        
+		</div>
+
+		<div class="userinfo_noavatar">
+			<div class="contact">
+				
+				<div class="username_container">
+					
+						<div class="popupmenu memberaction" id="yui-gen22">
+	<a class="username offline popupctrl" href="https://ubuntuforums.org/member.php?u=1411221&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" title="machs is offline" id="yui-gen24"><strong><span style="color: #000000;">machs</span></strong></a>
+	<ul class="popupbody memberaction_body" id="yui-gen23">
+		<li class="left">
+			<a href="https://ubuntuforums.org/member.php?u=1411221&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" class="siteicon_profile">
+				View Profile
+			</a>
+		</li>
+		
+		<li class="right">
+			<a href="https://ubuntuforums.org/search.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=finduser&amp;userid=1411221&amp;contenttype=vBForum_Post&amp;showposts=1" class="siteicon_forum" rel="nofollow">
+				View Forum Posts
+			</a>
+		</li>
+		
+		
+		<li class="left">
+			<a href="https://ubuntuforums.org/private.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=newpm&amp;u=1411221" class="siteicon_message" rel="nofollow">
+				Private Message
+			</a>
+		</li>
+		
+		
+		
+		
+		
+		
+		
+
+		
+
+		
+		
+	</ul>
+</div>
+						<img class="inlineimg onlinestatus" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/user-offline.png" alt="machs is offline" border="0" title="machs is offline">
+
+					
+					<span class="usertitle">
+						First Cup of Ubuntu
+					</span>
+					
+						<span class="rank"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/rank_1.png" alt="" border=""></span>
+					
+
+                                        
+					
+					
+						<div class="imlinks">
+							    
+						</div>
+					
+				</div>
+			</div>
+			
+				<div class="userinfo_extra">
+					<dl class="userstats">
+						<dt>Join Date</dt> <dd>Aug 2011</dd>
+						
+						
+						<!-- <dt>Beans</dt> <dd>9</dd>	 -->
+<dt>Beans</dt> <dd>9</dd>
+
+                                                 
+						
+					</dl>
+					
+					
+				</div>
+			
+		</div>
+	</div>
+
+	<div class="postbody">
+		
+		<div class="postrow">
+		
+		<h2 class="posttitle icon">
+			Re: GNURadio install missing libgnuradio-pmt-3.7.6git.so?
+		</h2>
+		
+				
+				
+		<div class="content">
+			<div id="post_message_13679060">
+				<blockquote class="postcontent restore">
+					Hmm Slightly different error message; <br>
+<br>
+<div class="bbcode_container">
+	<div class="bbcode_description">Code:</div>
+	<pre class="bbcode_code" style="height:36px;">(/usr/local/lib/python2.7/dist-packages/pmt/_pmt_swig.so: undefined symbol: _ZN3pmt5PMT_FE)</pre>
+</div>perhaps there is something wrong with the pmt package?
+				</blockquote>
+			</div>
+
+			
+
+
+		</div>
+			
+			<!-- edit note -->
+			<blockquote class="postcontent lastedited">
+				
+					Last edited by machs; August 23rd, 2017 at <span class="time">02:23 AM</span>.
+				
+				
+			</blockquote>
+			<!-- / edit note -->
+			
+				
+			
+			
+			
+		</div>
+	</div>
+	<div class="postfoot">
+		<div class="textcontrols floatcontainer">
+			<span class="postcontrols">
+				<img style="display:none" id="progress_13679060" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/progress.gif" alt="">
+				
+				
+<!-- added advance reply -->
+                    
+                        <a class="quickreply" href="https://ubuntuforums.org/newreply.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13679060&amp;noquote=1" rel="nofollow"><img id="replyimg_13679060" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/clear.gif" alt="Advanced reply" title="Advanced reply"> Adv Reply</a>
+                        <span class="seperator">&nbsp;</span>
+                    
+<!-- end added advance reply -->
+<!-- the next id was qrwq_13679060 -->
+				
+				
+			</span>
+			<span class="postlinking">
+				
+					
+				
+				
+
+				 
+				
+
+					
+
+					
+					 
+
+					
+					
+					
+					
+					
+			</span>
+		</div>
+	</div>
+	<hr>
+</li>
+
+<li class="postbit postbitim postcontainer old" id="post_13679121">
+	<div class="postdetails_noavatar">
+		<div class="posthead">
+                        
+                                <span class="postdate old">
+                                        
+                                                <span class="date">August 23rd, 2017</span>
+                                        
+                                </span>
+                                <span class="nodecontrols">
+                                        
+                                                <a name="post13679121" href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13679121#post13679121" class="postcounter">#4</a><a id="postcount13679121" name="4"></a>
+                                        
+                                        
+                                        
+                                </span>
+                        
+		</div>
+
+		<div class="userinfo">
+			<div class="contact">
+				
+					<a class="postuseravatarlink" href="https://ubuntuforums.org/member.php?u=19&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" title="Artificial Intelligence is offline">
+						
+							<img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/avatar19_126.gif" alt="Artificial Intelligence&#39;s Avatar" title="Artificial Intelligence&#39;s Avatar">
+						
+					</a>
+				
+				<div class="username_container">
+					
+						<div class="popupmenu memberaction" id="yui-gen25">
+	<a class="username offline popupctrl" href="https://ubuntuforums.org/member.php?u=19&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" title="Artificial Intelligence is offline" id="yui-gen27"><strong><span style="font-weight: bold; color: #C61919;">Artificial Intelligence</span></strong></a>
+	<ul class="popupbody memberaction_body" id="yui-gen26">
+		<li class="left">
+			<a href="https://ubuntuforums.org/member.php?u=19&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" class="siteicon_profile">
+				View Profile
+			</a>
+		</li>
+		
+		<li class="right">
+			<a href="https://ubuntuforums.org/search.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=finduser&amp;userid=19&amp;contenttype=vBForum_Post&amp;showposts=1" class="siteicon_forum" rel="nofollow">
+				View Forum Posts
+			</a>
+		</li>
+		
+		
+		<li class="left">
+			<a href="https://ubuntuforums.org/private.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=newpm&amp;u=19" class="siteicon_message" rel="nofollow">
+				Private Message
+			</a>
+		</li>
+		
+		
+		
+		
+		
+		
+		
+
+		
+
+		
+		
+	</ul>
+</div>
+						<img class="inlineimg onlinestatus" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/user-offline.png" alt="Artificial Intelligence is offline" border="0" title="Artificial Intelligence is offline">
+
+					
+					<span class="usertitle">
+						elementary OS user
+					</span>
+					
+						<span class="rank"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/rank_uf_moderator_2013-07.png" alt="" border=""></span>
+					
+
+                                        
+					
+					
+						<div class="imlinks">
+							    
+						</div>
+					
+				</div>
+			</div>
+			
+				<div class="userinfo_extra">
+					<dl class="userstats">
+						<dt>Join Date</dt> <dd>Oct 2004</dd>
+						<dt>Location</dt> <dd>Denmark - Scandinavia</dd>
+						
+						<!-- <dt>Beans</dt> <dd>19,313</dd>	 -->
+<dt>Beans</dt> <dd>19,313</dd>
+
+                                                 <dt>Distro</dt><dd>Ubuntu 18.04 Bionic Beaver</dd>
+						
+					</dl>
+					
+					
+				</div>
+			
+		</div>
+	</div>
+
+	<div class="postbody">
+		
+		<div class="postrow">
+		
+		<h2 class="posttitle icon">
+			Re: GNURadio install missing libgnuradio-pmt-3.7.6git.so?
+		</h2>
+		
+				
+				
+		<div class="content">
+			<div id="post_message_13679121">
+				<blockquote class="postcontent restore">
+					Seems symblink won't help in this case. You can remove it again:<br>
+<div class="bbcode_container">
+	<div class="bbcode_description">Code:</div>
+	<pre class="bbcode_code" style="height:36px;">sudo rm -rf /usr/lib/x86_64-linux-gnu/libgnuradio-pmt-3.7.6git.so.0.0.0</pre>
+</div>Perhaps purge the ppa's yuo added and use GNURadio from the original repo to see if it works.
+				</blockquote>
+			</div>
+
+			
+
+
+		</div>
+			
+				
+			
+			
+				<blockquote class="signature restore"><div class="signaturecontainer"><font color="#FF0000">| AMD Ryzen 1700x 3.4 GHz | ASUS PRIME X370-A | 32 GB 2400 Mhz DDR4 |<br>
+| ASUS Nvidia 1070 8 GB | SSD 250 GB | HDD 1 TB |</font><br>
+<br>
+My Blog: <a href="https://eosvisions.wordpress.com/" target="_blank">https://eosvisions.wordpress.com</a><br>
+<br>
+Try elementary OS - <a href="https://elementary.io/" target="_blank">https://elementary.io</a></div></blockquote>
+			
+			
+		</div>
+	</div>
+	<div class="postfoot">
+		<div class="textcontrols floatcontainer">
+			<span class="postcontrols">
+				<img style="display:none" id="progress_13679121" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/progress.gif" alt="">
+				
+				
+<!-- added advance reply -->
+                    
+                        <a class="quickreply" href="https://ubuntuforums.org/newreply.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13679121&amp;noquote=1" rel="nofollow"><img id="replyimg_13679121" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/clear.gif" alt="Advanced reply" title="Advanced reply"> Adv Reply</a>
+                        <span class="seperator">&nbsp;</span>
+                    
+<!-- end added advance reply -->
+<!-- the next id was qrwq_13679121 -->
+				
+				
+			</span>
+			<span class="postlinking">
+				
+					
+				
+				
+
+				 
+				
+
+					
+
+					
+					 
+
+					
+					
+					
+					
+					
+			</span>
+		</div>
+	</div>
+	<hr>
+</li>
+
+<li class="postbit postbitim postcontainer old" id="post_13679286">
+	<div class="postdetails_noavatar">
+		<div class="posthead">
+                        
+                                <span class="postdate old">
+                                        
+                                                <span class="date">August 23rd, 2017</span>
+                                        
+                                </span>
+                                <span class="nodecontrols">
+                                        
+                                                <a name="post13679286" href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13679286#post13679286" class="postcounter">#5</a><a id="postcount13679286" name="5"></a>
+                                        
+                                        
+                                        
+                                </span>
+                        
+		</div>
+
+		<div class="userinfo_noavatar">
+			<div class="contact">
+				
+				<div class="username_container">
+					
+						<div class="popupmenu memberaction" id="yui-gen28">
+	<a class="username offline popupctrl" href="https://ubuntuforums.org/member.php?u=1411221&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" title="machs is offline" id="yui-gen30"><strong><span style="color: #000000;">machs</span></strong></a>
+	<ul class="popupbody memberaction_body" id="yui-gen29">
+		<li class="left">
+			<a href="https://ubuntuforums.org/member.php?u=1411221&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" class="siteicon_profile">
+				View Profile
+			</a>
+		</li>
+		
+		<li class="right">
+			<a href="https://ubuntuforums.org/search.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=finduser&amp;userid=1411221&amp;contenttype=vBForum_Post&amp;showposts=1" class="siteicon_forum" rel="nofollow">
+				View Forum Posts
+			</a>
+		</li>
+		
+		
+		<li class="left">
+			<a href="https://ubuntuforums.org/private.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=newpm&amp;u=1411221" class="siteicon_message" rel="nofollow">
+				Private Message
+			</a>
+		</li>
+		
+		
+		
+		
+		
+		
+		
+
+		
+
+		
+		
+	</ul>
+</div>
+						<img class="inlineimg onlinestatus" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/user-offline.png" alt="machs is offline" border="0" title="machs is offline">
+
+					
+					<span class="usertitle">
+						First Cup of Ubuntu
+					</span>
+					
+						<span class="rank"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/rank_1.png" alt="" border=""></span>
+					
+
+                                        
+					
+					
+						<div class="imlinks">
+							    
+						</div>
+					
+				</div>
+			</div>
+			
+				<div class="userinfo_extra">
+					<dl class="userstats">
+						<dt>Join Date</dt> <dd>Aug 2011</dd>
+						
+						
+						<!-- <dt>Beans</dt> <dd>9</dd>	 -->
+<dt>Beans</dt> <dd>9</dd>
+
+                                                 
+						
+					</dl>
+					
+					
+				</div>
+			
+		</div>
+	</div>
+
+	<div class="postbody">
+		
+		<div class="postrow">
+		
+		<h2 class="posttitle icon">
+			Re: GNURadio install missing libgnuradio-pmt-3.7.6git.so?
+		</h2>
+		
+				
+				
+		<div class="content">
+			<div id="post_message_13679286">
+				<blockquote class="postcontent restore">
+					So I removed all of my gnuradio packages from the other repositories. <br>
+<div class="bbcode_container">
+	<div class="bbcode_description">Code:</div>
+	<pre class="bbcode_code" style="height:60px;">sudo apt-get purge --auto-remove gqrx
+sudo apt-get purge --auto-remove gqrx-sdr
+sudo apt-get purge --auto-remove libgnuradio*</pre>
+</div>and I disabled the five custom repos using the software centre.  I reinstalled gqrx and gnuradio with apt and it pulled gnuradio version 3.7.9 from the ubuntu archives along with libgnuradio-pmt3.7.9.  When I run gnuradio from the prompt i get the same error message; <br>
+<br>
+<div class="bbcode_container">
+	<div class="bbcode_description">Code:</div>
+	<pre class="bbcode_code" style="height:168px;">Cannot import gnuradio.
+
+Is the python path environment variable set correctly?
+    All OS: PYTHONPATH
+
+Is the library path environment variable set correctly?
+    Linux: LD_LIBRARY_PATH
+    Windows: PATH
+    MacOSX: DYLD_LIBRARY_PATH
+
+
+(libgnuradio-pmt-3.7.6git.so.0.0.0: cannot open shared object file: No such file or directory)</pre>
+</div>Same message - why is gnuradio looking for pmt3.7.6git when everything else is 3.7.9?  does the git have any significance?
+				</blockquote>
+			</div>
+
+			
+
+
+		</div>
+			
+				
+			
+			
+			
+		</div>
+	</div>
+	<div class="postfoot">
+		<div class="textcontrols floatcontainer">
+			<span class="postcontrols">
+				<img style="display:none" id="progress_13679286" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/progress.gif" alt="">
+				
+				
+<!-- added advance reply -->
+                    
+                        <a class="quickreply" href="https://ubuntuforums.org/newreply.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13679286&amp;noquote=1" rel="nofollow"><img id="replyimg_13679286" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/clear.gif" alt="Advanced reply" title="Advanced reply"> Adv Reply</a>
+                        <span class="seperator">&nbsp;</span>
+                    
+<!-- end added advance reply -->
+<!-- the next id was qrwq_13679286 -->
+				
+				
+			</span>
+			<span class="postlinking">
+				
+					
+				
+				
+
+				 
+				
+
+					
+
+					
+					 
+
+					
+					
+					
+					
+					
+			</span>
+		</div>
+	</div>
+	<hr>
+</li>
+
+<li class="postbit postbitim postcontainer old" id="post_13679361">
+	<div class="postdetails_noavatar">
+		<div class="posthead">
+                        
+                                <span class="postdate old">
+                                        
+                                                <span class="date">August 24th, 2017</span>
+                                        
+                                </span>
+                                <span class="nodecontrols">
+                                        
+                                                <a name="post13679361" href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13679361#post13679361" class="postcounter">#6</a><a id="postcount13679361" name="6"></a>
+                                        
+                                        
+                                        
+                                </span>
+                        
+		</div>
+
+		<div class="userinfo">
+			<div class="contact">
+				
+					<a class="postuseravatarlink" href="https://ubuntuforums.org/member.php?u=19&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" title="Artificial Intelligence is offline">
+						
+							<img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/avatar19_126.gif" alt="Artificial Intelligence&#39;s Avatar" title="Artificial Intelligence&#39;s Avatar">
+						
+					</a>
+				
+				<div class="username_container">
+					
+						<div class="popupmenu memberaction" id="yui-gen31">
+	<a class="username offline popupctrl" href="https://ubuntuforums.org/member.php?u=19&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" title="Artificial Intelligence is offline" id="yui-gen33"><strong><span style="font-weight: bold; color: #C61919;">Artificial Intelligence</span></strong></a>
+	<ul class="popupbody memberaction_body" id="yui-gen32">
+		<li class="left">
+			<a href="https://ubuntuforums.org/member.php?u=19&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" class="siteicon_profile">
+				View Profile
+			</a>
+		</li>
+		
+		<li class="right">
+			<a href="https://ubuntuforums.org/search.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=finduser&amp;userid=19&amp;contenttype=vBForum_Post&amp;showposts=1" class="siteicon_forum" rel="nofollow">
+				View Forum Posts
+			</a>
+		</li>
+		
+		
+		<li class="left">
+			<a href="https://ubuntuforums.org/private.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=newpm&amp;u=19" class="siteicon_message" rel="nofollow">
+				Private Message
+			</a>
+		</li>
+		
+		
+		
+		
+		
+		
+		
+
+		
+
+		
+		
+	</ul>
+</div>
+						<img class="inlineimg onlinestatus" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/user-offline.png" alt="Artificial Intelligence is offline" border="0" title="Artificial Intelligence is offline">
+
+					
+					<span class="usertitle">
+						elementary OS user
+					</span>
+					
+						<span class="rank"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/rank_uf_moderator_2013-07.png" alt="" border=""></span>
+					
+
+                                        
+					
+					
+						<div class="imlinks">
+							    
+						</div>
+					
+				</div>
+			</div>
+			
+				<div class="userinfo_extra">
+					<dl class="userstats">
+						<dt>Join Date</dt> <dd>Oct 2004</dd>
+						<dt>Location</dt> <dd>Denmark - Scandinavia</dd>
+						
+						<!-- <dt>Beans</dt> <dd>19,313</dd>	 -->
+<dt>Beans</dt> <dd>19,313</dd>
+
+                                                 <dt>Distro</dt><dd>Ubuntu 18.04 Bionic Beaver</dd>
+						
+					</dl>
+					
+					
+				</div>
+			
+		</div>
+	</div>
+
+	<div class="postbody">
+		
+		<div class="postrow">
+		
+		<h2 class="posttitle icon">
+			Re: GNURadio install missing libgnuradio-pmt-3.7.6git.so?
+		</h2>
+		
+				
+				
+		<div class="content">
+			<div id="post_message_13679361">
+				<blockquote class="postcontent restore">
+					Strange. I can't that package in the ubuntu package (homepage for all the packages). I guess you're out of luck with that applications, seems broken.<br>
+Your only option may be installing it from the source. Uninstall GNUradio first thhen:<br>
+<div class="bbcode_container">
+	<div class="bbcode_description">Code:</div>
+	<pre class="bbcode_code" style="height:36px;">wget http://www.sbrac.org/files/build-gnuradio &amp;&amp; chmod a+x build-gnuradio &amp;&amp; ./build-gnuradio</pre>
+</div>More here: <a href="https://wiki.gnuradio.org/index.php/InstallingGRFromSource" target="_blank">https://wiki.gnuradio.org/index.php/...ngGRFromSource</a>
+				</blockquote>
+			</div>
+
+			
+
+
+		</div>
+			
+				
+			
+			
+				<blockquote class="signature restore"><div class="signaturecontainer"><font color="#FF0000">| AMD Ryzen 1700x 3.4 GHz | ASUS PRIME X370-A | 32 GB 2400 Mhz DDR4 |<br>
+| ASUS Nvidia 1070 8 GB | SSD 250 GB | HDD 1 TB |</font><br>
+<br>
+My Blog: <a href="https://eosvisions.wordpress.com/" target="_blank">https://eosvisions.wordpress.com</a><br>
+<br>
+Try elementary OS - <a href="https://elementary.io/" target="_blank">https://elementary.io</a></div></blockquote>
+			
+			
+		</div>
+	</div>
+	<div class="postfoot">
+		<div class="textcontrols floatcontainer">
+			<span class="postcontrols">
+				<img style="display:none" id="progress_13679361" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/progress.gif" alt="">
+				
+				
+<!-- added advance reply -->
+                    
+                        <a class="quickreply" href="https://ubuntuforums.org/newreply.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13679361&amp;noquote=1" rel="nofollow"><img id="replyimg_13679361" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/clear.gif" alt="Advanced reply" title="Advanced reply"> Adv Reply</a>
+                        <span class="seperator">&nbsp;</span>
+                    
+<!-- end added advance reply -->
+<!-- the next id was qrwq_13679361 -->
+				
+				
+			</span>
+			<span class="postlinking">
+				
+					
+				
+				
+
+				 
+				
+
+					
+
+					
+					 
+
+					
+					
+					
+					
+					
+			</span>
+		</div>
+	</div>
+	<hr>
+</li>
+
+<li class="postbit postbitim postcontainer old" id="post_13772566">
+	<div class="postdetails_noavatar">
+		<div class="posthead">
+                        
+                                <span class="postdate old">
+                                        
+                                                <span class="date">June 2nd, 2018</span>
+                                        
+                                </span>
+                                <span class="nodecontrols">
+                                        
+                                                <a name="post13772566" href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13772566#post13772566" class="postcounter">#7</a><a id="postcount13772566" name="7"></a>
+                                        
+                                        
+                                        
+                                </span>
+                        
+		</div>
+
+		<div class="userinfo_noavatar">
+			<div class="contact">
+				
+				<div class="username_container">
+					
+						<div class="popupmenu memberaction" id="yui-gen34">
+	<a class="username offline popupctrl" href="https://ubuntuforums.org/member.php?u=771182&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" title="David2009 is offline" id="yui-gen36"><strong><span style="color: #000000;">David2009</span></strong></a>
+	<ul class="popupbody memberaction_body" id="yui-gen35">
+		<li class="left">
+			<a href="https://ubuntuforums.org/member.php?u=771182&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" class="siteicon_profile">
+				View Profile
+			</a>
+		</li>
+		
+		<li class="right">
+			<a href="https://ubuntuforums.org/search.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=finduser&amp;userid=771182&amp;contenttype=vBForum_Post&amp;showposts=1" class="siteicon_forum" rel="nofollow">
+				View Forum Posts
+			</a>
+		</li>
+		
+		
+		<li class="left">
+			<a href="https://ubuntuforums.org/private.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=newpm&amp;u=771182" class="siteicon_message" rel="nofollow">
+				Private Message
+			</a>
+		</li>
+		
+		
+		
+		
+		
+		
+		
+
+		
+
+		
+		
+	</ul>
+</div>
+						<img class="inlineimg onlinestatus" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/user-offline.png" alt="David2009 is offline" border="0" title="David2009 is offline">
+
+					
+					<span class="usertitle">
+						Just Give Me the Beans!
+					</span>
+					
+						<span class="rank"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/rank_3.png" alt="" border=""></span>
+					
+
+                                        
+					
+					
+						<div class="imlinks">
+							    
+						</div>
+					
+				</div>
+			</div>
+			
+				<div class="userinfo_extra">
+					<dl class="userstats">
+						<dt>Join Date</dt> <dd>Feb 2009</dd>
+						<dt>Location</dt> <dd>Pordenone, Italy</dd>
+						
+						<!-- <dt>Beans</dt> <dd>47</dd>	 -->
+<dt>Beans</dt> <dd>47</dd>
+
+                                                 <dt>Distro</dt><dd>Ubuntu 16.04 Xenial Xerus</dd>
+						
+					</dl>
+					
+					
+				</div>
+			
+		</div>
+	</div>
+
+	<div class="postbody">
+		
+		<div class="postrow">
+		
+		<h2 class="posttitle icon">
+			Re: GNURadio install missing libgnuradio-pmt-3.7.6git.so?
+		</h2>
+		
+				
+				
+		<div class="content">
+			<div id="post_message_13772566">
+				<blockquote class="postcontent restore">
+					I am hoping to begin SDR listening.  After all of the adjustments / installations / etc for GNURADIO, was a usable solution found?  Thank you for reading.<br>
+<br>
+David
+				</blockquote>
+			</div>
+
+			
+
+
+		</div>
+			
+				
+			
+			
+				<blockquote class="signature restore"><div class="signaturecontainer">Toshiba Satellite A305-S6861 <br>
+Intel Core 2 Duo T5750 @ 2 Ghz<br>
+ATI Mobility Radeon HD 3400 Series<br>
+Ubuntu 16.04 LTS</div></blockquote>
+			
+			
+		</div>
+	</div>
+	<div class="postfoot">
+		<div class="textcontrols floatcontainer">
+			<span class="postcontrols">
+				<img style="display:none" id="progress_13772566" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/progress.gif" alt="">
+				
+				
+<!-- added advance reply -->
+                    
+                        <a class="quickreply" href="https://ubuntuforums.org/newreply.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13772566&amp;noquote=1" rel="nofollow"><img id="replyimg_13772566" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/clear.gif" alt="Advanced reply" title="Advanced reply"> Adv Reply</a>
+                        <span class="seperator">&nbsp;</span>
+                    
+<!-- end added advance reply -->
+<!-- the next id was qrwq_13772566 -->
+				
+				
+			</span>
+			<span class="postlinking">
+				
+					
+				
+				
+
+				 
+				
+
+					
+
+					
+					 
+
+					
+					
+					
+					
+					
+			</span>
+		</div>
+	</div>
+	<hr>
+</li>
+
+<li class="postbit postbitim postcontainer old" id="post_13772868">
+	<div class="postdetails_noavatar">
+		<div class="posthead">
+                        
+                                <span class="postdate old">
+                                        
+                                                <span class="date">June 3rd, 2018</span>
+                                        
+                                </span>
+                                <span class="nodecontrols">
+                                        
+                                                <a name="post13772868" href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13772868#post13772868" class="postcounter">#8</a><a id="postcount13772868" name="8"></a>
+                                        
+                                        
+                                        
+                                </span>
+                        
+		</div>
+
+		<div class="userinfo_noavatar">
+			<div class="contact">
+				
+				<div class="username_container">
+					
+						<div class="popupmenu memberaction" id="yui-gen37">
+	<a class="username offline popupctrl" href="https://ubuntuforums.org/member.php?u=1411221&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" title="machs is offline" id="yui-gen39"><strong><span style="color: #000000;">machs</span></strong></a>
+	<ul class="popupbody memberaction_body" id="yui-gen38">
+		<li class="left">
+			<a href="https://ubuntuforums.org/member.php?u=1411221&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" class="siteicon_profile">
+				View Profile
+			</a>
+		</li>
+		
+		<li class="right">
+			<a href="https://ubuntuforums.org/search.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=finduser&amp;userid=1411221&amp;contenttype=vBForum_Post&amp;showposts=1" class="siteicon_forum" rel="nofollow">
+				View Forum Posts
+			</a>
+		</li>
+		
+		
+		<li class="left">
+			<a href="https://ubuntuforums.org/private.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=newpm&amp;u=1411221" class="siteicon_message" rel="nofollow">
+				Private Message
+			</a>
+		</li>
+		
+		
+		
+		
+		
+		
+		
+
+		
+
+		
+		
+	</ul>
+</div>
+						<img class="inlineimg onlinestatus" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/user-offline.png" alt="machs is offline" border="0" title="machs is offline">
+
+					
+					<span class="usertitle">
+						First Cup of Ubuntu
+					</span>
+					
+						<span class="rank"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/rank_1.png" alt="" border=""></span>
+					
+
+                                        
+					
+					
+						<div class="imlinks">
+							    
+						</div>
+					
+				</div>
+			</div>
+			
+				<div class="userinfo_extra">
+					<dl class="userstats">
+						<dt>Join Date</dt> <dd>Aug 2011</dd>
+						
+						
+						<!-- <dt>Beans</dt> <dd>9</dd>	 -->
+<dt>Beans</dt> <dd>9</dd>
+
+                                                 
+						
+					</dl>
+					
+					
+				</div>
+			
+		</div>
+	</div>
+
+	<div class="postbody">
+		
+		<div class="postrow">
+		
+		<h2 class="posttitle icon">
+			Re: GNURadio install missing libgnuradio-pmt-3.7.6git.so?
+		</h2>
+		
+				
+				
+					
+				
+		<div class="content">
+			<div id="post_message_13772868">
+				<blockquote class="postcontent restore">
+					In the end i downloaded the GNUradio live CD and boot from that to play with GNU radio.   My ubuntu install is probably 4 or 5 years old has gone through multiple distribution upgrades.  At one point I'd installed gnuRadio from source,  I suspect that's why i have these problems.
+				</blockquote>
+			</div>
+
+			
+
+
+		</div>
+			
+				
+			
+			
+			
+		</div>
+	</div>
+	<div class="postfoot">
+		<div class="textcontrols floatcontainer">
+			<span class="postcontrols">
+				<img style="display:none" id="progress_13772868" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/progress.gif" alt="">
+				
+				
+<!-- added advance reply -->
+                    
+                        <a class="quickreply" href="https://ubuntuforums.org/newreply.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;p=13772868&amp;noquote=1" rel="nofollow"><img id="replyimg_13772868" src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/clear.gif" alt="Advanced reply" title="Advanced reply"> Adv Reply</a>
+                        <span class="seperator">&nbsp;</span>
+                    
+<!-- end added advance reply -->
+<!-- the next id was qrwq_13772868 -->
+				
+				
+			</span>
+			<span class="postlinking">
+				
+					
+				
+				
+
+				 
+				
+
+					
+
+					
+					 
+
+					
+					
+					
+					
+					
+			</span>
+		</div>
+	</div>
+	<hr>
+</li>
+
+		</ol>
+		<div class="separator"></div>
+		<div class="postlistfoot">
+			
+		</div>
+
+	
+
+</div>
+
+<div id="below_postlist" class="noinlinemod below_postlist">
+	
+	<div id="pagination_bottom" class="pagination_bottom">
+	
+		<div class="clear"></div>
+<div class="navpopupmenu popupmenu nohovermenu" id="showthread_navpopup">
+	
+		<span class="shade">Quick Navigation</span>
+		<a href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5" class="popupctrl" id="yui-gen41"><span class="ctrlcontainer">Multimedia Software</span></a>
+		<a href="https://ubuntuforums.org/showthread.php?t=2369339#top" class="textcontrol" onclick="document.location.hash=&#39;top&#39;;return false;">Top</a>
+	
+	<ul class="navpopupbody popupbody" id="yui-gen40">
+		
+		<li class="optionlabel">Site Areas</li>
+		<li><a href="https://ubuntuforums.org/usercp.php?s=a9679fcf2884adb7df7f2150eb91ebc5">Settings</a></li>
+		<li><a href="https://ubuntuforums.org/private.php?s=a9679fcf2884adb7df7f2150eb91ebc5">Private Messages</a></li>
+		<li><a href="https://ubuntuforums.org/subscription.php?s=a9679fcf2884adb7df7f2150eb91ebc5">Subscriptions</a></li>
+		<li><a href="https://ubuntuforums.org/online.php?s=a9679fcf2884adb7df7f2150eb91ebc5">Who's Online</a></li>
+		<li><a href="https://ubuntuforums.org/search.php?s=a9679fcf2884adb7df7f2150eb91ebc5">Search Forums</a></li>
+		<li><a href="https://ubuntuforums.org/index.php?s=a9679fcf2884adb7df7f2150eb91ebc5">Forums Home</a></li>
+		
+			<li class="optionlabel">Forums</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=130&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">The Ubuntu Forum Community</a>
+					<ol class="d1">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=327&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu Official Flavours Support</a>
+					<ol class="d2">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=326&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">New to Ubuntu</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=331&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">General Help</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=333&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Installation &amp; Upgrades</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=332&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Hardware</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=329&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Desktop Environments</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=336&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Networking &amp; Wireless</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=334&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Multimedia Software</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=125&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu Specialised Support</a>
+					<ol class="d2">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=427&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu Development Version</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=338&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Security</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=308&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Virtualisation</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=441&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu Servers, Cloud and Juju</a>
+					<ol class="d3">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Server Platforms</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=392&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu Cloud and Juju</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=93&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Gaming &amp; Leisure</a>
+					<ol class="d3">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=413&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Emulators</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=313&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Wine</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=310&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Development &amp; Programming</a>
+					<ol class="d3">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=44&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Packaging and Compiling Programs</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=201&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Development CD/DVD Image Testing</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=417&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu Application Development</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=307&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu Dev Link Forum</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=39&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Programming Talk</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=41&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Repositories &amp; Backports</a>
+					<ol class="d4">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=47&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu Backports</a>
+					<ol class="d5">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=82&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Bug Reports / Support</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=341&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">System76 Support</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=328&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Apple Hardware Users</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=175&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu Community Discussions</a>
+					<ol class="d2">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=434&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu, Linux and OS Chat</a>
+					<ol class="d3">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=302&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Recurring Discussions</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=270&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Full Circle Magazine</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=11&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">The Cafe</a>
+					<ol class="d3">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=298&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Cafe Games</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=38&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Market</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=426&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Mobile Technology Discussions</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=13&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Announcements &amp; News</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=243&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Weekly Newsletter</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=404&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Membership Applications</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=122&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">The Fridge Discussions</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=357&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Forum Council Agenda</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=48&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Forum Feedback &amp; Help</a>
+					<ol class="d3">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=181&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Request a LoCo forum</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=123&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Resolution Centre</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=423&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Other Discussion and Support</a>
+					<ol class="d2">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=446&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Other OS Support and Projects</a>
+					<ol class="d3">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=447&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Other Operating Systems</a>
+					<ol class="d4">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=452&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu/Debian BASED</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=161&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Debian</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=453&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">MINT</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=321&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Arch and derivatives</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=162&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Fedora/RedHat and derivatives</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=344&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Mandriva/Mageia</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=163&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Slackware and derivatives</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=164&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">openSUSE and SUSE Linux Enterprise</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=165&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Mac OSX</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=457&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">PCLinuxOS</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=166&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Gentoo and derivatives</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=170&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Windows</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=171&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">BSD</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=401&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Any Other OS</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=145&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Assistive Technology &amp; Accessibility</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=16&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Art &amp; Design</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=169&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Education &amp; Science</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=428&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Documentation and Community Wiki Discussions</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=100&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Tutorials</a>
+					<ol class="d3">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=255&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Outdated Tutorials &amp; Tips</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=76&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu Women</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=183&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ubuntu LoCo Team Forums</a>
+					<ol class="d3">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=245&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Americas LoCo Teams</a>
+					<ol class="d4">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=189&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Argentina Team</a>
+					<ol class="d5">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=349&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Software</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=350&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Hardware</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=351&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Comunidad</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=209&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Arizona Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=208&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Arkansas Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=445&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Brazil Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=188&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">California Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=395&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Canada Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=397&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Centroamerica Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=362&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Chile Team</a>
+					<ol class="d5">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=363&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Comunidad</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=364&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Hardware</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=365&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Software</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=366&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Instalación y Actualización</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=197&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Colombia Team - Colombia</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=210&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Georgia Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=247&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Illinois Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=213&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Indiana - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=203&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Kentucky Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=292&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Maine Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=282&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Minnesota Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=276&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Mississippi Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=371&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Nebraska Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=187&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">New Mexico Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=212&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">New York - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=278&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">North Carolina Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=191&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ohio Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=286&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Oklahoma Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=345&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Oregon Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=228&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Pennsylvania Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=393&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Peru Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=379&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Texas Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=414&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Uruguay Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=184&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Utah Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=236&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Virginia Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=312&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">West Virginia Team - US</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=389&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Asia and Oceania LoCo Teams</a>
+					<ol class="d4">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=399&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Australia Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=409&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Bangladesh Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=382&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Hong Kong Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=431&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Myanmar Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=303&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Philippine Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=433&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Singapore Team</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=388&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Europe, Middle East, and African (EMEA) LoCo Teams</a>
+					<ol class="d4">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=372&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Albania Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=206&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Catalan Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=462&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Portugal Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=258&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Egypt Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=304&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Georgia Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=195&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ireland Team - Ireland</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=193&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Kenyan Team - Kenya</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=196&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Kurdish Team - Kurdistan</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=272&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Lebanon Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=390&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Morocco Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=264&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Saudi Arabia Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=261&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Sudan Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=227&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Tunisia Team</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=204&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Other Forums &amp; Teams</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=458&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">LoCo Archive</a>
+					<ol class="d4">
+						
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=396&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Afghanistan Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=232&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Alabama Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=280&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Alaska Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=383&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Algerian Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=202&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Andhra Pradesh Team - India</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=400&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Austria Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=309&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Bangalore Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=373&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Bolivia Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=291&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Cameroon Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=207&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Colorado Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=248&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Connecticut Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=262&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Costa Rica Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=347&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Delhi Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=290&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Ecuador Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=374&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">El Salvador Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=225&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Florida Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=356&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Galician LoCo Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=461&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Greek team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=314&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Hawaii Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=369&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Honduras Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=398&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Idaho Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=381&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Iowa Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=320&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Jordan Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=275&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Kansas Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=378&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Libya Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=288&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Louisiana Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=224&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Maryland Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=260&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Massachusetts Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=271&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Michigan Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=277&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Missouri Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=229&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Montana Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=410&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Namibia Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=283&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Nevada Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=289&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">New Hampshire Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=185&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">New Jersey Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=190&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Northeastern Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=281&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Panama Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=273&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Paraguay Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=429&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Qatar Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=375&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Quebec Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=287&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Rhode Island Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=250&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Senegal Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=311&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">South Carolina Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=285&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">South Dakota Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=319&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Switzerland Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=186&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Tamil Team - India</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=259&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Tennessee Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=386&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Trinidad &amp; Tobago Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=384&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Uganda Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=274&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">United Kingdom Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=284&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">US LoCo Teams</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=300&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Venezuela Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=360&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Wales Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=252&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Washington DC Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=380&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Washington State Team - US</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=263&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Wisconsin Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=387&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Yemen Team</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=194&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Za Team - South Africa</a></li>
+			
+		
+			
+				<li><a href="https://ubuntuforums.org/forumdisplay.php?f=299&amp;s=a9679fcf2884adb7df7f2150eb91ebc5">Zimbabwe Team</a></li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+			
+					</ol>
+				</li>
+			
+		
+		
+	</ul>
+</div>
+<div class="clear"></div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+	<!-- next / previous links -->
+	<div class="navlinks">
+		
+			<strong>«</strong>
+			<a href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5&amp;goto=nextoldest" rel="nofollow">Previous Thread</a>
+			|
+			<a href="https://ubuntuforums.org/showthread.php?t=2369339&amp;s=a9679fcf2884adb7df7f2150eb91ebc5&amp;goto=nextnewest" rel="nofollow">Next Thread</a>
+			<strong>»</strong>
+		
+	</div>
+	<!-- / next / previous links -->
+
+<div id="thread_info" class="thread_info block">
+	
+	
+	
+	
+	
+	
+	<h4 class="threadinfohead blockhead">Tags for this Thread</h4>
+	<div id="thread_tags_list" class="thread_info_block blockbody formcontrols">
+		<div class="inner_block">
+			
+			<div id="tag_list_cell">
+				
+		
+			<a href="https://ubuntuforums.org/tags.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;tag=gnuradio">gnuradio</a>, 
+		
+			<a href="https://ubuntuforums.org/tags.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;tag=rtl">rtl</a>
+		
+
+<img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/11x11progress.gif" id="tag_form_progress" class="inlineimg hidden" alt="">
+			</div>
+			<p>
+				<a href="https://ubuntuforums.org/tags.php?s=a9679fcf2884adb7df7f2150eb91ebc5">View Tag Cloud</a>
+			</p>
+		</div>
+	</div>
+	
+	<div class="options_block_container">
+		
+		<div class="options_block2">
+			<h4 class="blockhead options_correct">Bookmarks</h4>
+			<div id="social_bookmarks_list" class="thread_info_block blockbody formcontrols floatcontainer options_correct">
+				<h5 class="blocksubhead">Bookmarks</h5>
+				<ul class="icon_list"><li class="smallfont">
+	
+		<a href="http://digg.com/submit?phrase=2&amp;url=https%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D2369339&amp;title=GNURadio+install+missing+libgnuradio-pmt-3.7.6git.so%3F" target="socialbookmark"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/bookmarksite_digg.gif" alt="Submit to Digg" title="Submit to Digg"></a>
+	
+	<a href="http://digg.com/submit?phrase=2&amp;url=https%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D2369339&amp;title=GNURadio+install+missing+libgnuradio-pmt-3.7.6git.so%3F" target="socialbookmark">Digg</a>
+</li><li class="smallfont">
+	
+		<a href="http://del.icio.us/post?url=https%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D2369339&amp;title=GNURadio+install+missing+libgnuradio-pmt-3.7.6git.so%3F" target="socialbookmark"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/bookmarksite_delicious.gif" alt="Submit to del.icio.us" title="Submit to del.icio.us"></a>
+	
+	<a href="http://del.icio.us/post?url=https%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D2369339&amp;title=GNURadio+install+missing+libgnuradio-pmt-3.7.6git.so%3F" target="socialbookmark">del.icio.us</a>
+</li><li class="smallfont">
+	
+		<a href="http://www.stumbleupon.com/submit?url=https%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D2369339&amp;title=GNURadio+install+missing+libgnuradio-pmt-3.7.6git.so%3F" target="socialbookmark"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/bookmarksite_stumbleupon.gif" alt="Submit to StumbleUpon" title="Submit to StumbleUpon"></a>
+	
+	<a href="http://www.stumbleupon.com/submit?url=https%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D2369339&amp;title=GNURadio+install+missing+libgnuradio-pmt-3.7.6git.so%3F" target="socialbookmark">StumbleUpon</a>
+</li><li class="smallfont">
+	
+		<a href="http://www.google.com/bookmarks/mark?op=edit&amp;output=popup&amp;bkmk=https%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D2369339&amp;title=GNURadio+install+missing+libgnuradio-pmt-3.7.6git.so%3F" target="socialbookmark"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/bookmarksite_google.gif" alt="Submit to Google" title="Submit to Google"></a>
+	
+	<a href="http://www.google.com/bookmarks/mark?op=edit&amp;output=popup&amp;bkmk=https%3A%2F%2Fubuntuforums.org%2Fshowthread.php%3Ft%3D2369339&amp;title=GNURadio+install+missing+libgnuradio-pmt-3.7.6git.so%3F" target="socialbookmark">Google</a>
+</li></ul>
+			</div>
+		</div>
+		
+		<div class="options_block">
+			<h4 class="collapse blockhead options_correct">
+				<a class="collapse" id="collapse_posting_rules" href="https://ubuntuforums.org/showthread.php?t=2369339#top"><img src="./[ubuntu] GNURadio install missing libgnuradio-pmt-3.7.6git.so__files/collapse_40b.png" alt=""></a>
+				Posting Permissions
+			</h4>
+			<div id="posting_rules" class="thread_info_block blockbody formcontrols floatcontainer options_correct">
+				
+<div id="forumrules" class="info_subblock">
+
+	<ul class="youcandoblock">
+		<li>You <strong>may not</strong> post new threads</li>
+		<li>You <strong>may not</strong> post replies</li>
+		<li>You <strong>may not</strong> post attachments</li>
+		<li>You <strong>may not</strong> edit your posts</li>
+		<li>&nbsp;</li>
+	</ul>
+	<div class="bbcodeblock">
+		<ul>
+			<li><a href="https://ubuntuforums.org/misc.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=bbcode" target="_blank">BB code</a> is <strong>On</strong></li>
+			<li><a href="https://ubuntuforums.org/misc.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=showsmilies" target="_blank">Smilies</a> are <strong>On</strong></li>
+			<li><a href="https://ubuntuforums.org/misc.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=bbcode#imgcode" target="_blank">[IMG]</a> code is <strong>On</strong></li>
+			<li><a href="https://ubuntuforums.org/misc.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=bbcode#videocode" target="_blank">[VIDEO]</a> code is <strong>Off</strong></li>
+			<li>HTML code is <strong>Off</strong></li>
+		</ul>
+	</div>
+	<p class="rules_link"><a href="https://ubuntuforums.org/misc.php?s=a9679fcf2884adb7df7f2150eb91ebc5&amp;do=showrules" target="_blank">Ubuntu Forums Code of Conduct</a></p>
+
+</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+<div id="footer" class="floatcontainer footer">
+
+	<form action="https://ubuntuforums.org/index.php" method="get" id="footer_select" class="footer_select">
+
+		
+			<select name="styleid" onchange="switch_id(this, &#39;style&#39;)">
+				<optgroup label="Quick Style Chooser"><option class="hidden"></option></optgroup>
+				
+					
+					<optgroup label=" Standard Styles">
+									
+					
+	<option value="117" class="" selected="selected">-- Ubuntu vB4.x</option>
+
+					
+					</optgroup>
+										
+				
+				
+					
+					<optgroup label=" Mobile Styles">
+					
+					
+	<option value="118" class="">-- Ubuntu Mobile Style</option>
+
+					
+					</optgroup>
+										
+				
+			</select>	
+		
+		
+		
+	</form>
+
+	<ul id="footer_links" class="footer_links">
+		
+		<li><a href="https://ubuntuforums.org/">Ubuntu Forums</a></li>
+		
+		
+		<li><a href="https://ubuntuforums.org/archive/index.php?s=a9679fcf2884adb7df7f2150eb91ebc5">Archive</a></li>
+		
+		
+		
+		<li><a href="https://ubuntuforums.org/showthread.php?t=2369339#top" onclick="document.location.hash=&#39;top&#39;; return false;">Top</a></li>
+	</ul>
+	
+	
+	
+	
+	<script type="text/javascript">
+	<!--
+		// Main vBulletin Javascript Initialization
+		vBulletin_init();
+	//-->
+	</script>
+        
+</div>
+</div> <!-- closing div for body_wrapper -->
+
+<div class="below_body">
+<div id="footer_time" class="shade footer_time">All times are GMT +1. The time now is <span class="time">03:56 PM</span>.</div>
+
+<div id="footer_copyright" class="shade footer_copyright">
+	<!-- Do not remove this copyright notice -->
+	vBulletin  ©2000 - 2019, Jelsoft Enterprises Ltd. Ubuntu Logo, Ubuntu and Canonical © Canonical Ltd. Tango Icons © Tango Desktop Project. 
+<br>
+User contributions on this site are licensed under the  <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution Share Alike 4.0 International License</a>. For details and our forum data attribution, retention and privacy policy, see <a href="http://ubuntuforums.org/showthread.php?t=2231107">here</a> 
+
+	<!-- Do not remove this copyright notice -->	
+</div>
+<div id="footer_morecopyright" class="shade footer_morecopyright">
+	<!-- Do not remove cronimage or your scheduled tasks will cease to function -->
+	
+	<!-- Do not remove cronimage or your scheduled tasks will cease to function -->
+	
+	
+</div>
+ 
+
+</div>
+
+</body></html>

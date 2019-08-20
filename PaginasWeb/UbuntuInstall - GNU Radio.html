@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html class="client-js" dir="ltr" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>UbuntuInstall - GNU Radio</title>
+<script>document.documentElement.className = document.documentElement.className.replace( /(^|\s)client-nojs(\s|$)/, "$1client-js$2" );</script>
+<script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":false,"wgNamespaceNumber":0,"wgPageName":"UbuntuInstall","wgTitle":"UbuntuInstall","wgCurRevisionId":5081,"wgRevisionId":5081,"wgArticleId":172,"wgIsArticle":true,"wgIsRedirect":false,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":[],"wgBreakFrames":false,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"UbuntuInstall","wgRelevantArticleId":172,"wgRequestId":"f54a2f0e719cbf9241731587","wgIsProbablyEditable":false,"wgRestrictionEdit":[],"wgRestrictionMove":[]});mw.loader.state({"site.styles":"ready","noscript":"ready","user.styles":"ready","user.cssprefs":"ready","user":"ready","user.options":"loading","user.tokens":"loading","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.sectionAnchor":"ready","mediawiki.skinning.interface":"ready","skins.vector.styles":"ready"});mw.loader.implement("user.options@0j3lz3q",function($,jQuery,require,module){mw.user.options.set({"variant":"en"});});mw.loader.implement("user.tokens@008h9ls",function ( $, jQuery, require, module ) {
+mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});/*@nomin*/;
+
+});mw.loader.load(["mediawiki.page.startup","skins.vector.js"]);});</script>
+<link rel="stylesheet" href="UbuntuInstall%20-%20GNU%20Radio_files/load.css">
+<script async="" src="UbuntuInstall%20-%20GNU%20Radio_files/load_002.php"></script>
+<style>
+.mw-collapsible-toggle{float:right;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}  .mw-content-ltr .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr .mw-collapsible-toggle{float:right} .mw-content-rtl .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl .mw-collapsible-toggle{float:left}.mw-customtoggle,.mw-collapsible-toggle{cursor:pointer} caption .mw-collapsible-toggle,.mw-content-ltr caption .mw-collapsible-toggle,.mw-content-rtl caption .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr caption .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl caption .mw-collapsible-toggle{float:none} li .mw-collapsible-toggle,.mw-content-ltr li .mw-collapsible-toggle,.mw-content-rtl li .mw-collapsible-toggle,.mw-content-rtl .mw-content-ltr li .mw-collapsible-toggle,.mw-content-ltr .mw-content-rtl li .mw-collapsible-toggle{float:none} .mw-collapsible-toggle-li{list-style:none}
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:none;z-index:1099;padding:0;margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:#fff;cursor:pointer;border:solid 1px #aaa;padding:0;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:#fff;cursor:pointer;border:solid 1px #aaa;padding:0;margin:0}.suggestions-result{color:#000;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left; overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}.suggestions-result-current{background-color:#4c59a6;color:#fff}.suggestions-special .special-label{color:#808080;text-align:left}.suggestions-special .special-query{color:#000;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:#c0c0c0}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:#fff}.highlight{font-weight:bold}
+@media screen {
+	.tochidden,.toctoggle{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}.toctoggle{font-size:94%}}
+@media print {
+	#toc.tochidden,.toctoggle{display:none}}
+.postedit-container{margin:0 auto;position:fixed;top:0;height:0;left:50%;z-index:1000;font-size:13px}.postedit-container:hover{cursor:pointer}.postedit{position:relative;top:0.6em;left:-50%;padding:.6em 3.6em .6em 1.1em;line-height:1.5625em;color:#626465;background-color:#f4f4f4;border:1px solid #dcd9d9;text-shadow:0 0.0625em 0 rgba( 255,255,255,0.5 );border-radius:5px;box-shadow:0 2px 5px 0 #ccc;-webkit-transition:all 0.25s ease-in-out;-moz-transition:all 0.25s ease-in-out;-ms-transition:all 0.25s ease-in-out;-o-transition:all 0.25s ease-in-out;transition:all 0.25s ease-in-out}.skin-monobook .postedit{top:6em !important}.postedit-faded{opacity:0}.postedit-icon{padding-left:41px;  line-height:25px;background-repeat:no-repeat;background-position:8px 50%}.postedit-icon-checkmark{background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAB9ElEQVR4AZWRA3AYURQArxrVHtW2bdu2bdu2zdi2bdu2bWxs7zeehZaw4f70kbs+zI3e/nWK+RWx3aOFlrL56Sy5SxrruG69hlv6OyK+mz+8KDSXdXembj0ispT7tjs4ZTIbpYBvxGSGKzZTeFrb7W/meN002swFs0U8ttpHTkF2BvCqWQrW35929bTsKm5Zb+SEwWwcY8wAngB9m7Z+d+rIPZ/npdy12M5p47n8dXsCYAf0qPy06eGMdktuDu9Qf+JmKl3SWM91qzVcN9tAbEYkwMaq0tyb1m/To5kP170el/BK8/qa6sJr70ydf+T/Uu5ab+Oo/lS0AkUBpIFWlZ9WPhxpse/PHO7YbOOczjL0vZV2lNxPPtG73dYXM+xvm2znrOl83tidoqCwMBgYXsPFB0on5S6pr+eK5TKuW67lgvaKvF8mL1dtfTL32FHxRdyx3cQpg7m4x9sCXKkTIzA4LDH44zWdzaUf71hv5rTG4uyzcusybxSX7aThbMQ8XgCYAp3rzTTQOiIh9PNlzY3FSuZxrzjme1Y7uGS6kjsWO4jPjM4FVjRZsvD4kO9XtTZzQn82NyzWc0B7AmZh6gA/hOYSGhfw9YbOVnarj+S7800AL2BIsxUAbWNToj7bhBuQmZcOsFdoKUC74rGheCwXmqAIQTc9jQcrADIAAAAASUVORK5CYII=);background-image:url(/resources/src/mediawiki.action/images/green-checkmark.png?d94f1)!ie;background-position:left}.postedit-close{position:absolute;padding:0 .8em;right:0;top:0;font-size:1.25em;font-weight:bold;line-height:2.3em;color:#000;text-shadow:0 0.0625em 0 #fff;text-decoration:none;opacity:0.2;filter:alpha( opacity=20 )}.postedit-close:hover{color:#000;text-decoration:none;opacity:0.4;filter:alpha( opacity=40 )}</style><style>
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{color:#000;text-decoration:none}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:#fff}.suggestions a.mw-searchSuggest-link .special-query{ overflow:hidden;-o-text-overflow:ellipsis; text-overflow:ellipsis;white-space:nowrap}</style><meta name="ResourceLoaderDynamicStyles" content="">
+<meta name="generator" content="MediaWiki 1.28.0">
+<link rel="shortcut icon" href="https://wiki.gnuradio.org/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="https://wiki.gnuradio.org/opensearch_desc.php" title="GNU Radio (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.gnuradio.org/api.php?action=rsd">
+<link rel="copyright" href="http://creativecommons.org/licenses/by-sa/3.0/">
+<link rel="alternate" type="application/atom+xml" title="GNU Radio Atom feed" href="https://wiki.gnuradio.org/index.php?title=Special:RecentChanges&amp;feed=atom">
+<script src="UbuntuInstall%20-%20GNU%20Radio_files/load.php"></script></head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-UbuntuInstall rootpage-UbuntuInstall skin-vector action-view">		<div id="mw-page-base" class="noprint"></div>
+		<div id="mw-head-base" class="noprint"></div>
+		<div id="content" class="mw-body" role="main">
+			<a id="top"></a>
+
+						<div class="mw-indicators">
+</div>
+			<h1 id="firstHeading" class="firstHeading" lang="en">UbuntuInstall</h1>
+									<div id="bodyContent" class="mw-body-content">
+									<div id="siteSub">From GNU Radio</div>
+								<div id="contentSub"></div>
+												<div id="jump-to-nav" class="mw-jump">
+					Jump to:					<a href="#mw-head">navigation</a>, 					<a href="#p-search">search</a>
+				</div>
+				<div id="mw-content-text" dir="ltr" class="mw-content-ltr" lang="en"><div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2><span class="toctoggle">&nbsp;[<a role="button" tabindex="0" id="togglelink">hide</a>]&nbsp;</span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Building_GNU_Radio_on_Ubuntu_Linux"><span class="tocnumber">1</span> <span class="toctext">Building GNU Radio on Ubuntu Linux</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Installation_Overview"><span class="tocnumber">1.1</span> <span class="toctext">Installation Overview</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#Install_the_Pre-Requisites"><span class="tocnumber">1.2</span> <span class="toctext">Install the Pre-Requisites</span></a></li>
+<li class="toclevel-2 tocsection-4"><a href="#Install_Dependencies"><span class="tocnumber">1.3</span> <span class="toctext">Install Dependencies</span></a>
+<ul>
+<li class="toclevel-3 tocsection-5"><a href="#Bionic_Beaver_.2818.04.29"><span class="tocnumber">1.3.1</span> <span class="toctext">Bionic Beaver (18.04)</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="#Xenial_Xerus_.2816.04.29"><span class="tocnumber">1.3.2</span> <span class="toctext">Xenial Xerus (16.04)</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="#Trusty_Tahr_.2814.04.29"><span class="tocnumber">1.3.3</span> <span class="toctext">Trusty Tahr (14.04)</span></a></li>
+<li class="toclevel-3 tocsection-8"><a href="#Saucy_Salamander_.2813.10.29"><span class="tocnumber">1.3.4</span> <span class="toctext">Saucy Salamander (13.10)</span></a></li>
+<li class="toclevel-3 tocsection-9"><a href="#Raring_Ringtail_.2813.04.29"><span class="tocnumber">1.3.5</span> <span class="toctext">Raring Ringtail (13.04)</span></a></li>
+<li class="toclevel-3 tocsection-10"><a href="#Precise_Pangolin_.2812.04.29"><span class="tocnumber">1.3.6</span> <span class="toctext">Precise Pangolin (12.04)</span></a></li>
+<li class="toclevel-3 tocsection-11"><a href="#Natty_Narwhal_.2811.04.29"><span class="tocnumber">1.3.7</span> <span class="toctext">Natty Narwhal (11.04)</span></a></li>
+<li class="toclevel-3 tocsection-12"><a href="#Maverick_.2810.10.29"><span class="tocnumber">1.3.8</span> <span class="toctext">Maverick (10.10)</span></a></li>
+<li class="toclevel-3 tocsection-13"><a href="#Lucid_.2810.04.29"><span class="tocnumber">1.3.9</span> <span class="toctext">Lucid (10.04)</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-14"><a href="#Installing_GNU_Radio"><span class="tocnumber">1.4</span> <span class="toctext">Installing GNU Radio</span></a></li>
+<li class="toclevel-2 tocsection-15"><a href="#Configuring_USRP_support"><span class="tocnumber">1.5</span> <span class="toctext">Configuring USRP support</span></a></li>
+<li class="toclevel-2 tocsection-16"><a href="#Installing_in_a_custom_directory"><span class="tocnumber">1.6</span> <span class="toctext">Installing in a custom directory</span></a></li>
+</ul>
+</li>
+<li class="toclevel-1 tocsection-17"><a href="#Building_GNU_Radio_on_Legacy_Ubuntu"><span class="tocnumber">2</span> <span class="toctext">Building GNU Radio on Legacy Ubuntu</span></a>
+<ul>
+<li class="toclevel-2 tocsection-18"><a href="#Installation_Options"><span class="tocnumber">2.1</span> <span class="toctext">Installation Options</span></a></li>
+<li class="toclevel-2 tocsection-19"><a href="#Pre-Requisites_for_Source_Build"><span class="tocnumber">2.2</span> <span class="toctext">Pre-Requisites for Source Build</span></a></li>
+<li class="toclevel-2 tocsection-20"><a href="#Install_Scripts"><span class="tocnumber">2.3</span> <span class="toctext">Install Scripts</span></a>
+<ul>
+<li class="toclevel-3 tocsection-21"><a href="#Install_Boost"><span class="tocnumber">2.3.1</span> <span class="toctext">Install Boost</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-22"><a href="#Installing_GNU_Radio_2"><span class="tocnumber">2.4</span> <span class="toctext">Installing GNU Radio</span></a></li>
+<li class="toclevel-2 tocsection-23"><a href="#Broken_libtool_on_Debian_and_Ubuntu"><span class="tocnumber">2.5</span> <span class="toctext">Broken libtool on Debian and Ubuntu</span></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="Building_GNU_Radio_on_Ubuntu_Linux">Building GNU Radio on Ubuntu Linux</span></h1>
+<p><b>Note: this page is not update anymore, as <a href="https://wiki.gnuradio.org/index.php/InstallingGRFromSource#Using-the-build-gnuradio-script" title="InstallingGRFromSource">the build-gnuradio script</a>
+ does all the work on Ubuntu systems. Check this page only for reference
+ for older systems and as long as the script doesn't work for Ubuntu 
+18.04!</b>
+</p><p>This page describes how to build and install GNU Radio from 
+source on Ubuntu Linux. It is intended to be a step-by-step guide for 
+the entire process. Nevertheless, you should carefully read it through 
+before doing anything.
+</p><p>Before you continue, please consider using <a href="https://wiki.gnuradio.org/index.php/InstallingGRFromSource#Using-the-build-gnuradio-script" title="InstallingGRFromSource">the build-gnuradio script</a>.
+ It works fine on Ubuntu and Fedora and is sufficient for most users. 
+Continue reading if you really want to go through all the steps of the 
+build process manually.<br>
+The build-gnuradio script can also take care of individual steps here. You should really, really consider using it.
+</p><p>GNU Radio works great on all Ubuntus from 10.04 upward. It is 
+also possible to install GNU Radio on older releases of Ubuntu (see 
+below); however, we may not be able to provide sufficient support for 
+legacy OS.
+</p><p><a href="https://wiki.gnuradio.org/index.php?title=Template:Toc&amp;action=edit&amp;redlink=1" class="new" title="Template:Toc (page does not exist)">Template:Toc</a>
+</p>
+<h2><span class="mw-headline" id="Installation_Overview">Installation Overview</span></h2>
+<p>Installing GNU Radio on any recent Ubuntu is easy and requires the following steps:
+</p>
+<ol><li> Install the pre-requisites</li>
+<li> Get the GNU Radio source code</li>
+<li> Configure, compile and install GNU Radio</li>
+<li> Configure USRP (optional)</li></ol>
+<p>Instructions for each of these steps are given below. The 
+build-gnuradio script can do all of these steps in one go, or every one 
+individually.
+</p>
+<h2><span class="mw-headline" id="Install_the_Pre-Requisites">Install the Pre-Requisites</span></h2>
+<p>The following packages are required for compiling various parts of 
+GNU Radio on Ubuntu. These packages can be installed via the command <code>build-gnuradio prereqs</code>, your favourite package manager (e.g. Synaptic) or using the command lines given in the <a href="https://wiki.gnuradio.org/index.php/UbuntuInstall#Install-Dependencies" title="UbuntuInstall">next section</a>.
+</p>
+<ul><li> Development Tools (need for compilation)
+<ul><li> g++</li>
+<li> git</li>
+<li> make</li>
+<li> cmake</li>
+<li> sdcc (from "universe")</li>
+<li> guile</li>
+<li> ccache (not required, but recommended if you compile frequently)</li></ul></li></ul>
+<ul><li> Libraries (need for runtime and for compilation)
+<ul><li> python-dev</li>
+<li> SWIG</li>
+<li> FFTW 3.X (libfftw3-dev)</li>
+<li> cppunit (libcppunit-dev)</li>
+<li> Boost 1.35 (or later, but not 1.46, 1.47 or 1.52)</li>
+<li> GSL GNU Scientific Library (libgsl0-dev)</li>
+<li> libusb and libusb-dev</li>
+<li> ALSA (alsa-base, libasound2 and libasound2-dev)</li></ul></li></ul>
+<ul><li> GNU Radio Companion
+<ul><li> for the GNU Radio Companion (GRC) you need to install python-numpy, python-cheetah and python-lxml</li></ul></li></ul>
+<ul><li> WX GUI
+<ul><li> for the WX GUI components you need to install python-wxgtk2.8 and python-numpy</li></ul></li></ul>
+<ul><li> QT GUI
+<ul><li> for the QT GUI components you need to install PyQT4, PyQwt5 for
+ Qt4, QT-OpenGL, Fontconfig, Xrender and Xinput (python-qt4, 
+python-qwt5-qt4, libqt4-opengl-dev, libqwt5-qt4-dev, libfontconfig1-dev,
+ libxrender-dev, libxi-dev).</li></ul></li></ul>
+<ul><li> Video-SDL
+<ul><li> for Video-SDL you need to install the Simple DirectMedia Layer development libraries (libsdl1.2-dev)</li></ul></li></ul>
+<ul><li> Polyphase Filter Bank examples
+<ul><li> for the examples in gnuradio-examples/python/pfb to work you need to install python-scipy, python-matplotlib, and python-tk</li></ul></li></ul>
+<ul><li> Other useful packages
+<ul><li> doxygen (for creating documentation from source code)</li>
+<li> octave (from "universe")</li></ul></li></ul>
+<h2><span class="mw-headline" id="Install_Dependencies">Install Dependencies</span></h2>
+<p>The following command line scripts will install all the required 
+dependencies. Before running them you should ensure that the Universe 
+repository are enabled in "Software Sources".
+</p><p>To execute the script copy &amp; paste the relevant command line into a terminal.<br>
+If you have an Ubuntu newer than 11.04, use the build-gnuradio script.
+</p>
+<h3><span class="mw-headline" id="Bionic_Beaver_.2818.04.29">Bionic Beaver (18.04)</span></h3>
+<p>GNU Radio version 3.8.x with Python 3 support:
+</p>
+<pre>sudo apt install git cmake g++ libboost-all-dev libgmp-dev swig python3-numpy \
+python3-mako python3-sphinx python3-lxml doxygen libfftw3-dev libcomedi-dev \
+libsdl1.2-dev libgsl-dev libqwt-qt5-dev libqt5opengl5-dev python3-pyqt5 \
+liblog4cpp5-dev libzmq3-dev python3-yaml </pre>
+<p>GNU Radio version 3.7.x:
+</p>
+<pre>sudo apt install cmake git g++ libboost-all-dev python-dev python-mako \
+python-numpy python-wxgtk3.0 python-sphinx python-cheetah swig libzmq3-dev \
+libfftw3-dev libgsl-dev libcppunit-dev doxygen libcomedi-dev libqt4-opengl-dev \
+python-qt4 libqwt-dev libsdl1.2-dev libusb-1.0-0-dev python-gtk2 python-lxml \
+pkg-config python-sip-dev </pre>
+<h3><span class="mw-headline" id="Xenial_Xerus_.2816.04.29">Xenial Xerus (16.04)</span></h3>
+<pre>sudo apt-get -y install git-core cmake g++ python-dev swig \
+pkg-config libfftw3-dev libboost-all-dev libcppunit-dev libgsl0-dev \
+libusb-dev libsdl1.2-dev python-wxgtk3.0 python-numpy \
+python-cheetah python-lxml doxygen libxi-dev python-sip \
+libqt4-opengl-dev libqwt-dev libfontconfig1-dev libxrender-dev \
+python-sip python-sip-dev python-qt4 python-sphinx libusb-1.0-0-dev \
+libcomedi-dev libzmq-dev </pre>
+<h3><span class="mw-headline" id="Trusty_Tahr_.2814.04.29">Trusty Tahr (14.04)</span></h3>
+<pre>sudo apt-get -y install git-core cmake g++ python-dev swig \
+pkg-config libfftw3-dev libboost1.55-all-dev libcppunit-dev libgsl0-dev \
+libusb-dev libsdl1.2-dev python-wxgtk2.8 python-numpy \
+python-cheetah python-lxml doxygen libxi-dev python-sip \
+libqt4-opengl-dev libqwt-dev libfontconfig1-dev libxrender-dev \
+python-sip python-sip-dev</pre>
+<p>Then set the following environmental variable to use PyQT:
+</p>
+<pre>export PYTHONPATH=/opt/qt/lib/python2.7/dist-package</pre>
+<h3><span class="mw-headline" id="Saucy_Salamander_.2813.10.29">Saucy Salamander (13.10)</span></h3>
+<p>Saucy Salamander has a particular problem with PyQT and PyQWT. First,
+ apt-get the following packages to get start. We will then manually 
+build and install PyQT and PyQWT to get around the issue.
+</p>
+<pre>sudo apt-get -y install git-core cmake g++ python-dev swig \
+pkg-config libfftw3-dev libboost1.53-all-dev libcppunit-dev libgsl0-dev \
+libusb-dev libsdl1.2-dev python-wxgtk2.8 python-numpy \
+python-cheetah python-lxml doxygen libxi-dev python-sip \
+libqt4-opengl-dev libqwt-dev libfontconfig1-dev libxrender-dev \
+libgruel3.6.1</pre>
+<p>If you have PyQWT installed already, remove it:<br>
+<code>$ sudo apt-get remove python-qwt5-qt4</code>
+</p><p>Make sure SIP is installed:<br>
+<code>$ sudo apt-get install python-sip python-sip-dev</code>
+</p><p>We'll set up a separate directory to install into to make it keep
+ it nicely separated from anything else (in case Ubuntu fixes this 
+problem).<br>
+<code>$ sudo mkdir /opt/qt</code>
+</p><p>First, set up your environment
+</p><p>Edit ./bashrc by adding or amending the following variables:
+</p>
+<pre>export PATH=/opt/qt/bin:$PATH
+export LD_LIBRARY_PATH=/opt/qt/lib:/usr/local/lib:$LD_LIBRARY_PATH
+export PYTHONPATH=/opt/qt/lib/python2.7/dist-packages:$PYTHONPATH
+export PKG_CONFIG_PATH=/opt/qt/lib/pkgconfig:$PKG_CONFIG_PATH</pre>
+<p>Either restart the terminal or reset your environment:<br>
+<code>$ source ~/.bashrc</code>
+</p><p>Download and install PyQt version 4.10.3<br>
+<a rel="nofollow" class="external free" href="http://www.riverbankcomputing.com/software/pyqt/download">http://www.riverbankcomputing.com/software/pyqt/download</a>
+</p>
+<pre>   $ tar xzf PyQt-x11-gpl-4.10.3.tar.gz
+   $ cd PyQt-x11-gpl-4.10.3
+   $ python configure.py -b /opt/qt/bin -d /opt/qt/lib/python2.7/dist-packages -v /opt/qt/share/sip
+   $ make
+   $ sudo make install</pre>
+<p>Download and install PyQWT version 5.2.0<br>
+<a rel="nofollow" class="external free" href="http://pyqwt.sourceforge.net/download.html">http://pyqwt.sourceforge.net/download.html</a>
+</p>
+<pre>   $ tar xzf PyQwt-5.2.0.tar.gz
+   $ cd PyQwt-5.2.0/configure
+   $ ./configure.py -Q ../qwt-5.2 --module-install-path=/opt/qt/lib/python2.7/dist-packages/PyQt4/Qwt5
+   $ make
+   $ sudo make install</pre>
+<p>If you've already built GNU Radio, first delete CMakeCache.txt in the
+ top build directory. You should then only have to 'make clean' in 
+gr-qtgui.
+</p><p>Run cmake and make like you would normally. With the 
+environmental variables pointing to the new PyQT and PyQWT versions 
+we've installed all gr-qtui displays and widgets should work properly 
+now.
+</p>
+<h3><span class="mw-headline" id="Raring_Ringtail_.2813.04.29">Raring Ringtail (13.04)</span></h3>
+<p><b>Note:</b> At release, Ubuntu defaults the 'libboost-all-dev' 
+package to libboost-*.49, which is incompatible with GNURadio. Thus, 
+until the Ubuntu default Boost install catches up, you must manually 
+specify 'libboost1.53-all-dev'.
+</p>
+<pre>sudo apt-get -y install git-core autoconf automake  libtool g++ python-dev swig \
+pkg-config libfftw3-dev libboost1.53-all-dev libcppunit-dev libgsl0-dev \
+libusb-dev sdcc libsdl1.2-dev python-wxgtk2.8 python-numpy \
+python-cheetah python-lxml doxygen python-qt4 python-qwt5-qt4 libxi-dev \
+libqt4-opengl-dev libqwt5-qt4-dev libfontconfig1-dev libxrender-dev qt4-default</pre>
+<h3><span class="mw-headline" id="Precise_Pangolin_.2812.04.29">Precise Pangolin (12.04)</span></h3>
+<pre>sudo apt-get -y install git-core autoconf automake  libtool g++ python-dev swig \
+pkg-config libboost1.48-all-dev libfftw3-dev libcppunit-dev libgsl0-dev \
+libusb-dev sdcc libsdl1.2-dev python-wxgtk2.8 python-numpy \
+python-cheetah python-lxml doxygen python-qt4 python-qwt5-qt4 libxi-dev \
+libqt4-opengl-dev libqwt5-qt4-dev libfontconfig1-dev libxrender-dev </pre>
+<h3><span class="mw-headline" id="Natty_Narwhal_.2811.04.29">Natty Narwhal (11.04)</span></h3>
+<pre>sudo apt-get -y install git-core autoconf automake  libtool g++ python-dev swig \
+pkg-config libboost-all-dev libfftw3-dev libcppunit-dev libgsl0-dev \
+libusb-dev sdcc libsdl1.2-dev python-wxgtk2.8 python-numpy \
+python-cheetah python-lxml doxygen python-qt4 python-qwt5-qt4 libxi-dev \
+libqt4-opengl-dev libqwt5-qt4-dev libfontconfig1-dev libxrender-dev </pre>
+<h3><span class="mw-headline" id="Maverick_.2810.10.29">Maverick (10.10)</span></h3>
+<pre>sudo apt-get -y install libfontconfig1-dev libxrender-dev libpulse-dev \
+swig g++ automake autoconf libtool python-dev libfftw3-dev \
+libcppunit-dev libboost-all-dev libusb-dev fort77 sdcc sdcc-libraries \
+libsdl1.2-dev python-wxgtk2.8 git guile-1.8-dev \
+libqt4-dev python-numpy ccache python-opengl libgsl0-dev \
+python-cheetah python-lxml doxygen qt4-dev-tools \
+libqwt5-qt4-dev libqwtplot3d-qt4-dev pyqt4-dev-tools python-qwt5-qt4</pre>
+<h3><span class="mw-headline" id="Lucid_.2810.04.29">Lucid (10.04)</span></h3>
+<pre>sudo apt-get -y install libfontconfig1-dev libxrender-dev libpulse-dev \
+swig g++ automake autoconf libtool python-dev libfftw3-dev \
+libcppunit-dev libboost-all-dev libusb-dev fort77 sdcc sdcc-libraries \
+libsdl1.2-dev python-wxgtk2.8 git-core guile-1.8-dev \
+libqt4-dev python-numpy ccache python-opengl libgsl0-dev \
+python-cheetah python-lxml doxygen qt4-dev-tools \
+libqwt5-qt4-dev libqwtplot3d-qt4-dev pyqt4-dev-tools python-qwt5-qt4</pre>
+<h2><span class="mw-headline" id="Installing_GNU_Radio">Installing GNU Radio</span></h2>
+<p>Notes:
+</p>
+<ul><li> If you want to use GNU Radio with a USRP, install UHD package or follow the <a rel="nofollow" class="external text" href="https://files.ettus.com/manual/page_build_guide.html">UHD Manual Build Guide</a>.</li>
+<li> By default GNU Radio will be installed under /usr/local - for installing in a custom directory see <a href="https://wiki.gnuradio.org/index.php/UbuntuInstall#Installing-in-a-custom-directory" title="UbuntuInstall">this section</a></li></ul>
+<p><br>
+You can do this automatically via: <code>build-gnuradio gitfetch</code>. Or manually:
+</p>
+<pre>git clone --recursive https://github.com/gnuradio/gnuradio.git</pre>
+<p>or
+</p>
+<pre>git clone --recursive git@github.com:gnuradio/gnuradio.git</pre>
+<p>Configure and build GNU Radio:
+</p>
+<pre>cd gnuradio
+mkdir build
+cd build
+cmake ../
+make</pre>
+<p>After successful build you should run the GNU Radio software self-check (does not require USRP):
+</p>
+<pre>make test</pre>
+<p>If any test or tests do not work, GNU Radio might still function 
+properly, but it might be wise to look in the email archives for a fix 
+or to write the email list. If writing to the email list, please include
+ the OS type, OS version, and CPU type (e.g. via "uname -a"), anything 
+special about the computer hardware, software versions (gcc, g++, swig, 
+sdcc, etc) and how installed (standard or non-standard package, source).
+ You can find some useful tips for asking questions under <a href="https://wiki.gnuradio.org/index.php/ReportingErrors" title="ReportingErrors">Reporting Errors</a>.
+</p><p>Now install GNU Radio for general use:
+</p>
+<pre>sudo make install</pre>
+<p>You are now ready to use GNU Radio. You can try to execute the 
+dial_tone.py example 
+(/usr/local/share/gnuradio/examples/audio/dial_tone.py) or the <a href="https://wiki.gnuradio.org/index.php/GNURadioCompanion" title="GNURadioCompanion">gnuradio-companion</a>.
+</p>
+<h2><span class="mw-headline" id="Configuring_USRP_support">Configuring USRP support</span></h2>
+<p><i>This section is only relevant if you have a USRP1 that you want to
+ use with GNU Radio. You may already have done this if you have <a rel="nofollow" class="external text" href="http://www.ettus.com/uhd_docs/manual/html/usrp1.html#linux-setup-udev">installed UHD</a> .</i>
+</p><p>Ubuntu uses udev for handling hotplug devices, and does not by 
+default provide non-root access to the USRP. The following script is 
+taken from <a href="https://wiki.gnuradio.org/index.php/UdevConfig" title="UdevConfig">directions</a>, and sets up groups to handle USRP via USB, either live or hot-plug
+</p>
+<pre>sudo addgroup usrp
+sudo usermod -G usrp -a 
+echo 'ACTION=="add", BUS=="usb", SYSFS{idVendor}=="fffe", SYSFS{idProduct}=="0002", GROUP:="usrp", MODE:="0660"' &gt; tmpfile
+sudo chown root.root tmpfile
+sudo mv tmpfile /etc/udev/rules.d/10-usrp.rules</pre>
+<p>At this point, Ubuntu is configured to know what to do if/when it 
+detects the USRP on the USB, except that "udev" needs to reload the 
+rules to include the newly created one. The following <i>might</i> work, but if it doesn't then rebooting the computer will.
+</p>
+<pre>sudo udevadm control --reload-rules</pre>
+<p>or
+</p>
+<pre>sudo /etc/init.d/udev stop
+sudo /etc/init.d/udev start</pre>
+<p>or
+</p>
+<pre>sudo killall -HUP udevd</pre>
+<p>You can check if the USRP is being recognized, by examining /dev/bus/usb after plugging in a USRP. Using the command:
+</p>
+<pre>ls -lR /dev/bus/usb | grep usrp</pre>
+<p>should result in one or more lines (one for each USRP) reading something like:
+</p>
+<pre>crw-rw---- 1 root usrp 189, 514 Mar 24 09:46 003</pre>
+<p>Each device file will be listed with group 'usrp' and mode 'crw-rw----'.
+</p><p>Once you've verified that the USRP is available to Ubuntu, now it
+ is time to verify that GNU Radio works with the USRP. While 
+"usrp_benchmark_usb" might not return a full 32 MB/s of throughput, the 
+script should at least run properly; if not, either GNU Radio didn't 
+make correctly or the USRP isn't accessible. From the "gnuradio" 
+directory, verify that <i>all</i> of the following work:
+</p>
+<ul><li> Python interface to the USRP; provides a rough estimate of the 
+maximum throughput (quantized to a power of 2) between the host computer
+ and the USRP.</li></ul>
+<pre>cd gnuradio-examples/python/usrp
+./usrp_benchmark_usb.py</pre>
+<ul><li> C++ interface to the USRP; provides a good estimate of the 
+maximum throughput (non-quantized) between the host computer and the 
+USRP.</li></ul>
+<pre>cd usrp/host/apps
+./test_usrp_standard_tx
+./test_usrp_standard_rx</pre>
+<p>You are now ready to use GNU Radio and your USRP.
+</p>
+<h2><span class="mw-headline" id="Installing_in_a_custom_directory">Installing in a custom directory</span></h2>
+<p>The generic <a href="https://wiki.gnuradio.org/index.php/UbuntuInstall#Installing-GNU-Radio" title="UbuntuInstall">instructions above</a>
+ install GNU Radio to /usr/local. It is however possible to install to a
+ location of your choice. In order to do that you have to configure the 
+build to use the custom prefix:
+</p>
+<pre>cmake -DCMAKE_INSTALL_PREFIX=/opt/gnuradio ../
+...</pre>
+<p>This will configure GNU Radio to be installed to /opt/gnuradio rather than the default /usr/local
+</p><p>It is now necessary to add the custom installation directories to
+ our environment settings, otherwise applications will not be able to 
+find the headers, libraries, python scripts, etc. Open your .bashrc file
+ (e.g. type "gedit .bashrc" in the terminal) and add to the end of the 
+file:
+</p>
+<pre># GNU Radio installation
+export PATH=$PATH:/opt/gnuradio/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/gnuradio/lib
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/gnuradio/lib/pkgconfig
+export PYTHONPATH=$PYTHONPATH:/opt/gnuradio/lib/python2.7/dist-packages</pre>
+<p>The changes will take effect when you restart your session, e.g. log out and log in again.
+</p>
+<h1><span class="mw-headline" id="Building_GNU_Radio_on_Legacy_Ubuntu">Building GNU Radio on Legacy Ubuntu</span></h1>
+<ul><li>This page describes how to build and install GNU Radio from 
+source on releases of Ubuntu Linux that are no longer supported by 
+Canonical (9.10 or earlier). We strongly recommend using a newer version
+ of Ubuntu.</li></ul>
+<h2><span class="mw-headline" id="Installation_Options">Installation Options</span></h2>
+<p>This page provides information and scripts to compile and install GNU
+ Radio and its required background applications, libraries, and includes
+ on Ubuntu Linux 6.10 ("Edgy") or newer; they can probably be applied to
+ some previous versions, though that hasn't been tested.
+</p><p>You might not be able to install the newest GNU Radio version unless you backport some of the depencies!
+</p>
+<h2><span class="mw-headline" id="Pre-Requisites_for_Source_Build">Pre-Requisites for Source Build</span></h2>
+<p>See those for newer Ubuntus.
+</p>
+<h2><span class="mw-headline" id="Install_Scripts">Install Scripts</span></h2>
+<p>The following are scripts to take most users through a GNU Radio 
+install on a typical Ubuntu install, with the hope that it provides 
+enough guidance such that you can get GNU Radio up and running on your 
+Ubuntu box.
+</p>
+<ul><li> This section is for Edgy or previous only (no changes are 
+needed on Feisty or newer, except possibly to disable the CDROM entry):<br></li></ul>
+<p>Manually uncomment all repositories to include "universe" and "multiverse" either via direct editing
+</p>
+<pre>  sudo  /etc/apt/sources.list</pre>
+<p>or via the provided GUI: System <s>&gt; Administration</s>&gt; 
+Software Sources. Then enter the admin password for access. On the 
+"Ubuntu" tab, make sure all of "main restricted universe multiverse" are
+ checked and the rest unchecked (or deal with those are you deem correct
+ for your setup). Click "Close", then "Reload" to update the package 
+list.
+</p><p>The uncommented lines of the file "/etc/apt/sources.list" should 
+read something like (DIST is a string with your particular distribution:
+ edgy, feisty, gusty, etc):
+</p>
+<pre>deb http://us.archive.ubuntu.com/ubuntu/ DIST main restricted universe multiverse
+deb http://us.archive.ubuntu.com/ubuntu/ DIST-updates main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu/ DIST-security main restricted universe multiverse</pre>
+<p>Update the local dpkg cache:
+</p>
+<pre>sudo apt-get update</pre>
+<p>Install required packages (some are likely already installed by 
+Ubuntu by default; some are likely redundant with others; but these 
+groups cover all of the required packages, except for in Edgy)
+</p>
+<ul><li> Karmic (9.10)</li></ul>
+<pre>sudo apt-get -y install swig g++ automake autoconf libtool python-dev libfftw3-dev \
+libcppunit-dev libboost1.38-dev libusb-dev fort77 sdcc sdcc-libraries \
+libsdl1.2-dev python-wxgtk2.8 git-core guile-1.8-dev \
+libqt4-dev python-numpy ccache python-opengl libgsl0-dev \
+python-cheetah python-lxml doxygen qt4-dev-tools \
+libqwt5-qt4-dev libqwtplot3d-qt4-dev pyqt4-dev-tools python-qwt5-qt4</pre>
+<ul><li> Jaunty (9.04)</li></ul>
+<p><i>Package sdcc-nf needs to be installed (instead of sdcc)</i>
+</p>
+<pre>sudo apt-get -y install swig g++ automake1.9 autoconf libtool python-dev fftw3-dev \
+libcppunit-dev libboost1.35-dev sdcc-nf libusb-dev \
+libsdl1.2-dev python-wxgtk2.8 git-core guile-1.8-dev \
+libqt4-dev python-numpy ccache python-opengl libgsl0-dev \
+python-cheetah python-lxml doxygen qt4-dev-tools \
+libqwt5-qt4-dev libqwtplot3d-qt4-dev pyqt4-dev-tools python-qwt5-qt4</pre>
+<p><b>Note:</b> If you are upgrading from an older install, you may have python-wxgtk2.6 installed.<br>
+Because python-wxgtk2.6 takes precedence over python-wxgtk2.8, it must be removed first: <i>sudo apt-get remove python-wxgtk2.6</i>
+</p>
+<ul><li> Intrepid (8.10)</li></ul>
+<p><i>Package sdcc-nf needs to be installed instead of sdcc</i>
+</p>
+<pre>sudo apt-get -y install swig g++ automake1.9 autoconf libtool python-dev fftw3-dev \
+libcppunit-dev libboost1.35-dev sdcc-nf libusb-dev \
+libsdl1.2-dev python-wxgtk2.8 git-core guile-1.8-dev \
+libqt4-dev python-numpy ccache python-opengl libgsl0-dev \
+python-cheetah python-lxml doxygen qt4-dev-tools \
+libqwt5-qt4-dev libqwtplot3d-qt4-dev  pyqt4-dev-tools python-qwt5-qt4</pre>
+<ul><li> Hardy (8.04): <i><b>Boost should be installed as explained in README.building-boost file</b></i></li></ul>
+<pre>sudo apt-get -y install swig g++ automake1.9 libtool python-dev fftw3-dev \
+libcppunit-dev sdcc libusb-dev libasound2-dev libsdl1.2-dev \
+python-wxgtk2.8 subversion guile-1.8-dev libqt4-dev python-numpy-ext \
+ccache python-opengl libgsl0-dev python-cheetah python-lxml doxygen \
+libqwt5-qt4-dev libqwtplot3d-qt4-dev qt4-dev-tools pyqt4-dev-tools</pre>
+<ul><li> Gutsy (7.10): <i><b>Boost should be installed as explained in README.building-boost file. GSL is required Also</b></i></li></ul>
+<pre>sudo apt-get -y install g++ automake libtool python-dev fftw3-dev \
+libcppunit-dev sdcc libusb-dev libasound2-dev \
+libsdl1.2-dev python-wxgtk2.8 subversion guile-1.8-dev libgsl0-dev \
+libqt3-mt-dev python-numpy-ext swig ccache</pre>
+<ul><li> Feisty (7.04): <i><b>Boost should be installed as explained in README.building-boost file. GSL is required Also</b></i></li></ul>
+<pre>sudo apt-get -y install g++ automake1.9 libtool python-dev fftw3-dev \
+libcppunit-dev sdcc libusb-dev libasound2-dev \
+libsdl1.2-dev python-wxgtk2.8 subversion guile-1.6-dev\
+libqt3-mt-dev python-numpy-ext swig ccache</pre>
+<ul><li> Edgy (6.10): <i><b>It is strongly recommended that you use one of the newer releases above</b></i></li></ul>
+<pre>sudo apt-get -y install g++ automake1.9 libtool python-dev fftw3-dev \
+libcppunit-dev libboost-dev sdcc libusb-dev libasound2-dev \
+libsdl1.2-dev python-wxgtk2.6 subversion guile-1.6-dev \
+libqt3-mt-dev python-numpy-ext ccache</pre>
+<p>Note that above line for Edgy installs python-wxgtk-2.6. While this 
+is good enough for older gnuradio releases, it is too old for recent 
+gnuradio svn snapshots. If you want to build a recent svn snapshot of 
+gnuradio you need wxgtk version 2.8 or later.<br>
+You can install more recent wxgtk versions from the wxwidgets debian and ubuntu repository.<br>
+See <a rel="nofollow" class="external text" href="http://wiki.wxpython.org/InstallingOnUbuntuOrDebian">Installing latest wxgtk-2.8 packages on debian or Ubuntu</a>
+</p><p>Install optional packages, if desired; some might already be installed from the previous command:
+</p>
+<pre>sudo apt-get -y install gkrellm wx-common libwxgtk2.8-dev alsa-base autoconf xorg-dev g77 gawk bison openssh-server emacs cvs usbview octave</pre>
+<p>For Edgy only: Get, Compile, and Install SWIG
+</p>
+<pre>wget http://prdownloads.sourceforge.net/swig/swig-1.3.33.tar.gz
+tar zxf swig-1.3.33.tar.gz
+cd swig-1.3.33
+./configure
+make
+sudo make install
+cd ..</pre>
+<p>Optional: Get, Compile, Install QWT 5.0.0 (or newer):
+</p>
+<ul><li> NOTE: You should not need to set the environment variables "QTDIR" or "QWT_CFLAGS", so leave them be (for now).</li></ul>
+<pre>wget http://superb-east.dl.sourceforge.net/sourceforge/qwt/qwt-5.0.2.tar.bz2
+tar jxf qwt-5.0.2.tar.bz2
+cd qwt-5.0.2</pre>
+<ul><li> Now edit <i>qwtconfig.pri</i>:</li></ul>
+<p>'<b><i> Change the </i>unix<i> version of "INSTALLBASE" to "/usr/local" (was "/usr/local/qwt-5.0.2");</i></b>
+</p><p>'<b><i> Change "doc.path" to "$$INSTALLBASE/doc/qwt" (was "$$INSTALLBASE/doc");</i></b>
+</p><p>'<b><i> Save, exit.<br></i></b>
+The "doc" portion is in both HTML and man-style, but is all in 
+/usr/local/doc/{html,man}. While this isn't the standard path, there 
+doesn't seem to be an easy way to separate them and thus this is left as
+ is. Then:
+</p>
+<pre>qmake
+make
+sudo make install
+cd ..</pre>
+<h3><span class="mw-headline" id="Install_Boost">Install Boost</span></h3>
+<p>For Ubuntu 8.04 and older, download and install Boost 1.35 or later as follows (see README.building-boost file):
+</p><p>1) Download the latest version of boost from 
+boost.sourceforge.net (boost_1_37_0.tar.bz2 was the latest when this was
+ written but GNU Radio works with newer versions as well).
+</p><p>2) unpack it somewhere and cd into the resulting directory
+</p>
+<pre>$ cd boost_1_37_0</pre>
+<p>3) Pick a prefix to install it into. For example use /opt/boost_1_37_0
+</p>
+<pre>$ BOOST_PREFIX=/opt/boost_1_37_0</pre>
+<p>4) Configure
+</p>
+<pre>$ ./configure --prefix=$BOOST_PREFIX --with-libraries=thread,date_time,program_options</pre>
+<p>5) Compile the package
+</p>
+<pre>$ make</pre>
+<p>6) Install the package
+</p>
+<pre>$ sudo make install
+
+$ cd ..</pre>
+<h2><span class="mw-headline" id="Installing_GNU_Radio_2">Installing GNU Radio</span></h2>
+<p>Download, bootstrap, configure, and compile GNU Radio package:
+</p>
+<pre># Install GNU Radio from git
+
+git clone --recursive https://github.com/gnuradio/gnuradio.git
+
+cd gnuradio
+export LD_LIBRARY_PATH=$BOOST_PREFIX/lib     # As per the instructions for installing Boost
+
+./bootstrap
+./configure --with-boost=$BOOST_PREFIX   # As per the instructions for installing Boost
+make</pre>
+<p>Optionally: Run the GNU Radio software self-check; does not require a USRP.
+</p>
+<pre>make check</pre>
+<p>If any test or tests do not work, GNU Radio might still function 
+properly, but it might be wise to look in the email archives for a fix 
+or to write the email list. If writing to the email list, please include
+ the OS type, OS version, and CPU type (e.g. via "uname -a"), anything 
+special about the computer hardware, software versions (gcc, g++, swig, 
+sdcc, etc) and how installed (standard or non-standard package, source).
+</p><p>Now install GNU Radio for general use (default is in to /usr/local ):
+</p>
+<pre>sudo make install</pre>
+<p>Make sure you configure USRP support through udev (see top).
+</p><p>'<b><i> NOTE: If installing on Feisty or newer, the computer 
+probably needs to be rebooted in order for the GNU Radio software to 
+interface correctly with the USRP hardware. This does </i>not<i> seem to be necessary on Edgy.</i></b>
+</p><p>Update the rest of the system, after which you might need or want to reboot:
+</p>
+<pre>sudo apt-get -y upgrade</pre>
+<p>Update the Linux distro, after which a reboot is required:
+</p>
+<pre>sudo apt-get -y dist-upgrade</pre>
+<h2><span class="mw-headline" id="Broken_libtool_on_Debian_and_Ubuntu">Broken libtool on Debian and Ubuntu</span></h2>
+<p>Because Debian and Ubuntu apply a poorly implemented "enhancement" to the upstream version of libtool,<br>
+they break the ability to test code and libraries prior to installing them. We think that testing before<br>
+installation is a good idea. To work around their damage, be sure to include<br>
+$PREFIX/lib (and $PREFIX/lib64 on 64-bit machines) in /etc/ld.so.conf.
+</p><p>If you don't include $PREFIX/lib in /etc/ld.so.conf, you will see errors during the linking phase<br>
+of the build. There are several places it shows up. The first one is often during the build of<br>
+mblocks. It's not an mblock problem. It's a Debian/Ubuntu problem.
+</p><p>Do this to work around this <a href="https://wiki.gnuradio.org/index.php?title=Feature&amp;action=edit&amp;redlink=1" class="new" title="Feature (page does not exist)">feature</a>
+</p><p>1) Make a copy from the current ld.so.conf file and save it in a temp folder:
+</p>
+<pre>cp /etc/ld.so.conf /tmp/ld.so.conf</pre>
+<p>2) Add /usr/local/lib path to it&nbsp;:
+</p>
+<pre>echo /usr/local/lib &gt;&gt; /tmp/ld.so.conf</pre>
+<p>3) If you installed Boost (version 1_37_0 for example) manually, then add its library path to the file:
+</p>
+<pre>echo /opt/boost_1_37_0/lib &gt;&gt; /tmp/ld.so.conf</pre>
+<p>4) Delete the original ld.so.conf file and put the modified file instead:
+</p>
+<pre>sudo mv /tmp/ld.so.conf /etc/ld.so.conf</pre>
+<p>5) Do ldconfig:
+</p>
+<pre>sudo ldconfig</pre>
+
+<!-- 
+NewPP limit report
+Cached time: 20190701123636
+Cache expiry: 86400
+Dynamic content: false
+CPU time usage: 0.038 seconds
+Real time usage: 0.039 seconds
+Preprocessor visited node count: 603/1000000
+Preprocessor generated node count: 1300/1000000
+Post‐expand include size: 17/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+-->
+
+<!-- 
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    1.232      1 - -total
+100.00%    1.232      1 - Template:Toc
+-->
+
+<!-- Saved in parser cache with key mediawiki:pcache:idhash:172-0!*!0!!en!*!* and timestamp 20190701123636 and revision id 5081
+ -->
+</div>					<div class="printfooter">
+						Retrieved from "<a dir="ltr" href="https://wiki.gnuradio.org/index.php?title=UbuntuInstall&amp;oldid=5081">https://wiki.gnuradio.org/index.php?title=UbuntuInstall&amp;oldid=5081</a>"					</div>
+				<div id="catlinks" class="catlinks catlinks-allhidden" data-mw="interface"></div>				<div class="visualClear"></div>
+							</div>
+		</div>
+		<div id="mw-navigation">
+			<h2>Navigation menu</h2>
+
+			<div id="mw-head">
+									<div id="p-personal" role="navigation" class="" aria-labelledby="p-personal-label">
+						<h3 id="p-personal-label">Personal tools</h3>
+						<ul>
+							<li id="pt-login"><a href="https://wiki.gnuradio.org/index.php?title=Special:UserLogin&amp;returnto=UbuntuInstall" title="You are encouraged to log in; however, it is not mandatory [Alt+Mayús.+o]" accesskey="o">Log in</a></li><li id="pt-createaccount"><a href="https://wiki.gnuradio.org/index.php/Special:RequestAccount" title="You are encouraged to create an account and log in; however, it is not mandatory">Request account</a></li>						</ul>
+					</div>
+									<div id="left-navigation">
+										<div id="p-namespaces" role="navigation" class="vectorTabs" aria-labelledby="p-namespaces-label">
+						<h3 id="p-namespaces-label">Namespaces</h3>
+						<ul>
+															<li id="ca-nstab-main" class="selected"><span><a href="https://wiki.gnuradio.org/index.php/UbuntuInstall" title="View the content page [Alt+Mayús.+c]" accesskey="c">Page</a></span></li>
+															<li id="ca-talk" class="new"><span><a href="https://wiki.gnuradio.org/index.php?title=Talk:UbuntuInstall&amp;action=edit&amp;redlink=1" title="Discussion about the content page [Alt+Mayús.+t]" accesskey="t" rel="discussion">Discussion</a></span></li>
+													</ul>
+					</div>
+										<div id="p-variants" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-variants-label">
+												<h3 id="p-variants-label" tabindex="0">
+							<span>Variants</span><a href="#" tabindex="-1"></a>
+						</h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+									</div>
+				<div id="right-navigation">
+										<div id="p-views" role="navigation" class="vectorTabs" aria-labelledby="p-views-label">
+						<h3 id="p-views-label">Views</h3>
+						<ul>
+															<li id="ca-view" class="selected"><span><a href="https://wiki.gnuradio.org/index.php/UbuntuInstall">Read</a></span></li>
+															<li id="ca-viewsource"><span><a href="https://wiki.gnuradio.org/index.php?title=UbuntuInstall&amp;action=edit" title="This page is protected.
+You can view its source [Alt+Mayús.+e]" accesskey="e">View source</a></span></li>
+															<li id="ca-history" class="collapsible"><span><a href="https://wiki.gnuradio.org/index.php?title=UbuntuInstall&amp;action=history" title="Past revisions of this page [Alt+Mayús.+h]" accesskey="h">View history</a></span></li>
+													</ul>
+					</div>
+										<div id="p-cactions" role="navigation" class="vectorMenu emptyPortlet" aria-labelledby="p-cactions-label" style="">
+						<h3 id="p-cactions-label" tabindex="0"><span>More</span><a href="#" tabindex="-1"></a></h3>
+
+						<div class="menu">
+							<ul>
+															</ul>
+						</div>
+					</div>
+										<div id="p-search" role="search">
+						<h3>
+							<label for="searchInput">Search</label>
+						</h3>
+
+						<form action="/index.php" id="searchform">
+							<div id="simpleSearch">
+							<input type="search" name="search" placeholder="Search GNU Radio" title="Search GNU Radio [Alt+Mayús.+f]" accesskey="f" id="searchInput" tabindex="1" autocomplete="off"><input type="hidden" value="Special:Search" name="title"><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="searchButton" class="searchButton">							</div>
+						</form>
+					</div>
+									</div>
+			</div>
+			<div id="mw-panel">
+				<div id="p-logo" role="banner"><a class="mw-wiki-logo" href="https://wiki.gnuradio.org/index.php/Main_Page" title="Visit the main page"></a></div>
+						<div class="portal" role="navigation" id="p-navigation" aria-labelledby="p-navigation-label">
+			<h3 id="p-navigation-label">Navigation</h3>
+
+			<div class="body">
+									<ul>
+						<li id="n-mainpage-description"><a href="https://wiki.gnuradio.org/index.php/Main_Page" title="Visit the main page [Alt+Mayús.+z]" accesskey="z">Main page</a></li><li id="n-Homepage"><a href="https://gnuradio.org/" rel="nofollow">Homepage</a></li><li id="n-FAQ"><a href="https://wiki.gnuradio.org/index.php/FAQ">FAQ</a></li><li id="n-Tutorials"><a href="https://wiki.gnuradio.org/index.php/Tutorials">Tutorials</a></li><li id="n-Contributing"><a href="https://wiki.gnuradio.org/index.php/Development">Contributing</a></li><li id="n-Installing-GNU-Radio"><a href="https://wiki.gnuradio.org/index.php/InstallingGR">Installing GNU Radio</a></li><li id="n-recentchanges"><a href="https://wiki.gnuradio.org/index.php/Special:RecentChanges" title="A list of recent changes in the wiki [Alt+Mayús.+r]" accesskey="r">Recent changes</a></li><li id="n-randompage"><a href="https://wiki.gnuradio.org/index.php/Special:Random" title="Load a random page [Alt+Mayús.+x]" accesskey="x">Random page</a></li><li id="n-help"><a href="https://www.mediawiki.org/wiki/Special:MyLanguage/Help:Contents" title="The place to find out">Help</a></li>					</ul>
+							</div>
+		</div>
+			<div class="portal" role="navigation" id="p-tb" aria-labelledby="p-tb-label">
+			<h3 id="p-tb-label">Tools</h3>
+
+			<div class="body">
+									<ul>
+						<li id="t-whatlinkshere"><a href="https://wiki.gnuradio.org/index.php/Special:WhatLinksHere/UbuntuInstall" title="A list of all wiki pages that link here [Alt+Mayús.+j]" accesskey="j">What links here</a></li><li id="t-recentchangeslinked"><a href="https://wiki.gnuradio.org/index.php/Special:RecentChangesLinked/UbuntuInstall" rel="nofollow" title="Recent changes in pages linked from this page [Alt+Mayús.+k]" accesskey="k">Related changes</a></li><li id="t-specialpages"><a href="https://wiki.gnuradio.org/index.php/Special:SpecialPages" title="A list of all special pages [Alt+Mayús.+q]" accesskey="q">Special pages</a></li><li id="t-print"><a href="https://wiki.gnuradio.org/index.php?title=UbuntuInstall&amp;printable=yes" rel="alternate" title="Printable version of this page [Alt+Mayús.+p]" accesskey="p">Printable version</a></li><li id="t-permalink"><a href="https://wiki.gnuradio.org/index.php?title=UbuntuInstall&amp;oldid=5081" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-info"><a href="https://wiki.gnuradio.org/index.php?title=UbuntuInstall&amp;action=info" title="More information about this page">Page information</a></li>					</ul>
+							</div>
+		</div>
+				</div>
+		</div>
+		<div id="footer" role="contentinfo">
+							<ul id="footer-info">
+											<li id="footer-info-lastmod"> This page was last modified on 28 June 2019, at 11:28.</li>
+											<li id="footer-info-copyright">Content is available under <a class="external" rel="nofollow" href="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike</a> unless otherwise noted.</li>
+									</ul>
+							<ul id="footer-places">
+											<li id="footer-places-privacy"><a href="https://wiki.gnuradio.org/index.php/GNU_Radio:Privacy_policy" title="GNU Radio:Privacy policy">Privacy policy</a></li>
+											<li id="footer-places-about"><a href="https://wiki.gnuradio.org/index.php/GNU_Radio:About" title="GNU Radio:About">About GNU Radio</a></li>
+											<li id="footer-places-disclaimer"><a href="https://wiki.gnuradio.org/index.php/GNU_Radio:General_disclaimer" title="GNU Radio:General disclaimer">Disclaimers</a></li>
+									</ul>
+										<ul id="footer-icons" class="noprint">
+											<li id="footer-copyrightico">
+							<a href="http://creativecommons.org/licenses/by-sa/3.0/"><img src="UbuntuInstall%20-%20GNU%20Radio_files/cc-by-sa.png" alt="Creative Commons Attribution-ShareAlike" width="88" height="31"></a>						</li>
+											<li id="footer-poweredbyico">
+							<a href="https://www.mediawiki.org/"><img src="UbuntuInstall%20-%20GNU%20Radio_files/poweredby_mediawiki_88x31.png" alt="Powered by MediaWiki" srcset="/resources/assets/poweredby_mediawiki_132x47.png 1.5x, /resources/assets/poweredby_mediawiki_176x62.png 2x" width="88" height="31"></a>						</li>
+									</ul>
+						<div style="clear:both"></div>
+		</div>
+		<script>(window.RLQ=window.RLQ||[]).push(function(){mw.loader.load(["mediawiki.toc","mediawiki.action.view.postEdit","site","mediawiki.user","mediawiki.hidpi","mediawiki.page.ready","mediawiki.searchSuggest"]);});</script><script>(window.RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":106});});</script>
+	
+
+<div style="display: none; font-size: 13px;" class="suggestions"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>

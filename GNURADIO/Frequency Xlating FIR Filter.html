@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Slate is a responsive theme for GitHub Pages">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="Frequency%20Xlating%20FIR%20Filter_files/stylesheet.css">
+
+    <title> Frequency Xlating FIR Filter </title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <h1 id="project_title"><a href="http://blog.sdr.hu/grblocks" class="headerlink">grblocks</a></h1>
+          <h2 id="project_tagline">Description of some GNU Radio blocks</h2>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+
+	<h1 id="frequency-xlating-fir-filter">Frequency Xlating FIR Filter</h1>
+
+<h2 id="grc-block">GRC block</h2>
+
+<p><img src="Frequency%20Xlating%20FIR%20Filter_files/xlating-fir-grc.png" alt="Block"></p>
+
+<h2 id="description">Description</h2>
+
+<p>Frequency Xlating FIR Filter is a block that:</p>
+
+<ol>
+  <li>
+    <p>performs frequency translation on the signal,</p>
+  </li>
+  <li>
+    <p>downsamples the signal by running a <a href="https://en.wikipedia.org/wiki/Decimation_(signal_processing)">decimating</a> <a href="https://en.wikipedia.org/wiki/Finite_impulse_response">FIR filter</a> on it.</p>
+  </li>
+</ol>
+
+<p>It can be used as a channelizer: it can select a narrow bandwidth channel from the wideband receiver input.</p>
+
+<p><img src="Frequency%20Xlating%20FIR%20Filter_files/xlating-fir-operation.png" alt="Operation"></p>
+
+<h2 id="parameters">Parameters</h2>
+
+<p><strong>Type:</strong> It selects the <a href="http://blog.sdr.hu/grblocks/types.html">type</a> of the input and the output, and also the <a href="https://en.wikipedia.org/wiki/Finite_impulse_response">filter taps</a>.</p>
+
+<p>If you have <em>Real taps</em>, then your FIR filter will be symmetric in the frequency domain. Some examples on filter characteristics:</p>
+
+<p><img src="Frequency%20Xlating%20FIR%20Filter_files/fir-realtaps-example.png" alt="FirSymmEx"></p>
+
+<p>If you have <em>Complex taps</em>, then your FIR filter will <strong>not have to be</strong> symmetric in the frequency domain. Some examples on filter characteristics:</p>
+
+<p><img src="Frequency%20Xlating%20FIR%20Filter_files/fir-complextaps-example.png" alt="FirComplEx"></p>
+
+<!-- TODO: speed of cplx and real -->
+
+<hr>
+
+<p><strong>Decimation:</strong> the integer ratio between the input and the output signal’s sampling rate. Example:</p>
+
+<pre>Input sample rate = 240000
+Decimation factor = 5
+Output sample rate = 240000 ÷ 5 = 48000
+</pre>
+
+<p>See also: <a href="https://en.wikipedia.org/wiki/Decimation_(signal_processing)">decimation</a>.</p>
+
+<hr>
+
+<p><strong>Center frequency:</strong> the frequency translation offset frequency.</p>
+
+<p>In practice, it is the frequency offset of the signal if interest to be selected from the input.</p>
+
+<p>Example:</p>
+
+<p><img src="Frequency%20Xlating%20FIR%20Filter_files/xlating-fir-param-center.png" alt="Block"></p>
+
+<hr>
+
+<p><strong>Taps</strong>: the vector of the complex or real taps of the <a href="https://en.wikipedia.org/wiki/Finite_impulse_response">FIR filter</a>.</p>
+
+<p>If you generate the filter coefficients with a custom filter design tool, e.g. MATLAB:</p>
+
+<pre>[0.1, -0.2, 0.3, -0.2, 0.1]</pre>
+
+<p>If you do not want to filter anyway (but if you still decimate, the output will suffer from aliasing, see <a href="https://en.wikipedia.org/wiki/Decimation_(signal_processing)">decimation</a>):</p>
+
+<pre>[1]</pre>
+
+<p>You can also generate them by using <code class="highlighter-rouge">python</code> code.</p>
+
+<p>Use this if you selected a type with <strong>real taps</strong>:</p>
+
+<pre>firdes.low_pass(1,samp_rate,samp_rate/(2*decimation), transition_bw)</pre>
+
+<p>Use this if you selected a type with <strong>complex taps</strong>:</p>
+
+<pre>firdes.complex_band_pass(1, samp_rate, -samp_rate/(2*decimation), samp_rate/(2*decimation), transition_bw)</pre>
+
+<p><strong>Note: transition_bw</strong> is the transition bandwidth of 
+the filter in Hz. The lower it is, the more taps the function will 
+generate, and the more CPU time it will take to apply this filter. <strong>This parameter will determine the CPU usage and thus the execution speed of the block.</strong></p>
+
+<hr>
+
+<p><strong>Sample rate:</strong> The sample rate of the input signal.</p>
+
+<h2 id="example-flowgraph">Example flowgraph</h2>
+
+<p><img src="Frequency%20Xlating%20FIR%20Filter_files/xlating-fir-grc-screenshot.png" alt="ExFlow"></p>
+
+<h2 id="notes">Notes</h2>
+
+<p>If you set <code class="highlighter-rouge">decimation</code> above 1, then the sampling rate of the block’s output signal will differ from the input sampling rate.</p>
+
+<p>You will have to set the sampling rate of all the blocks connected to its output correctly!</p>
+
+<p><img src="Frequency%20Xlating%20FIR%20Filter_files/xlating-fir-grc-multirate.png" alt="ExFlowMultirate"></p>
+
+<h2 id="speed-considerations">Speed considerations</h2>
+
+<p>You might also consider using the <em>Frequency Xlating FFT Filter</em> instead of this block.</p>
+
+<p>The speed of these two blocks compare differently in different 
+applications, as it depends on the decimation factor and the length of 
+the filter.</p>
+
+<p>See <a href="http://www.trondeau.com/blog/2014/2/27/to-use-or-not-to-use-fft-filters.html">this article</a> for more information.</p>
+
+
+    <!-- FOOTER  -->
+
+
+  
+
+</section></div></body></html>

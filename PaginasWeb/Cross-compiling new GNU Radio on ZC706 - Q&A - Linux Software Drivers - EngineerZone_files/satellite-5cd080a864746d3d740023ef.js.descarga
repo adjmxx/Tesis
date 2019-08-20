@@ -1,0 +1,67 @@
+_satellite.pushAsyncScript(function(event, target, $variables){
+  var scTitle = $('h3#signalChaintitle').text(),
+    s = _satellite.getToolsByType('sc')[0].getS();
+if (scTitle.length == 0 || scTitle == undefined || scTitle == "") {
+    return false; // to ensure this rule only triggers on pages with Signal Chain
+} else if (scTitle.length > 1) {
+
+
+    var a = $('div.col-md-12.clearfix > div.col-md-8.clearfix > a:nth-child(3)'),
+        aThis,
+        b = $('div.col-md-12.clearfix > div.col-md-8.clearfix > a:nth-child(2)'),
+        bThis,
+        c = $('div.mobilelink-application-box div h4 a[href]'),
+        cThis;
+
+    a.click(function () {
+        aThis = $(this);
+        viewprice();
+    });
+
+    b.click(function () {
+        bThis = $(this);
+        viewdetails();
+    });
+
+    c.click(function () {
+        cThis = $(this);
+        productused();
+    });
+
+    //view Product details click interactions in Reference Design
+    function viewdetails() {
+        s.linkTrackVars = "eVar95, events";
+        s.linkTrackEvents = "event110";
+        var cnElement = bThis[0].parentElement.parentElement.previousElementSibling,
+            cnText = cnElement.children[0].innerText;
+        s.eVar95 = scTitle.toLowerCase() + "|" + cnText.toLowerCase() + "|View Details";
+        s.events = "event110";
+        s.tl(this, 'o', 'Signal Chain: Reference Click - View Details');
+    }
+
+    //view Product Pricing clicked interaction in Reference Design
+    function viewprice() {
+        s.linkTrackVars = "eVar95, events";
+        s.linkTrackEvents = "event110";
+        var cnElement = aThis[0].parentElement.parentElement.previousElementSibling,
+            cnText = cnElement.children[0].innerText;
+
+        s.eVar95 = scTitle.toLowerCase() + "|" + cnText.toLowerCase() + "|View Pricing";
+        s.events = "event110";
+        s.tl(this, 'o', 'Signal Chain: Reference Click - View pricing');
+    }
+
+    //Click interaction on Product Used in Reference Design
+    function productused() {
+        var pUsed = cThis.text().substring(1),
+            pElement = cThis,
+            refText = pElement[0].parentElement.parentElement.parentElement.parentElement.previousElementSibling.previousElementSibling.innerText;
+        s.linkTrackVars = "eVar95, events";
+        s.linkTrackEvents = "event111";
+
+        s.eVar95 = scTitle.toLowerCase() + "|" + "Products Used|" + refText.toLowerCase() + "|" + pUsed.toLowerCase();
+        s.events = "event111";
+        s.tl(this, 'o', 'Signal Chain: Products Used Click');
+    }
+}
+});

@@ -1,0 +1,231 @@
+code {
+    background-color: #f6f8fa;
+    color: #242729;
+}
+
+pre {
+    background-color: #f6f8fa;
+    margin-bottom: 1em;
+    padding: 5px !important;
+    max-height: 600px;
+    overflow: auto;
+    border: 0 !important;
+}
+
+blockquote {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f6f8fa;
+    border-left: 2px solid #c4c6c8;
+    font-size: 1em;
+}
+
+blockquote *:last-child {
+    margin-bottom: 0;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+.enviar-txt-ans {
+    border-left: 4px solid #80A1B2;
+    padding-left: 16px;
+}
+
+.enviar-txt-best-ans {
+    border-left: 4px solid #4B5FAF;
+    padding-left: 16px;
+}
+
+.ans-enviar-upv {
+    background-color: #80A1B2 !important;
+    border-color: #80A1B2 !important;
+}
+
+.best-enviar-upv {
+    background-color: #4B5FAF !important;
+    border-color: #4B5FAF !important;
+}
+
+.enviar-upv {
+    float: left;
+    color: white;
+    background-color: #80A1B2;
+    border-color: #80A1B2;
+    padding: 4px 10px 4px 10px;
+    margin-top: 2px;
+    margin-bottom: 5px;
+    margin-left: 6px;
+    font-size: 16px;
+    border-radius: 4px;
+}
+
+.main-enviar-upv {
+    float: left;
+    color: white;
+    width: 92px;
+    background-color: #80A1B2;
+    border-color: #80A1B2;
+    padding: 4px 10px 4px 10px;
+    margin-top: 2px;
+    margin-bottom: 5px;
+    margin-left: 6px;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.pagination > .active > a {
+    background-color: #80A1B2 !important;
+    border-color: #80A1B2 !important;
+}
+
+.pagination > li > a {
+    color: #80A1B2;
+}
+
+.enviar-date {
+    float: right;
+    color: white;
+    background-color: #80A1B2;
+    border-color: #80A1B2;
+    padding: 4px 10px 4px 10px;
+    margin-top: 4px;
+    margin-right: 6px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+.src-enlazar {
+    color: #888;
+    font-size: 12px;
+    text-decoration: none;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 15px;
+    background-color: transparent;
+}
+
+.src-enlazar:hover {
+    color: #666;
+    text-decoration: none;
+}
+
+.ya-share2__link {
+    margin-top: 10px;
+}
+
+.footer-class {
+    background-color: #588C5E;
+    color: white;
+}
+
+.bottom-license {
+    float: left;
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+
+.bottom-privacy-policy {
+    color: #FFFFFF;
+    font-size: 1.2em;
+    background-color: transparent;
+    float: right;
+    padding-top: 24px;
+}
+
+.bottom-privacy-policy:hover {
+    color: #FFFFFF;
+    background-color: transparent;
+}
+
+.bottom-contacts {
+    color: #FFFFFF;
+    font-size: 1.2em;
+    background-color: transparent;
+    float: right;
+    padding-top: 24px;
+    padding-right: 12px;
+}
+
+.bottom-contacts:hover {
+    color: #FFFFFF;
+    background-color: transparent;
+}
+
+.ask-main-div {
+    margin-top: 26px;
+    margin-bottom: 26px;
+}
+
+.question-main {
+    margin-left: 26px;
+    font-size: 1.4em;
+    color: #333;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.question-main:hover {
+    color: #333;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.side-enlazar {
+    display: block;
+    float: left;
+    padding-bottom: 0.9em;
+}
+
+/*Generated Navigation Bar*/
+
+#custom-bootstrap-menu.navbar-default .navbar-brand {
+    color: #FFFFFF;
+}
+
+#custom-bootstrap-menu.navbar-default {
+    font-size: 15px;
+    background-color: #21B785;
+    border-width: 1px;
+    border-radius: 4px;
+}
+
+#custom-bootstrap-menu.navbar-default .navbar-nav > li > a {
+    color: #FFFFFF;
+    background-color: #8FEFAC;
+}
+
+#custom-bootstrap-menu.navbar-default .navbar-nav > li > a:hover,
+#custom-bootstrap-menu.navbar-default .navbar-nav > li > a:focus {
+    color: #FFFFFF;
+    background-color: #8FEFAC;
+}
+
+#custom-bootstrap-menu.navbar-default .navbar-nav > .active > a,
+#custom-bootstrap-menu.navbar-default .navbar-nav > .active > a:hover,
+#custom-bootstrap-menu.navbar-default .navbar-nav > .active > a:focus {
+    color: #FFFFFF;
+    background-color: #8FEFAC;
+}
+
+#custom-bootstrap-menu.navbar-default .navbar-toggle {
+    border-color: #8FEFAC;
+}
+
+#custom-bootstrap-menu.navbar-default .navbar-toggle:hover,
+#custom-bootstrap-menu.navbar-default .navbar-toggle:focus {
+    background-color: #8FEFAC;
+}
+
+#custom-bootstrap-menu.navbar-default .navbar-toggle .icon-bar {
+    background-color: #8FEFAC;
+}
+
+#custom-bootstrap-menu.navbar-default .navbar-toggle:hover .icon-bar,
+#custom-bootstrap-menu.navbar-default .navbar-toggle:focus .icon-bar {
+    background-color: #21B785;
+}

@@ -1,0 +1,40 @@
+_satellite.pushAsyncScript(function(event, target, $variables){
+  (function(w, d, $s) {
+
+    var i;
+
+    check();
+
+    function check() {
+
+        var cookie = $s.readCookie('cookieAccepted');
+
+        if (cookie === 'pending' || !cookie ) {
+            if (!i) i = setInterval(check, 1000);
+            return;
+        }
+
+        if (i) clearInterval(i);
+
+        if (cookie === 'false') return $s.notify('[GTM] User declined analytics.');
+
+        addGTM();
+
+    }
+
+    function addGTM() {
+        var axel = Math.random(),
+        a = axel * 10000000000000,
+        s = document.createElement( 'img' );
+
+        s.src = "https://9206192.fls.doubleclick.net/activityi;src=9206192;type=unive00;cat=unive0;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;ord=1;num=" + a + "?";
+        s.style.display = 'none';
+        s.style.height = '1px';
+        s.style.width = '1px';
+
+        document.body.appendChild( s );
+        $s.notify('[GTM] Load tag manager - Unique 24hr.')
+    }
+
+})(window, document, _satellite);
+});
