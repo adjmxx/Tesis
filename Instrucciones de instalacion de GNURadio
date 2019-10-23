@@ -1,0 +1,26 @@
+primer paso: Instalar dependencias
+
+sudo apt-get install hackrf libhackrf-dev libhackrf0
+sudo apt-get install hackrf libhackrf-dev libhackrf0
+https://kb.ettus.com/Building_and_Installing_the_USRP_Open-Source_Toolchain_(UHD_and_GNU_Radio)_on_Linux
+pip3 install mako
+
+Segundo pago: Instalar herramientas necesarias
+git
+gedit
+pip
+sudo pip install pybombs
+
+Tercer paso Instalar GNURadio
+
+ pybombs recipes add gr-recipes git+https://github.com/gnuradio/gr-recipes.git
+ mkdir prefix/
+ pybombs prefix init -a default prefix/default/ -R gnuradio-default
+cd prefix/default
+pybombs run gnuradio-companion
+
+Tercer paso instalar paquetes para ieee802.11
+
+https://github.com/gnuradio/gr-recipes: pybombs install "paquete a install"
+osmosdr
+gr-ieee-802-11
