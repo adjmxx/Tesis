@@ -1,1 +1,39 @@
 
+PYTHONPATH=$PYTHONPATH:/home/proyecto/prefix/default/lib/python2.7/dist-packages
+export PYTHONPATH
+
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/proyecto/prefix/default/lib
+export LD_LIBRARY_PATH
+
+PATH=$PATH:/home/proyecto/prefix/default/bin
+export PATH
+
+Para poder lograr que el script generado por gnuradio pueda ser ejecutado des de la terminal hay que editar el archivo ~/.bashrc con la ayuda de gedit(preferiblemente)
+
+link de informacion:https://github.com/gnuberries/raspberry-radio/wiki/GNU-Radio-Installation-Instructions-(for-desktop-or-notebook)
+
+https://es.stackoverflow.com/questions/61674/poner-icono-en-ventana-qt5
+
+pyuic4  ieee80211.ui -o ieee80211.py
+ convertir de ui a py
+
+https://code-examples.net/es/q/bdb4fd
+
+https://www.online-convert.com/es/resultado/c99686df-e063-4046-9a11-4a094c825ad9
+
+https://pythonprogramming.net/button-functions-pyqt-tutorial/(agregar funcionalidad al boton salir con simplemente)
+        self.Salir.clicked.connect(self.cerrar_aplicacion)
+
+
+def cerrar_aplicacion(self):
+         sys.exit()
+if __name__ == '__main__':
+    main()
+wifi_rx.py
+
+https://stackoverflow.com/questions/10754549/fft-bin-width-clarification
+bin width=samprate/4 maximo ancho de bins para la fft
+
+tamaño FFT
+
+http://support.ircam.fr/docs/AudioSculpt/3.0/co/FFT%20Size.html
