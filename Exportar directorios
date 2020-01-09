@@ -1,0 +1,8 @@
+PYTHONPATH=$PYTHONPATH:/home/nombre_del_equipo/prefix/default/lib/python2.7/dist-packages
+export PYTHONPATH
+
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/nombre_del_equipo/prefix/default/lib
+export LD_LIBRARY_PATH
+
+PATH=$PATH:/home/nombre_del_equipo/prefix/default/bin
+export PATH
